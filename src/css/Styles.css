@@ -21,6 +21,7 @@ body {
 	--ltgray: #FAFAFA;
 	--black: #181b21;
 	--sideMargin: 10px;
+	--gridGap: 20px;
 }
 
 /* Global Styles */
@@ -33,7 +34,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 .wrapper {
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
-	grid-gap: 20px;
+	grid-gap: var(--gridGap);
 }
 
 /* Top Menu */
@@ -83,7 +84,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	display: grid;
 	grid-template-rows: repeat(3, auto);
 	padding: 20px 0;
-	grid-gap: 20px;
+	grid-gap: var(--gridGap);
 	color: var(--ltgray);
 }
 
@@ -107,7 +108,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	display: grid;
 	grid-template-columns: 1fr auto auto 1fr;
 	grid-template-areas: ". pic desc .";
-	grid-gap: 20px;
+	grid-gap: var(--gridGap);
 	background: url("./Assets/Backgrounds/7.jpg");
 	padding: 20px 0;
 	color: var(--ltgray);
@@ -130,7 +131,6 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	color: var(--aqua);
 }
 
-
 /* Blog Preview */
 
 .blog {
@@ -144,7 +144,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	grid-template-columns: 1fr 2fr 2fr 1fr;
 	grid-template-rows: 400px;
 	grid-template-areas: ". first second .";
-	grid-gap: 20px;
+	grid-gap: var(--gridGap);
 }
 
 .snippet {
@@ -159,6 +159,18 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 
 .post2 {
 	grid-area: second;
+}
+
+/* About Page */
+
+.about {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-gap: var(--gridGap);
+}
+
+.desc_about > p {
+	font-size: .75em;
 }
 
 /* Responsive */
