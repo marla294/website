@@ -21,12 +21,12 @@ class HomeComponent extends React.Component {
 						</li>
 					</ul>
 				</nav>
-				<section className="about">
+				<section className="about_homepage">
 					<img
-						className="pic"
+						className="pic_homepage"
 						src={require("../Assets/Pictures/SelfPortraits/20180607_SagradaFamilia.jpg")}
 					/>
-					<p className="desc">
+					<p className="desc_homepage">
 						Hi, I'm Marla, a self-taught Web Developer currently
 						calling Omaha, Nebraska home.{" "}
 						<a href="">Read More...</a>

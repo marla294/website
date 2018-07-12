@@ -76,9 +76,9 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	border-bottom: 1px solid var(--aqua);
 }
 
-/* About */
+/* About Homepage Blurb */
 
-.about {
+.about_homepage {
 	display: grid;
 	grid-template-columns: 1fr auto auto 1fr;
 	grid-template-areas: ". pic desc .";
@@ -88,19 +88,19 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	color: var(--ltgray);
 }
 
-.pic {
+.pic_homepage {
 	grid-area: pic;
 	width: 400px;
 }
 
-.desc {
+.desc_homepage {
 	grid-area: desc;
 	align-self: center;
 	width: 350px;
 }
 
 
-.about > p > a {
+.about_homepage > p > a {
 	text-decoration: none;
 	color: var(--aqua);
 }
@@ -179,8 +179,8 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 		justify-self: center;
 	}
 
-	/* About */
-	.about {
+	/* About Homepage Blurb */
+	.about_homepage {
 		grid-template-columns: 1fr 2fr 1fr;
 		grid-template-rows: auto 1fr;
 		grid-template-areas: 
@@ -188,10 +188,10 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 			". desc ."
 			;
 	}
-	.pic, .desc {
+	.pic_homepage, .desc_homepage {
 		justify-self: center;
 	}
-	.pic {
+	.pic_homepage {
 		width: 300px;
 	}
 	/* Blog */
@@ -215,10 +215,12 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 		margin: 0;
 	}
 
-	.pic {
+	/* About Homepage Blurb */
+	
+	.pic_homepage {
 		width: 200px;
 	}
-	.desc {
+	.desc_homepage {
 		max-width: 300px;
 	}
 	.snippet {
