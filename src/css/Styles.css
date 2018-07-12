@@ -1,8 +1,8 @@
 /* Fonts */
 @font-face {
     font-family: 'fionaregular';
-    src: url('../Assets/Fonts/Fiona/fiona-regular-webfont.woff2') format('woff2'),
-         url('../Assets/Fonts/Fiona/fiona-regular-webfont.woff') format('woff');
+    src: url('./Assets/Fonts/Fiona/fiona-regular-webfont.woff2') format('woff2'),
+         url('./Assets/Fonts/Fiona/fiona-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -76,6 +76,31 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	border-bottom: 1px solid var(--aqua);
 }
 
+/* Contact */
+
+.contact {
+	background: url("./Assets/Backgrounds/7.jpg");
+	display: grid;
+	grid-template-rows: repeat(3, auto);
+	padding: 20px 0;
+	grid-gap: 20px;
+	color: var(--ltgray);
+}
+
+.contact > h1 {
+	justify-self: center;
+}
+
+.email, .phone {
+	justify-self: center;
+}
+
+.social {
+	justify-self: center;
+}
+
+/* Homepage */
+
 /* About Homepage Blurb */
 
 .about_homepage {
@@ -83,7 +108,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	grid-template-columns: 1fr auto auto 1fr;
 	grid-template-areas: ". pic desc .";
 	grid-gap: 20px;
-	background: url("../Assets/Backgrounds/7.jpg");
+	background: url("./Assets/Backgrounds/7.jpg");
 	padding: 20px 0;
 	color: var(--ltgray);
 }
@@ -136,33 +161,10 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	grid-area: second;
 }
 
-/* Contact */
-
-.contact {
-	background: url("../Assets/Backgrounds/7.jpg");
-	display: grid;
-	grid-template-rows: repeat(3, auto);
-	padding: 20px 0;
-	grid-gap: 20px;
-	color: var(--ltgray);
-}
-
-.contact > h1 {
-	justify-self: center;
-}
-
-.email, .phone {
-	justify-self: center;
-}
-
-.social {
-	justify-self: center;
-}
-
 /* Responsive */
 
 @media (max-width: 750px) {
-	/* General */
+	/* Global */
 	body {
 		font-size: 1.5em;
 	}
@@ -179,7 +181,9 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 		justify-self: center;
 	}
 
-	/* About Homepage Blurb */
+	/* Homepage */
+
+	/* About Homepage */
 	.about_homepage {
 		grid-template-columns: 1fr 2fr 1fr;
 		grid-template-rows: auto 1fr;
@@ -208,23 +212,31 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 }
 
 @media (max-width: 500px) {
+
+	/* General */
 	body {
 		font-size: 1.25em;
 	}
+
+	/* Global */
 	.top {
 		margin: 0;
 	}
 
+	/* Homepage */
+
 	/* About Homepage Blurb */
-	
 	.pic_homepage {
 		width: 200px;
 	}
 	.desc_homepage {
 		max-width: 300px;
 	}
+
 	.snippet {
 		height: 190px;
 		max-width: 300px;
 	}
+}
+
 }
