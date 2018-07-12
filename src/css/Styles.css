@@ -11,7 +11,7 @@ body {
 	font-family: 'fionaregular';
 	background: var(--ltgray);
 	color: var(--black);
-	font-size: 2em;
+	font-size: 32px;
 	margin: 0;
 }
 
@@ -28,6 +28,10 @@ body {
 
 h1, h2, h3, h4, h5, h6, p, ul, li {
 	margin: 0;
+}
+
+p {
+	font-size: 0.75em;
 }
 
 /* Wrapper */
@@ -92,6 +96,10 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	justify-self: center;
 }
 
+.contact > p {
+	font-size: 1em;
+}
+
 .email, .phone {
 	justify-self: center;
 }
@@ -125,6 +133,9 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 	width: 350px;
 }
 
+.about_homepage > p {
+	font-size: 1em;
+}
 
 .about_homepage > p > a {
 	text-decoration: none;
