@@ -5,10 +5,7 @@ class HomeComponent extends React.Component {
 	render() {
 		return (
 			<div className="wrapper">
-				<TopNavComponent
-					goToHome={this.goToHome}
-					goToAbout={this.goToAbout}
-				/>
+				<TopNavComponent push={this.props.history.push} />
 				<section className="about_homepage">
 					<img
 						className="pic_homepage"
@@ -66,14 +63,6 @@ class HomeComponent extends React.Component {
 			</div>
 		);
 	}
-	goToAbout = event => {
-		event.preventDefault();
-		this.props.history.push("/About");
-	};
-	goToHome = event => {
-		event.preventDefault();
-		this.props.history.push("/");
-	};
 }
 
 export default HomeComponent;

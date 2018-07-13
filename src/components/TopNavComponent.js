@@ -4,12 +4,12 @@ class TopNavComponent extends React.Component {
 	render() {
 		return (
 			<nav className="top">
-				<a href="" onClick={this.props.goToHome} className="sitename">
+				<a href="" onClick={this.goToHome} className="sitename">
 					Marla Foreman
 				</a>
 				<ul className="menu-top">
 					<li>
-						<a href="" onClick={this.props.goToAbout}>
+						<a href="" onClick={this.goToAbout}>
 							About
 						</a>
 					</li>
@@ -26,6 +26,14 @@ class TopNavComponent extends React.Component {
 			</nav>
 		);
 	}
+	goToAbout = event => {
+		event.preventDefault();
+		this.props.push("/About");
+	};
+	goToHome = event => {
+		event.preventDefault();
+		this.props.push("/");
+	};
 }
 
 export default TopNavComponent;

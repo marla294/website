@@ -1,31 +1,11 @@
 import React from "react";
+import TopNavComponent from "./TopNavComponent";
 
 class AboutComponent extends React.Component {
 	render() {
 		return (
 			<div className="wrapper">
-				<nav className="top">
-					<a href="" onClick={this.goToHome} className="sitename">
-						Marla Foreman
-					</a>
-					<ul className="menu-top">
-						<li>
-							<a href="" onClick={this.goToAbout}>
-								About
-							</a>
-						</li>
-						<li>
-							<a href="">Blog</a>
-						</li>
-						<li>
-							<a href="">Gallery</a>
-						</li>
-						<li>
-							<a href="">Contact</a>
-						</li>
-					</ul>
-				</nav>
-
+				<TopNavComponent push={this.props.history.push} />
 				<section className="about">
 					<h1 className="title">About Me</h1>
 					<div className="pic_about">
@@ -101,15 +81,6 @@ class AboutComponent extends React.Component {
 			</div>
 		);
 	}
-
-	goToAbout = event => {
-		event.preventDefault();
-		this.props.history.push("/About");
-	};
-	goToHome = event => {
-		event.preventDefault();
-		this.props.history.push("/");
-	};
 }
 
 export default AboutComponent;
