@@ -5,10 +5,14 @@ class AboutComponent extends React.Component {
 		return (
 			<div className="wrapper">
 				<nav className="top">
-					<p className="sitename">Marla Foreman</p>
+					<a href="" onClick={this.goToHome} className="sitename">
+						Marla Foreman
+					</a>
 					<ul className="menu-top">
 						<li>
-							<a href="">About</a>
+							<a href="" onClick={this.goToAbout}>
+								About
+							</a>
 						</li>
 						<li>
 							<a href="">Blog</a>
@@ -97,6 +101,15 @@ class AboutComponent extends React.Component {
 			</div>
 		);
 	}
+
+	goToAbout = event => {
+		event.preventDefault();
+		this.props.history.push("/About");
+	};
+	goToHome = event => {
+		event.preventDefault();
+		this.props.history.push("/");
+	};
 }
 
 export default AboutComponent;
