@@ -1,5 +1,6 @@
 import React from "react";
 import TopNavComponent from "./TopNavComponent";
+import FooterComponent from "./FooterComponent";
 
 class HomeComponent extends React.Component {
 	render() {
@@ -52,14 +53,7 @@ class HomeComponent extends React.Component {
 						</div>
 					</div>
 				</section>
-				<footer className="contact">
-					<h1>Connect with me</h1>
-					<p className="email">marla294@gmail.com</p>
-					<p className="phone">312-576-4246</p>
-					<div className="social">
-						<p>LinkedIn, Twitter, Instagram, Github</p>
-					</div>
-				</footer>
+				<FooterComponent />
 			</div>
 		);
 	}
