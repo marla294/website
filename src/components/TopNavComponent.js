@@ -4,9 +4,9 @@ class TopNavComponent extends React.Component {
 	render() {
 		return (
 			<nav className="top">
-				<a href="" onClick={this.goToHome} className="sitename">
+				<p onClick={this.goToHome} className="sitename">
 					Marla Foreman
-				</a>
+				</p>
 				<ul className="menu-top">
 					<li>
 						<a href="" onClick={this.goToAbout}>
