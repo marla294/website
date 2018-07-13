@@ -1,8 +1,8 @@
 /* Fonts */
 @font-face {
     font-family: 'fionaregular';
-    src: url('./Assets/Fonts/Fiona/fiona-regular-webfont.woff2') format('woff2'),
-         url('./Assets/Fonts/Fiona/fiona-regular-webfont.woff') format('woff');
+    src: url('../Assets/Fonts/Fiona/fiona-regular-webfont.woff2') format('woff2'),
+         url('../Assets/Fonts/Fiona/fiona-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -84,7 +84,7 @@ p {
 /* Contact */
 
 .contact {
-	background: url("./Assets/Backgrounds/7.jpg");
+	background: url("../Assets/Backgrounds/7.jpg");
 	display: grid;
 	grid-template-rows: repeat(3, auto);
 	padding: 20px 0;
@@ -117,7 +117,7 @@ p {
 	grid-template-columns: 1fr auto auto 1fr;
 	grid-template-areas: ". pic desc .";
 	grid-gap: var(--gridGap);
-	background: url("./Assets/Backgrounds/7.jpg");
+	background: url("../Assets/Backgrounds/7.jpg");
 	padding: 20px 0;
 	color: var(--ltgray);
 }
@@ -305,6 +305,4 @@ p {
 		height: 190px;
 		max-width: 300px;
 	}
-}
-
 }

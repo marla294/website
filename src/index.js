@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import HomeComponent from "./components/HomeComponent";
+import Router from "./components/Router";
 import "./css/Styles.css";
 
-render(<HomeComponent />, document.getElementById("root"));
+render(<Router />, document.getElementById("root"));
