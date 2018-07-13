@@ -22,7 +22,7 @@ class AboutComponent extends React.Component {
 						</p>
 
 						<p>
-							I am a 36 year old web developer from Omaha,
+							I am a 36-year-old web developer from Omaha,
 							Nebraska. I grew up in Ohio, in a small-ish town
 							(Lima). Went to college at the University of
 							Illinois in Urbana-Champaign. Played on the women's
