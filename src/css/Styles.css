@@ -27,7 +27,7 @@ body {
 
 /* Global Styles */
 
-h1, h2, h3, h4, h5, h6, p, ul, li {
+h1, h2, h3, h4, h5, h6, p, ul, li, figure {
 	margin: 0;
 }
 
@@ -228,20 +228,21 @@ p {
 .post_header {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	grid-template-areas: "postImg postContent";
 	grid-column: 2 / span 2;
+	grid-gap: var(--gridGap);
 }
 
 .post_headImg {
-	justify-self: right;
-	display: grid;
+	grid-area: postImg;
 }
 
 .post_headImg > img {
-	width: 600px;
-	align-self: center;
+	width: 100%;
 }
 
 .post_header_content {
+	grid-area: postContent;
 	align-self: center;
 }
 
@@ -252,7 +253,7 @@ p {
 }
 
 .post_contentImg > img {
-	width: 250px;
+	width: 100%;
 }
 
 .figcaption {
@@ -274,10 +275,6 @@ p {
 	grid-row: span 3;
 }
 
-.full > img {
-	width: 100%;
-}
-
 /* Responsive */
 
 @media (max-width: 1000px) {
@@ -289,6 +286,33 @@ p {
 		". title ."
 		". pic   ."
 		". desc  .";
+	}
+
+	/* Post Component */
+	.post_header {
+		grid-template-areas: "postContent" "postImg";
+	}
+
+	.post_header_content, .post_headImg {
+		grid-column: span 2;
+		justify-self: left;
+	}
+
+	.post_headImg {
+		margin-right: var(--sideMargin);
+	}
+
+	.post {
+		grid-template-columns: 1fr;
+	}
+
+	.post > * {
+		grid-column: 2 / span 2;
+	}
+
+	.right, .left {
+		grid-column: 2 / span 1;
+		grid-row: span 3;
 	}
 
 }
