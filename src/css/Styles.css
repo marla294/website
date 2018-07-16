@@ -277,6 +277,28 @@ p {
 	grid-row: span 3;
 }
 
+/* Image Overlay */
+
+.overlay {
+	display: none;
+	background: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.overlay-inner {
+	width: 700px;
+	justify-self: center;
+	align-self: center;
+}
+
+.overlay-inner > img {
+	width: 100%;
+}
+
 /* Responsive */
 
 @media (max-width: 1000px) {
