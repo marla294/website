@@ -8,19 +8,20 @@ class PostComponent extends React.Component {
 			<div className="wrapper">
 				<TopNavComponent push={this.props.history.push} />
 				<div className="post_header">
-					<div className="post_headImg">
+					<figure className="post_headImg">
 						<img
 							src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
 						/>
-					</div>
+					</figure>
 					<div className="post_header_content">
 						<h2 className="post_title">
-							That Time We Went To Barcelona
+							When We Went To Barcelona
 						</h2>
-						<h4 className="post_date">7/16/18</h4>
+						<h4 className="post_date">July 16, 2018</h4>
 					</div>
 				</div>
 				<section className="post_content">
+					<h4>&#191;Por Que Barcelona?</h4>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing
 						elit. Quis obcaecati facere voluptatibus iste impedit
@@ -38,6 +39,15 @@ class PostComponent extends React.Component {
 						minima, voluptatibus consequatur cumque saepe delectus.
 						Alias, nihil!
 					</p>
+
+					<figure className="post_contentImg right">
+						<img
+							src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
+						/>
+						<figcaption class="figcaption">
+							Standing in front of a cool wall
+						</figcaption>
+					</figure>
 
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -89,6 +99,15 @@ class PostComponent extends React.Component {
 						ipsam impedit accusamus cumque maiores, vitae corporis
 						consequuntur!
 					</p>
+
+					<figure className="post_contentImg right">
+						<img
+							src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
+						/>
+						<figcaption class="figcaption">
+							Standing in front of a cool wall
+						</figcaption>
+					</figure>
 
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing
