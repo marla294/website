@@ -223,7 +223,7 @@ p {
 	grid-column: 2 / span 1;
 }
 
-
+/* Post Header */
 
 .post_header {
 	display: grid;
@@ -245,12 +245,7 @@ p {
 	align-self: center;
 }
 
-
-
-.right {
-	grid-column: 3 / -1;
-	grid-row: span 2;
-}
+/* Post Content Images */
 
 .post_contentImg {
 	justify-self: center;
@@ -262,6 +257,25 @@ p {
 
 .figcaption {
 	font-size: 0.5em;
+}
+
+.right {
+	grid-column: 3 / -1;
+	grid-row: span 3;
+}
+
+.left {
+	grid-column: 1 / span 1;
+	grid-row: span 3;
+}
+
+.full {
+	grid-column: 2 / span 1;
+	grid-row: span 3;
+}
+
+.full > img {
+	width: 100%;
 }
 
 /* Responsive */

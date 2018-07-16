@@ -100,12 +100,12 @@ class PostComponent extends React.Component {
 						consequuntur!
 					</p>
 
-					<figure className="post_contentImg right">
+					<figure className="post_contentImg left">
 						<img
 							src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
 						/>
 						<figcaption class="figcaption">
-							Standing in front of a cool wall
+							Standing in front of a cool wall 2
 						</figcaption>
 					</figure>
 
