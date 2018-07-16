@@ -280,13 +280,20 @@ p {
 /* Image Overlay */
 
 .overlay {
-	display: none;
 	background: rgba(0, 0, 0, 0.7);
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+}
+
+.overlay.open {
+	display: grid;
+}
+
+.overlay.closed {
+	display: none;
 }
 
 .overlay-inner {

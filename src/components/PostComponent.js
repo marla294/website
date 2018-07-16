@@ -3,12 +3,29 @@ import TopNavComponent from "./TopNavComponent";
 import FooterComponent from "./FooterComponent";
 
 class PostComponent extends React.Component {
+	/* Overlay stuff */
+	state = { show: false };
+
+	showFullImage = () => {
+		this.setState({ show: true });
+	};
+
+	hideFullImage = () => {
+		this.setState({ show: false });
+	};
+
 	render() {
 		return (
 			<div>
-				<div class="overlay">
-					<div class="overlay-inner">
-						<button class="close">× Close</button>
+				<div
+					className={
+						this.state.show ? "overlay open" : "overlay closed"
+					}
+				>
+					<div className="overlay-inner">
+						<button className="close" onClick={this.hideFullImage}>
+							× Close
+						</button>
 						<img
 							src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
 						/>
@@ -16,10 +33,11 @@ class PostComponent extends React.Component {
 				</div>
 				<div className="wrapper">
 					<TopNavComponent push={this.props.history.push} />
-					<article class="post">
+					<article className="post">
 						<div className="post_header">
 							<figure className="post_headImg">
 								<img
+									onClick={this.showFullImage}
 									src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
 								/>
 							</figure>
@@ -52,7 +70,7 @@ class PostComponent extends React.Component {
 							<img
 								src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
 							/>
-							<figcaption class="figcaption">
+							<figcaption className="figcaption">
 								Standing in front of a cool wall
 							</figcaption>
 						</figure>
@@ -117,7 +135,7 @@ class PostComponent extends React.Component {
 							<img
 								src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
 							/>
-							<figcaption class="figcaption">
+							<figcaption className="figcaption">
 								Standing in front of a cool wall 2
 							</figcaption>
 						</figure>
