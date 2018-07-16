@@ -213,11 +213,22 @@ p {
 
 /* Post Component */
 
-.post_header {
+.post {
 	display: grid;
 	grid-gap: var(--gridGap);
+	grid-template-columns: 3fr 12fr 5fr;
+}
+
+.post > * {
+	grid-column: 2 / span 1;
+}
+
+
+
+.post_header {
+	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	margin: 0 var(--sideMargin);
+	grid-column: 2 / span 2;
 }
 
 .post_headImg {
@@ -234,15 +245,7 @@ p {
 	align-self: center;
 }
 
-.post_content {
-	display: grid;
-	grid-gap: var(--gridGap);
-	grid-template-columns: 3fr 12fr 5fr;
-}
 
-.post_content > * {
-	grid-column: 2 / span 1;
-}
 
 .right {
 	grid-column: 3 / -1;

@@ -7,20 +7,18 @@ class PostComponent extends React.Component {
 		return (
 			<div className="wrapper">
 				<TopNavComponent push={this.props.history.push} />
-				<div className="post_header">
-					<figure className="post_headImg">
-						<img
-							src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
-						/>
-					</figure>
-					<div className="post_header_content">
-						<h2 className="post_title">
-							When We Went To Barcelona
-						</h2>
-						<h4 className="post_date">July 16, 2018</h4>
+				<article class="post">
+					<div className="post_header">
+						<figure className="post_headImg">
+							<img
+								src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
+							/>
+						</figure>
+						<div className="post_header_content">
+							<h2>When We Went To Barcelona</h2>
+							<h4>July 16, 2018</h4>
+						</div>
 					</div>
-				</div>
-				<section className="post_content">
 					<h4>&#191;Por Que Barcelona?</h4>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -89,6 +87,8 @@ class PostComponent extends React.Component {
 						dignissimos, aperiam veritatis.
 					</p>
 
+					<h4>What we did there</h4>
+
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing
 						elit. Cumque obcaecati beatae nam, commodi aspernatur
@@ -129,7 +129,7 @@ class PostComponent extends React.Component {
 						Esse accusantium, ab, ipsam dolorum corporis illum nemo
 						odit modi officiis dignissimos explicabo.
 					</p>
-				</section>
+				</article>
 				<FooterComponent />
 			</div>
 		);
