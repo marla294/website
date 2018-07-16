@@ -8,12 +8,17 @@ class PostComponent extends React.Component {
 			<div className="wrapper">
 				<TopNavComponent push={this.props.history.push} />
 				<div className="post_header">
-					<h1 className="post_title">Title</h1>
-					<h3 className="post_date">Date</h3>
-					<h3 className="post_categories">Categories</h3>
-					<img
-						src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
-					/>
+					<div className="post_headImg">
+						<img
+							src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
+						/>
+					</div>
+					<div className="post_header_content">
+						<h2 className="post_title">
+							That Time We Went To Barcelona
+						</h2>
+						<h4 className="post_date">7/16/18</h4>
+					</div>
 				</div>
 				<section className="post_content">
 					<p>

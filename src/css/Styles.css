@@ -211,6 +211,29 @@ p {
 	width: 400px;
 }
 
+/* Post Component */
+
+.post_header {
+	display: grid;
+	grid-gap: var(--gridGap);
+	grid-template-columns: repeat(2, 1fr);
+	margin: 0 var(--sideMargin);
+}
+
+.post_headImg {
+	justify-self: right;
+	display: grid;
+}
+
+.post_headImg > img {
+	width: 600px;
+	align-self: center;
+}
+
+.post_header_content {
+	align-self: center;
+}
+
 /* Responsive */
 
 @media (max-width: 1000px) {
