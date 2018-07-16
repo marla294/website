@@ -263,11 +263,13 @@ p {
 .right {
 	grid-column: 3 / -1;
 	grid-row: span 3;
+	margin-right: 40px;
 }
 
 .left {
 	grid-column: 1 / span 1;
 	grid-row: span 3;
+	margin-left: 40px;
 }
 
 .full {
@@ -290,11 +292,12 @@ p {
 
 	/* Post Component */
 	.post_header {
+		grid-template-columns: 1fr;
 		grid-template-areas: "postContent" "postImg";
+		margin-right: var(--sideMargin);
 	}
 
 	.post_header_content, .post_headImg {
-		grid-column: span 2;
 		justify-self: left;
 	}
 
@@ -306,13 +309,10 @@ p {
 		grid-template-columns: 1fr;
 	}
 
-	.post > * {
-		grid-column: 2 / span 2;
-	}
-
 	.right, .left {
 		grid-column: 2 / span 1;
 		grid-row: span 3;
+		margin: 0;
 	}
 
 }
