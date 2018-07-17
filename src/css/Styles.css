@@ -299,7 +299,7 @@ p {
 }
 
 .overlay-inner {
-	width: 700px;
+	width: 600px;
 	display: grid;
 	grid-template-rows: 1fr;
 	grid-template-columns: 1fr;
@@ -405,6 +405,7 @@ p {
 	.pic_homepage {
 		width: 300px;
 	}
+
 	/* Blog */
 	.snippets {
 		grid-template-columns: 1fr;
@@ -418,9 +419,13 @@ p {
 	}
 
 	/* About Page */
-
 	.pic_about > img {
 		width: 275px;
+	}
+
+	/* Image Overlay */
+	.overlay-inner {
+		width: 300px;
 	}
 }
 
