@@ -36,6 +36,7 @@ class PostComponent extends React.Component {
 								<img
 									onClick={this.showFullImage}
 									src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
+									alt="Spanish Flags"
 								/>
 							</figure>
 							<div className="post_header_content">
@@ -67,6 +68,7 @@ class PostComponent extends React.Component {
 							<img
 								onClick={this.showFullImage}
 								src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
+								alt="Marla in front of graffiti wall"
 							/>
 							<figcaption className="figcaption">
 								Standing in front of a cool wall
@@ -133,6 +135,7 @@ class PostComponent extends React.Component {
 							<img
 								onClick={this.showFullImage}
 								src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
+								alt="Marla in front of graffiti wall"
 							/>
 							<figcaption className="figcaption">
 								Standing in front of a cool wall 2

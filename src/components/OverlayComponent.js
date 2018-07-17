@@ -15,7 +15,7 @@ class OverlayComponent extends React.Component {
 							×
 						</button>
 					</div>
-					<img src={`${this.props.imgURL}`} />
+					<img src={`${this.props.imgURL}`} alt="" />
 				</div>
 			</div>
 		);

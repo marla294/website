@@ -11,11 +11,14 @@ class HomeComponent extends React.Component {
 					<img
 						className="pic_homepage"
 						src={require("../Assets/Pictures/SelfPortraits/20180607_SagradaFamilia.jpg")}
+						alt=""
 					/>
 					<p className="desc_homepage">
 						Hi, I'm Marla, a self-taught Web Developer currently
 						calling Omaha, Nebraska home.{" "}
-						<a href="">Read More...</a>
+						<a href="" onClick={this.goToAbout}>
+							Read More...
+						</a>
 					</p>
 				</section>
 				<section className="blog">
@@ -57,6 +60,10 @@ class HomeComponent extends React.Component {
 			</div>
 		);
 	}
+	goToAbout = event => {
+		event.preventDefault();
+		this.props.history.push("/About");
+	};
 }
 
 export default HomeComponent;

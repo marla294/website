@@ -12,6 +12,7 @@ class AboutComponent extends React.Component {
 					<div className="pic_about">
 						<img
 							src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
+							alt=""
 						/>
 					</div>
 					<div className="desc_about">
