@@ -121,6 +121,7 @@ p {
 	grid-gap: var(--gridGap);
 	padding: 20px 0;
 	color: var(--black);
+	margin-top: 60px;
 }
 
 .pic_homepage {
@@ -410,6 +411,7 @@ p {
 			". pic ."
 			". desc ."
 			;
+		margin: 0;
 	}
 	.pic_homepage, .desc_homepage {
 		justify-self: center;
