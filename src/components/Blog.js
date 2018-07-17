@@ -7,10 +7,15 @@ class Blog extends React.Component {
 	render() {
 		return (
 			<div className="wrapper">
-				<TopNav />
-				<p>This is the blog component</p>
+				<TopNav push={this.props.history.push} />
 				{Object.keys(this.props.posts).map(key => {
-					return <Snippet key={key} post={this.props.posts[key]} />;
+					return (
+						<Snippet
+							key={key}
+							post={this.props.posts[key]}
+							push={this.props.history.push}
+						/>
+					);
 				})}
 				<Footer />
 			</div>

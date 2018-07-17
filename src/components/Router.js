@@ -21,11 +21,10 @@ class Router extends React.Component {
 		this.loadBlogPosts();
 	}
 
-	blog = () => {
-		return <Blog posts={this.state.posts} />;
+	blog = props => {
+		return <Blog posts={this.state.posts} {...props} />;
 	};
 
-	/* Home component needs the router props to pass to TopNav component */
 	home = props => {
 		return <Home posts={this.state.posts} {...props} />;
 	};
