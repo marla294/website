@@ -2,13 +2,15 @@ import React from "react";
 import TopNavComponent from "./TopNavComponent";
 import FooterComponent from "./FooterComponent";
 import OverlayComponent from "./OverlayComponent";
+import posts from "../blog-posts";
 
 class HomeComponent extends React.Component {
-	/* Overlay stuff */
 	state = {
-		show: false
+		show: false,
+		posts: {}
 	};
 
+	/* Image Overlay Stuff */
 	imgURL = "";
 
 	showFullImage = event => {
@@ -19,6 +21,15 @@ class HomeComponent extends React.Component {
 	hideFullImage = () => {
 		this.setState({ show: false });
 	};
+
+	/* Load blog posts into state */
+	loadBlogPosts = () => {
+		this.setState({ posts });
+	};
+
+	componentDidMount() {
+		this.loadBlogPosts();
+	}
 
 	render() {
 		return (
@@ -37,13 +48,15 @@ class HomeComponent extends React.Component {
 							src={require("../Assets/Pictures/SelfPortraits/20180607_SagradaFamilia.jpg")}
 							alt=""
 						/>
-						<p className="desc_homepage">
-							Hi, I'm Marla, a self-taught Web Developer currently
-							calling Omaha, Nebraska home.{" "}
+						<div className="desc_homepage">
+							<p>
+								Hi, I'm Marla, a self-taught Web Developer
+								currently calling Omaha, Nebraska home.{" "}
+							</p>
 							<a href="" onClick={this.goToAbout}>
-								Read More...
+								<i>Read More...</i>
 							</a>
-						</p>
+						</div>
 					</section>
 					<section className="blog">
 						<h1>From the blog...</h1>
