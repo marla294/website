@@ -119,9 +119,8 @@ p {
 	grid-template-columns: 1fr auto auto 1fr;
 	grid-template-areas: ". pic desc .";
 	grid-gap: var(--gridGap);
-	background: url("../Assets/Backgrounds/7.jpg");
 	padding: 20px 0;
-	color: var(--ltgray);
+	color: var(--black);
 }
 
 .pic_homepage {
@@ -148,15 +147,23 @@ p {
 
 .blog {
 	margin: 0 var(--sideMargin);
+	margin-top: 60px;
 	display: grid;
+	grid-gap: var(--gridGap);
 	grid-template-rows: auto auto;
+	grid-template-columns: 1fr 4fr 1fr;
+}
+
+.blog > h1 {
+	grid-column: 2 / span 1;
 }
 
 .snippets {
+	grid-column: 2 / span 1;
 	display: grid;
-	grid-template-columns: 1fr 2fr 2fr 1fr;
+	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: 400px;
-	grid-template-areas: ". first second .";
+	grid-template-areas: "first second";
 	grid-gap: var(--gridGap);
 }
 
@@ -412,6 +419,9 @@ p {
 	}
 
 	/* Blog */
+	.blog {
+		margin-top: 0;
+	}
 	.snippets {
 		grid-template-columns: 1fr;
 		grid-template-rows: repeat(2, 200px);
