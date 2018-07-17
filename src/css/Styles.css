@@ -297,13 +297,13 @@ p {
 }
 
 .overlay-inner {
-	width: 700px;
+	height: 100vh;
 	justify-self: center;
 	align-self: center;
 }
 
 .overlay-inner > img {
-	width: 100%;
+	height: 90%;
 }
 
 /* Responsive */

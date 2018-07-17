@@ -4,9 +4,14 @@ import FooterComponent from "./FooterComponent";
 
 class PostComponent extends React.Component {
 	/* Overlay stuff */
-	state = { show: false };
+	state = {
+		show: false
+	};
 
-	showFullImage = () => {
+	imgURL = "";
+
+	showFullImage = event => {
+		this.imgURL = event.currentTarget.src;
 		this.setState({ show: true });
 	};
 
@@ -26,9 +31,7 @@ class PostComponent extends React.Component {
 						<button className="close" onClick={this.hideFullImage}>
 							× Close
 						</button>
-						<img
-							src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
-						/>
+						<img src={`${this.imgURL}`} />
 					</div>
 				</div>
 				<div className="wrapper">
@@ -68,6 +71,7 @@ class PostComponent extends React.Component {
 
 						<figure className="post_contentImg right">
 							<img
+								onClick={this.showFullImage}
 								src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
 							/>
 							<figcaption className="figcaption">
@@ -133,6 +137,7 @@ class PostComponent extends React.Component {
 
 						<figure className="post_contentImg left">
 							<img
+								onClick={this.showFullImage}
 								src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
 							/>
 							<figcaption className="figcaption">
