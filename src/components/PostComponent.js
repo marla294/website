@@ -1,6 +1,7 @@
 import React from "react";
 import TopNavComponent from "./TopNavComponent";
 import FooterComponent from "./FooterComponent";
+import OverlayComponent from "./OverlayComponent";
 
 class PostComponent extends React.Component {
 	/* Overlay stuff */
