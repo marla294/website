@@ -48,15 +48,16 @@ p {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-template-areas: "sitename menu";
-	margin: 0 var(--sideMargin);
-	margin-top: 20px;
+	background: url("../Assets/Backgrounds/7.jpg");
+	color: var(--ltgray);
 }
 
 .top > p {
 	grid-area: sitename;
 	font-size: 2em;
 	align-self: center;
-	margin: 0;
+	margin-left: var(--sideMargin);
+	cursor: pointer;
 }
 
 .top > ul {
@@ -74,7 +75,7 @@ p {
 
 .top a {
 	text-decoration: none;
-	color: var(--black);
+	color: var(--ltgray);
 }
 
 .top a:hover {
@@ -386,6 +387,10 @@ p {
 
 	.top > p {
 		justify-self: center;
+	}
+
+	.top > ul {
+		padding-bottom: 20px;
 	}
 
 	/* Homepage */

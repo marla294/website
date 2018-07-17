@@ -8,7 +8,7 @@ class FooterComponent extends React.Component {
 				<p className="email">marla294@gmail.com</p>
 				<p className="phone">312-576-4246</p>
 				<div className="social">
-					<p>LinkedIn, Twitter, Instagram, Github</p>
+					<p>Facebook, LinkedIn, Twitter, Instagram, Github</p>
 				</div>
 			</footer>
 		);
