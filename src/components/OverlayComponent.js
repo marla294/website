@@ -7,12 +7,14 @@ class OverlayComponent extends React.Component {
 				className={this.props.show ? "overlay open" : "overlay closed"}
 			>
 				<div className="overlay-inner">
-					<button
-						className="close"
-						onClick={this.props.hideFullImage}
-					>
-						× Close
-					</button>
+					<div className="btn_overlay">
+						<button
+							className="close"
+							onClick={this.props.hideFullImage}
+						>
+							×
+						</button>
+					</div>
 					<img src={`${this.props.imgURL}`} />
 				</div>
 			</div>

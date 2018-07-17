@@ -290,6 +290,8 @@ p {
 
 .overlay.open {
 	display: grid;
+	justify-content: center;
+	align-content: center;
 }
 
 .overlay.closed {
@@ -297,13 +299,35 @@ p {
 }
 
 .overlay-inner {
-	height: 100vh;
-	justify-self: center;
-	align-self: center;
+	width: 700px;
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr;
 }
 
 .overlay-inner > img {
-	height: 90%;
+	grid-column: 1 / -1;
+	grid-row: 1 / -1;
+	width: 100%;
+}
+
+.btn_overlay {
+	grid-column: 1 / -1;
+	grid-row: 1 / -1;
+	width: 100%;
+	position: relative;
+}
+
+.btn_overlay button {
+	background: none;
+	border: none;
+	font-size: 1.5em;
+	position: absolute;
+	top: -10px;
+}
+
+.btn_overlay button:hover {
+	color: var(--aqua);
 }
 
 /* Responsive */
