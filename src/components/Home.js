@@ -6,8 +6,7 @@ import posts from "../blog-posts";
 
 class Home extends React.Component {
 	state = {
-		show: false,
-		posts: {}
+		show: false
 	};
 
 	/* Image Overlay Stuff */
@@ -21,15 +20,6 @@ class Home extends React.Component {
 	hideFullImage = () => {
 		this.setState({ show: false });
 	};
-
-	/* Load blog posts into state */
-	loadBlogPosts = () => {
-		this.setState({ posts });
-	};
-
-	componentDidMount() {
-		this.loadBlogPosts();
-	}
 
 	render() {
 		return (
