@@ -347,6 +347,12 @@ p {
 	color: var(--aqua);
 }
 
+/* Post Snippet */
+
+.snippet_img {
+	width: 100px;
+}
+
 /* Responsive */
 
 @media (max-width: 1000px) {

@@ -5,7 +5,7 @@ const posts = {
 		title: "Barcelona",
 		date: "July 16, 2018",
 		postNum: 1,
-		headerImage: "../Assets/Pictures/Spain/20180607_Flags.jpg"
+		headerImage: "/Images/Pictures/Spain/20180607_Flags.jpg"
 	}
 };
 

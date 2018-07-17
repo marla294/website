@@ -2,7 +2,6 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
-import posts from "../blog-posts";
 
 class Home extends React.Component {
 	state = {
