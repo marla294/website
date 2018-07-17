@@ -1,10 +1,10 @@
 import React from "react";
-import TopNavComponent from "./TopNavComponent";
-import FooterComponent from "./FooterComponent";
-import OverlayComponent from "./OverlayComponent";
+import TopNav from "./TopNav";
+import Footer from "./Footer";
+import Overlay from "./Overlay";
 import posts from "../blog-posts";
 
-class HomeComponent extends React.Component {
+class Home extends React.Component {
 	state = {
 		show: false,
 		posts: {}
@@ -34,13 +34,13 @@ class HomeComponent extends React.Component {
 	render() {
 		return (
 			<div>
-				<OverlayComponent
+				<Overlay
 					show={this.state.show}
 					imgURL={this.imgURL}
 					hideFullImage={this.hideFullImage}
 				/>
 				<div className="wrapper">
-					<TopNavComponent push={this.props.history.push} />
+					<TopNav push={this.props.history.push} />
 					<section className="about_homepage">
 						<img
 							onClick={this.showFullImage}
@@ -95,7 +95,7 @@ class HomeComponent extends React.Component {
 							</div>
 						</div>
 					</section>
-					<FooterComponent />
+					<Footer />
 				</div>
 			</div>
 		);
@@ -106,4 +106,4 @@ class HomeComponent extends React.Component {
 	};
 }
 
-export default HomeComponent;
+export default Home;

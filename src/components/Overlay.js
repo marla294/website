@@ -1,6 +1,6 @@
 import React from "react";
 
-class OverlayComponent extends React.Component {
+class Overlay extends React.Component {
 	render() {
 		return (
 			<div
@@ -22,4 +22,4 @@ class OverlayComponent extends React.Component {
 	}
 }
 
-export default OverlayComponent;
+export default Overlay;

@@ -1,6 +1,6 @@
 import React from "react";
 
-class TopNavComponent extends React.Component {
+class TopNav extends React.Component {
 	render() {
 		return (
 			<nav className="top">
@@ -42,4 +42,4 @@ class TopNavComponent extends React.Component {
 	};
 }
 
-export default TopNavComponent;
+export default TopNav;

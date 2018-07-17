@@ -1,7 +1,7 @@
 import React from "react";
-import Snippet from "./PostSnippetComponent";
+import Snippet from "./PostSnippet";
 
-class BlogComponent extends React.Component {
+class Blog extends React.Component {
 	render() {
 		return (
 			<div className="wrapper">
@@ -12,4 +12,4 @@ class BlogComponent extends React.Component {
 	}
 }
 
-export default BlogComponent;
+export default Blog;

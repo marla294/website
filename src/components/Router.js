@@ -1,19 +1,19 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomeComponent from "./HomeComponent";
-import AboutComponent from "./AboutComponent";
-import PostComponent from "./PostComponent";
-import BlogComponent from "./BlogComponent";
+import Home from "./Home";
+import About from "./About";
+import Post from "./Post";
+import Blog from "./Blog";
 
 class Router extends React.Component {
 	render() {
 		return (
 			<BrowserRouter>
 				<Switch>
-					<Route exact path="/" component={HomeComponent} />
-					<Route path="/About" component={AboutComponent} />
-					<Route path="/Post" component={PostComponent} />
-					<Route path="/Blog" component={BlogComponent} />
+					<Route exact path="/" component={Home} />
+					<Route path="/About" component={About} />
+					<Route path="/Post" component={Post} />
+					<Route path="/Blog" component={Blog} />
 				</Switch>
 			</BrowserRouter>
 		);

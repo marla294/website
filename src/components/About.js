@@ -1,9 +1,9 @@
 import React from "react";
-import TopNavComponent from "./TopNavComponent";
-import FooterComponent from "./FooterComponent";
-import OverlayComponent from "./OverlayComponent";
+import TopNav from "./TopNav";
+import Footer from "./Footer";
+import Overlay from "./Overlay";
 
-class AboutComponent extends React.Component {
+class About extends React.Component {
 	/* Overlay stuff */
 	state = {
 		show: false
@@ -23,13 +23,13 @@ class AboutComponent extends React.Component {
 	render() {
 		return (
 			<div>
-				<OverlayComponent
+				<Overlay
 					show={this.state.show}
 					imgURL={this.imgURL}
 					hideFullImage={this.hideFullImage}
 				/>
 				<div className="wrapper">
-					<TopNavComponent push={this.props.history.push} />
+					<TopNav push={this.props.history.push} />
 					<section className="about">
 						<h1 className="title">About Me</h1>
 						<div className="pic_about">
@@ -97,11 +97,11 @@ class AboutComponent extends React.Component {
 							<p>- Marla</p>
 						</div>
 					</section>
-					<FooterComponent />
+					<Footer />
 				</div>
 			</div>
 		);
 	}
 }
 
-export default AboutComponent;
+export default About;
