@@ -23,18 +23,11 @@ class PostComponent extends React.Component {
 	render() {
 		return (
 			<div>
-				<div
-					className={
-						this.state.show ? "overlay open" : "overlay closed"
-					}
-				>
-					<div className="overlay-inner">
-						<button className="close" onClick={this.hideFullImage}>
-							× Close
-						</button>
-						<img src={`${this.imgURL}`} />
-					</div>
-				</div>
+				<OverlayComponent
+					show={this.state.show}
+					imgURL={this.imgURL}
+					hideFullImage={this.hideFullImage}
+				/>
 				<div className="wrapper">
 					<TopNavComponent push={this.props.history.push} />
 					<article className="post">
