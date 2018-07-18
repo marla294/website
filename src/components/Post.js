@@ -7,7 +7,7 @@ class Post extends React.Component {
 	/* Overlay stuff */
 	state = {
 		show: false,
-		module: null
+		PostContent: null
 	};
 
 	imgURL = "";
@@ -25,13 +25,15 @@ class Post extends React.Component {
 
 	componentDidMount() {
 		import(`../Posts/${this.props.match.params.PostID}.js`).then(post =>
-			this.setState({ module: post.default })
+			this.setState({ PostContent: post.default })
 		);
 	}
 
 	render() {
+		const { PostContent } = this.state;
 		return (
 			<div>
+				{PostContent && <PostContent />}
 				<Overlay
 					show={this.state.show}
 					imgURL={this.imgURL}
