@@ -21,12 +21,16 @@ class Router extends React.Component {
 		this.loadBlogPosts();
 	}
 
-	blog = props => {
-		return <Blog posts={this.state.posts} {...props} />;
-	};
-
 	home = props => {
 		return <Home posts={this.state.posts} {...props} />;
+	};
+
+	post = props => {
+		return <Post posts={this.state.posts} {...props} />;
+	};
+
+	blog = props => {
+		return <Blog posts={this.state.posts} {...props} />;
 	};
 
 	render() {
@@ -35,7 +39,7 @@ class Router extends React.Component {
 				<Switch>
 					<Route exact path="/" render={this.home} />
 					<Route path="/About" component={About} />
-					<Route path="/Post" component={Post} />
+					<Route path="/Post" render={this.post} />
 					<Route path="/Blog" render={this.blog} />
 				</Switch>
 			</BrowserRouter>
