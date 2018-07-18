@@ -18,7 +18,7 @@ class PostSnippet extends React.Component {
 	}
 	goToPost = event => {
 		event.preventDefault();
-		this.props.push("/Post");
+		this.props.push(`/Post/${this.props.index}`);
 	};
 }
 

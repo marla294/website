@@ -12,6 +12,7 @@ class Blog extends React.Component {
 					return (
 						<Snippet
 							key={key}
+							index={key}
 							post={this.props.posts[key]}
 							push={this.props.history.push}
 						/>

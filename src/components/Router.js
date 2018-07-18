@@ -39,7 +39,7 @@ class Router extends React.Component {
 				<Switch>
 					<Route exact path="/" render={this.home} />
 					<Route path="/About" component={About} />
-					<Route path="/Post" render={this.post} />
+					<Route path="/Post/:PostID" render={this.post} />
 					<Route path="/Blog" render={this.blog} />
 				</Switch>
 			</BrowserRouter>
