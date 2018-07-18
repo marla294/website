@@ -23,17 +23,17 @@ class Post extends React.Component {
 
 	/* Grabbing the post html data to display */
 
-	componentDidMount() {
-		import(`../Posts/${this.props.match.params.PostID}.js`).then(post =>
-			this.setState({ PostContent: post.default })
-		);
+	async componentDidMount() {
+		const { default: PostContent } = await import(`../Posts/${
+			this.props.match.params.PostID
+		}.js`);
+		this.setState({ PostContent: <PostContent /> });
 	}
 
 	render() {
-		const { PostContent } = this.state;
 		return (
 			<div>
-				{PostContent && <PostContent />}
+				{this.state.PostContent || <h3>Loading...</h3>}
 				<Overlay
 					show={this.state.show}
 					imgURL={this.imgURL}
