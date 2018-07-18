@@ -230,18 +230,6 @@ p {
 
 /* Post Component */
 
-/*
-.post {
-	display: grid;
-	grid-gap: var(--gridGap);
-	grid-template-columns: 3fr 12fr 5fr;
-}
-
-.post > * {
-	grid-column: 2 / span 1;
-}
-*/
-
 /* Post Header */
 
 .post_header_wrapper {
@@ -312,59 +300,6 @@ p {
 .full {
 	grid-column: 2 / span 1;
 	grid-row: span 3;
-}
-
-/* Image Overlay */
-
-.overlay {
-	background: rgba(0, 0, 0, 0.7);
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-
-.overlay.open {
-	display: grid;
-	justify-content: center;
-	align-content: center;
-}
-
-.overlay.closed {
-	display: none;
-}
-
-.overlay-inner {
-	width: 600px;
-	display: grid;
-	grid-template-rows: 1fr;
-	grid-template-columns: 1fr;
-}
-
-.overlay-inner > img {
-	grid-column: 1 / -1;
-	grid-row: 1 / -1;
-	width: 100%;
-}
-
-.btn_overlay {
-	grid-column: 1 / -1;
-	grid-row: 1 / -1;
-	width: 100%;
-	position: relative;
-}
-
-.btn_overlay button {
-	background: none;
-	border: none;
-	font-size: 1.5em;
-	position: absolute;
-	top: -10px;
-}
-
-.btn_overlay button:hover {
-	color: var(--aqua);
 }
 
 /* Post Snippet */
@@ -487,11 +422,6 @@ p {
 	/* About Page */
 	.pic_about > img {
 		width: 275px;
-	}
-
-	/* Image Overlay */
-	.overlay-inner {
-		width: 300px;
 	}
 }
 

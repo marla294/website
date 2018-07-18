@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/Overlay.css";
 
 class Overlay extends React.Component {
 	render() {
