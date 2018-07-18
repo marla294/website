@@ -29,7 +29,9 @@ class Post extends React.Component {
 		const { default: PostContent } = await import(`../Posts/${
 			this.props.match.params.PostID
 		}.js`);
-		this.setState({ PostContent: <PostContent /> });
+		this.setState({
+			PostContent: <PostContent showFullImage={this.showFullImage} />
+		});
 	}
 
 	render() {
@@ -42,18 +44,20 @@ class Post extends React.Component {
 				/>
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
-					<article className="post">
-						<div className="post_header">
-							<figure className="post_headImg">
-								<img
-									onClick={this.showFullImage}
-									src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
-									alt="Spanish Flags"
-								/>
-							</figure>
-							<div className="post_header_content">
-								<h2>When We Went To Barcelona</h2>
-								<h4>July 16, 2018</h4>
+					<article>
+						<div className="post_header_wrapper">
+							<div className="post_header">
+								<figure className="post_headImg">
+									<img
+										onClick={this.showFullImage}
+										src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
+										alt="Spanish Flags"
+									/>
+								</figure>
+								<div className="post_header_content">
+									<h2>When We Went To Barcelona</h2>
+									<h4>July 16, 2018</h4>
+								</div>
 							</div>
 						</div>
 						{this.state.PostContent || <h3>Loading...</h3>}

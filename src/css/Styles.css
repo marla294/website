@@ -230,6 +230,7 @@ p {
 
 /* Post Component */
 
+/*
 .post {
 	display: grid;
 	grid-gap: var(--gridGap);
@@ -239,8 +240,15 @@ p {
 .post > * {
 	grid-column: 2 / span 1;
 }
+*/
 
 /* Post Header */
+
+.post_header_wrapper {
+	display: grid;
+	grid-gap: var(--gridGap);
+	grid-template-columns: 3fr 12fr 5fr;
+}
 
 .post_header {
 	display: grid;
@@ -261,6 +269,18 @@ p {
 .post_header_content {
 	grid-area: postContent;
 	align-self: center;
+}
+
+/* Post Content */
+
+.post_content {
+	display: grid;
+	grid-gap: var(--gridGap);
+	grid-template-columns: 3fr 12fr 5fr;
+}
+
+.post_content > * {
+	grid-column: 2 / span 1;
 }
 
 /* Post Content Images */

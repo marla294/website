@@ -3,7 +3,7 @@ import React from "react";
 class PostData extends React.Component {
 	render() {
 		return (
-			<div>
+			<div className="post_content">
 				<h4>&#191;Por Que Barcelona?</h4>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -24,7 +24,7 @@ class PostData extends React.Component {
 
 				<figure className="post_contentImg right">
 					<img
-						onClick={this.showFullImage}
+						onClick={this.props.showFullImage}
 						src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
 						alt="Marla in front of graffiti wall"
 					/>
@@ -84,7 +84,7 @@ class PostData extends React.Component {
 
 				<figure className="post_contentImg left">
 					<img
-						onClick={this.showFullImage}
+						onClick={this.props.showFullImage}
 						src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
 						alt="Marla in front of graffiti wall"
 					/>
