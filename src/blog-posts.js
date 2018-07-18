@@ -1,6 +1,6 @@
 /* Where all the high-level blog post information will go */
 const posts = {
-	post001: {
+	Post001: {
 		title: "When We Went To Barcelona",
 		date: "July 16, 2018",
 		postNum: 1,

@@ -6,7 +6,8 @@ import Overlay from "./Overlay";
 class Post extends React.Component {
 	/* Overlay stuff */
 	state = {
-		show: false
+		show: false,
+		module: null
 	};
 
 	imgURL = "";
@@ -19,6 +20,14 @@ class Post extends React.Component {
 	hideFullImage = () => {
 		this.setState({ show: false });
 	};
+
+	/* Grabbing the post html data to display */
+
+	componentDidMount() {
+		import(`../Posts/${this.props.match.params.PostID}.js`).then(post =>
+			this.setState({ module: post.default })
+		);
+	}
 
 	render() {
 		return (
