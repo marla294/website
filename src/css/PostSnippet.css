@@ -42,3 +42,18 @@
 .snippet_details > * {
 	margin-left: 20px;
 }
+
+/* 75% */
+@media (max-width: 750px) {
+	.snippet {
+		width: 450px;
+	}
+}
+
+
+/* 62.5% */
+@media (max-width: 500px) {
+	.snippet {
+		width: 300px;
+	}
+}
