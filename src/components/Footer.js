@@ -5,12 +5,14 @@ class Footer extends React.Component {
 	render() {
 		return (
 			<footer className="footer">
-				<h1>Connect with me</h1>
-				<p className="email">marla294@gmail.com</p>
-				<p className="phone">312-576-4246</p>
-				<div className="social">
-					<p>Facebook, LinkedIn, Twitter, Instagram, Github</p>
-				</div>
+				<p className="social">
+					<i className="fab fa-facebook-f" />
+					<i className="fab fa-linkedin-in" />
+					<i className="fab fa-twitter" />
+					<i className="fab fa-instagram" />
+					<i className="fab fa-github" />
+					<i className="far fa-envelope" />
+				</p>
 			</footer>
 		);
 	}
