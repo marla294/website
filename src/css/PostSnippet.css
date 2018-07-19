@@ -36,11 +36,11 @@
 	justify-self: center;
 	align-self: end;
 	width: 100%;
-	margin-bottom: 20px;
+	margin-bottom: 3%;
 }
 
 .snippet_details > * {
-	margin-left: 20px;
+	margin-left: 3%;
 }
 
 /* 75% */
