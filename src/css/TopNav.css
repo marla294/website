@@ -34,13 +34,7 @@
 }
 
 .top a {
-	text-decoration: none;
 	color: var(--ltgray);
-}
-
-.top a:hover {
-	text-decoration: none;
-	color: var(--aqua);
 }
 
 @media (max-width: 750px) {

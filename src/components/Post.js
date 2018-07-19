@@ -37,7 +37,7 @@ class Post extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container">
 				<Overlay
 					show={this.state.show}
 					imgURL={this.imgURL}
@@ -63,8 +63,8 @@ class Post extends React.Component {
 						</div>
 						{this.state.PostContent || <h3>Loading...</h3>}
 					</article>
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 		);
 	}

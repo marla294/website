@@ -23,7 +23,7 @@ class About extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container">
 				<Overlay
 					show={this.state.show}
 					imgURL={this.imgURL}
@@ -98,8 +98,8 @@ class About extends React.Component {
 							<p>- Marla</p>
 						</div>
 					</section>
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 		);
 	}
