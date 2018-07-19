@@ -51,7 +51,7 @@ class Home extends React.Component {
 					<section className="blog">
 						<h1>From the blog...</h1>
 						<div className="snippets">
-							<div className="snippet post1">
+							<div className="home_snippet post1">
 								<h3>Post Title I</h3>
 								<p>
 									Lorem ipsum dolor sit amet, consectetur
@@ -67,7 +67,7 @@ class Home extends React.Component {
 									mollit anim id est laborum.
 								</p>
 							</div>
-							<div className="snippet post2">
+							<div className="home_snippet post2">
 								<h3>Post Title II</h3>
 								<p>
 									Lorem ipsum dolor sit amet, consectetur

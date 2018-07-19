@@ -60,7 +60,7 @@
 	grid-gap: var(--gridGap);
 }
 
-.snippet {
+.home_snippet {
 	height: 400px;
     overflow: hidden;
 }
