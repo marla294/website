@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/TopNav.css";
 
 class TopNav extends React.Component {
 	render() {

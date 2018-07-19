@@ -1,0 +1,22 @@
+/* Contact */
+
+.footer {
+	background: url("../Assets/Backgrounds/7.jpg");
+	display: grid;
+	grid-template-rows: repeat(3, auto);
+	padding: 20px 0;
+	grid-gap: var(--gridGap);
+	color: var(--ltgray);
+}
+
+.footer > h1 {
+	justify-self: center;
+}
+
+.footer > p {
+	font-size: 1em;
+}
+
+.email, .phone, .social {
+	justify-self: center;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
+import "../css/About.css";
 
 class About extends React.Component {
 	/* Overlay stuff */

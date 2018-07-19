@@ -1,9 +1,10 @@
 import React from "react";
+import "../css/Footer.css";
 
 class Footer extends React.Component {
 	render() {
 		return (
-			<footer className="contact">
+			<footer className="footer">
 				<h1>Connect with me</h1>
 				<p className="email">marla294@gmail.com</p>
 				<p className="phone">312-576-4246</p>

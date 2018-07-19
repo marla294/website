@@ -2,6 +2,7 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
+import "../css/Home.css";
 
 class Home extends React.Component {
 	state = {

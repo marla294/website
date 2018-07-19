@@ -1,0 +1,20 @@
+/* Post Snippet */
+
+.snippet {
+	display: grid;
+	grid-gap: var(--gridGap);
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: auto;
+	height: auto;
+}
+
+.snippet_img {
+	justify-self: right;
+	align-self: center;
+	width: 500px;
+	margin: var(--sideMargin);
+}
+
+.snippet_details {
+	align-self: center;
+}

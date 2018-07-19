@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/PostSnippet.css";
 
 class PostSnippet extends React.Component {
 	render() {

@@ -5,6 +5,7 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
+import "../css/Post.css";
 
 class Post extends React.Component {
 	/* Overlay stuff */
