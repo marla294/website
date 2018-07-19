@@ -3,18 +3,42 @@
 .snippet {
 	display: grid;
 	grid-gap: var(--gridGap);
-	grid-template-columns: 1fr 2fr;
-	grid-template-rows: auto;
-	height: auto;
-}
-
-.snippet_img {
-	justify-self: right;
-	align-self: center;
-	width: 500px;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	width: 600px;
 	margin: var(--sideMargin);
 }
 
+.snippet_img {
+	grid-column: 1 / -1;
+	grid-row: 1 / -1;
+	width: 100%;
+}
+
+.snippet_overlay {
+	cursor: pointer;
+}
+
+.snippet_overlay:hover > * {
+	color: var(--aqua);
+}
+
+.snippet_overlay {
+	grid-column: 1 / -1;
+	grid-row: 1 / -1;
+	z-index: 2;
+	display: grid;
+	background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0) 30%);
+}
+
 .snippet_details {
-	align-self: center;
+	color: var(--ltgray);
+	justify-self: center;
+	align-self: end;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.snippet_details > * {
+	margin-left: 20px;
 }
