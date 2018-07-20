@@ -6,21 +6,18 @@
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr;
 	width: 600px;
+	height: 450px;
 	margin: var(--sideMargin);
+	overflow: hidden;
+	position: relative;
 }
 
 .snippet_img {
 	grid-column: 1 / -1;
 	grid-row: 1 / -1;
-	width: 100%;
-}
-
-.snippet_overlay {
-	cursor: pointer;
-}
-
-.snippet_overlay:hover > * {
-	color: var(--aqua);
+	width: 600px;
+	position: absolute;
+	bottom: 0;
 }
 
 .snippet_overlay {
@@ -29,6 +26,13 @@
 	z-index: 2;
 	display: grid;
 	background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0) 30%);
+	cursor: pointer;
+	width: 600px;
+	height: 450px;
+}
+
+.snippet_overlay:hover > * {
+	color: var(--aqua);
 }
 
 .snippet_details {
