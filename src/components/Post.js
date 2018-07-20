@@ -41,11 +41,15 @@ class Post extends React.Component {
 		Object.keys(this.props.posts).forEach(key => {
 			if (key === this.state.PostID) {
 				postHeaderContent = (
-					<div key={key}>
-						<h2 key={`${key}title`}>
-							{this.props.posts[key].title}
-						</h2>
-						<h4 key={`${key}date`}>{this.props.posts[key].date}</h4>
+					<div className="post_header_content">
+						<div key={key}>
+							<h2 key={`${key}title`}>
+								{this.props.posts[key].title}
+							</h2>
+							<h4 key={`${key}date`}>
+								{this.props.posts[key].date}
+							</h4>
+						</div>
 					</div>
 				);
 			}
@@ -58,11 +62,13 @@ class Post extends React.Component {
 		Object.keys(this.props.posts).forEach(key => {
 			if (key === this.state.PostID) {
 				postHeaderImage = (
-					<img
-						onClick={this.showFullImage}
-						src={`${this.props.posts[key].headerImage}`}
-						alt=""
-					/>
+					<figure className="post_headImg">
+						<img
+							onClick={this.showFullImage}
+							src={`${this.props.posts[key].headerImage}`}
+							alt=""
+						/>
+					</figure>
 				);
 			}
 		});
@@ -82,12 +88,8 @@ class Post extends React.Component {
 					<article>
 						<div className="post_header_wrapper">
 							<div className="post_header">
-								<figure className="post_headImg">
-									{this.renderPostHeaderImage()}
-								</figure>
-								<div className="post_header_content">
-									{this.renderPostHeaderContent()}
-								</div>
+								{this.renderPostHeaderImage()}
+								{this.renderPostHeaderContent()}
 							</div>
 						</div>
 						{this.state.PostContent || <h3>Loading...</h3>}
