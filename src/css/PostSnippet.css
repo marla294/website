@@ -51,12 +51,33 @@
 @media (max-width: 750px) {
 	.snippet {
 		width: 450px;
+		height: 337.5px;
+	}
+
+	.snippet_img {
+		width: 450px;
+	}
+
+	.snippet_overlay {
+		width: 450px;
+		height: 337.5px;
 	}
 }
 
-/* 62.5% */
+/* 50% */
 @media (max-width: 500px) {
 	.snippet {
 		width: 300px;
+		height: 225px;
 	}
+
+	.snippet_img {
+		width: 300px;
+	}
+
+	.snippet_overlay {
+		width: 300px;
+		height: 225px;
+	}
+
 }
