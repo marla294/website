@@ -11,7 +11,8 @@ class Post extends React.Component {
 	/* Overlay stuff */
 	state = {
 		show: false,
-		PostContent: null
+		PostContent: null,
+		PostID: this.props.match.params.PostID
 	};
 
 	imgURL = "";
@@ -28,7 +29,7 @@ class Post extends React.Component {
 	/* Grabbing the post html data to display */
 	async componentDidMount() {
 		const { default: PostContent } = await import(`../Posts/${
-			this.props.match.params.PostID
+			this.state.PostID
 		}.js`);
 		this.setState({
 			PostContent: <PostContent showFullImage={this.showFullImage} />
@@ -56,8 +57,28 @@ class Post extends React.Component {
 									/>
 								</figure>
 								<div className="post_header_content">
-									<h2>When We Went To Barcelona</h2>
-									<h4>July 16, 2018</h4>
+									{Object.keys(this.props.posts).map(key => {
+										if (key === this.state.PostID) {
+											return (
+												<div key={key}>
+													<h2 key={`${key}title`}>
+														{
+															this.props.posts[
+																key
+															].title
+														}
+													</h2>
+													<h4 key={`${key}date`}>
+														{
+															this.props.posts[
+																key
+															].date
+														}
+													</h4>
+												</div>
+											);
+										}
+									})}
 								</div>
 							</div>
 						</div>
