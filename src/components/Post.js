@@ -80,7 +80,11 @@ class Post extends React.Component {
 					<TopNav push={this.props.history.push} />
 					<article>
 						{this.renderPostHeader()}
-						{this.state.PostContent || <h3>Loading...</h3>}
+						{this.state.PostContent || (
+							<div className="post_content">
+								<h3>Loading...</h3>
+							</div>
+						)}
 					</article>
 				</div>
 				<Footer />
