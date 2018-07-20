@@ -13,6 +13,13 @@ const posts = {
 		postNum: 2,
 		headerImage: "/Images/Pictures/Omaha/20180719_Trains.jpg",
 		content: "/Posts/Post002.js"
+	},
+	Post003: {
+		title: "Here's another one",
+		date: "July 20, 2018",
+		postNum: 3,
+		headerImage: "/Images/Pictures/Omaha/20180719_Trains.jpg",
+		content: "/Posts/Post003.js"
 	}
 };
 
