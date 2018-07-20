@@ -36,43 +36,36 @@ class Post extends React.Component {
 		});
 	}
 
-	renderPostHeaderContent = () => {
-		let postHeaderContent;
+	renderPostHeader = () => {
+		let postHeader;
 		Object.keys(this.props.posts).forEach(key => {
 			if (key === this.state.PostID) {
-				postHeaderContent = (
-					<div className="post_header_content">
-						<div key={key}>
-							<h2 key={`${key}title`}>
-								{this.props.posts[key].title}
-							</h2>
-							<h4 key={`${key}date`}>
-								{this.props.posts[key].date}
-							</h4>
+				postHeader = (
+					<div className="post_header_wrapper">
+						<div className="post_header">
+							<figure className="post_headImg">
+								<img
+									onClick={this.showFullImage}
+									src={`${this.props.posts[key].headerImage}`}
+									alt=""
+								/>
+							</figure>
+							<div className="post_header_content">
+								<div key={key}>
+									<h2 key={`${key}title`}>
+										{this.props.posts[key].title}
+									</h2>
+									<h4 key={`${key}date`}>
+										{this.props.posts[key].date}
+									</h4>
+								</div>
+							</div>
 						</div>
 					</div>
 				);
 			}
 		});
-		return postHeaderContent;
-	};
-
-	renderPostHeaderImage = () => {
-		let postHeaderImage;
-		Object.keys(this.props.posts).forEach(key => {
-			if (key === this.state.PostID) {
-				postHeaderImage = (
-					<figure className="post_headImg">
-						<img
-							onClick={this.showFullImage}
-							src={`${this.props.posts[key].headerImage}`}
-							alt=""
-						/>
-					</figure>
-				);
-			}
-		});
-		return postHeaderImage;
+		return postHeader;
 	};
 
 	render() {
@@ -86,12 +79,7 @@ class Post extends React.Component {
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
 					<article>
-						<div className="post_header_wrapper">
-							<div className="post_header">
-								{this.renderPostHeaderImage()}
-								{this.renderPostHeaderContent()}
-							</div>
-						</div>
+						{this.renderPostHeader()}
 						{this.state.PostContent || <h3>Loading...</h3>}
 					</article>
 				</div>
