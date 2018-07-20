@@ -60,7 +60,7 @@ class Post extends React.Component {
 				postHeaderImage = (
 					<img
 						onClick={this.showFullImage}
-						src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
+						src={`${this.props.posts[key].headerImage}`}
 						alt=""
 					/>
 				);
