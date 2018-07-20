@@ -36,6 +36,23 @@ class Post extends React.Component {
 		});
 	}
 
+	renderPostHeaderContent = () => {
+		let postHeaderContent;
+		Object.keys(this.props.posts).map(key => {
+			if (key === this.state.PostID) {
+				value = (
+					<div key={key}>
+						<h2 key={`${key}title`}>
+							{this.props.posts[key].title}
+						</h2>
+						<h4 key={`${key}date`}>{this.props.posts[key].date}</h4>
+					</div>
+				);
+			}
+		});
+		return postHeaderContent;
+	};
+
 	render() {
 		return (
 			<div className="container">
@@ -57,28 +74,7 @@ class Post extends React.Component {
 									/>
 								</figure>
 								<div className="post_header_content">
-									{Object.keys(this.props.posts).map(key => {
-										if (key === this.state.PostID) {
-											return (
-												<div key={key}>
-													<h2 key={`${key}title`}>
-														{
-															this.props.posts[
-																key
-															].title
-														}
-													</h2>
-													<h4 key={`${key}date`}>
-														{
-															this.props.posts[
-																key
-															].date
-														}
-													</h4>
-												</div>
-											);
-										}
-									})}
+									{this.renderPostHeaderContent()}
 								</div>
 							</div>
 						</div>
