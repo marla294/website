@@ -38,9 +38,9 @@ class Post extends React.Component {
 
 	renderPostHeaderContent = () => {
 		let postHeaderContent;
-		Object.keys(this.props.posts).map(key => {
+		Object.keys(this.props.posts).forEach(key => {
 			if (key === this.state.PostID) {
-				value = (
+				postHeaderContent = (
 					<div key={key}>
 						<h2 key={`${key}title`}>
 							{this.props.posts[key].title}
@@ -51,6 +51,22 @@ class Post extends React.Component {
 			}
 		});
 		return postHeaderContent;
+	};
+
+	renderPostHeaderImage = () => {
+		let postHeaderImage;
+		Object.keys(this.props.posts).forEach(key => {
+			if (key === this.state.PostID) {
+				postHeaderImage = (
+					<img
+						onClick={this.showFullImage}
+						src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
+						alt=""
+					/>
+				);
+			}
+		});
+		return postHeaderImage;
 	};
 
 	render() {
@@ -67,11 +83,7 @@ class Post extends React.Component {
 						<div className="post_header_wrapper">
 							<div className="post_header">
 								<figure className="post_headImg">
-									<img
-										onClick={this.showFullImage}
-										src={require("../Assets/Pictures/Spain/20180607_Flags.jpg")}
-										alt="Spanish Flags"
-									/>
+									{this.renderPostHeaderImage()}
 								</figure>
 								<div className="post_header_content">
 									{this.renderPostHeaderContent()}
