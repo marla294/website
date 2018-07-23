@@ -23,7 +23,13 @@ class Home extends React.Component {
 	};
 
 	renderPostSnippets = () => {
-		const displayKeys = Object.keys(this.props.posts).slice(-2);
+		const arr = Object.entries(this.props.posts).sort(
+			(a, b) => (a[1].order < b[1].order ? -1 : 1)
+		);
+		const displayKeys = arr
+			.map(post => post[0])
+			.slice(-2)
+			.sort((a, b) => 1);
 		return displayKeys.map(key => {
 			return (
 				<Snippet
