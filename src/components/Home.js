@@ -22,6 +22,20 @@ class Home extends React.Component {
 		this.setState({ show: false });
 	};
 
+	renderPostSnippets = () => {
+		const displayKeys = Object.keys(this.props.posts).slice(-2);
+		return displayKeys.map(key => {
+			return (
+				<Snippet
+					key={key}
+					index={key}
+					post={this.props.posts[key]}
+					push={this.props.history.push}
+				/>
+			);
+		});
+	};
+
 	render() {
 		return (
 			<div className="container">
@@ -49,21 +63,9 @@ class Home extends React.Component {
 							</a>
 						</div>
 					</section>
-					<section className="blog">
-						<h1>From the blog...</h1>
-						<div className="snippets">
-							{Object.keys(this.props.posts).map(key => {
-								return (
-									<div className="home_snippet post1">
-										<Snippet
-											key={key}
-											index={key}
-											post={this.props.posts[key]}
-											push={this.props.history.push}
-										/>
-									</div>
-								);
-							})}
+					<section className="blog_posts_container home_blog_posts_container">
+						<div className="blog_posts">
+							{this.renderPostSnippets()}
 						</div>
 					</section>
 				</div>
