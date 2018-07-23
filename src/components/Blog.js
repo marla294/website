@@ -11,6 +11,7 @@ class Blog extends React.Component {
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
 					<div className="blog_posts_container">
+						<h1 className="blog_posts_header">Blog Posts</h1>
 						<div className="blog_posts">
 							{Object.keys(this.props.posts).map(key => {
 								return (
