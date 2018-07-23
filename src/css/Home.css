@@ -7,9 +7,7 @@
 	grid-template-columns: 1fr auto auto 1fr;
 	grid-template-areas: ". pic desc .";
 	grid-gap: var(--gridGap);
-	padding: 20px 0;
 	color: var(--black);
-	margin-top: 60px;
 }
 
 .pic_homepage {
@@ -34,12 +32,6 @@
 
 .desc_homepage > a:hover {
 	color: var(--aqua);
-}
-
-/* Blog Preview */
-
-.home_blog_posts_container {
-	margin-top: 60px;
 }
 
 

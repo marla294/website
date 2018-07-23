@@ -54,8 +54,8 @@ a:hover {
 .wrapper {
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
-	grid-gap: var(--gridGap);
-	padding-bottom: 100px;
+	grid-gap: 100px;
+	padding-bottom: 200px;
 }
 
 /* Blog Posts */
@@ -63,6 +63,12 @@ a:hover {
 
 .blog_posts_container {
 	display: grid;
+}
+
+.blog_posts_header {
+	width: 1260px;
+	justify-self: center;
+	justify-content: start;
 }
 
 .blog_posts {
@@ -82,6 +88,10 @@ a:hover {
 	.blog_posts {
 		grid-template-columns: 1fr;
 	}
+
+	.blog_posts_header {
+		width: 600px;
+	}
 }
 
 /* 75% */
@@ -89,6 +99,16 @@ a:hover {
 	/* Global */
 	body {
 		font-size: 1.5em;
+	}
+
+	.wrapper {
+		grid-gap: 75px;
+		padding-bottom: 150px;
+	}
+
+	/* Blog Posts */
+	.blog_posts_header {
+		width: 450px;
 	}
 
 }
@@ -100,6 +120,16 @@ a:hover {
 	/* General */
 	body {
 		font-size: 1.25em;
+	}
+
+	.wrapper {
+		grid-gap: 62.5px;
+		padding-bottom: 125px;
+	}
+
+	/* Blog Posts */
+	.blog_posts_header {
+		width: 300px;
 	}
 
 }

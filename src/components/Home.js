@@ -63,7 +63,8 @@ class Home extends React.Component {
 							</a>
 						</div>
 					</section>
-					<section className="blog_posts_container home_blog_posts_container">
+					<section className="blog_posts_container">
+						<h1 className="blog_posts_header">Latest Blog Posts</h1>
 						<div className="blog_posts">
 							{this.renderPostSnippets()}
 						</div>
