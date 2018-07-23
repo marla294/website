@@ -12,7 +12,8 @@ class Post extends React.Component {
 	state = {
 		show: false,
 		PostContent: null,
-		PostID: this.props.match.params.PostID
+		PostID: this.props.match.params.PostID,
+		Error: null
 	};
 
 	imgURL = "";
@@ -28,12 +29,16 @@ class Post extends React.Component {
 
 	/* Grabbing the post html data to display */
 	async componentDidMount() {
-		const { default: PostContent } = await import(`../Posts/${
-			this.state.PostID
-		}.js`);
-		this.setState({
-			PostContent: <PostContent showFullImage={this.showFullImage} />
-		});
+		try {
+			let { default: PostContent } = await import(`../Posts/${
+				this.state.PostID
+			}.js`);
+			this.setState({
+				PostContent: <PostContent showFullImage={this.showFullImage} />
+			});
+		} catch (err) {
+			this.setState({ Error: err });
+		}
 	}
 
 	renderPostHeader = () => {
