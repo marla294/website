@@ -1,18 +1,2 @@
-.blog_posts_container {
-	display: grid;
-}
 
-.blog_posts {
-	justify-self: center;
-	display: grid;
-	grid-template-columns: repeat(2, 600px);
-	grid-gap: var(--gridGap);
-	justify-items: center;
-	margin: 0 var(--sideMargin);
-}
-
-@media (max-width: 1250px) {
-	.blog_posts {
-		grid-template-columns: 1fr;
-	}
-}
+/* Blog posts snippet wrapper styles are global, so they are located in Styles.css */

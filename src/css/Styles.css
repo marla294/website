@@ -58,7 +58,31 @@ a:hover {
 	padding-bottom: 100px;
 }
 
+/* Blog Posts */
+/* These styles are used on the Home and Blog components, so they are global. */
+
+.blog_posts_container {
+	display: grid;
+}
+
+.blog_posts {
+	justify-self: center;
+	display: grid;
+	grid-template-columns: repeat(2, 600px);
+	grid-gap: 30px 60px;
+	justify-items: center;
+	margin: 0 var(--sideMargin);
+}
+
 /* Responsive */
+
+@media (max-width: 1250px) {
+
+	/* Blog Posts */
+	.blog_posts {
+		grid-template-columns: 1fr;
+	}
+}
 
 /* 75% */
 @media (max-width: 750px) {
