@@ -2,6 +2,7 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
+import Snippet from "./PostSnippet";
 import "../css/Home.css";
 
 class Home extends React.Component {
@@ -51,38 +52,18 @@ class Home extends React.Component {
 					<section className="blog">
 						<h1>From the blog...</h1>
 						<div className="snippets">
-							<div className="home_snippet post1">
-								<h3>Post Title I</h3>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur.
-									Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.
-								</p>
-							</div>
-							<div className="home_snippet post2">
-								<h3>Post Title II</h3>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur.
-									Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.
-								</p>
-							</div>
+							{Object.keys(this.props.posts).map(key => {
+								return (
+									<div className="home_snippet post1">
+										<Snippet
+											key={key}
+											index={key}
+											post={this.props.posts[key]}
+											push={this.props.history.push}
+										/>
+									</div>
+								);
+							})}
 						</div>
 					</section>
 				</div>
