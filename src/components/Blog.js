@@ -5,13 +5,45 @@ import Snippet from "./PostSnippet";
 import "../css/Blog.css";
 
 class Blog extends React.Component {
+	state = {
+		show: false
+	};
+
+	toggleShow = () => {
+		this.setState({
+			show: !this.state.show
+		});
+	};
+
 	render() {
 		return (
 			<div className="container">
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
 					<div className="blog_posts_container">
-						<h1 className="blog_posts_header">Blog Posts</h1>
+						<div className="blog_posts_header">
+							<h1>Blog Posts</h1>
+							<div className="dropdown">
+								<button
+									onClick={this.toggleShow}
+									className="dropbtn"
+								>
+									Dropdown
+								</button>
+								<div
+									id="myDropdown"
+									className={
+										this.state.show
+											? "dropdown-content show"
+											: "dropdown-content"
+									}
+								>
+									<a href="#">Link 1</a>
+									<a href="#">Link 2</a>
+									<a href="#">Link 3</a>
+								</div>
+							</div>
+						</div>
 						<div className="blog_posts">
 							{Object.keys(this.props.posts).map(key => {
 								return (
