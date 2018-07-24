@@ -15,6 +15,23 @@ class Blog extends React.Component {
 		});
 	};
 
+	renderPostSnippets = () => {
+		const arr = Object.entries(this.props.posts).sort(
+			(a, b) => (a[1].order < b[1].order ? -1 : 1)
+		);
+		const displayKeys = arr.map(post => post[0]).sort((a, b) => 1);
+		return displayKeys.map(key => {
+			return (
+				<Snippet
+					key={key}
+					index={key}
+					post={this.props.posts[key]}
+					push={this.props.history.push}
+				/>
+			);
+		});
+	};
+
 	render() {
 		return (
 			<div className="container">
@@ -28,7 +45,7 @@ class Blog extends React.Component {
 									onClick={this.toggleShow}
 									className="dropbtn"
 								>
-									Dropdown
+									Categories
 								</button>
 								<div
 									id="myDropdown"
@@ -45,16 +62,7 @@ class Blog extends React.Component {
 							</div>
 						</div>
 						<div className="blog_posts">
-							{Object.keys(this.props.posts).map(key => {
-								return (
-									<Snippet
-										key={key}
-										index={key}
-										post={this.props.posts[key]}
-										push={this.props.history.push}
-									/>
-								);
-							})}
+							{this.renderPostSnippets()}
 						</div>
 					</div>
 				</div>
