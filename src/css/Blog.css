@@ -1,2 +1,10 @@
 
 /* Blog posts snippet wrapper styles are global, so they are located in Styles.css */
+
+.category-show {
+	background-color: var(--aqua) !important;
+}
+
+.category-hide {
+	color: var(--black);
+}

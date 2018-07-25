@@ -49,6 +49,14 @@ class Blog extends React.Component {
 		return categories;
 	};
 
+	clickCategory = category => {
+		if (!this.state.displayCategories.find(cat => cat === category)) {
+			this.addDisplayCategory(category);
+		} else {
+			this.removeDisplayCategory(category);
+		}
+	};
+
 	/* Adds a display category to state if it is not already there */
 	addDisplayCategory = category => {
 		if (
@@ -126,9 +134,14 @@ class Blog extends React.Component {
 		const categories = this.getAllCategories();
 		return categories.map(cat => (
 			<a
+				className={
+					this.state.displayCategories.find(c => c === cat)
+						? "category-show"
+						: ""
+				}
 				key={cat}
 				onClick={() => {
-					this.addDisplayCategory(cat);
+					this.clickCategory(cat);
 				}}
 			>
 				{cat}
