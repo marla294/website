@@ -33,6 +33,23 @@ class Blog extends React.Component {
 		}
 	};
 
+	/* Removes a display category to state if it is not already there */
+	removeDisplayCategory = category => {
+		const index = this.state.displayCategories.findIndex(
+			cat => cat === category
+		);
+		if (index !== -1) {
+			/* 1. Take a copy of state */
+			let displayCategories = [...this.state.displayCategories];
+			/* 2. Remove category from the displayCategories list */
+			displayCategories.splice(index, 1);
+			/* 3. Set state */
+			this.setState({
+				displayCategories
+			});
+		}
+	};
+
 	renderPostSnippets = () => {
 		const arr = Object.entries(this.props.posts).sort(
 			(a, b) => (a[1].order < b[1].order ? -1 : 1)
