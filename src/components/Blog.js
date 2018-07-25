@@ -18,9 +18,17 @@ class Blog extends React.Component {
 
 	/* Adds a display category to state if it is not already there */
 	addDisplayCategory = category => {
-		if (this.state.displayCategories.find(cat => cat === category) === -1) {
+		if (
+			this.state.displayCategories.findIndex(cat => cat === category) ===
+			-1
+		) {
+			/* 1. Take a copy of state */
+			let displayCategories = [...this.state.displayCategories];
+			/* 2. Push category to the end of the displayCategories list */
+			displayCategories.push(category);
+			/* 3. Set state */
 			this.setState({
-				displayCategories: this.state.displayCategories.push(category)
+				displayCategories
 			});
 		}
 	};
@@ -68,7 +76,12 @@ class Blog extends React.Component {
 	renderCategories = () => {
 		const categories = this.getAllCategories();
 		return categories.map(cat => (
-			<a key={cat} onClick={this.addDisplayCategory}>
+			<a
+				key={cat}
+				onClick={() => {
+					this.addDisplayCategory(cat);
+				}}
+			>
 				{cat}
 			</a>
 		));
