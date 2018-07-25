@@ -15,11 +15,38 @@ class Blog extends React.Component {
 		displayCategories: []
 	};
 
+	/* Toggle for the dropdown menu, Categories */
+
 	toggleShow = () => {
 		this.setState({
 			show: !this.state.show,
 			disableClick: !this.state.disableClick
 		});
+	};
+
+	/* Categories */
+
+	getAllCategories = () => {
+		const arr = Object.entries(this.props.posts).map(
+			post => post[1].categories
+		);
+		let categories = [];
+		arr.forEach(cat => categories.push(...cat));
+
+		/* Filter categories arr to unique categories */
+		categories.sort();
+		categories.forEach((cat, i) => {
+			if (cat === categories[i + 1]) {
+				const first = categories.slice(0, i + 1);
+				let rest = categories.slice(i + 1);
+				while (cat === rest[0]) {
+					rest.shift();
+				}
+				categories = first.concat(rest);
+			}
+		});
+
+		return categories;
 	};
 
 	/* Adds a display category to state if it is not already there */
@@ -56,31 +83,30 @@ class Blog extends React.Component {
 		}
 	};
 
-	getAllCategories = () => {
-		const arr = Object.entries(this.props.posts).map(
-			post => post[1].categories
-		);
-		let categories = [];
-		arr.forEach(cat => categories.push(...cat));
+	/* Filters the posts to ones that contain displayCategories */
+	filterPostsByCategory = () => {
+		const arr = Object.entries(this.props.posts);
+		const displayCategories = [...this.state.displayCategories];
+		let retArr = []; /* return array */
 
-		/* Filter categories arr to unique categories */
-		categories.sort();
-		categories.forEach((cat, i) => {
-			if (cat === categories[i + 1]) {
-				const first = categories.slice(0, i + 1);
-				let rest = categories.slice(i + 1);
-				while (cat === rest[0]) {
-					rest.shift();
+		arr.forEach(post => {
+			displayCategories.forEach(cat => {
+				if (
+					post[1].categories.find(category => category === cat) &&
+					!retArr.find(p => p === post)
+				) {
+					retArr.push(post);
 				}
-				categories = first.concat(rest);
-			}
+			});
 		});
 
-		return categories;
+		return retArr;
 	};
 
+	/* Render methods */
+
 	renderPostSnippets = () => {
-		const arr = Object.entries(this.props.posts).sort(
+		const arr = this.filterPostsByCategory().sort(
 			(a, b) => (a[1].order < b[1].order ? -1 : 1)
 		);
 		const displayKeys = arr.map(post => post[0]).sort((a, b) => 1);
