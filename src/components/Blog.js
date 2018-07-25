@@ -1,3 +1,7 @@
+/* 
+Method for disabling click events for dropdown found here: https://github.com/JedWatson/react-select/issues/532
+*/
+
 import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
@@ -7,12 +11,14 @@ import "../css/Blog.css";
 class Blog extends React.Component {
 	state = {
 		show: false,
+		disableClick: false,
 		displayCategories: []
 	};
 
 	toggleShow = () => {
 		this.setState({
-			show: !this.state.show
+			show: !this.state.show,
+			disableClick: !this.state.disableClick
 		});
 	};
 
@@ -50,23 +56,6 @@ class Blog extends React.Component {
 		}
 	};
 
-	renderPostSnippets = () => {
-		const arr = Object.entries(this.props.posts).sort(
-			(a, b) => (a[1].order < b[1].order ? -1 : 1)
-		);
-		const displayKeys = arr.map(post => post[0]).sort((a, b) => 1);
-		return displayKeys.map(key => {
-			return (
-				<Snippet
-					key={key}
-					index={key}
-					post={this.props.posts[key]}
-					push={this.props.history.push}
-				/>
-			);
-		});
-	};
-
 	getAllCategories = () => {
 		const arr = Object.entries(this.props.posts).map(
 			post => post[1].categories
@@ -88,6 +77,23 @@ class Blog extends React.Component {
 		});
 
 		return categories;
+	};
+
+	renderPostSnippets = () => {
+		const arr = Object.entries(this.props.posts).sort(
+			(a, b) => (a[1].order < b[1].order ? -1 : 1)
+		);
+		const displayKeys = arr.map(post => post[0]).sort((a, b) => 1);
+		return displayKeys.map(key => {
+			return (
+				<Snippet
+					key={key}
+					index={key}
+					post={this.props.posts[key]}
+					push={this.props.history.push}
+				/>
+			);
+		});
 	};
 
 	renderCategories = () => {
@@ -133,7 +139,11 @@ class Blog extends React.Component {
 						</div>
 						<div
 							className="blog_posts"
-							style={{ pointerEvents: "none" }}
+							style={{
+								pointerEvents: this.state.disableClick
+									? "none"
+									: "all"
+							}}
 						>
 							{this.renderPostSnippets()}
 						</div>
