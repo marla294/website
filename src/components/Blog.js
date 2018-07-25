@@ -32,6 +32,34 @@ class Blog extends React.Component {
 		});
 	};
 
+	getAllCategories = () => {
+		const arr = Object.entries(this.props.posts).map(
+			post => post[1].categories
+		);
+		let categories = [];
+		arr.forEach(cat => categories.push(...cat));
+
+		/* Filter categories arr to unique categories */
+		categories.sort();
+		categories.forEach((cat, i) => {
+			if (cat === categories[i + 1]) {
+				const first = categories.slice(0, i + 1);
+				let rest = categories.slice(i + 1);
+				while (cat === rest[0]) {
+					rest.shift();
+				}
+				categories = first.concat(rest);
+			}
+		});
+
+		return categories;
+	};
+
+	renderCategories = () => {
+		const categories = this.getAllCategories();
+		return categories.map(cat => <a key={cat}>{cat}</a>);
+	};
+
 	render() {
 		return (
 			<div className="container">
@@ -55,9 +83,7 @@ class Blog extends React.Component {
 											: "dropdown-content"
 									}
 								>
-									<a href="#">Link 1</a>
-									<a href="#">Link 2</a>
-									<a href="#">Link 3</a>
+									{this.renderCategories()}
 								</div>
 							</div>
 						</div>
