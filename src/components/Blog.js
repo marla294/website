@@ -67,7 +67,11 @@ class Blog extends React.Component {
 
 	renderCategories = () => {
 		const categories = this.getAllCategories();
-		return categories.map(cat => <a key={cat}>{cat}</a>);
+		return categories.map(cat => (
+			<a key={cat} onClick={this.addDisplayCategory}>
+				{cat}
+			</a>
+		));
 	};
 
 	render() {
@@ -97,7 +101,10 @@ class Blog extends React.Component {
 								</div>
 							</div>
 						</div>
-						<div className="blog_posts">
+						<div
+							className="blog_posts"
+							style={{ pointerEvents: "none" }}
+						>
 							{this.renderPostSnippets()}
 						</div>
 					</div>
