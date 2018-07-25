@@ -6,13 +6,23 @@ import "../css/Blog.css";
 
 class Blog extends React.Component {
 	state = {
-		show: false
+		show: false,
+		displayCategories: []
 	};
 
 	toggleShow = () => {
 		this.setState({
 			show: !this.state.show
 		});
+	};
+
+	/* Adds a display category to state if it is not already there */
+	addDisplayCategory = category => {
+		if (this.state.displayCategories.find(cat => cat === category) === -1) {
+			this.setState({
+				displayCategories: this.state.displayCategories.push(category)
+			});
+		}
 	};
 
 	renderPostSnippets = () => {
