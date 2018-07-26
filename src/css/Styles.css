@@ -63,6 +63,7 @@ a:hover {
 
 .blog_posts_container {
 	display: grid;
+	grid-gap: 20px;
 }
 
 .blog_posts_header {

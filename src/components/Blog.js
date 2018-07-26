@@ -176,26 +176,28 @@ class Blog extends React.Component {
 					<div className="blog_posts_container">
 						<div className="blog_posts_header">
 							<h1>Blog Posts</h1>
-							<div className="dropdown">
-								<button
-									onClick={this.toggleShow}
-									className="dropbtn"
-								>
-									Categories
-								</button>
-								<div
-									id="myDropdown"
-									className={
-										this.state.show
-											? "dropdown-content show"
-											: "dropdown-content"
-									}
-								>
-									{this.renderCategories()}
+							<div className="blog_posts_categories">
+								<div className="dropdown">
+									<button
+										onClick={this.toggleShow}
+										className="dropbtn"
+									>
+										Categories
+									</button>
+									<div
+										id="myDropdown"
+										className={
+											this.state.show
+												? "dropdown-content show"
+												: "dropdown-content"
+										}
+									>
+										{this.renderCategories()}
+									</div>
 								</div>
-							</div>
-							<div>
-								Categories: {this.renderCategoriesLabel()}
+								<div className="label">
+									Categories: {this.renderCategoriesLabel()}
+								</div>
 							</div>
 						</div>
 						<div

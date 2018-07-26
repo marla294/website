@@ -1,6 +1,18 @@
 
 /* Blog posts snippet wrapper styles are global, so they are located in Styles.css */
 
+/* Categories */
+
 .category-show {
 	background-color: var(--aqua) !important;
+}
+
+.blog_posts_categories {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: 20px;
+}
+
+.blog_posts_categories .label {
+	align-self: center;
 }
