@@ -10,7 +10,7 @@
 .blog_posts_categories {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	grid-gap: 20px;
+	grid-gap: 0.5em;
 }
 
 .blog_posts_categories .label {

@@ -196,7 +196,7 @@ class Blog extends React.Component {
 									</div>
 								</div>
 								<div className="label">
-									Categories: {this.renderCategoriesLabel()}
+									{this.renderCategoriesLabel()}
 								</div>
 							</div>
 						</div>

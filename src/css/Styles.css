@@ -85,10 +85,11 @@ a:hover {
 
 /* Dropdown Button */
 .dropbtn {
+	font-family: 'fionaregular';
     background-color: var(--aqua);
     color: white;
-    padding: 16px;
-    font-size: 16px;
+    padding: 0.25em 0.5em;
+    font-size: 1em;
     border: none;
     cursor: pointer;
 }
@@ -178,6 +179,11 @@ a:hover {
 	/* Blog Posts */
 	.blog_posts_header {
 		width: 300px;
+	}
+
+	/* Dropdown Button */
+	.dropbtn {
+	    padding: 10px;
 	}
 
 }
