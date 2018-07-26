@@ -155,6 +155,19 @@ class Blog extends React.Component {
 		));
 	};
 
+	renderCategoriesLabel = () => {
+		const categories = this.state.displayCategories;
+		return categories.length === 0
+			? "All"
+			: categories.map((cat, i) => {
+					if (i < categories.length - 1) {
+						return `${cat}, `;
+					} else {
+						return cat;
+					}
+			  });
+	};
+
 	render() {
 		return (
 			<div className="container">
@@ -180,6 +193,9 @@ class Blog extends React.Component {
 								>
 									{this.renderCategories()}
 								</div>
+							</div>
+							<div>
+								Categories: {this.renderCategoriesLabel()}
 							</div>
 						</div>
 						<div
