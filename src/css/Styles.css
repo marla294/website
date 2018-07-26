@@ -54,7 +54,7 @@ a:hover {
 .wrapper {
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
-	grid-gap: 100px;
+	grid-gap: 3em;
 	padding-bottom: 200px;
 }
 
@@ -151,7 +151,6 @@ a:hover {
 	}
 
 	.wrapper {
-		grid-gap: 75px;
 		padding-bottom: 150px;
 	}
 
@@ -172,7 +171,6 @@ a:hover {
 	}
 
 	.wrapper {
-		grid-gap: 62.5px;
 		padding-bottom: 125px;
 	}
 
