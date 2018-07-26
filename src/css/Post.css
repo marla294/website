@@ -77,10 +77,18 @@
 
 @media (max-width: 1000px) {
 	/* Post Component */
+	.post_header_wrapper {
+		grid-template-columns: 1fr;
+	}
+
 	.post_header {
 		grid-template-columns: 1fr;
 		grid-template-areas: "postContent" "postImg";
 		margin-right: var(--sideMargin);
+	}
+
+	.post_content {
+		grid-template-columns: 1fr;
 	}
 
 	.post_header_content, .post_headImg {
@@ -95,9 +103,11 @@
 		grid-template-columns: 1fr;
 	}
 
-	.right, .left {
+	.right, .left, .full {
 		grid-column: 2 / span 1;
 		grid-row: span 3;
 		margin: 0;
+		width: 300px;
+		justify-self: center;
 	}
 }
