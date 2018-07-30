@@ -12,8 +12,9 @@ class Post extends React.Component {
 	state = {
 		show: false,
 		PostContent: null,
-		PostID: this.props.match.params.PostID,
-		Error: null
+		Slug: this.props.match.params.Slug,
+		Error: null,
+		PostID: null
 	};
 
 	imgURL = "";
@@ -27,18 +28,29 @@ class Post extends React.Component {
 		this.setState({ show: false });
 	};
 
-	/* Grabbing the post html data to display */
-	async componentDidMount() {
-		try {
-			let { default: PostContent } = await import(`../Posts/${
-				this.state.PostID
-			}.js`);
-			this.setState({
-				PostContent: <PostContent showFullImage={this.showFullImage} />
-			});
-		} catch (err) {
-			this.setState({ Error: err });
-		}
+	/* Get PostID using the slug from router */
+	getPostID = slug => {
+		let PostID = null;
+		Object.entries(this.props.posts).forEach(entry => {
+			if (entry[1].slug === slug) {
+				PostID = entry[0];
+			}
+		});
+		this.setState({ PostID });
+		return Promise.resolve(PostID);
+	};
+
+	/* Async import the post content */
+	async importPostContent() {
+		let postID = await this.getPostID(this.state.Slug);
+		let { default: PostContent } = await import(`../Posts/${postID}.js`);
+		this.setState({
+			PostContent: <PostContent showFullImage={this.showFullImage} />
+		});
+	}
+
+	componentDidMount() {
+		this.importPostContent();
 	}
 
 	renderPostHeader = () => {
@@ -74,6 +86,8 @@ class Post extends React.Component {
 	};
 
 	render() {
+		//this.importPostContent();
+
 		return (
 			<div className="container">
 				<Overlay
