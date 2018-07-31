@@ -170,7 +170,10 @@ class Blog extends React.Component {
 
 	render() {
 		return (
-			<div className="container">
+			<div
+				className="container"
+				onClick={this.state.show ? this.toggleShow : null}
+			>
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
 					<div className="blog_posts_container">
