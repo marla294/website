@@ -32,6 +32,7 @@
 /* Post Content */
 
 .post_content {
+	margin-top: 1.25em;
 	display: grid;
 	grid-gap: var(--gridGap);
 	grid-template-columns: 3fr 12fr 5fr;
@@ -89,6 +90,7 @@
 
 	.post_content {
 		grid-template-columns: 1fr;
+		margin-right: 20px;
 	}
 
 	.post_header_content, .post_headImg {
