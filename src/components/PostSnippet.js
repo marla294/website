@@ -22,7 +22,9 @@ class PostSnippet extends React.Component {
 
 	goToPost = event => {
 		event.preventDefault();
-		this.props.push(`/Post/${this.props.post.slug}`);
+		let slugify = require("slugify");
+		let slug = slugify(this.props.post.title, { remove: /\./ });
+		this.props.push(`/Post/${slug}`);
 	};
 }
 

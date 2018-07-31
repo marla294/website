@@ -2,7 +2,7 @@
 const posts = {
 	Post001: {
 		title: "About This Blog Thing...",
-		slug: "about-this-blog-thing",
+		slug: "About-This-Blog-Thing",
 		date: "July 26, 2018",
 		headerImage: "/Images/Pictures/Omaha/20180726_Office.jpg",
 		content: "/Posts/Post001.js",
