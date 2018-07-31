@@ -46,14 +46,21 @@ class Blog extends React.Component {
 			}
 		});
 
+		categories = ["Show All"].concat(...categories);
+
 		return categories;
 	};
 
 	clickCategory = category => {
-		if (!this.state.displayCategories.find(cat => cat === category)) {
-			this.addDisplayCategory(category);
+		if (category !== "Show All") {
+			if (!this.state.displayCategories.find(cat => cat === category)) {
+				this.addDisplayCategory(category);
+			} else {
+				this.removeDisplayCategory(category);
+			}
 		} else {
-			this.removeDisplayCategory(category);
+			// wipe all categories from State
+			this.removeAllDisplayCategories();
 		}
 	};
 
@@ -89,6 +96,12 @@ class Blog extends React.Component {
 				displayCategories
 			});
 		}
+	};
+
+	removeAllDisplayCategories = () => {
+		this.setState({
+			displayCategories: []
+		});
 	};
 
 	/* Filters the posts to ones that contain displayCategories */
