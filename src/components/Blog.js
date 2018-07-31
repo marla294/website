@@ -59,7 +59,7 @@ class Blog extends React.Component {
 				this.removeDisplayCategory(category);
 			}
 		} else {
-			// wipe all categories from State
+			// wipe all categories from state
 			this.removeAllDisplayCategories();
 		}
 	};
@@ -98,6 +98,7 @@ class Blog extends React.Component {
 		}
 	};
 
+	/* Empties Display Categories from state */
 	removeAllDisplayCategories = () => {
 		this.setState({
 			displayCategories: []
@@ -153,11 +154,7 @@ class Blog extends React.Component {
 		const categories = this.getAllCategories();
 		return categories.map(cat => (
 			<a
-				className={
-					this.state.displayCategories.find(c => c === cat)
-						? "category-show"
-						: ""
-				}
+				className={this.categoryClasses(cat)}
 				key={cat}
 				onClick={() => {
 					this.clickCategory(cat);
@@ -166,6 +163,18 @@ class Blog extends React.Component {
 				{cat}
 			</a>
 		));
+	};
+
+	/* Sets the styles of the categories in the dropdown */
+	categoryClasses = cat => {
+		let catClass;
+		this.state.displayCategories.find(c => c === cat)
+			? (catClass = "category-show")
+			: (catClass = "");
+		if (cat === "Show All") {
+			catClass = "category-show-all";
+		}
+		return catClass;
 	};
 
 	renderCategoriesLabel = () => {

@@ -7,6 +7,10 @@
 	background-color: var(--aqua) !important;
 }
 
+.category-show-all {
+	font-style: italic !important;
+}
+
 .blog_posts_categories {
 	display: grid;
 	grid-template-columns: auto 1fr;
