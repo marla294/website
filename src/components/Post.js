@@ -12,10 +12,9 @@ class Post extends React.Component {
 	/* Overlay stuff */
 	state = {
 		show: false,
-		PostContent: null,
-		Slug: this.props.match.params.Slug,
 		Posts,
-		PostsID: null
+		PostContent: null,
+		Slug: this.props.match.params.Slug
 	};
 
 	imgURL = "";
@@ -39,7 +38,6 @@ class Post extends React.Component {
 				PostID = entry[0];
 			}
 		});
-		this.setState({ PostID });
 		return PostID;
 	};
 
@@ -59,7 +57,7 @@ class Post extends React.Component {
 	renderPostHeader = () => {
 		let postHeader;
 		Object.keys(this.props.posts).forEach(key => {
-			if (key === this.state.PostID) {
+			if (key === this.getPostID(this.state.Slug)) {
 				postHeader = (
 					<div className="post_header_wrapper">
 						<div className="post_header">
