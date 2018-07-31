@@ -32,8 +32,10 @@ class Post extends React.Component {
 	/* Get PostID using the slug from router */
 	getPostID = slug => {
 		let PostID = null;
+		let slugify = require("slugify");
 		Object.entries(this.state.Posts).forEach(entry => {
-			if (entry[1].slug === slug) {
+			let slugTitle = slugify(entry[1].title, { remove: /\./ });
+			if (slugTitle === slug) {
 				PostID = entry[0];
 			}
 		});
