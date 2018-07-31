@@ -169,11 +169,6 @@ a:hover {
 /* 62.5% */
 @media (max-width: 500px) {
 
-	/* General */
-	body {
-		font-size: 1.25em;
-	}
-
 	.wrapper {
 		padding-bottom: 125px;
 	}

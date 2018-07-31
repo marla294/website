@@ -21,10 +21,6 @@
 	align-self: top;
 }
 
-.desc_about > p {
-	font-size: .75em;
-}
-
 .pic_about {
 	grid-area: pic;
 	display: grid;
