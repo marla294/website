@@ -5,6 +5,7 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
+import Posts from "../blog-posts";
 import "../css/Post.css";
 
 class Post extends React.Component {
@@ -13,8 +14,8 @@ class Post extends React.Component {
 		show: false,
 		PostContent: null,
 		Slug: this.props.match.params.Slug,
-		Error: null,
-		PostID: null
+		Posts,
+		PostsID: null
 	};
 
 	imgURL = "";
@@ -31,18 +32,18 @@ class Post extends React.Component {
 	/* Get PostID using the slug from router */
 	getPostID = slug => {
 		let PostID = null;
-		Object.entries(this.props.posts).forEach(entry => {
+		Object.entries(this.state.Posts).forEach(entry => {
 			if (entry[1].slug === slug) {
 				PostID = entry[0];
 			}
 		});
 		this.setState({ PostID });
-		return Promise.resolve(PostID);
+		return PostID;
 	};
 
 	/* Async import the post content */
 	async importPostContent() {
-		let postID = await this.getPostID(this.state.Slug);
+		let postID = this.getPostID(this.state.Slug);
 		let { default: PostContent } = await import(`../Posts/${postID}.js`);
 		this.setState({
 			PostContent: <PostContent showFullImage={this.showFullImage} />
@@ -86,8 +87,6 @@ class Post extends React.Component {
 	};
 
 	render() {
-		//this.importPostContent();
-
 		return (
 			<div className="container">
 				<Overlay
