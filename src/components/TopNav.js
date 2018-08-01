@@ -20,10 +20,9 @@ class TopNav extends React.Component {
 						</a>
 					</li>
 					<li>
-						<a href="">Gallery</a>
-					</li>
-					<li>
-						<a href="">Contact</a>
+						<a href="" onClick={this.goToContact}>
+							Contact
+						</a>
 					</li>
 				</ul>
 			</nav>
@@ -40,6 +39,10 @@ class TopNav extends React.Component {
 	goToHome = event => {
 		event.preventDefault();
 		this.props.push("/");
+	};
+	goToContact = event => {
+		event.preventDefault();
+		this.props.push("/Contact");
 	};
 }
 
