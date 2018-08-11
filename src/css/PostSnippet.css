@@ -6,7 +6,7 @@
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr;
 	width: 600px;
-	height: 450px;
+	height: 425px;
 	margin: var(--sideMargin);
 	overflow: hidden;
 	position: relative;
@@ -28,7 +28,7 @@
 	background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0) 30%);
 	cursor: pointer;
 	width: 600px;
-	height: 450px;
+	height: 425px;
 }
 
 .snippet_overlay:hover > * {
