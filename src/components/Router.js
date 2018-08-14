@@ -5,7 +5,7 @@ import About from "./About";
 import Post from "./Post";
 import Blog from "./Blog";
 import posts from "../blog-posts";
-import Contact from "./Contact";
+// import Contact from "./Contact";
 
 class Router extends React.Component {
 	/* Blog posts live in the router for now */
@@ -42,7 +42,6 @@ class Router extends React.Component {
 					<Route path="/About" component={About} />
 					<Route path="/Post/:Slug" render={this.post} />
 					<Route path="/Blog" render={this.blog} />
-					<Route path="/Contact" component={Contact} />
 				</Switch>
 			</BrowserRouter>
 		);

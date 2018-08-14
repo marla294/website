@@ -44,8 +44,7 @@ class Contact extends React.Component {
 							<p>
 								I am currently looking for web development
 								opportunities. If you're interested in chatting,
-								please feel free to email or contact me via
-								LinkedIn (link in footer). My email is:&nbsp;
+								please feel free to email me at:&nbsp;
 								<a href="mailto:marla294@gmail.com">
 									marla294@gmail.com
 								</a>.

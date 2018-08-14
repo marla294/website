@@ -19,11 +19,6 @@ class TopNav extends React.Component {
 							Blog
 						</a>
 					</li>
-					<li>
-						<a href="" onClick={this.goToContact}>
-							Contact
-						</a>
-					</li>
 				</ul>
 			</nav>
 		);

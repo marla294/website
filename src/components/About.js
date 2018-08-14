@@ -95,6 +95,15 @@ class About extends React.Component {
 								petunias. I like to travel, whenever I can.
 							</p>
 
+							<p>
+								I am currently open for web development
+								opportunities. If you're interested in chatting,
+								you can email me at:&nbsp;
+								<a href="mailto:marla294@gmail.com">
+									marla294@gmail.com
+								</a>.
+							</p>
+
 							<p>- Marla</p>
 						</div>
 					</section>
