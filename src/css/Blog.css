@@ -25,6 +25,7 @@
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-gap: 0.5em;
+	margin-top: 0.25em;
 }
 
 .blog_posts_sort_order .label {

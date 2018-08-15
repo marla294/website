@@ -260,7 +260,9 @@ class Blog extends React.Component {
 									</div>
 								</div>
 								<div className="label">
-									{this.renderCategoriesLabel()}
+									{this.state.sortBy === "Newest"
+										? "Newest First"
+										: "Oldest First"}
 								</div>
 							</div>
 						</div>
