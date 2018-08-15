@@ -3,7 +3,7 @@
 
 /* Categories */
 
-.category-show {
+.category-show, .sortBy-show {
 	background-color: var(--aqua) !important;
 }
 

@@ -88,6 +88,12 @@ class Blog extends React.Component {
 			: "";
 	};
 
+	sortByClasses = option => {
+		const optionFiltered = option.split(" ")[0];
+
+		return this.state.sortBy === optionFiltered ? "sortBy-show" : "";
+	};
+
 	/* Click Events */
 
 	toggleCategoryDropdown = () => {
@@ -201,6 +207,7 @@ class Blog extends React.Component {
 		const options = ["Newest First", "Oldest First"];
 		return options.map(opt => (
 			<a
+				className={this.sortByClasses(opt)}
 				key={opt}
 				onClick={() => {
 					this.clickSortOption(opt);
