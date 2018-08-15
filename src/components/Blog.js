@@ -13,7 +13,8 @@ class Blog extends React.Component {
 		showCategoryDropdown: false,
 		showSortByDropdown: false,
 		disableClick: false,
-		displayCategories: []
+		displayCategories: [],
+		sortBy: "Newest"
 	};
 
 	/* Helper Methods */
@@ -115,6 +116,18 @@ class Blog extends React.Component {
 		}
 	};
 
+	clickSortOption = option => {
+		if (option === "Newest First") {
+			this.setState({
+				sortBy: "Newest"
+			});
+		} else {
+			this.setState({
+				sortBy: "Oldest"
+			});
+		}
+	};
+
 	clickOutsideDropdown = () => {
 		if (this.state.showCategoryDropdown) {
 			this.toggleCategoryDropdown();
@@ -137,7 +150,11 @@ class Blog extends React.Component {
 				: this.filterPostsByCategory();
 
 		const displayKeys = postArr.map(post => post[0]).sort(() => {
-			return isChrome ? 1 : -1;
+			if (this.state.sortBy === "Newest") {
+				return isChrome ? 1 : -1;
+			} else {
+				return isChrome ? -1 : 1;
+			}
 		});
 
 		return displayKeys.map(key => {
@@ -182,7 +199,16 @@ class Blog extends React.Component {
 
 	renderSortBy = () => {
 		const options = ["Newest First", "Oldest First"];
-		return options.map(opt => <a key={opt}>{opt}</a>);
+		return options.map(opt => (
+			<a
+				key={opt}
+				onClick={() => {
+					this.clickSortOption(opt);
+				}}
+			>
+				{opt}
+			</a>
+		));
 	};
 
 	render() {
