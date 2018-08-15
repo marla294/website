@@ -131,8 +131,9 @@ class PostData extends React.Component {
 					Thomas did some great things. He put to words the
 					Declaration of Independance. He made the Louisiana Purchase
 					and launched the Louis and Clark expidition during his
-					presidency. He deserves to be seen as one of the main presidents that shaped the nation,
-					presidents, just like Washington and Lincoln.
+					presidency. He deserves to be seen as one of the main
+					presidents that shaped the nation, presidents, just like
+					Washington and Lincoln.
 				</p>
 
 				<p>
@@ -176,9 +177,10 @@ class PostData extends React.Component {
 				<p>
 					The biggest lesson I took away from this book was the
 					importance of a person to know when to turn the other cheek
-					when they feel they have been slighted. Hamilton did not seem
-					to have this ability. In fact, he went far out of his way to
-					protect his honor, way further than he probably should have.
+					when they feel they have been slighted. Hamilton did not
+					seem to have this ability. In fact, he went far out of his
+					way to protect his honor, way further than he probably
+					should have.
 				</p>
 
 				<p>

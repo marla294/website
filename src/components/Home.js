@@ -23,9 +23,7 @@ class Home extends React.Component {
 	};
 
 	renderPostSnippets = () => {
-		const arr = Object.entries(this.props.posts).sort(
-			(a, b) => (a[1].order < b[1].order ? -1 : 1)
-		);
+		const arr = Object.entries(this.props.posts);
 		const displayKeys = arr
 			.map(post => post[0])
 			.slice(-2)
@@ -56,8 +54,8 @@ class Home extends React.Component {
 						<img
 							onClick={this.showFullImage}
 							className="pic_homepage"
-							src={require("../Assets/Pictures/SelfPortraits/20180607_SagradaFamilia.jpg")}
-							alt=""
+							src="/Images/Pictures/Common/Selfie_SagradaFamilia.jpg"
+							alt="Marla Foreman"
 						/>
 						<div className="desc_homepage">
 							<p>
