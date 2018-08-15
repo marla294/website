@@ -15,16 +15,7 @@ class Blog extends React.Component {
 		displayCategories: []
 	};
 
-	/* Toggle for the dropdown menu, Categories */
-
-	toggleShow = () => {
-		this.setState({
-			show: !this.state.show,
-			disableClick: !this.state.disableClick
-		});
-	};
-
-	/* Categories */
+	/* Helper Methods */
 
 	getAllCategories = () => {
 		const arr = Object.entries(this.props.posts).map(
@@ -70,11 +61,8 @@ class Blog extends React.Component {
 			this.state.displayCategories.findIndex(cat => cat === category) ===
 			-1
 		) {
-			/* 1. Take a copy of state */
 			let displayCategories = [...this.state.displayCategories];
-			/* 2. Push category to the end of the displayCategories list */
 			displayCategories.push(category);
-			/* 3. Set state */
 			this.setState({
 				displayCategories
 			});
@@ -87,11 +75,8 @@ class Blog extends React.Component {
 			cat => cat === category
 		);
 		if (index !== -1) {
-			/* 1. Take a copy of state */
 			let displayCategories = [...this.state.displayCategories];
-			/* 2. Remove category from the displayCategories list */
 			displayCategories.splice(index, 1);
-			/* 3. Set state */
 			this.setState({
 				displayCategories
 			});
@@ -107,39 +92,54 @@ class Blog extends React.Component {
 
 	/* Filters the posts to ones that contain displayCategories */
 	filterPostsByCategory = () => {
-		const arr = Object.entries(this.props.posts);
 		const displayCategories = [...this.state.displayCategories];
-		let retArr = []; /* return array */
 
-		arr.forEach(post => {
+		return Object.entries(this.props.posts).filter(post => {
+			let filter = false;
 			displayCategories.forEach(cat => {
-				if (
-					post[1].categories.find(category => category === cat) &&
-					!retArr.find(p => p === post)
-				) {
-					retArr.push(post);
+				if (post[1].categories.find(category => category === cat)) {
+					filter = true;
 				}
 			});
+			return filter;
 		});
-
-		return retArr;
 	};
 
-	/* Render methods */
+	/* Sets the styles of the categories in the dropdown */
+	categoryClasses = cat => {
+		let catClass;
+		this.state.displayCategories.find(c => c === cat)
+			? (catClass = "category-show")
+			: (catClass = "");
+		if (cat === "Show All") {
+			catClass = "category-show-all";
+		}
+		return catClass;
+	};
+
+	/* Click Events */
+
+	/* Toggle for the dropdown menu */
+	toggleShow = () => {
+		this.setState({
+			show: !this.state.show,
+			disableClick: !this.state.disableClick
+		});
+	};
+
+	/* Render Methods */
 
 	renderPostSnippets = () => {
 		/* Because sorting works differently on Safari than on Chrome */
-		let isChrome =
+		const isChrome =
 			navigator.userAgent.indexOf("Chrome") !== -1 ? true : false;
 
-		/* If no categories are selected, show all posts - else show filtered */
 		const postArr =
 			this.state.displayCategories.length === 0
 				? Object.entries(this.props.posts)
 				: this.filterPostsByCategory();
 
-		const arr = postArr.sort((a, b) => (a[1].order < b[1].order ? -1 : 1));
-		const displayKeys = arr.map(post => post[0]).sort((a, b) => {
+		const displayKeys = postArr.map(post => post[0]).sort(() => {
 			return isChrome ? 1 : -1;
 		});
 
@@ -170,21 +170,9 @@ class Blog extends React.Component {
 		));
 	};
 
-	/* Sets the styles of the categories in the dropdown */
-	categoryClasses = cat => {
-		let catClass;
-		this.state.displayCategories.find(c => c === cat)
-			? (catClass = "category-show")
-			: (catClass = "");
-		if (cat === "Show All") {
-			catClass = "category-show-all";
-		}
-		return catClass;
-	};
-
 	renderCategoriesLabel = () => {
 		const categories = this.state.displayCategories;
-		return categories.length === 0
+		return this.state.displayCategories.length === 0
 			? "All"
 			: categories.map((cat, i) => {
 					if (i < categories.length - 1) {

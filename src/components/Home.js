@@ -34,13 +34,13 @@ class Home extends React.Component {
 
 	renderPostSnippets = () => {
 		/* Because sorting works differently on Safari than on Chrome */
-		let isChrome =
+		const isChrome =
 			navigator.userAgent.indexOf("Chrome") !== -1 ? true : false;
 
 		const displayKeys = Object.entries(this.props.posts)
 			.map(post => post[0])
 			.slice(-2)
-			.sort((a, b) => {
+			.sort(() => {
 				return isChrome ? 1 : -1;
 			});
 		return displayKeys.map(key => {
