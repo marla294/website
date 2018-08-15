@@ -6,11 +6,11 @@ import Snippet from "./PostSnippet";
 import "../css/Home.css";
 
 class Home extends React.Component {
+	/* Overlay */
 	state = {
 		show: false
 	};
 
-	/* Image Overlay Stuff */
 	imgURL = "";
 
 	showFullImage = event => {
