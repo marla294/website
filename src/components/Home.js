@@ -7,6 +7,7 @@ import "../css/Home.css";
 
 class Home extends React.Component {
 	/* Overlay */
+
 	state = {
 		show: false
 	};
@@ -22,9 +23,17 @@ class Home extends React.Component {
 		this.setState({ show: false });
 	};
 
+	/* Click Events */
+
+	goToAbout = event => {
+		event.preventDefault();
+		this.props.history.push("/About");
+	};
+
+	/* Render Functions */
+
 	renderPostSnippets = () => {
-		const arr = Object.entries(this.props.posts);
-		const displayKeys = arr
+		const displayKeys = Object.entries(this.props.posts)
 			.map(post => post[0])
 			.slice(-2)
 			.sort((a, b) => 1);
@@ -78,10 +87,6 @@ class Home extends React.Component {
 			</div>
 		);
 	}
-	goToAbout = event => {
-		event.preventDefault();
-		this.props.history.push("/About");
-	};
 }
 
 export default Home;
