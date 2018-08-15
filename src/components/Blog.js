@@ -10,7 +10,7 @@ import "../css/Blog.css";
 
 class Blog extends React.Component {
 	state = {
-		show: false,
+		showDropdown: false,
 		disableClick: false,
 		displayCategories: []
 	};
@@ -30,7 +30,6 @@ class Blog extends React.Component {
 		return ["Show All"].concat(...categories);
 	};
 
-	/* Adds a display category to state if it is not already there */
 	addDisplayCategory = category => {
 		if (
 			this.state.displayCategories.findIndex(cat => cat === category) ===
@@ -44,7 +43,6 @@ class Blog extends React.Component {
 		}
 	};
 
-	/* Removes a display category to state if it is not already there */
 	removeDisplayCategory = category => {
 		const index = this.state.displayCategories.findIndex(
 			cat => cat === category
@@ -58,14 +56,12 @@ class Blog extends React.Component {
 		}
 	};
 
-	/* Empties Display Categories from state */
 	removeAllDisplayCategories = () => {
 		this.setState({
 			displayCategories: []
 		});
 	};
 
-	/* Filters the posts to ones that contain displayCategories */
 	filterPostsByCategory = () => {
 		const displayCategories = [...this.state.displayCategories];
 
@@ -80,13 +76,12 @@ class Blog extends React.Component {
 		});
 	};
 
-	/* Sets the styles of the categories in the dropdown */
-	categoryClasses = cat => {
-		if (cat === "Show All") {
+	categoryClasses = category => {
+		if (category === "Show All") {
 			return "category-show-all";
 		}
 
-		return this.state.displayCategories.find(c => c === cat)
+		return this.state.displayCategories.find(cat => cat === category)
 			? "category-show"
 			: "";
 	};
@@ -94,9 +89,9 @@ class Blog extends React.Component {
 	/* Click Events */
 
 	/* Toggle for the dropdown menu */
-	toggleShow = () => {
+	toggleDropdown = () => {
 		this.setState({
-			show: !this.state.show,
+			showDropdown: !this.state.showDropdown,
 			disableClick: !this.state.disableClick
 		});
 	};
@@ -173,7 +168,7 @@ class Blog extends React.Component {
 		return (
 			<div
 				className="container"
-				onClick={this.state.show ? this.toggleShow : null}
+				onClick={this.state.showDropdown ? this.toggleDropdown : null}
 			>
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
@@ -183,7 +178,7 @@ class Blog extends React.Component {
 							<div className="blog_posts_categories">
 								<div className="dropdown">
 									<button
-										onClick={this.toggleShow}
+										onClick={this.toggleDropdown}
 										className="dropbtn"
 									>
 										Categories
@@ -191,7 +186,7 @@ class Blog extends React.Component {
 									<div
 										id="myDropdown"
 										className={
-											this.state.show
+											this.state.showDropdown
 												? "dropdown-content show"
 												: "dropdown-content"
 										}
