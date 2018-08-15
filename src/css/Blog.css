@@ -20,3 +20,13 @@
 .blog_posts_categories .label {
 	align-self: center;
 }
+
+.blog_posts_sort_order {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: 0.5em;
+}
+
+.blog_posts_sort_order .label {
+	align-self: center;
+}

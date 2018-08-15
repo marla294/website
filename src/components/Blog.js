@@ -10,7 +10,8 @@ import "../css/Blog.css";
 
 class Blog extends React.Component {
 	state = {
-		showDropdown: false,
+		showCategoryDropdown: false,
+		showSortByDropdown: false,
 		disableClick: false,
 		displayCategories: []
 	};
@@ -88,10 +89,16 @@ class Blog extends React.Component {
 
 	/* Click Events */
 
-	/* Toggle for the dropdown menu */
-	toggleDropdown = () => {
+	toggleCategoryDropdown = () => {
 		this.setState({
-			showDropdown: !this.state.showDropdown,
+			showCategoryDropdown: !this.state.showCategoryDropdown,
+			disableClick: !this.state.disableClick
+		});
+	};
+
+	toggleSortByDropdown = () => {
+		this.setState({
+			showSortByDropdown: !this.state.showSortByDropdown,
 			disableClick: !this.state.disableClick
 		});
 	};
@@ -105,6 +112,15 @@ class Blog extends React.Component {
 			}
 		} else {
 			this.removeAllDisplayCategories();
+		}
+	};
+
+	clickOutsideDropdown = () => {
+		if (this.state.showCategoryDropdown) {
+			this.toggleCategoryDropdown();
+		}
+		if (this.state.showSortByDropdown) {
+			this.toggleSortByDropdown();
 		}
 	};
 
@@ -164,12 +180,14 @@ class Blog extends React.Component {
 			  });
 	};
 
+	renderSortBy = () => {
+		const options = ["Newest First", "Oldest First"];
+		return options.map(opt => <a key={opt}>{opt}</a>);
+	};
+
 	render() {
 		return (
-			<div
-				className="container"
-				onClick={this.state.showDropdown ? this.toggleDropdown : null}
-			>
+			<div className="container" onClick={this.clickOutsideDropdown}>
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
 					<div className="blog_posts_container">
@@ -178,20 +196,41 @@ class Blog extends React.Component {
 							<div className="blog_posts_categories">
 								<div className="dropdown">
 									<button
-										onClick={this.toggleDropdown}
+										onClick={this.toggleCategoryDropdown}
 										className="dropbtn"
 									>
 										Categories
 									</button>
 									<div
-										id="myDropdown"
 										className={
-											this.state.showDropdown
+											this.state.showCategoryDropdown
 												? "dropdown-content show"
 												: "dropdown-content"
 										}
 									>
 										{this.renderCategories()}
+									</div>
+								</div>
+								<div className="label">
+									{this.renderCategoriesLabel()}
+								</div>
+							</div>
+							<div className="blog_posts_sort_order">
+								<div className="dropdown">
+									<button
+										onClick={this.toggleSortByDropdown}
+										className="dropbtn"
+									>
+										Sort By
+									</button>
+									<div
+										className={
+											this.state.showSortByDropdown
+												? "dropdown-content show"
+												: "dropdown-content"
+										}
+									>
+										{this.renderSortBy()}
 									</div>
 								</div>
 								<div className="label">
