@@ -2,6 +2,15 @@ import React from "react";
 import "../css/PostSnippet.css";
 
 class PostSnippet extends React.Component {
+	/* Click Events */
+
+	goToPost = event => {
+		event.preventDefault();
+		const slugify = require("slugify");
+		const slug = slugify(this.props.post.title, { remove: /\./ });
+		this.props.push(`/Post/${slug}`);
+	};
+
 	render() {
 		return (
 			<div className="snippet" onClick={this.goToPost}>
@@ -19,13 +28,6 @@ class PostSnippet extends React.Component {
 			</div>
 		);
 	}
-
-	goToPost = event => {
-		event.preventDefault();
-		let slugify = require("slugify");
-		let slug = slugify(this.props.post.title, { remove: /\./ });
-		this.props.push(`/Post/${slug}`);
-	};
 }
 
 export default PostSnippet;

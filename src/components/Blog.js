@@ -158,7 +158,7 @@ class Blog extends React.Component {
 
 	renderCategoriesLabel = () => {
 		const categories = this.state.displayCategories;
-		return this.state.displayCategories.length === 0
+		return categories.length === 0
 			? "All"
 			: categories.map((cat, i) => {
 					if (i < categories.length - 1) {
