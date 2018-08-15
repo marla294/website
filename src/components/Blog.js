@@ -18,28 +18,16 @@ class Blog extends React.Component {
 	/* Helper Methods */
 
 	getAllCategories = () => {
-		const arr = Object.entries(this.props.posts).map(
-			post => post[1].categories
-		);
 		let categories = [];
-		arr.forEach(cat => categories.push(...cat));
-
-		/* Filter categories arr to unique categories */
-		categories.sort();
-		categories.forEach((cat, i) => {
-			if (cat === categories[i + 1]) {
-				const first = categories.slice(0, i + 1);
-				let rest = categories.slice(i + 1);
-				while (cat === rest[0]) {
-					rest.shift();
+		Object.entries(this.props.posts).forEach(post => {
+			post[1].categories.forEach(cat => {
+				if (!categories.find(c => c === cat)) {
+					categories.push(cat);
 				}
-				categories = first.concat(rest);
-			}
+			});
 		});
 
-		categories = ["Show All"].concat(...categories);
-
-		return categories;
+		return ["Show All"].concat(...categories);
 	};
 
 	/* Adds a display category to state if it is not already there */
