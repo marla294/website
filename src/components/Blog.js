@@ -42,19 +42,6 @@ class Blog extends React.Component {
 		return categories;
 	};
 
-	clickCategory = category => {
-		if (category !== "Show All") {
-			if (!this.state.displayCategories.find(cat => cat === category)) {
-				this.addDisplayCategory(category);
-			} else {
-				this.removeDisplayCategory(category);
-			}
-		} else {
-			// wipe all categories from state
-			this.removeAllDisplayCategories();
-		}
-	};
-
 	/* Adds a display category to state if it is not already there */
 	addDisplayCategory = category => {
 		if (
@@ -107,14 +94,13 @@ class Blog extends React.Component {
 
 	/* Sets the styles of the categories in the dropdown */
 	categoryClasses = cat => {
-		let catClass;
-		this.state.displayCategories.find(c => c === cat)
-			? (catClass = "category-show")
-			: (catClass = "");
 		if (cat === "Show All") {
-			catClass = "category-show-all";
+			return "category-show-all";
 		}
-		return catClass;
+
+		return this.state.displayCategories.find(c => c === cat)
+			? "category-show"
+			: "";
 	};
 
 	/* Click Events */
@@ -125,6 +111,18 @@ class Blog extends React.Component {
 			show: !this.state.show,
 			disableClick: !this.state.disableClick
 		});
+	};
+
+	clickCategory = category => {
+		if (category !== "Show All") {
+			if (!this.state.displayCategories.find(cat => cat === category)) {
+				this.addDisplayCategory(category);
+			} else {
+				this.removeDisplayCategory(category);
+			}
+		} else {
+			this.removeAllDisplayCategories();
+		}
 	};
 
 	/* Render Methods */
