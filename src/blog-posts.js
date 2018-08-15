@@ -6,6 +6,13 @@ const posts = {
 		date: "July 26, 2018",
 		headerImage: "/Images/Pictures/Omaha/20180726_Office.jpg",
 		categories: ["Coding", "ReactJS"]
+	},
+	Post002: {
+		order: 2,
+		title: "Book Review - Alexander Hamilton by Ron Chernow",
+		date: "August 15, 2018",
+		headerImage: "/Images/Pictures/Posts/Post002/hamilton.jpg",
+		categories: ["Book Review"]
 	}
 };
 
