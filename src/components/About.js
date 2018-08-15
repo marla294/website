@@ -5,7 +5,7 @@ import Overlay from "./Overlay";
 import "../css/About.css";
 
 class About extends React.Component {
-	/* Overlay stuff */
+	/* Overlay */
 	state = {
 		show: false
 	};

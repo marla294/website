@@ -128,15 +128,20 @@ class Blog extends React.Component {
 	/* Render methods */
 
 	renderPostSnippets = () => {
+		/* Because sorting works differently on Safari than on Chrome */
+		let isChrome =
+			navigator.userAgent.indexOf("Chrome") !== -1 ? true : false;
+
 		/* If no categories are selected, show all posts - else show filtered */
 		const postArr =
 			this.state.displayCategories.length === 0
 				? Object.entries(this.props.posts)
 				: this.filterPostsByCategory();
 
-		/* Sort the post array for display */
 		const arr = postArr.sort((a, b) => (a[1].order < b[1].order ? -1 : 1));
-		const displayKeys = arr.map(post => post[0]).sort((a, b) => 1);
+		const displayKeys = arr.map(post => post[0]).sort((a, b) => {
+			return isChrome ? 1 : -1;
+		});
 
 		return displayKeys.map(key => {
 			return (
