@@ -29,28 +29,30 @@ const TopNav = props => (
 		>
 			Marla Foreman
 		</p>
-		<ul className="menu-top">
-			<li>
-				<a
-					href=""
-					onClick={event => {
-						goToAbout(props, event);
-					}}
-				>
-					About
-				</a>
-			</li>
-			<li>
-				<a
-					href=""
-					onClick={event => {
-						goToBlog(props, event);
-					}}
-				>
-					Blog
-				</a>
-			</li>
-		</ul>
+		<div className="menu">
+			<ul className="menu-top">
+				<li>
+					<a
+						href=""
+						onClick={event => {
+							goToAbout(props, event);
+						}}
+					>
+						About
+					</a>
+				</li>
+				<li>
+					<a
+						href=""
+						onClick={event => {
+							goToBlog(props, event);
+						}}
+					>
+						Blog
+					</a>
+				</li>
+			</ul>
+		</div>
 	</nav>
 );
 

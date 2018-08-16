@@ -2,6 +2,8 @@
 
 .top {
 	display: grid;
+	align-items: center;
+	justify-items: right;
 	grid-template-columns: auto 1fr;
 	grid-template-areas: "sitename menu";
 	background: url("../Assets/Backgrounds/7.jpg");
@@ -12,7 +14,7 @@
 	grid-area: sitename;
 	font-size: 2em;
 	align-self: center;
-	margin-left: var(--sideMargin);
+	margin-left: 0.5em;
 	cursor: pointer;
 }
 
@@ -20,16 +22,21 @@
 	color: var(--aqua);
 }
 
-.top > ul {
+.menu {
+	width: 475px;
 	grid-area: menu;
+}
+
+.menu > ul {
 	list-style-type: none;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	justify-items: center;
 	align-content: center;
 	padding: 0;
 }
 
-.top > ul > li {
+.menu > ul > li {
 	justify-self: center;
 }
 
@@ -44,15 +51,20 @@
 		grid-template-areas: 
 		". sitename ." 
 		". menu .";
+		justify-items: center;
 	}
 
 	.top > p {
 		justify-self: center;
 	}
 
-	.top > ul {
+	.menu > ul {
 		padding-bottom: 20px;
 		padding-top: 5px;
+	}
+
+	.menu {
+		width: 400px;
 	}
 }
 
@@ -60,5 +72,9 @@
 	/* Top Nav */
 	.top {
 		margin: 0;
+	}
+
+	.menu {
+		width: 100%;
 	}
 }
