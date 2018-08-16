@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../css/PostSnippet.css";
 
+/* Click Events */
+
 const goToPost = (post, push, event) => {
 	event.preventDefault();
 	const slugify = require("slugify");

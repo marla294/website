@@ -2,27 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../css/Overlay.css";
 
-class Overlay extends React.Component {
-	render() {
-		return (
-			<div
-				className={this.props.show ? "overlay open" : "overlay closed"}
-			>
-				<div className="overlay-inner">
-					<div className="btn_overlay">
-						<button
-							className="close"
-							onClick={this.props.hideFullImage}
-						>
-							×
-						</button>
-					</div>
-					<img src={`${this.props.imgURL}`} alt="" />
-				</div>
+const Overlay = ({ show, hideFullImage, imgURL }) => (
+	<div className={show ? "overlay open" : "overlay closed"}>
+		<div className="overlay-inner">
+			<div className="btn_overlay">
+				<button className="close" onClick={hideFullImage}>
+					×
+				</button>
 			</div>
-		);
-	}
-}
+			<img src={`${imgURL}`} alt="" />
+		</div>
+	</div>
+);
 
 Overlay.propTypes = {
 	show: PropTypes.bool.isRequired,
