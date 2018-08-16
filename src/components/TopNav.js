@@ -2,6 +2,23 @@ import React from "react";
 import "../css/TopNav.css";
 
 class TopNav extends React.Component {
+	/* Click Events */
+
+	goToAbout = event => {
+		event.preventDefault();
+		this.props.push("/About");
+	};
+
+	goToBlog = event => {
+		event.preventDefault();
+		this.props.push("/Blog");
+	};
+
+	goToHome = event => {
+		event.preventDefault();
+		this.props.push("/");
+	};
+
 	render() {
 		return (
 			<nav className="top">
@@ -23,22 +40,6 @@ class TopNav extends React.Component {
 			</nav>
 		);
 	}
-	goToAbout = event => {
-		event.preventDefault();
-		this.props.push("/About");
-	};
-	goToBlog = event => {
-		event.preventDefault();
-		this.props.push("/Blog");
-	};
-	goToHome = event => {
-		event.preventDefault();
-		this.props.push("/");
-	};
-	goToContact = event => {
-		event.preventDefault();
-		this.props.push("/Contact");
-	};
 }
 
 export default TopNav;
