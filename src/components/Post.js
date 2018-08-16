@@ -10,13 +10,14 @@ import PropTypes from "prop-types";
 import "../css/Post.css";
 
 class Post extends React.Component {
-	/* Overlay stuff */
 	state = {
 		show: false,
 		Posts,
 		PostContent: null,
 		Slug: this.props.match.params.Slug
 	};
+
+	/* Overlay */
 
 	imgURL = "";
 
@@ -29,12 +30,13 @@ class Post extends React.Component {
 		this.setState({ show: false });
 	};
 
-	/* Get PostID using the slug from router */
+	/* Helper Methods */
+
 	getPostID = slug => {
 		let PostID = null;
-		let slugify = require("slugify");
+		const slugify = require("slugify");
 		Object.entries(this.state.Posts).forEach(entry => {
-			let slugTitle = slugify(entry[1].title, { remove: /\./ });
+			const slugTitle = slugify(entry[1].title, { remove: /\./ });
 			if (slugTitle === slug) {
 				PostID = entry[0];
 			}
@@ -42,21 +44,24 @@ class Post extends React.Component {
 		return PostID;
 	};
 
-	/* Async import the post content */
 	async importPostContent() {
-		let postID = this.getPostID(this.state.Slug);
-		let { default: PostContent } = await import(`../Posts/${postID}.js`);
+		const postID = this.getPostID(this.state.Slug);
+		const { default: PostContent } = await import(`../Posts/${postID}.js`);
 		this.setState({
 			PostContent: <PostContent showFullImage={this.showFullImage} />
 		});
 	}
 
+	/* Lifecycle */
+
 	componentDidMount() {
 		this.importPostContent();
 	}
 
+	/* Render Methods */
+
 	renderPostHeader = () => {
-		let postHeader;
+		let postHeader = "";
 		Object.keys(this.props.posts).forEach(key => {
 			if (key === this.getPostID(this.state.Slug)) {
 				postHeader = (
