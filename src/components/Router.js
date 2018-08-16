@@ -8,20 +8,16 @@ import Posts from "../blog-posts";
 // import Contact from "./Contact";
 
 class Router extends React.Component {
-	state = {
-		Posts
-	};
-
 	home = props => {
-		return <Home posts={this.state.Posts} {...props} />;
+		return <Home posts={Posts} {...props} />;
 	};
 
 	post = props => {
-		return <Post posts={this.state.Posts} {...props} />;
+		return <Post posts={Posts} {...props} />;
 	};
 
 	blog = props => {
-		return <Blog posts={this.state.Posts} {...props} />;
+		return <Blog posts={Posts} {...props} />;
 	};
 
 	render() {
