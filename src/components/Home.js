@@ -3,6 +3,7 @@ import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
 import Snippet from "./PostSnippet";
+import PropTypes from "prop-types";
 import "../css/Home.css";
 
 class Home extends React.Component {
@@ -94,5 +95,10 @@ class Home extends React.Component {
 		);
 	}
 }
+
+Home.propTypes = {
+	posts: PropTypes.object.isRequired,
+	history: PropTypes.object.isRequired
+};
 
 export default Home;

@@ -6,6 +6,7 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Snippet from "./PostSnippet";
+import PropTypes from "prop-types";
 import "../css/Blog.css";
 
 class Blog extends React.Component {
@@ -290,5 +291,10 @@ class Blog extends React.Component {
 		);
 	}
 }
+
+Blog.propTypes = {
+	posts: PropTypes.object.isRequired,
+	history: PropTypes.object.isRequired
+};
 
 export default Blog;

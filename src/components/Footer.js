@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/Footer.css";
 
-const Footer = props => (
+const Footer = () => (
 	<footer className="footer">
 		<p className="social">
 			<a href="https://www.facebook.com/profile.php?id=1925590">

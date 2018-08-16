@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "../css/Overlay.css";
 
 class Overlay extends React.Component {
@@ -22,5 +23,11 @@ class Overlay extends React.Component {
 		);
 	}
 }
+
+Overlay.propTypes = {
+	show: PropTypes.bool.isRequired,
+	hideFullImage: PropTypes.func.isRequired,
+	imgURL: PropTypes.string.isRequired
+};
 
 export default Overlay;

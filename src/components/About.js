@@ -2,6 +2,7 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
+import PropTypes from "prop-types";
 import "../css/About.css";
 
 class About extends React.Component {
@@ -113,5 +114,9 @@ class About extends React.Component {
 		);
 	}
 }
+
+About.propTypes = {
+	history: PropTypes.object.isRequired
+};
 
 export default About;

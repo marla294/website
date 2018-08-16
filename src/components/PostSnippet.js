@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "../css/PostSnippet.css";
 
 class PostSnippet extends React.Component {
@@ -29,5 +30,9 @@ class PostSnippet extends React.Component {
 		);
 	}
 }
+
+PostSnippet.propTypes = {
+	post: PropTypes.object.isRequired
+};
 
 export default PostSnippet;

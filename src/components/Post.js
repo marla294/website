@@ -6,6 +6,7 @@ import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Overlay from "./Overlay";
 import Posts from "../blog-posts";
+import PropTypes from "prop-types";
 import "../css/Post.css";
 
 class Post extends React.Component {
@@ -110,5 +111,11 @@ class Post extends React.Component {
 		);
 	}
 }
+
+Post.propTypes = {
+	match: PropTypes.object.isRequired,
+	posts: PropTypes.object.isRequired,
+	history: PropTypes.object.isRequired
+};
 
 export default Post;

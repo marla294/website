@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "../css/TopNav.css";
 
 /* Click Events */
@@ -52,5 +53,9 @@ const TopNav = props => (
 		</ul>
 	</nav>
 );
+
+TopNav.propTypes = {
+	push: PropTypes.func.isRequired
+};
 
 export default TopNav;
