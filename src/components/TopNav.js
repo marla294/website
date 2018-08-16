@@ -21,16 +21,17 @@ const goToHome = (props, event) => {
 
 const TopNav = props => (
 	<nav className="top">
-		<p
+		<a
+			href=""
 			onClick={event => {
 				goToHome(props, event);
 			}}
 			className="sitename"
 		>
 			Marla Foreman
-		</p>
+		</a>
 		<div className="menu">
-			<ul className="menu-top">
+			<ul>
 				<li>
 					<a
 						href=""
