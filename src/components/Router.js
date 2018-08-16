@@ -4,34 +4,24 @@ import Home from "./Home";
 import About from "./About";
 import Post from "./Post";
 import Blog from "./Blog";
-import posts from "../blog-posts";
+import Posts from "../blog-posts";
 // import Contact from "./Contact";
 
 class Router extends React.Component {
-	/* Blog posts live in the router for now */
 	state = {
-		posts: {}
+		Posts
 	};
-
-	/* Load blog posts into state */
-	loadBlogPosts = () => {
-		this.setState({ posts });
-	};
-
-	componentDidMount() {
-		this.loadBlogPosts();
-	}
 
 	home = props => {
-		return <Home posts={this.state.posts} {...props} />;
+		return <Home posts={this.state.Posts} {...props} />;
 	};
 
 	post = props => {
-		return <Post posts={this.state.posts} {...props} />;
+		return <Post posts={this.state.Posts} {...props} />;
 	};
 
 	blog = props => {
-		return <Blog posts={this.state.posts} {...props} />;
+		return <Blog posts={this.state.Posts} {...props} />;
 	};
 
 	render() {
