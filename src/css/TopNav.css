@@ -6,7 +6,6 @@
 	grid-template-columns: auto 1fr;
 	grid-template-areas: "sitename menu";
 	background: url("../Assets/Backgrounds/7.jpg");
-	color: var(--ltgray);
 }
 
 .sitename {
@@ -22,10 +21,8 @@
 }
 
 .menu > ul {
-	list-style-type: none;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	justify-self: center;
 }
 
 .menu > ul > li {
@@ -37,9 +34,7 @@
 }
 
 @media (max-width: 750px) {
-	/* Top Nav */
 	.top {
-		grid-template-rows: auto auto;
 		grid-template-areas: 
 		". sitename ." 
 		". menu .";
@@ -47,7 +42,6 @@
 	}
 
 	.sitename {
-		justify-self: center;
 		margin-left: 0;
 	}
 
@@ -57,17 +51,12 @@
 	}
 
 	.menu {
-		justify-self: center;
 		width: 400px;
 		
 	}
 }
 
 @media (max-width: 500px) {
-	/* Top Nav */
-	.top {
-		margin: 0;
-	}
 
 	.menu {
 		width: 100%;
