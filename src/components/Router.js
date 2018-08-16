@@ -6,6 +6,8 @@ import Post from "./Post";
 import Blog from "./Blog";
 import Posts from "../blog-posts";
 
+/* Render Functions */
+
 const home = props => {
 	return <Home posts={Posts} {...props} />;
 };

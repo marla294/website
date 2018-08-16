@@ -1,45 +1,56 @@
 import React from "react";
 import "../css/TopNav.css";
 
-class TopNav extends React.Component {
-	/* Click Events */
+/* Click Events */
 
-	goToAbout = event => {
-		event.preventDefault();
-		this.props.push("/About");
-	};
+const goToAbout = (props, event) => {
+	event.preventDefault();
+	props.push("/About");
+};
 
-	goToBlog = event => {
-		event.preventDefault();
-		this.props.push("/Blog");
-	};
+const goToBlog = (props, event) => {
+	event.preventDefault();
+	props.push("/Blog");
+};
 
-	goToHome = event => {
-		event.preventDefault();
-		this.props.push("/");
-	};
+const goToHome = (props, event) => {
+	event.preventDefault();
+	props.push("/");
+};
 
-	render() {
-		return (
-			<nav className="top">
-				<p onClick={this.goToHome} className="sitename">
-					Marla Foreman
-				</p>
-				<ul className="menu-top">
-					<li>
-						<a href="" onClick={this.goToAbout}>
-							About
-						</a>
-					</li>
-					<li>
-						<a href="" onClick={this.goToBlog}>
-							Blog
-						</a>
-					</li>
-				</ul>
-			</nav>
-		);
-	}
-}
+const TopNav = props => (
+	<nav className="top">
+		<p
+			onClick={event => {
+				goToHome(props, event);
+			}}
+			className="sitename"
+		>
+			Marla Foreman
+		</p>
+		<ul className="menu-top">
+			<li>
+				<a
+					href=""
+					onClick={event => {
+						goToAbout(props, event);
+					}}
+				>
+					About
+				</a>
+			</li>
+			<li>
+				<a
+					href=""
+					onClick={event => {
+						goToBlog(props, event);
+					}}
+				>
+					Blog
+				</a>
+			</li>
+		</ul>
+	</nav>
+);
 
 export default TopNav;
