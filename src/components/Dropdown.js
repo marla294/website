@@ -5,19 +5,19 @@ class Dropdown extends React.Component {
 		return (
 			<div className="dropdown">
 				<button
-					onClick={this.toggleCategoryDropdown}
+					onClick={this.props.toggleCategoryDropdown}
 					className="dropbtn"
 				>
 					Categories
 				</button>
 				<div
 					className={
-						this.state.showCategoryDropdown
+						this.props.show
 							? "dropdown-content show"
 							: "dropdown-content"
 					}
 				>
-					{this.renderCategories()}
+					{this.props.renderCategories()}
 				</div>
 			</div>
 		);
@@ -25,3 +25,21 @@ class Dropdown extends React.Component {
 }
 
 export default Dropdown;
+
+// <div className="dropdown">
+// 	<button
+// 		onClick={this.toggleCategoryDropdown}
+// 		className="dropbtn"
+// 	>
+// 		Categories
+// 	</button>
+// 	<div
+// 		className={
+// 			this.state.showCategoryDropdown
+// 				? "dropdown-content show"
+// 				: "dropdown-content"
+// 		}
+// 	>
+// 		{this.renderCategories()}
+// 	</div>
+// </div>

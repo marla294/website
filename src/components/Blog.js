@@ -6,6 +6,7 @@ import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Snippet from "./PostSnippet";
+import Dropdown from "./Dropdown";
 import PropTypes from "prop-types";
 import "../css/Blog.css";
 
@@ -228,23 +229,13 @@ class Blog extends React.Component {
 						<div className="blog_posts_header">
 							<h1>Blog Posts</h1>
 							<div className="blog_posts_categories">
-								<div className="dropdown">
-									<button
-										onClick={this.toggleCategoryDropdown}
-										className="dropbtn"
-									>
-										Categories
-									</button>
-									<div
-										className={
-											this.state.showCategoryDropdown
-												? "dropdown-content show"
-												: "dropdown-content"
-										}
-									>
-										{this.renderCategories()}
-									</div>
-								</div>
+								<Dropdown
+									show={this.showCategoryDropdown}
+									renderCategories={this.renderCategories}
+									toggleCategoryDropdown={
+										this.toggleCategoryDropdown
+									}
+								/>
 								<div className="label">
 									{this.renderCategoriesLabel()}
 								</div>
