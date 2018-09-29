@@ -231,10 +231,8 @@ class Blog extends React.Component {
 							<div className="blog_posts_categories">
 								<Dropdown
 									show={this.state.showCategoryDropdown}
-									renderCategories={this.renderCategories}
-									toggleCategoryDropdown={
-										this.toggleCategoryDropdown
-									}
+									renderDropdown={this.renderCategories}
+									toggleDropdown={this.toggleCategoryDropdown}
 								/>
 								<div className="label">
 									{this.renderCategoriesLabel()}

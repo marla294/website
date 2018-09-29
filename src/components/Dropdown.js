@@ -1,15 +1,10 @@
 import React from "react";
 
 class Dropdown extends React.Component {
-	state = { disableClick: false, show: false };
-
 	render() {
 		return (
 			<div className="dropdown">
-				<button
-					onClick={this.props.toggleCategoryDropdown}
-					className="dropbtn"
-				>
+				<button onClick={this.props.toggleDropdown} className="dropbtn">
 					Categories
 				</button>
 				<div
@@ -19,7 +14,7 @@ class Dropdown extends React.Component {
 							: "dropdown-content"
 					}
 				>
-					{this.props.renderCategories()}
+					{this.props.renderDropdown()}
 				</div>
 			</div>
 		);
@@ -27,4 +22,3 @@ class Dropdown extends React.Component {
 }
 
 export default Dropdown;
-
