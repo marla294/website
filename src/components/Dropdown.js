@@ -5,7 +5,7 @@ class Dropdown extends React.Component {
 		return (
 			<div className="dropdown">
 				<button onClick={this.props.toggleDropdown} className="dropbtn">
-					Categories
+					{this.props.name}
 				</button>
 				<div
 					className={

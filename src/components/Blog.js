@@ -230,6 +230,7 @@ class Blog extends React.Component {
 							<h1>Blog Posts</h1>
 							<div className="blog_posts_categories">
 								<Dropdown
+									name={"Categories"}
 									show={this.state.showCategoryDropdown}
 									renderDropdown={this.renderCategories}
 									toggleDropdown={this.toggleCategoryDropdown}
@@ -239,23 +240,12 @@ class Blog extends React.Component {
 								</div>
 							</div>
 							<div className="blog_posts_sort_order">
-								<div className="dropdown">
-									<button
-										onClick={this.toggleSortByDropdown}
-										className="dropbtn"
-									>
-										Sort By
-									</button>
-									<div
-										className={
-											this.state.showSortByDropdown
-												? "dropdown-content show"
-												: "dropdown-content"
-										}
-									>
-										{this.renderSortBy()}
-									</div>
-								</div>
+								<Dropdown
+									name={"Sort By"}
+									show={this.state.showSortByDropdown}
+									renderDropdown={this.renderSortBy}
+									toggleDropdown={this.toggleSortByDropdown}
+								/>
 								<div className="label">
 									{this.state.sortBy === "Newest"
 										? "Newest First"
