@@ -230,7 +230,7 @@ class Blog extends React.Component {
 							<h1>Blog Posts</h1>
 							<div className="blog_posts_categories">
 								<Dropdown
-									show={this.showCategoryDropdown}
+									show={this.state.showCategoryDropdown}
 									renderCategories={this.renderCategories}
 									toggleCategoryDropdown={
 										this.toggleCategoryDropdown
