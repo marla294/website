@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Overlay from "./Overlay";
 import Snippet from "./PostSnippet";
 import PropTypes from "prop-types";
+import ReactGA from "react-ga";
 import "../css/Home.css";
 
 class Home extends React.Component {
@@ -102,3 +103,11 @@ Home.propTypes = {
 };
 
 export default Home;
+
+// <script>
+//       let dataLayer = window.dataLayer || [];
+//       function gtag(){dataLayer.push(arguments);}
+//       gtag('js', new Date());
+
+//       gtag('config', 'UA-126572930-1');
+//     </script>

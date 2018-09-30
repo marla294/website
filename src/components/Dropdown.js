@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Dropdown extends React.Component {
 	render() {
@@ -20,5 +21,11 @@ class Dropdown extends React.Component {
 		);
 	}
 }
+
+Dropdown.propTypes = {
+	toggleDropdown: PropTypes.func.isRequired,
+	name: PropTypes.string.isRequired,
+	show: PropTypes.bool.isRequired
+};
 
 export default Dropdown;

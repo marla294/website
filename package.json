@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-ga": "^2.5.3",
     "react-scripts": "1.1.4",
     "serve": "^9.2.0"
   },
