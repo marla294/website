@@ -12,3 +12,4 @@ This is my personal blog + website, created in ReactJS.
 
 * ReactJS
 * CSS Grid
+* Deployed using Netlify (which is awesome btw, try it out if you haven't!)
