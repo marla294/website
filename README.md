@@ -1,2 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# Website
 
+## About
+
+URL: www.marlaforeman.com
+
+Author: Marla Foreman
+
+This is my personal blog + website, created in ReactJS.
+
+## Tech Used
+
+* ReactJS
+* CSS Grid
