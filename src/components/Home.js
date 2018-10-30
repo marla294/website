@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import Overlay from "./Overlay";
 import Snippet from "./PostSnippet";
 import PropTypes from "prop-types";
-import ReactGA from "react-ga";
+// import ReactGA from "react-ga";
 import "../css/Home.css";
 
 class Home extends React.Component {

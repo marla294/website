@@ -35,7 +35,9 @@ class Blog extends React.Component {
 	};
 
 	addDisplayCategory = category => {
-		if (this.getDisplayCategoryIndex(category) === -1) {
+		const index = this.getDisplayCategoryIndex(category);
+
+		if (index === -1) {
 			let displayCategories = [...this.state.displayCategories];
 			displayCategories.push(category);
 			this.setState({
@@ -80,22 +82,6 @@ class Blog extends React.Component {
 			});
 			return filter;
 		});
-	};
-
-	categoryClasses = category => {
-		if (category === "Show All") {
-			return "category-show-all";
-		}
-
-		return this.state.displayCategories.find(cat => cat === category)
-			? "category-show"
-			: "";
-	};
-
-	sortByClasses = option => {
-		const optionFiltered = option.split(" ")[0];
-
-		return this.state.sortBy === optionFiltered ? "sortBy-show" : "";
 	};
 
 	/* Click Events */
@@ -179,21 +165,6 @@ class Blog extends React.Component {
 		});
 	};
 
-	renderCategories = () => {
-		const categories = this.getAllCategories();
-		return categories.map(cat => (
-			<a
-				className={this.categoryClasses(cat)}
-				key={cat}
-				onClick={() => {
-					this.clickCategory(cat);
-				}}
-			>
-				{cat}
-			</a>
-		));
-	};
-
 	renderCategoriesLabel = () => {
 		const categories = this.state.displayCategories;
 		return categories.length === 0
@@ -205,21 +176,6 @@ class Blog extends React.Component {
 						return cat;
 					}
 			  });
-	};
-
-	renderSortBy = () => {
-		const options = ["Newest First", "Oldest First"];
-		return options.map(opt => (
-			<a
-				className={this.sortByClasses(opt)}
-				key={opt}
-				onClick={() => {
-					this.clickSortOption(opt);
-				}}
-			>
-				{opt}
-			</a>
-		));
 	};
 
 	render() {
@@ -234,8 +190,10 @@ class Blog extends React.Component {
 								<Dropdown
 									name={"Categories"}
 									show={this.state.showCategoryDropdown}
-									renderDropdown={this.renderCategories}
 									toggleDropdown={this.toggleCategoryDropdown}
+									categories={this.getAllCategories()}
+									displayCategories={this.state.displayCategories}
+									clickCategory={this.clickCategory}
 								/>
 								<div className="label">
 									{this.renderCategoriesLabel()}
@@ -245,8 +203,9 @@ class Blog extends React.Component {
 								<Dropdown
 									name={"Sort By"}
 									show={this.state.showSortByDropdown}
-									renderDropdown={this.renderSortBy}
 									toggleDropdown={this.toggleSortByDropdown}
+									sortBy={this.state.sortBy}
+									clickSortOption={this.clickSortOption}
 								/>
 								<div className="label">
 									{this.state.sortBy === "Newest"
@@ -279,3 +238,5 @@ Blog.propTypes = {
 };
 
 export default Blog;
+
+
