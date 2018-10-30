@@ -35,10 +35,7 @@ class Blog extends React.Component {
 	};
 
 	addDisplayCategory = category => {
-		if (
-			this.state.displayCategories.findIndex(cat => cat === category) ===
-			-1
-		) {
+		if (this.getDisplayCategoryIndex(category) === -1) {
 			let displayCategories = [...this.state.displayCategories];
 			displayCategories.push(category);
 			this.setState({
@@ -48,9 +45,8 @@ class Blog extends React.Component {
 	};
 
 	removeDisplayCategory = category => {
-		const index = this.state.displayCategories.findIndex(
-			cat => cat === category
-		);
+		const index = this.getDisplayCategoryIndex(category);
+
 		if (index !== -1) {
 			let displayCategories = [...this.state.displayCategories];
 			displayCategories.splice(index, 1);
@@ -58,6 +54,12 @@ class Blog extends React.Component {
 				displayCategories
 			});
 		}
+	};
+
+	getDisplayCategoryIndex = category => {
+		return this.state.displayCategories.findIndex(
+			cat => cat === category
+		);
 	};
 
 	removeAllDisplayCategories = () => {
