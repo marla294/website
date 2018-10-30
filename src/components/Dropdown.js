@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../css/Dropdown.css";
 
 class Dropdown extends React.Component {
 	categoryClasses = category => {
