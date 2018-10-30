@@ -19,19 +19,9 @@ class Dropdown extends React.Component {
 		return this.props.sortBy === optionFiltered ? "sortBy-show" : "";
 	};
 
-	renderCategories = () => {
-		const categories = this.props.categories;
+	renderDropdownOptions = () => {
+		const options = this.props.name === "Categories" ? this.props.categories : ["Newest First", "Oldest First"];
 
-		return this.renderDropdownOptions(categories);
-	};
-
-	renderSortBy = () => {
-		const options = ["Newest First", "Oldest First"];
-
-		return this.renderDropdownOptions(options);
-	};
-
-	renderDropdownOptions = options => {
 		return options.map(opt => (
 			<a
 				className={this.props.name === "Categories" ? this.categoryClasses(opt) : this.sortByClasses(opt)}
@@ -58,7 +48,7 @@ class Dropdown extends React.Component {
 							: "dropdown-content"
 					}
 				>
-					{this.props.name === "Categories" ? this.renderCategories() : this.renderSortBy()}
+					{this.renderDropdownOptions()}
 				</div>
 			</div>
 		);
