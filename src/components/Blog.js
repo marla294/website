@@ -193,7 +193,7 @@ class Blog extends React.Component {
 									toggleDropdown={this.toggleCategoryDropdown}
 									categories={this.getAllCategories()}
 									displayCategories={this.state.displayCategories}
-									clickCategory={this.clickCategory}
+									clickFn={this.clickCategory}
 								/>
 								<div className="label">
 									{this.renderCategoriesLabel()}
@@ -205,7 +205,7 @@ class Blog extends React.Component {
 									show={this.state.showSortByDropdown}
 									toggleDropdown={this.toggleSortByDropdown}
 									sortBy={this.state.sortBy}
-									clickSortOption={this.clickSortOption}
+									clickFn={this.clickSortOption}
 								/>
 								<div className="label">
 									{this.state.sortBy === "Newest"

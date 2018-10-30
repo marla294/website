@@ -22,28 +22,22 @@ class Dropdown extends React.Component {
 	renderCategories = () => {
 		const categories = this.props.categories;
 
-		return categories.map(cat => (
-			<a
-				className={this.categoryClasses(cat)}
-				key={cat}
-				onClick={() => {
-					this.props.clickCategory(cat);
-				}}
-			>
-				{cat}
-			</a>
-		));
+		return this.renderDropdownOptions(categories);
 	};
 
 	renderSortBy = () => {
 		const options = ["Newest First", "Oldest First"];
 
+		return this.renderDropdownOptions(options);
+	};
+
+	renderDropdownOptions = options => {
 		return options.map(opt => (
 			<a
-				className={this.sortByClasses(opt)}
+				className={this.props.name === "Categories" ? this.categoryClasses(opt) : this.sortByClasses(opt)}
 				key={opt}
 				onClick={() => {
-					this.props.clickSortOption(opt);
+					this.props.clickFn(opt);
 				}}
 			>
 				{opt}
