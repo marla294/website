@@ -157,19 +157,6 @@ class Blog extends React.Component {
 		});
 	};
 
-	renderCategoriesLabel = () => {
-		const categories = this.state.displayCategories;
-		return categories.length === 0
-			? "All"
-			: categories.map((cat, i) => {
-					if (i < categories.length - 1) {
-						return `${cat}, `;
-					} else {
-						return cat;
-					}
-			  });
-	};
-
 	render() {
 		return (
 			<div className="container" onClick={this.clickOutsideDropdown}>
@@ -178,33 +165,23 @@ class Blog extends React.Component {
 					<div className="blog_posts_container">
 						<div className="blog_posts_header">
 							<h1>Blog Posts</h1>
-							<div className="blog_posts_categories">
-								<Dropdown
-									name={"Categories"}
-									show={this.state.showCategoryDropdown}
-									toggleDropdown={this.toggleCategoryDropdown}
-									options={this.getAllCategories()}
-									displayOptions={this.state.displayCategories}
-									clickFn={this.clickCategory}
-								/>
-								<div className="label">
-									{this.renderCategoriesLabel()}
-								</div>
+							<Dropdown
+								name={"Categories"}
+								show={this.state.showCategoryDropdown}
+								toggleDropdown={this.toggleCategoryDropdown}
+								options={this.getAllCategories()}
+								displayOptions={this.state.displayCategories}
+								clickFn={this.clickCategory}
+							/>
+							<Dropdown
+								name={"Sort By"}
+								show={this.state.showSortByDropdown}
+								toggleDropdown={this.toggleSortByDropdown}
+								options={["Newest First", "Oldest First"]}
+								displayOptions={[this.state.sortBy]}
+								clickFn={this.clickSortOption}
+							/>
 							</div>
-							<div className="blog_posts_sort_order">
-								<Dropdown
-									name={"Sort By"}
-									show={this.state.showSortByDropdown}
-									toggleDropdown={this.toggleSortByDropdown}
-									options={["Newest First", "Oldest First"]}
-									displayOptions={[this.state.sortBy]}
-									clickFn={this.clickSortOption}
-								/>
-								<div className="label">
-									{this.state.sortBy}
-								</div>
-							</div>
-						</div>
 						<div
 							className="blog_posts"
 							style={{
