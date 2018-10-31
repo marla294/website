@@ -1,12 +1,12 @@
 /* 
 Method for disabling click events for dropdown found here: https://github.com/JedWatson/react-select/issues/532
 */
-
 import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Snippet from "./PostSnippet";
-import Dropdown from "./Dropdown";
+import CategoryDropdown from "./CategoryDropdown";
+import SortByDropdown from "./SortByDropdown";
 import PropTypes from "prop-types";
 import "../css/Blog.css";
 
@@ -165,16 +165,14 @@ class Blog extends React.Component {
 					<div className="blog_posts_container">
 						<div className="blog_posts_header">
 							<h1>Blog Posts</h1>
-							<Dropdown
-								name={"Categories"}
+							<CategoryDropdown
 								show={this.state.showCategoryDropdown}
 								toggleDropdown={this.toggleCategoryDropdown}
 								options={this.getAllCategories()}
 								selectedOptions={this.state.displayCategories}
 								clickFn={this.clickCategory}
 							/>
-							<Dropdown
-								name={"Sort By"}
+							<SortByDropdown
 								show={this.state.showSortByDropdown}
 								toggleDropdown={this.toggleSortByDropdown}
 								options={["Newest First", "Oldest First"]}
