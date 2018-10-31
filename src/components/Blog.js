@@ -16,7 +16,7 @@ class Blog extends React.Component {
 		showSortByDropdown: false,
 		disableClick: false,
 		displayCategories: [],
-		sortBy: "Newest"
+		sortBy: "Newest First"
 	};
 
 	/* Helper Methods */
@@ -113,15 +113,7 @@ class Blog extends React.Component {
 	};
 
 	clickSortOption = option => {
-		if (option === "Newest First") {
-			this.setState({
-				sortBy: "Newest"
-			});
-		} else {
-			this.setState({
-				sortBy: "Oldest"
-			});
-		}
+		this.setState({sortBy: option});
 	};
 
 	clickOutsideDropdown = () => {
@@ -146,7 +138,7 @@ class Blog extends React.Component {
 				: this.filterPostsByCategory();
 
 		const displayKeys = postArr.map(post => post[0]).sort(() => {
-			if (this.state.sortBy === "Newest") {
+			if (this.state.sortBy === "Newest First") {
 				return isChrome ? 1 : -1;
 			} else {
 				return isChrome ? -1 : 1;
@@ -209,9 +201,7 @@ class Blog extends React.Component {
 									clickFn={this.clickSortOption}
 								/>
 								<div className="label">
-									{this.state.sortBy === "Newest"
-										? "Newest First"
-										: "Oldest First"}
+									{this.state.sortBy}
 								</div>
 							</div>
 						</div>
