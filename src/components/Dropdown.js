@@ -8,7 +8,7 @@ class Dropdown extends React.Component {
 			return "show_all";
 		}
 
-		return this.props.displayOptions.find(opt => opt === option) ? "selected_option" : "";
+		return this.props.selectedOptions.find(opt => opt === option) ? "selected_option" : "";
 	};
 
 	renderDropdownOptions = () => {
@@ -26,7 +26,7 @@ class Dropdown extends React.Component {
 	};
 
 	renderCategoriesLabel = () => {
-		const categories = this.props.displayOptions;
+		const categories = this.props.selectedOptions;
 
 		return categories.length === 0
 			? "All"
@@ -51,7 +51,7 @@ class Dropdown extends React.Component {
 					</div>
 				</div>
 				<div className="label">
-					{this.props.name === "Categories" ? this.renderCategoriesLabel() : this.props.displayOptions[0]}
+					{this.props.name === "Categories" ? this.renderCategoriesLabel() : this.props.selectedOptions[0]}
 				</div>
 			</div>
 		);
@@ -63,7 +63,7 @@ Dropdown.propTypes = {
 	name: PropTypes.string.isRequired,
 	show: PropTypes.bool.isRequired,
 	options: PropTypes.array.isRequired,
-	displayOptions: PropTypes.array.isRequired,
+	selectedOptions: PropTypes.array.isRequired,
 	clickFn: PropTypes.func.isRequired
 };
 

@@ -170,7 +170,7 @@ class Blog extends React.Component {
 								show={this.state.showCategoryDropdown}
 								toggleDropdown={this.toggleCategoryDropdown}
 								options={this.getAllCategories()}
-								displayOptions={this.state.displayCategories}
+								selectedOptions={this.state.displayCategories}
 								clickFn={this.clickCategory}
 							/>
 							<Dropdown
@@ -178,7 +178,7 @@ class Blog extends React.Component {
 								show={this.state.showSortByDropdown}
 								toggleDropdown={this.toggleSortByDropdown}
 								options={["Newest First", "Oldest First"]}
-								displayOptions={[this.state.sortBy]}
+								selectedOptions={[this.state.sortBy]}
 								clickFn={this.clickSortOption}
 							/>
 							</div>
