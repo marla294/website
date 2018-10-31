@@ -8,13 +8,7 @@ class Dropdown extends React.Component {
 			return "category-show-all";
 		}
 
-		if (this.props.name === "Sort By") {
-			const optionFiltered = option.split(" ")[0];
-
-			return this.props.sortBy === optionFiltered ? "option-show" : "";
-		}
-
-		return this.props.displayCategories.find(cat => cat === option) ? "option-show" : "";
+		return this.props.displayOptions.find(opt => opt === option) ? "option-show" : "";
 	};
 
 	renderDropdownOptions = () => {
@@ -55,7 +49,9 @@ Dropdown.propTypes = {
 	toggleDropdown: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired,
 	show: PropTypes.bool.isRequired,
-	options: PropTypes.array.isRequired
+	options: PropTypes.array.isRequired,
+	displayOptions: PropTypes.array.isRequired,
+	clickFn: PropTypes.Func.isRequired
 };
 
 export default Dropdown;
