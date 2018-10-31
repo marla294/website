@@ -9,14 +9,14 @@ class Dropdown extends React.Component {
 		}
 
 		return this.props.displayCategories.find(cat => cat === category)
-			? "category-show"
+			? "option-show"
 			: "";
 	};
 
 	sortByClasses = option => {
 		const optionFiltered = option.split(" ")[0];
 
-		return this.props.sortBy === optionFiltered ? "sortBy-show" : "";
+		return this.props.sortBy === optionFiltered ? "option-show" : "";
 	};
 
 	renderDropdownOptions = () => {

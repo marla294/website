@@ -41,7 +41,41 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
+.dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+/* Categories */
+
+.option-show {
+    background-color: var(--aqua) !important;
+}
+
+.category-show-all {
+    font-style: italic !important;
+}
+
+.blog_posts_categories {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 0.5em;
+}
+
+.blog_posts_categories .label {
+    align-self: center;
+}
+
+.blog_posts_sort_order {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 0.5em;
+    margin-top: 0.25em;
+}
+
+.blog_posts_sort_order .label {
+    align-self: center;
+}
