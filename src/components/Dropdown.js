@@ -18,9 +18,7 @@ class Dropdown extends React.Component {
 	};
 
 	renderDropdownOptions = () => {
-		const options = this.props.name === "Categories" ? this.props.categories : ["Newest First", "Oldest First"];
-
-		return options.map(opt => (
+		return this.props.options.map(opt => (
 			<a
 				className={this.getClassNames(opt)}
 				key={opt}
@@ -56,7 +54,8 @@ class Dropdown extends React.Component {
 Dropdown.propTypes = {
 	toggleDropdown: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired,
-	show: PropTypes.bool.isRequired
+	show: PropTypes.bool.isRequired,
+	options: PropTypes.array.isRequired
 };
 
 export default Dropdown;

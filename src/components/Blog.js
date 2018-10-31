@@ -191,7 +191,7 @@ class Blog extends React.Component {
 									name={"Categories"}
 									show={this.state.showCategoryDropdown}
 									toggleDropdown={this.toggleCategoryDropdown}
-									categories={this.getAllCategories()}
+									options={this.getAllCategories()}
 									displayCategories={this.state.displayCategories}
 									clickFn={this.clickCategory}
 								/>
@@ -204,6 +204,7 @@ class Blog extends React.Component {
 									name={"Sort By"}
 									show={this.state.showSortByDropdown}
 									toggleDropdown={this.toggleSortByDropdown}
+									options={["Newest First", "Oldest First"]}
 									sortBy={this.state.sortBy}
 									clickFn={this.clickSortOption}
 								/>
