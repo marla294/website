@@ -41,8 +41,8 @@ class Dropdown extends React.Component {
 
 	render() {
 		return (
-			<div className="blog_posts_categories">
-				<div className="dropdown">
+			<div className="options">
+				<div>
 					<button onClick={this.props.toggleDropdown} className="dropbtn">
 						{this.props.name}
 					</button>
