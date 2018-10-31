@@ -26,7 +26,8 @@ class Dropdown extends React.Component {
 	};
 
 	renderCategoriesLabel = () => {
-		const categories = this.props.options;
+		const categories = this.props.displayOptions;
+		
 		return categories.length === 0
 			? "All"
 			: categories.map((cat, i) => {
@@ -56,7 +57,7 @@ class Dropdown extends React.Component {
 					</div>
 				</div>
 				<div className="label">
-					{this.props.name === "Categories" ? this.renderCategoriesLabel() : ""}
+					{this.props.name === "Categories" ? this.renderCategoriesLabel() : this.props.displayOptions[0]}
 				</div>
 			</div>
 		);
