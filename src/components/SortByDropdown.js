@@ -12,6 +12,7 @@ class SortByDropdown extends React.Component {
 				options={this.props.options}
 				selectedOptions={this.props.selectedOptions}
 				clickFn={this.props.clickFn}
+				label={this.props.selectedOptions[0]}
 			/>
 		);
 	};
