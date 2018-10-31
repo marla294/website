@@ -5,10 +5,10 @@ import "../css/Dropdown.css";
 class Dropdown extends React.Component {
 	getClassNames = option => {
 		if (option === "Show All") {
-			return "category-show-all";
+			return "show_all";
 		}
 
-		return this.props.displayOptions.find(opt => opt === option) ? "option-show" : "";
+		return this.props.displayOptions.find(opt => opt === option) ? "selected_option" : "";
 	};
 
 	renderDropdownOptions = () => {
@@ -27,7 +27,7 @@ class Dropdown extends React.Component {
 
 	renderCategoriesLabel = () => {
 		const categories = this.props.displayOptions;
-		
+
 		return categories.length === 0
 			? "All"
 			: categories.map((cat, i) => {
@@ -46,13 +46,7 @@ class Dropdown extends React.Component {
 					<button onClick={this.props.toggleDropdown} className="dropbtn">
 						{this.props.name}
 					</button>
-					<div
-						className={
-							this.props.show
-								? "dropdown-content show"
-								: "dropdown-content"
-						}
-					>
+					<div className={this.props.show ? "dropdown_content show" : "dropdown_content"}>
 						{this.renderDropdownOptions()}
 					</div>
 				</div>
