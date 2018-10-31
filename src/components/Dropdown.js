@@ -3,20 +3,18 @@ import PropTypes from "prop-types";
 import "../css/Dropdown.css";
 
 class Dropdown extends React.Component {
-	categoryClasses = category => {
-		if (category === "Show All") {
+	getClassNames = option => {
+		if (option === "Show All") {
 			return "category-show-all";
 		}
 
-		return this.props.displayCategories.find(cat => cat === category)
-			? "option-show"
-			: "";
-	};
+		if (this.props.name === "Sort By") {
+			const optionFiltered = option.split(" ")[0];
 
-	sortByClasses = option => {
-		const optionFiltered = option.split(" ")[0];
+			return this.props.sortBy === optionFiltered ? "option-show" : "";
+		}
 
-		return this.props.sortBy === optionFiltered ? "option-show" : "";
+		return this.props.displayCategories.find(cat => cat === option) ? "option-show" : "";
 	};
 
 	renderDropdownOptions = () => {
@@ -24,7 +22,7 @@ class Dropdown extends React.Component {
 
 		return options.map(opt => (
 			<a
-				className={this.props.name === "Categories" ? this.categoryClasses(opt) : this.sortByClasses(opt)}
+				className={this.getClassNames(opt)}
 				key={opt}
 				onClick={() => {
 					this.props.clickFn(opt);
