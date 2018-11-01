@@ -122,21 +122,13 @@ class Blog extends React.Component {
 	/* Render Methods */
 
 	renderPostSnippets = () => {
-		/* Because sorting works differently on Safari than on Chrome */
-		const isChrome =
-			navigator.userAgent.indexOf("Chrome") !== -1 ? true : false;
-
 		const postArr =
 			this.state.displayCategories.length === 0
 				? Object.entries(this.props.posts)
 				: this.filterPostsByCategory();
 
 		const displayKeys = postArr.map(post => post[0]).sort(() => {
-			if (this.state.sortBy === "Newest First") {
-				return isChrome ? 1 : -1;
-			} else {
-				return isChrome ? -1 : 1;
-			}
+			return this.state.sortBy === "Newest First" ? -1 : 1;
 		});
 
 		return displayKeys.map(key => {
