@@ -3,6 +3,14 @@ import PropTypes from "prop-types";
 import "./Dropdown.css";
 
 class Dropdown extends React.Component {
+	state = {
+		showDropdown: false
+	};
+
+	toggleDropdown = () => {
+		this.setState({showDropdown: !this.state.showDropdown});
+	};
+
 	getClassNames = option => {
 		if (option === "Show All") {
 			return "show_all";
@@ -18,6 +26,7 @@ class Dropdown extends React.Component {
 				key={opt}
 				onClick={() => {
 					this.props.clickFn(opt);
+					this.toggleDropdown();
 				}}
 			>
 				{opt}
@@ -29,10 +38,10 @@ class Dropdown extends React.Component {
 		return (
 			<div className="options">
 				<div>
-					<button onClick={this.props.toggleDropdown} className="dropbtn">
+					<button onClick={this.toggleDropdown} className="dropbtn">
 						{this.props.name}
 					</button>
-					<div className={this.props.show ? "dropdown_content show" : "dropdown_content"}>
+					<div className={this.state.showDropdown ? "dropdown_content show" : "dropdown_content"}>
 						{this.renderDropdownOptions()}
 					</div>
 				</div>
@@ -45,9 +54,7 @@ class Dropdown extends React.Component {
 }
 
 Dropdown.propTypes = {
-	toggleDropdown: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired,
-	show: PropTypes.bool.isRequired,
 	options: PropTypes.array.isRequired,
 	selectedOptions: PropTypes.array.isRequired,
 	clickFn: PropTypes.func.isRequired,

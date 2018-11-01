@@ -21,8 +21,6 @@ class CategoryDropdown extends React.Component {
 		return (
 			<Dropdown
 				name={"Categories"}
-				show={this.props.show}
-				toggleDropdown={this.props.toggleDropdown}
 				options={this.props.options}
 				selectedOptions={this.props.selectedOptions}
 				clickFn={this.props.clickFn}
@@ -33,8 +31,6 @@ class CategoryDropdown extends React.Component {
 }
 
 CategoryDropdown.propTypes = {
-	toggleDropdown: PropTypes.func.isRequired,
-	show: PropTypes.bool.isRequired,
 	options: PropTypes.array.isRequired,
 	selectedOptions: PropTypes.array.isRequired,
 	clickFn: PropTypes.func.isRequired

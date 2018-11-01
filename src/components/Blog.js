@@ -9,8 +9,6 @@ import "../css/Blog.css";
 
 class Blog extends React.Component {
 	state = {
-		showCategoryDropdown: false,
-		showSortByDropdown: false,
 		displayCategories: [],
 		sortBy: "Newest First"
 	};
@@ -82,18 +80,6 @@ class Blog extends React.Component {
 
 	/* Click Events */
 
-	toggleCategoryDropdown = () => {
-		this.setState({
-			showCategoryDropdown: !this.state.showCategoryDropdown
-		});
-	};
-
-	toggleSortByDropdown = () => {
-		this.setState({
-			showSortByDropdown: !this.state.showSortByDropdown
-		});
-	};
-
 	clickCategory = category => {
 		if (category !== "Show All") {
 			if (!this.state.displayCategories.find(cat => cat === category)) {
@@ -108,15 +94,6 @@ class Blog extends React.Component {
 
 	clickSortOption = option => {
 		this.setState({sortBy: option});
-	};
-
-	clickOutsideDropdown = () => {
-		if (this.state.showCategoryDropdown) {
-			this.toggleCategoryDropdown();
-		}
-		if (this.state.showSortByDropdown) {
-			this.toggleSortByDropdown();
-		}
 	};
 
 	/* Render Methods */
@@ -145,22 +122,18 @@ class Blog extends React.Component {
 
 	render() {
 		return (
-			<div className="container" onClick={this.clickOutsideDropdown}>
+			<div className="container">
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
 					<div className="blog_posts_container">
 						<div className="blog_posts_header">
 							<h1>Blog Posts</h1>
 							<CategoryDropdown
-								show={this.state.showCategoryDropdown}
-								toggleDropdown={this.toggleCategoryDropdown}
 								options={this.getAllCategories()}
 								selectedOptions={this.state.displayCategories}
 								clickFn={this.clickCategory}
 							/>
 							<SortByDropdown
-								show={this.state.showSortByDropdown}
-								toggleDropdown={this.toggleSortByDropdown}
 								options={["Newest First", "Oldest First"]}
 								selectedOptions={[this.state.sortBy]}
 								clickFn={this.clickSortOption}

@@ -7,8 +7,6 @@ class SortByDropdown extends React.Component {
 		return (
 			<Dropdown
 				name={"Sort By"}
-				show={this.props.show}
-				toggleDropdown={this.props.toggleDropdown}
 				options={this.props.options}
 				selectedOptions={this.props.selectedOptions}
 				clickFn={this.props.clickFn}
@@ -19,8 +17,6 @@ class SortByDropdown extends React.Component {
 }
 
 SortByDropdown.propTypes = {
-	toggleDropdown: PropTypes.func.isRequired,
-	show: PropTypes.bool.isRequired,
 	options: PropTypes.array.isRequired,
 	selectedOptions: PropTypes.array.isRequired,
 	clickFn: PropTypes.func.isRequired
