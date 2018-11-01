@@ -1,12 +1,9 @@
-/* 
-Method for disabling click events for dropdown found here: https://github.com/JedWatson/react-select/issues/532
-*/
 import React from "react";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 import Snippet from "./PostSnippet";
-import CategoryDropdown from "./CategoryDropdown";
-import SortByDropdown from "./SortByDropdown";
+import CategoryDropdown from "./Dropdown/CategoryDropdown";
+import SortByDropdown from "./Dropdown/SortByDropdown";
 import PropTypes from "prop-types";
 import "../css/Blog.css";
 
@@ -14,7 +11,6 @@ class Blog extends React.Component {
 	state = {
 		showCategoryDropdown: false,
 		showSortByDropdown: false,
-		disableClick: false,
 		displayCategories: [],
 		sortBy: "Newest First"
 	};
@@ -88,15 +84,13 @@ class Blog extends React.Component {
 
 	toggleCategoryDropdown = () => {
 		this.setState({
-			showCategoryDropdown: !this.state.showCategoryDropdown,
-			disableClick: !this.state.disableClick
+			showCategoryDropdown: !this.state.showCategoryDropdown
 		});
 	};
 
 	toggleSortByDropdown = () => {
 		this.setState({
-			showSortByDropdown: !this.state.showSortByDropdown,
-			disableClick: !this.state.disableClick
+			showSortByDropdown: !this.state.showSortByDropdown
 		});
 	};
 
@@ -180,14 +174,7 @@ class Blog extends React.Component {
 								clickFn={this.clickSortOption}
 							/>
 							</div>
-						<div
-							className="blog_posts"
-							style={{
-								pointerEvents: this.state.disableClick
-									? "none"
-									: "all"
-							}}
-						>
+						<div className="blog_posts">
 							{this.renderPostSnippets()}
 						</div>
 					</div>
@@ -204,5 +191,3 @@ Blog.propTypes = {
 };
 
 export default Blog;
-
-
