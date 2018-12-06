@@ -4,12 +4,10 @@ import Footer from "./Footer";
 import Overlay from "./Overlay";
 import Snippet from "./PostSnippet";
 import PropTypes from "prop-types";
-// import ReactGA from "react-ga";
 import "../css/Home.css";
 
 class Home extends React.Component {
 	/* Overlay */
-
 	state = {
 		show: false
 	};
@@ -67,23 +65,6 @@ class Home extends React.Component {
 				/>
 				<div className="wrapper">
 					<TopNav push={this.props.history.push} />
-					<section className="about_homepage">
-						<img
-							onClick={this.showFullImage}
-							className="pic_homepage"
-							src="/Images/Pictures/Common/Selfie_SagradaFamilia.jpg"
-							alt="Marla Foreman"
-						/>
-						<div className="desc_homepage">
-							<p>
-								Hi, I'm Marla, a self-taught Web Developer
-								currently calling Omaha, Nebraska home.{" "}
-							</p>
-							<a href="" onClick={this.goToAbout}>
-								<i>Read More...</i>
-							</a>
-						</div>
-					</section>
 					<section className="blog_posts_container">
 						<h1 className="blog_posts_header">Latest Blog Posts</h1>
 						<div className="blog_posts">
@@ -103,11 +84,3 @@ Home.propTypes = {
 };
 
 export default Home;
-
-// <script>
-//       let dataLayer = window.dataLayer || [];
-//       function gtag(){dataLayer.push(arguments);}
-//       gtag('js', new Date());
-
-//       gtag('config', 'UA-126572930-1');
-//     </script>
