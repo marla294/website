@@ -1,17 +1,8 @@
-/* Fonts */
-@font-face {
-    font-family: 'fionaregular';
-    src: url('../Assets/Fonts/Fiona/fiona-regular-webfont.woff2') format('woff2'),
-         url('../Assets/Fonts/Fiona/fiona-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
-	font-family: 'fionaregular';
+	font-family: 'Open Sans', sans-serif;
 	background: var(--ltgray);
 	color: var(--black);
-	font-size: 32px;
+	font-size: 15px;
 	margin: 0;
 	box-sizing: border-box;
 }
@@ -23,6 +14,9 @@ body {
 	--black: #181b21;
 	--sideMargin: 10px;
 	--gridGap: 20px;
+	--taupeGray: #909090;
+	--red: #F4442E;
+	--darkGray: #2C2C34;
 }
 
 /* Global Styles */
