@@ -1,6 +1,5 @@
 import React from "react";
 import TopNav from "./TopNav";
-import Footer from "./Footer";
 import Snippet from "./PostSnippet";
 import CategoryDropdown from "./Dropdown/CategoryDropdown";
 import SortByDropdown from "./Dropdown/SortByDropdown";
@@ -144,7 +143,6 @@ class Blog extends React.Component {
 						</div>
 					</div>
 				</div>
-				<Footer />
 			</div>
 		);
 	}

@@ -1,8 +1,13 @@
-body {
+html {
 	font-family: 'Open Sans', sans-serif;
-	background: var(--ltgray);
 	color: var(--black);
-	font-size: 15px;
+	font-size: 10px;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 2rem;
 	margin: 0;
 	box-sizing: border-box;
 }
@@ -26,17 +31,12 @@ h1, h2, h3, h4, h5, h6, p, ul, li, figure {
 	padding: 0;
 }
 
-p {
-	font-size: 0.75em;
-}
-
 a {
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: none;
-	color: var(--aqua);
 }
 
 /* So I can put footer on the bottom and make it stay there */

@@ -3,7 +3,6 @@ Method of lazy loading react components from here: https://reactjs.org/blog/2017
 */
 import React from "react";
 import TopNav from "./TopNav";
-import Footer from "./Footer";
 import Overlay from "./Overlay";
 import Posts from "../blog-posts";
 import PropTypes from "prop-types";
@@ -111,7 +110,6 @@ class Post extends React.Component {
 						)}
 					</article>
 				</div>
-				<Footer />
 			</div>
 		);
 	}

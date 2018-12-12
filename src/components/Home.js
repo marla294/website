@@ -1,6 +1,5 @@
 import React from "react";
 import TopNav from "./TopNav";
-import Footer from "./Footer";
 import Overlay from "./Overlay";
 import Snippet from "./PostSnippet";
 import PropTypes from "prop-types";
@@ -72,7 +71,6 @@ class Home extends React.Component {
 						</div>
 					</section>
 				</div>
-				<Footer />
 			</div>
 		);
 	}
