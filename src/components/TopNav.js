@@ -43,6 +43,16 @@ const TitleWrapper = styled.div`
 	  	transform: skew(-15deg);
 	  	z-index: -1;
 	}
+	@media only screen and (max-width: 768px) {
+		width: 21.5rem;
+		a {
+			font-size: 3rem;
+		}
+		:after {
+			width: 23rem;
+		}
+	}
+
 `;
 
 /* Click Events */
