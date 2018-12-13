@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./GlobalStyles";
 import Home from "./Home";
 import About from "./About";
 import Post from "./Post";
@@ -21,14 +23,16 @@ const blog = props => {
 };
 
 const Router = props => (
-	<BrowserRouter>
-		<Switch>
-			<Route exact path="/" render={home} />
-			<Route path="/About" component={About} />
-			<Route path="/Post/:Slug" render={post} />
-			<Route path="/Blog" render={blog} />
-		</Switch>
-	</BrowserRouter>
+	<ThemeProvider theme={theme}>
+		<BrowserRouter>
+			<Switch>
+				<Route exact path="/" render={home} />
+				<Route path="/About" component={About} />
+				<Route path="/Post/:Slug" render={post} />
+				<Route path="/Blog" render={blog} />
+			</Switch>
+		</BrowserRouter>
+	</ThemeProvider>
 );
 
 export default Router;

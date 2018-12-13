@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { GlobalStyle } from "./GlobalStyles";
 import "../css/Overlay.css";
 
 const Overlay = ({ show, hideFullImage, imgURL }) => (
@@ -12,6 +13,7 @@ const Overlay = ({ show, hideFullImage, imgURL }) => (
 			</div>
 			<img src={`${imgURL}`} alt="" />
 		</div>
+		<GlobalStyle />
 	</div>
 );
 

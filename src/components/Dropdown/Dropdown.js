@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { GlobalStyle } from "../GlobalStyles";
 import "./Dropdown.css";
 
 class Dropdown extends React.Component {
@@ -48,6 +49,7 @@ class Dropdown extends React.Component {
 				<div className="label">
 					{this.props.label}
 				</div>
+				<GlobalStyle />
 			</div>
 		);
 	};

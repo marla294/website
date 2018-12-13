@@ -4,6 +4,7 @@ import Snippet from "./PostSnippet";
 import CategoryDropdown from "./Dropdown/CategoryDropdown";
 import SortByDropdown from "./Dropdown/SortByDropdown";
 import PropTypes from "prop-types";
+import { GlobalStyle } from "./GlobalStyles";
 import "../css/Blog.css";
 
 class Blog extends React.Component {
@@ -143,6 +144,7 @@ class Blog extends React.Component {
 						</div>
 					</div>
 				</div>
+				<GlobalStyle />
 			</div>
 		);
 	}

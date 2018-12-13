@@ -4,6 +4,8 @@ import Overlay from "./Overlay";
 import Snippet from "./PostSnippet";
 import PropTypes from "prop-types";
 import "../css/Home.css";
+import { GlobalStyle } from "./GlobalStyles";
+
 
 class Home extends React.Component {
 	/* Overlay */
@@ -71,6 +73,7 @@ class Home extends React.Component {
 						</div>
 					</section>
 				</div>
+				<GlobalStyle />
 			</div>
 		);
 	}

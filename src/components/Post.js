@@ -6,6 +6,7 @@ import TopNav from "./TopNav";
 import Overlay from "./Overlay";
 import Posts from "../blog-posts";
 import PropTypes from "prop-types";
+import { GlobalStyle } from "./GlobalStyles";
 import "../css/Post.css";
 
 class Post extends React.Component {
@@ -110,6 +111,7 @@ class Post extends React.Component {
 						)}
 					</article>
 				</div>
+				<GlobalStyle />
 			</div>
 		);
 	}

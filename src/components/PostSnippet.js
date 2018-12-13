@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { GlobalStyle } from "./GlobalStyles";
 import "../css/PostSnippet.css";
 
 const goToPost = (post, push, event) => {
@@ -23,6 +24,7 @@ const PostSnippet = ({ post, push }) => (
 			</div>
 		</div>
 		<img className="snippet_img" src={`${post.headerImage}`} alt="" />
+		<GlobalStyle />
 	</div>
 );
 

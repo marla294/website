@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-// import "../css/TopNav.css";
+import { GlobalStyle } from "./GlobalStyles";
 
 const TopNavWrapper = styled.nav`
 	display: grid;
@@ -88,36 +88,37 @@ const goToHome = (props, event) => {
 
 const TopNav = props => (
 	<div>
-	<TopNavWrapper>
-		<TitleWrapper>
-			<a
-				href=""
-				onClick={event => {
-					goToHome(props, event);
-				}}
-			>
-				Marla Foreman
-			</a>
-		</TitleWrapper>
-	</TopNavWrapper>
-	<MenuWrapper>
-			<a
-				href=""
-				onClick={event => {
-					goToAbout(props, event);
-				}}
-			>
-				About
-			</a>
-			<a
-				href=""
-				onClick={event => {
-					goToBlog(props, event);
-				}}
-			>
-				Blog
-			</a>
-	</MenuWrapper>
+		<TopNavWrapper>
+			<TitleWrapper>
+				<a
+					href=""
+					onClick={event => {
+						goToHome(props, event);
+					}}
+				>
+					Marla Foreman
+				</a>
+			</TitleWrapper>
+		</TopNavWrapper>
+		<MenuWrapper>
+				<a
+					href=""
+					onClick={event => {
+						goToAbout(props, event);
+					}}
+				>
+					About
+				</a>
+				<a
+					href=""
+					onClick={event => {
+						goToBlog(props, event);
+					}}
+				>
+					Blog
+				</a>
+		</MenuWrapper>
+		<GlobalStyle />
 	</div>
 );
 
