@@ -9,9 +9,8 @@ const TopNavWrapper = styled.nav`
 	align-items: center;
 	justify-items: center;
 	background: var(--darkGray);
-	z-index: 10;
 	a {
-		color: var(--taupeGray);
+		color: white;
 	}
 `;
 
@@ -20,11 +19,11 @@ const TitleWrapper = styled.div`
 	display: inline-block;
 	background: var(--red);
 	width: 36rem;
+	z-index: 100;
 	a {
 		font-size: 5rem;
 		font-style: italic;
 		color: white;
-		z-index: 100;
 	}
 	:after {
 	  	content: '';
@@ -44,15 +43,30 @@ const TitleWrapper = styled.div`
 	  	z-index: -1;
 	}
 	@media only screen and (max-width: 768px) {
-		width: 21.5rem;
+		width: 29rem;
 		a {
-			font-size: 3rem;
+			font-size: 4rem;
 		}
 		:after {
-			width: 23rem;
+			width: 30.5rem;
 		}
 	}
+`;
 
+const MenuWrapper = styled.div`
+	width: 100%
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	padding: 0.7rem 0;
+	background: var(--red);
+	a {
+		justify-self: center;
+		font-style: italic;
+		font-size: 2rem;
+		color: white;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
 `;
 
 /* Click Events */
@@ -73,6 +87,7 @@ const goToHome = (props, event) => {
 };
 
 const TopNav = props => (
+	<div>
 	<TopNavWrapper>
 		<TitleWrapper>
 			<a
@@ -85,6 +100,25 @@ const TopNav = props => (
 			</a>
 		</TitleWrapper>
 	</TopNavWrapper>
+	<MenuWrapper>
+			<a
+				href=""
+				onClick={event => {
+					goToAbout(props, event);
+				}}
+			>
+				About
+			</a>
+			<a
+				href=""
+				onClick={event => {
+					goToBlog(props, event);
+				}}
+			>
+				Blog
+			</a>
+	</MenuWrapper>
+	</div>
 );
 
 TopNav.propTypes = {
