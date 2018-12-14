@@ -57,10 +57,6 @@ class Dropdown extends React.Component {
 		this.setState({showDropdown: !this.state.showDropdown});
 	};
 
-	getClassNames = option => {
-		return this.props.selectedOptions.find(opt => opt === option) ? "selected_option" : "";
-	};
-
 	renderDropdownOptions = () => {
 		return this.props.options.map(opt => (
 			<DropOption
