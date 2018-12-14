@@ -18,10 +18,10 @@ const TitleWrapper = styled.div`
 	position: relative;
 	display: inline-block;
 	background: var(--red);
-	width: 36rem;
+	width: 360px;
 	z-index: 100;
 	a {
-		font-size: 5rem;
+		font-size: 50px;
 		font-style: italic;
 		color: white;
 	}
@@ -30,7 +30,7 @@ const TitleWrapper = styled.div`
 	  	position: absolute;
 	  	top: 0;
 	  	left: 0;
-	  	width: 38.5rem;
+	  	width: 385px;
 	  	height: 100%;
 	  	background: #000;
 	  	background: var(--red);
@@ -43,12 +43,12 @@ const TitleWrapper = styled.div`
 	  	z-index: -1;
 	}
 	@media only screen and (max-width: 768px) {
-		width: 29rem;
+		width: 290px;
 		a {
-			font-size: 4rem;
+			font-size: 40px;
 		}
 		:after {
-			width: 30.5rem;
+			width: 305px;
 		}
 	}
 `;
@@ -57,12 +57,12 @@ const MenuWrapper = styled.div`
 	width: 100%
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	padding: 0.7rem 0;
+	padding: 10px 0;
 	background: var(--red);
 	a {
 		justify-self: center;
 		font-style: italic;
-		font-size: 2rem;
+		font-size: 20px;
 		color: white;
 		font-weight: 700;
 		text-transform: uppercase;

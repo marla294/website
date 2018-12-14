@@ -9,15 +9,18 @@ export const theme = {
 
 export const GlobalStyle = createGlobalStyle`
 	html {
-		box-sizing: border-box;
 		font-family: 'Open Sans', sans-serif;
 		color: ${props => props.theme.gray};
+		box-sizing: border-box;
 		padding: 0;
 		margin: 0;
 	}
 
 	body {
 		font-family: 'Open Sans', sans-serif;
+		font-size: 16px;
+		margin: 0;
+		box-sizing: border-box;
 	}
 
 	*, *:before, *:after {

@@ -1,21 +1,7 @@
-html {
-	font-family: 'Open Sans', sans-serif;
-	color: var(--black);
-	font-size: 10px;
-	margin: 0;
-	box-sizing: border-box;
-}
-
-body {
-	font-size: 2rem;
-	margin: 0;
-	box-sizing: border-box;
-}
-
 /* Global Vars */
 :root {
-	--aqua: #85E0E0;
-	--ltgray: #FAFAFA;
+	--aqua: #F4442E;
+	--ltgray: white;
 	--black: #181b21;
 	--sideMargin: 10px;
 	--gridGap: 20px;
@@ -26,24 +12,6 @@ body {
 
 /* Global Styles */
 
-h1, h2, h3, h4, h5, h6, p, ul, li, figure {
-	margin: 0;
-	padding: 0;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-/* So I can put footer on the bottom and make it stay there */
-.container {
-	position: relative;
-	min-height: 100vh;
-}
 
 /* Wrapper - for CSS grid on every page */
 .wrapper {

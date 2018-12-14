@@ -3,7 +3,6 @@ import TopNav from "./TopNav";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 import styled from "styled-components";
-import "../css/About.css";
 
 const AboutWrapper = styled.div`
 	width: 100%
