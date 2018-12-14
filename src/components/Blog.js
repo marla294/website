@@ -1,11 +1,42 @@
 import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 import TopNav from "./TopNav";
 import Snippet from "./PostSnippet";
 import CategoryDropdown from "./Dropdown/CategoryDropdown";
 import SortByDropdown from "./Dropdown/SortByDropdown";
-import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
-import "../css/Blog.css";
+
+const BlogWrapper = styled.div`
+	width: 100%
+	display: grid;
+	justify-items: center;
+`;
+
+const BlogContent = styled.div`
+	width: 300px;
+	margin: 40px 0;
+	display: grid;
+	grid-template-rows: repeat(auto-fit, auto);
+	grid-gap: 20px;
+
+	@media only screen and (min-width: 768px) {
+		width: 500px;
+	}
+`;
+
+const BlogPosts = styled.div`
+	justify-self: center;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 40px;
+	justify-items: center;
+`;
+
+const DropdownContainer = styled.div`
+	display: grid;
+	grid-gap: 10px;
+`;
 
 class Blog extends React.Component {
 	state = {
@@ -122,12 +153,12 @@ class Blog extends React.Component {
 
 	render() {
 		return (
-			<div className="container">
-				<div className="wrapper">
-					<TopNav push={this.props.history.push} />
-					<div className="blog_posts_container">
-						<div className="blog_posts_header">
-							<h1>Blog Posts</h1>
+			<React.Fragment>
+				<TopNav push={this.props.history.push} />
+				<BlogWrapper>
+					<BlogContent>
+						<h1>Blog Posts</h1>
+						<DropdownContainer>
 							<CategoryDropdown
 								options={this.getAllCategories()}
 								selectedOptions={this.state.displayCategories}
@@ -138,14 +169,14 @@ class Blog extends React.Component {
 								selectedOptions={[this.state.sortBy]}
 								clickFn={this.clickSortOption}
 							/>
-							</div>
-						<div className="blog_posts">
+						</DropdownContainer>
+						<BlogPosts>
 							{this.renderPostSnippets()}
-						</div>
-					</div>
-				</div>
+						</BlogPosts>
+					</BlogContent>
+				</BlogWrapper>
 				<GlobalStyle />
-			</div>
+			</React.Fragment>
 		);
 	}
 }

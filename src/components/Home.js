@@ -27,7 +27,7 @@ const BlogPosts = styled.div`
 	justify-self: center;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-gap: 20px;
+	grid-gap: 40px;
 	justify-items: center;
 `;
 
