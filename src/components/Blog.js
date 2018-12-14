@@ -38,6 +38,9 @@ const DropdownContainer = styled.div`
 	grid-gap: 10px;
 `;
 
+
+
+
 class Blog extends React.Component {
 	state = {
 		displayCategories: [],
@@ -159,16 +162,16 @@ class Blog extends React.Component {
 					<BlogContent>
 						<h1>Blog Posts</h1>
 						<DropdownContainer>
-							<CategoryDropdown
-								options={this.getAllCategories()}
-								selectedOptions={this.state.displayCategories}
-								clickFn={this.clickCategory}
-							/>
-							<SortByDropdown
-								options={["Newest First", "Oldest First"]}
-								selectedOptions={[this.state.sortBy]}
-								clickFn={this.clickSortOption}
-							/>
+						<CategoryDropdown
+							options={this.getAllCategories()}
+							selectedOptions={this.state.displayCategories}
+							clickFn={this.clickCategory}
+						/>
+						<SortByDropdown
+							options={["Newest First", "Oldest First"]}
+							selectedOptions={[this.state.sortBy]}
+							clickFn={this.clickSortOption}
+						/>
 						</DropdownContainer>
 						<BlogPosts>
 							{this.renderPostSnippets()}

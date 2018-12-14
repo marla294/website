@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { GlobalStyle } from "../GlobalStyles";
-import "./Dropdown.css";
 
 const DropdownWrapper = styled.div`
 	display: grid;
@@ -32,15 +31,19 @@ const DropContent = styled.div`
     background-color: white;
     box-shadow: ${props => props.theme.bs};
     z-index: 1000;
-    a {
-    	display: block;
-    	font-size: 16px;
-    	width: 200px;
-    	cursor: pointer;
-    	padding: 10px;
-    }
-    a:hover {
-    	background-color: #ddd;
+`;
+
+const DropOption = styled.a`
+	display: block;
+	font-size: 16px;
+	width: 200px;
+	cursor: pointer;
+	padding: 10px;
+	font-style: ${props => props.showAll ? "italic" : "normal"};
+	background-color: ${props => props.selected ? props.theme.red : "white"};
+	color: ${props => props.selected ? "white" : props.theme.darkGray};
+	:hover {
+    	background-color: #ddd
     	color: black;
     }
 `;
@@ -55,17 +58,14 @@ class Dropdown extends React.Component {
 	};
 
 	getClassNames = option => {
-		if (option === "Show All") {
-			return "show_all";
-		}
-
 		return this.props.selectedOptions.find(opt => opt === option) ? "selected_option" : "";
 	};
 
 	renderDropdownOptions = () => {
 		return this.props.options.map(opt => (
-			<a
-				className={this.getClassNames(opt)}
+			<DropOption
+				showAll={opt === "Show All"}
+				selected={this.props.selectedOptions.find(selected => selected === opt)}
 				key={opt}
 				onClick={() => {
 					this.props.clickFn(opt);
@@ -73,7 +73,7 @@ class Dropdown extends React.Component {
 				}}
 			>
 				{opt}
-			</a>
+			</DropOption>
 		));
 	};
 
@@ -100,7 +100,6 @@ Dropdown.propTypes = {
 	options: PropTypes.array.isRequired,
 	selectedOptions: PropTypes.array.isRequired,
 	clickFn: PropTypes.func.isRequired,
-	label: PropTypes.string.isRequired
 };
 
 export default Dropdown;
