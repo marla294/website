@@ -10,7 +10,7 @@ export const theme = {
 export const GlobalStyle = createGlobalStyle`
 	html {
 		font-family: 'Open Sans', sans-serif;
-		color: ${props => props.theme.gray};
+		color: ${props => props.theme.darkGray};
 		box-sizing: border-box;
 		padding: 0;
 		margin: 0;

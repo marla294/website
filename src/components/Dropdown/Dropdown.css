@@ -2,7 +2,6 @@
 
 /* Dropdown Button */
 .dropbtn {
-	font-family: 'fionaregular';
     background-color: var(--aqua);
     color: white;
     padding: 0.25em 0.5em;
@@ -51,15 +50,4 @@
 
 .show_all {
     font-style: italic !important;
-}
-
-.options {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-gap: 0.5em;
-    margin-bottom: 0.25em;
-}
-
-.options .label {
-    align-self: center;
 }
