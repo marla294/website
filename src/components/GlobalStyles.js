@@ -11,7 +11,6 @@ export const GlobalStyle = createGlobalStyle`
 	html {
 		box-sizing: border-box;
 		font-family: 'Open Sans', sans-serif;
-		font-size: 10px;
 		color: ${props => props.theme.gray};
 		padding: 0;
 		margin: 0;
@@ -19,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
 
 	body {
 		font-family: 'Open Sans', sans-serif;
-		font-size: 1em;
 	}
 
 	*, *:before, *:after {

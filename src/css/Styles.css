@@ -98,11 +98,6 @@ a:hover {
 
 /* 75% */
 @media (max-width: 750px) {
-	/* Global */
-	body {
-		font-size: 1.5em;
-	}
-
 	.wrapper {
 		padding-bottom: 150px;
 	}

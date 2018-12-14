@@ -1,57 +1,54 @@
 import React from "react";
 import TopNav from "./TopNav";
-import Overlay from "./Overlay";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
+import styled from "styled-components";
 import "../css/About.css";
 
+const AboutWrapper = styled.div`
+	width: 100%
+	display: grid;
+	justify-items: center;
+`;
+
+const AboutContent = styled.div`
+	width: 300px;
+	margin: 40px 0;
+	display: grid;
+	grid-template-rows: repeat(auto-fit, auto);
+	grid-gap: 20px;
+	img {
+		width: 300px;
+	}
+
+	@media only screen and (min-width: 768px) {
+		width: 500px;
+		img {
+			width: 500px;
+		}
+	}
+`;
+
 class About extends React.Component {
-	/* Overlay */
-	state = {
-		show: false
-	};
-
-	imgURL = "";
-
-	showFullImage = event => {
-		this.imgURL = event.currentTarget.src;
-		this.setState({ show: true });
-	};
-
-	hideFullImage = () => {
-		this.setState({ show: false });
-	};
-
 	render() {
 		return (
-			<div className="container">
-				<Overlay
-					show={this.state.show}
-					imgURL={this.imgURL}
-					hideFullImage={this.hideFullImage}
-				/>
-				<div className="wrapper">
+			<React.Fragment>
 					<TopNav push={this.props.history.push} />
-					<section className="about">
-						<h1 className="title">About Me</h1>
-						<div className="pic_about">
+					<AboutWrapper>
+						<AboutContent>
 							<img
-								onClick={this.showFullImage}
-								src={require("../Assets/Pictures/SelfPortraits/20180607_Graffiti.jpg")}
-								alt=""
+								src={require("../Assets/Pictures/SelfPortraits/20171001_Self.jpg")}
+								alt="Marla Foreman"
 							/>
-						</div>
-						<div className="desc_about">
 							<p>I am a self-taught full stack software developer living in Omaha, Nebraska.  My languages of choice are JavaScript with React and .NET, but I am friendly and open to trying just about anything.  Currently I'm learning GraphQL, advanced React concepts, and UI design.</p>
 
 							<p>When I'm not making stuff, I'm typically hanging out with my 6 year old (the coolest person I know), reading a good book, or practicing yoga and meditation.  Or, playing more Minecraft than is typically considered healthy for an adult.</p>
 
-							<p>If you'd like to reach me, you can at marla294@gmail.com.</p>
-						</div>
-					</section>
-				</div>
+							<p>If you'd like to reach me, you can email me at marla294@gmail.com.</p>
+						</AboutContent>
+					</AboutWrapper>
 				<GlobalStyle />
-			</div>
+			</React.Fragment>
 		);
 	}
 }
