@@ -21,58 +21,11 @@
 	padding-bottom: 200px;
 }
 
-/* Blog Posts */
-/* These styles are used on the Home and Blog components, so they are global. */
-
-.blog_posts_container {
-	display: grid;
-	grid-gap: 20px;
-}
-
-.blog_posts_header {
-	width: 1232px;
-	justify-self: center;
-	justify-content: start;
-}
-
-.blog_posts_header > h1 {
-	margin-bottom: 0.25em;
-}
-
-.blog_posts {
-	justify-self: center;
-	display: grid;
-	grid-template-columns: repeat(2, 600px);
-	grid-gap: 0.5em 1em;
-	justify-items: center;
-	margin: 0 var(--sideMargin);
-}
-
-
-
-/* Responsive */
-
-@media (max-width: 1250px) {
-
-	/* Blog Posts */
-	.blog_posts {
-		grid-template-columns: 1fr;
-	}
-
-	.blog_posts_header {
-		width: 600px;
-	}
-}
 
 /* 75% */
 @media (max-width: 768px) {
 	.wrapper {
 		padding-bottom: 150px;
-	}
-
-	/* Blog Posts */
-	.blog_posts_header {
-		width: 450px;
 	}
 
 }
@@ -83,11 +36,6 @@
 
 	.wrapper {
 		padding-bottom: 125px;
-	}
-
-	/* Blog Posts */
-	.blog_posts_header {
-		width: 300px;
 	}
 
 	/* Dropdown Button */

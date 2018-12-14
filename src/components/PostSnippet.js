@@ -1,7 +1,35 @@
 import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
-import "../css/PostSnippet.css";
+
+const Snippet = styled.div`
+	display: grid;
+	grid-template-rows: repeat(2, auto);
+	box-shadow: ${props => props.theme.bs};
+
+	img {
+		width: 300px;
+	}
+
+	@media only screen and (min-width: 768px) {
+		img {
+			width: 600px;
+		}
+	}
+`;
+
+const SnippetDetails = styled.div`
+	display: grid;
+	grid-gap: 5px;
+	background: ${props => props.theme.red};
+	color: white;
+	padding: 15px;
+
+	p {
+		font-style: italic;
+	}
+`;
 
 const goToPost = (post, push, event) => {
 	event.preventDefault();
@@ -11,21 +39,18 @@ const goToPost = (post, push, event) => {
 };
 
 const PostSnippet = ({ post, push }) => (
-	<div
-		className="snippet"
+	<Snippet
 		onClick={event => {
 			goToPost(post, push, event);
 		}}
 	>
-		<div className="snippet_overlay">
-			<div className="snippet_details">
-				<h3 className="title">{post.title}</h3>
-				<p className="date">{post.date}</p>
-			</div>
-		</div>
-		<img className="snippet_img" src={`${post.headerImage}`} alt="" />
+		<img src={`${post.headerImage}`} alt="" />
+		<SnippetDetails>
+			<h4>{post.title}</h4>
+			<p>{post.date}</p>
+		</SnippetDetails>
 		<GlobalStyle />
-	</div>
+	</Snippet>
 );
 
 PostSnippet.propTypes = {
