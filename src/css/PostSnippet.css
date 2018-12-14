@@ -2,12 +2,11 @@
 
 .snippet {
 	display: grid;
-	grid-gap: var(--gridGap);
+	grid-gap: 20px;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr;
 	width: 600px;
 	height: 425px;
-	margin: var(--sideMargin);
 	overflow: hidden;
 	position: relative;
 }
@@ -48,25 +47,7 @@
 	margin-right: 3%;
 }
 
-/* 75% */
-@media (max-width: 750px) {
-	.snippet {
-		width: 450px;
-		height: 337.5px;
-	}
-
-	.snippet_img {
-		width: 450px;
-	}
-
-	.snippet_overlay {
-		width: 450px;
-		height: 337.5px;
-	}
-}
-
-/* 50% */
-@media (max-width: 500px) {
+@media (max-width: 768px) {
 	.snippet {
 		width: 300px;
 		height: 225px;
@@ -80,5 +61,4 @@
 		width: 300px;
 		height: 225px;
 	}
-
 }

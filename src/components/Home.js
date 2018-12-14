@@ -1,29 +1,37 @@
 import React from "react";
-import TopNav from "./TopNav";
-import Overlay from "./Overlay";
-import Snippet from "./PostSnippet";
 import PropTypes from "prop-types";
-import "../css/Home.css";
+import styled from "styled-components";
+import TopNav from "./TopNav";
+import Snippet from "./PostSnippet";
 import { GlobalStyle } from "./GlobalStyles";
 
+const HomeWrapper = styled.div`
+	width: 100%
+	display: grid;
+	justify-items: center;
+`;
+
+const HomeContent = styled.div`
+	width: 300px;
+	margin: 40px 0;
+	display: grid;
+	grid-template-rows: repeat(auto-fit, auto);
+	grid-gap: 20px;
+
+	@media only screen and (min-width: 768px) {
+		width: 500px;
+	}
+`;
+
+const BlogPosts = styled.div`
+	justify-self: center;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 20px;
+	justify-items: center;
+`;
 
 class Home extends React.Component {
-	/* Overlay */
-	state = {
-		show: false
-	};
-
-	imgURL = "";
-
-	showFullImage = event => {
-		this.imgURL = event.currentTarget.src;
-		this.setState({ show: true });
-	};
-
-	hideFullImage = () => {
-		this.setState({ show: false });
-	};
-
 	/* Click Events */
 
 	goToAbout = event => {
@@ -34,16 +42,11 @@ class Home extends React.Component {
 	/* Render Functions */
 
 	renderPostSnippets = () => {
-		/* Because sorting works differently on Safari than on Chrome */
-		const isChrome =
-			navigator.userAgent.indexOf("Chrome") !== -1 ? true : false;
 
 		const displayKeys = Object.entries(this.props.posts)
 			.map(post => post[0])
-			.slice(-2)
-			.sort(() => {
-				return isChrome ? 1 : -1;
-			});
+			.slice(-2);
+
 		return displayKeys.map(key => {
 			return (
 				<Snippet
@@ -58,23 +61,18 @@ class Home extends React.Component {
 
 	render() {
 		return (
-			<div className="container">
-				<Overlay
-					show={this.state.show}
-					imgURL={this.imgURL}
-					hideFullImage={this.hideFullImage}
-				/>
-				<div className="wrapper">
-					<TopNav push={this.props.history.push} />
-					<section className="blog_posts_container">
-						<h1 className="blog_posts_header">Latest Blog Posts</h1>
-						<div className="blog_posts">
-							{this.renderPostSnippets()}
-						</div>
-					</section>
-				</div>
-				<GlobalStyle />
-			</div>
+			<React.Fragment>
+				<TopNav push={this.props.history.push} />
+					<HomeWrapper>
+						<HomeContent>
+							<h1>Latest Blog Posts</h1>
+							<BlogPosts>
+								{this.renderPostSnippets()}
+							</BlogPosts>
+						</HomeContent>
+						<GlobalStyle />
+					</HomeWrapper>
+			</React.Fragment>
 		);
 	}
 }

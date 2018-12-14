@@ -65,7 +65,7 @@
 }
 
 /* 75% */
-@media (max-width: 750px) {
+@media (max-width: 768px) {
 	.wrapper {
 		padding-bottom: 150px;
 	}
