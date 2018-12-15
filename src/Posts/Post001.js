@@ -1,7 +1,7 @@
 import React from "react";
 
 const PostData = props => (
-	<div className="post_content">
+	<React.Fragment>
 		<h4>Hi.</h4>
 		<p>
 			To be totally transparent, I don't really know what I'm going to
@@ -29,7 +29,7 @@ const PostData = props => (
 			with it! There's a lot more I want to do.
 		</p>
 		<p>Anyway, if you're here, I'm glad to have you.</p>
-	</div>
+	</React.Fragment>
 );
 
 export default PostData;

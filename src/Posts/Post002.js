@@ -1,7 +1,7 @@
 import React from "react";
 
 const PostData = props => (
-	<div className="post_content">
+	<React.Fragment>
 		<p>
 			I recently finished the Ron Chernow biography of Alexander Hamilton,
 			which the "Hamilton" musical was based on, and decided it would be
@@ -16,13 +16,12 @@ const PostData = props => (
 
 		<h4>There were differences between the book and the musical</h4>
 
-		<figure className="post_contentImg left">
+		<figure>
 			<img
-				onClick={props.showFullImage}
 				src="/Images/Pictures/Posts/Post002/lin_manuel_miranda.jpg"
 				alt="Hamilton The Musical"
 			/>
-			<figcaption className="figcaption">
+			<figcaption>
 				Lin Manuel Miranda as Alexander Hamilton in "Hamilton"
 			</figcaption>
 		</figure>
@@ -70,13 +69,12 @@ const PostData = props => (
 			work that he produced in such a short time was phenomenal.
 		</p>
 
-		<figure className="post_contentImg right">
+		<figure>
 			<img
-				onClick={props.showFullImage}
 				src="/Images/Pictures/Posts/Post002/bill_gates.jpg"
 				alt="Bill Gates"
 			/>
-			<figcaption className="figcaption">
+			<figcaption>
 				Paul Allen and Bill Gates
 			</figcaption>
 		</figure>
@@ -105,13 +103,12 @@ const PostData = props => (
 			about in the Hamilton biography was anything but boring.
 		</p>
 
-		<figure className="post_contentImg left">
+		<figure>
 			<img
-				onClick={props.showFullImage}
 				src="/Images/Pictures/Posts/Post002/jefferson.jpg"
 				alt="Thomas Jefferson"
 			/>
-			<figcaption className="figcaption">Thomas Jefferson</figcaption>
+			<figcaption>Thomas Jefferson</figcaption>
 		</figure>
 
 		<p>
@@ -148,13 +145,12 @@ const PostData = props => (
 			already"
 		</h4>
 
-		<figure className="post_contentImg right">
+		<figure>
 			<img
-				onClick={props.showFullImage}
 				src="/Images/Pictures/Posts/Post002/duel.jpg"
 				alt="Hamilton and Burr Duel"
 			/>
-			<figcaption className="figcaption">
+			<figcaption>
 				Hamilton and Burr's duel
 			</figcaption>
 		</figure>
@@ -193,7 +189,7 @@ const PostData = props => (
 			could have avoided that duel with Burr, and lived a longer, happier,
 			and more prosperous life.
 		</p>
-	</div>
+	</React.Fragment>
 );
 
 export default PostData;
