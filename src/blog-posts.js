@@ -9,7 +9,7 @@ const posts = {
 	},
 	Post002: {
 		order: 2,
-		title: "Book Review - Alexander Hamilton by Ron Chernow",
+		title: 'Book Review of "Alexander Hamilton"',
 		date: "August 15, 2018",
 		headerImage: "/Images/Pictures/Posts/Post002/hamilton.jpg",
 		categories: ["Book Review"]

@@ -7,27 +7,41 @@ const Snippet = styled.div`
 	display: grid;
 	grid-template-rows: repeat(2, auto);
 	box-shadow: ${props => props.theme.bs};
+	width: 100%;
 
 	img {
-		width: 300px;
+		width: 100%;
 	}
 
 	@media only screen and (min-width: 768px) {
+		width: 700px;
+		border-bottom-left-radius: var(--S02);
+		border-bottom-right-radius: var(--S02);
 		img {
-			width: 600px;
+			width: 700px;
+			border-top-left-radius: var(--S02);
+			border-top-right-radius: var(--S02);
 		}
 	}
 `;
 
 const SnippetDetails = styled.div`
 	display: grid;
-	grid-gap: 5px;
-	background: ${props => props.theme.red};
+	grid-gap: var(--S05);
+	background: var(--Gray03);
 	color: white;
-	padding: 15px;
+	padding: var(--S06);
+	font-size: var(--F04);
 
 	p {
-		font-style: italic;
+		color: var(--Gray01);
+		font-size: var(--F02);
+		text-transform: uppercase;
+	}
+
+	@media only screen and (min-width: 768px) {
+		border-bottom-left-radius: var(--S02);
+		border-bottom-right-radius: var(--S02);
 	}
 `;
 

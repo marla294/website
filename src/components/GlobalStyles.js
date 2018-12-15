@@ -5,7 +5,7 @@ export const theme = {
 	taupeGray: "#909090",
 	darkGray: "#2C2C34",
 	bs: "0 12px 24px 0 rgba(0, 0, 0, 0.09)",
-	Gray01: "EBEBEC",
+	Gray01: "#EBEBEC",
 	Gray02: "#C5C5C7",
 	Gray03: "#9F9FA2",
 	Gray04: "#78787D",

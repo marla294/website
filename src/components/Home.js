@@ -12,15 +12,10 @@ const HomeWrapper = styled.div`
 `;
 
 const HomeContent = styled.div`
-	width: 300px;
 	margin: 40px 0;
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
 	grid-gap: 20px;
-
-	@media only screen and (min-width: 768px) {
-		width: 500px;
-	}
 `;
 
 const BlogPosts = styled.div`
