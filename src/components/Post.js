@@ -27,12 +27,16 @@ const PostDiv = styled.div`
 `;
 
 const PostHeader = styled.div`
+	display: grid;
+	grid-template-rows: repeat(2, auto);
+	grid-gap: var(--S02);
+
 	img {
 		width: 100%
 	}
 
 	@media only screen and (min-width: 768px) {
-		width: 700px;
+		width: 768px;
 	}
 `;
 
@@ -43,6 +47,7 @@ const PostCopy = styled.div`
 	grid-template-columns: 1fr;
 
 	figure {
+		justify-self: center;
 		img {
 			width: 100%;
 		}
@@ -51,7 +56,7 @@ const PostCopy = styled.div`
 	@media only screen and (min-width: 768px) {
 		figure {
 			img {
-				width: 700px;
+				width: 768px;
 			}
 		}
 	}
@@ -101,14 +106,9 @@ class Post extends React.Component {
 				postHeader = (
 					<React.Fragment>
 						<PostHeader>
-							<div>
-								<h2>
-									{this.props.posts[key].title}
-								</h2>
-								<h4>
-									{this.props.posts[key].date}
-								</h4>
-							</div>
+							<h2>
+								{this.props.posts[key].title}
+							</h2>
 							<img
 								src={`${this.props.posts[key].headerImage}`}
 								alt=""

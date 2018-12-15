@@ -14,11 +14,11 @@ const Snippet = styled.div`
 	}
 
 	@media only screen and (min-width: 768px) {
-		width: 700px;
+		width: 768px;
 		border-bottom-left-radius: var(--S02);
 		border-bottom-right-radius: var(--S02);
 		img {
-			width: 700px;
+			width: 768px;
 			border-top-left-radius: var(--S02);
 			border-top-right-radius: var(--S02);
 		}
