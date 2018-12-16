@@ -38,6 +38,7 @@ class Home extends React.Component {
 
 	renderPostSnippets = () => {
 		const displayKeys = Object.entries(this.props.posts)
+			.sort((a, b) => b[1].order - a[1].order)
 			.map(post => post[0])
 			.slice(-2);
 
