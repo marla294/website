@@ -3,8 +3,6 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import TopNav from "./TopNav";
 import Snippet from "./PostSnippet";
-import CategoryDropdown from "./Dropdown/CategoryDropdown";
-import SortByDropdown from "./Dropdown/SortByDropdown";
 import { GlobalStyle } from "./GlobalStyles";
 
 const BlogWrapper = styled.div`
@@ -26,11 +24,6 @@ const BlogPosts = styled.div`
 	grid-template-columns: 1fr;
 	grid-gap: 40px;
 	justify-items: center;
-`;
-
-const DropdownContainer = styled.div`
-	display: grid;
-	grid-gap: 10px;
 `;
 
 
@@ -156,18 +149,6 @@ class Blog extends React.Component {
 				<BlogWrapper>
 					<BlogContent>
 						<h1>Blog Posts</h1>
-						<DropdownContainer>
-						<CategoryDropdown
-							options={this.getAllCategories()}
-							selectedOptions={this.state.displayCategories}
-							clickFn={this.clickCategory}
-						/>
-						<SortByDropdown
-							options={["Newest First", "Oldest First"]}
-							selectedOptions={[this.state.sortBy]}
-							clickFn={this.clickSortOption}
-						/>
-						</DropdownContainer>
 						<BlogPosts>
 							{this.renderPostSnippets()}
 						</BlogPosts>
