@@ -37,7 +37,6 @@ class Home extends React.Component {
 	/* Render Functions */
 
 	renderPostSnippets = () => {
-
 		const displayKeys = Object.entries(this.props.posts)
 			.map(post => post[0])
 			.slice(-2);

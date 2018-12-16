@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import TopNav from "./TopNav";
 import Snippet from "./PostSnippet";
 import { GlobalStyle } from "./GlobalStyles";
@@ -26,109 +26,19 @@ const BlogPosts = styled.div`
 	justify-items: center;
 `;
 
-
-
-
 class Blog extends React.Component {
-	state = {
-		displayCategories: [],
-		sortBy: "Newest First"
-	};
-
-	/* Helper Methods */
-
-	getAllCategories = () => {
-		let categories = [];
-		Object.entries(this.props.posts).forEach(post => {
-			post[1].categories.forEach(cat => {
-				if (!categories.find(c => c === cat)) {
-					categories.push(cat);
-				}
-			});
-		});
-
-		return ["Show All"].concat(...categories);
-	};
-
-	addDisplayCategory = category => {
-		const index = this.getDisplayCategoryIndex(category);
-
-		if (index === -1) {
-			let displayCategories = [...this.state.displayCategories];
-			displayCategories.push(category);
-			this.setState({
-				displayCategories
-			});
-		}
-	};
-
-	removeDisplayCategory = category => {
-		const index = this.getDisplayCategoryIndex(category);
-
-		if (index !== -1) {
-			let displayCategories = [...this.state.displayCategories];
-			displayCategories.splice(index, 1);
-			this.setState({
-				displayCategories
-			});
-		}
-	};
-
-	getDisplayCategoryIndex = category => {
-		return this.state.displayCategories.findIndex(
-			cat => cat === category
-		);
-	};
-
-	removeAllDisplayCategories = () => {
-		this.setState({
-			displayCategories: []
-		});
-	};
-
-	filterPostsByCategory = () => {
-		const displayCategories = [...this.state.displayCategories];
-
-		return Object.entries(this.props.posts).filter(post => {
-			let filter = false;
-			displayCategories.forEach(cat => {
-				if (post[1].categories.find(category => category === cat)) {
-					filter = true;
-				}
-			});
-			return filter;
-		});
-	};
-
 	/* Click Events */
 
-	clickCategory = category => {
-		if (category !== "Show All") {
-			if (!this.state.displayCategories.find(cat => cat === category)) {
-				this.addDisplayCategory(category);
-			} else {
-				this.removeDisplayCategory(category);
-			}
-		} else {
-			this.removeAllDisplayCategories();
-		}
+	goToAbout = event => {
+		event.preventDefault();
+		this.props.history.push("/About");
 	};
 
-	clickSortOption = option => {
-		this.setState({sortBy: option});
-	};
-
-	/* Render Methods */
+	/* Render Functions */
 
 	renderPostSnippets = () => {
-		const postArr =
-			this.state.displayCategories.length === 0
-				? Object.entries(this.props.posts)
-				: this.filterPostsByCategory();
-
-		const displayKeys = postArr.map(post => post[0]).sort(() => {
-			return this.state.sortBy === "Newest First" ? -1 : 1;
-		});
+		const displayKeys = Object.entries(this.props.posts)
+			.map(post => post[0]);
 
 		return displayKeys.map(key => {
 			return (
@@ -146,15 +56,15 @@ class Blog extends React.Component {
 		return (
 			<React.Fragment>
 				<TopNav push={this.props.history.push} />
-				<BlogWrapper>
-					<BlogContent>
-						<h1>Blog Posts</h1>
-						<BlogPosts>
-							{this.renderPostSnippets()}
-						</BlogPosts>
-					</BlogContent>
-				</BlogWrapper>
-				<GlobalStyle />
+					<BlogWrapper>
+						<BlogContent>
+							<h1>Blog Posts</h1>
+							<BlogPosts>
+								{this.renderPostSnippets()}
+							</BlogPosts>
+						</BlogContent>
+						<GlobalStyle />
+					</BlogWrapper>
 			</React.Fragment>
 		);
 	}
