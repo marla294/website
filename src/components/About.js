@@ -5,26 +5,48 @@ import { GlobalStyle } from "./GlobalStyles";
 import styled from "styled-components";
 
 const AboutWrapper = styled.div`
-	width: 100%
+	margin-top: var(--S07);
+	width: 100%;
 	display: grid;
 	justify-items: center;
 `;
 
 const AboutContent = styled.div`
-	width: 300px;
-	margin: 40px 0;
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
-	grid-gap: 20px;
+
+	h1 {
+		margin-bottom: 20px;
+	}
+
 	img {
-		width: 300px;
+		width: 100%;
 	}
 
 	@media only screen and (min-width: 768px) {
-		width: 500px;
+		margin-bottom: var(--S07);
 		img {
-			width: 500px;
+			justify-self: center;
+			width: 768px;
+			border-top-left-radius: var(--S02);
+			border-top-right-radius: var(--S02);
 		}
+	}
+`;
+
+const Copy = styled.div`
+	display: grid;
+	grid-gap: var(--S03);
+	background: var(--Gray03);
+	color: white;
+	padding: var(--S06);
+	font-size: var(--F03);
+	justify-self: center;
+
+	@media only screen and (min-width: 768px) {
+		width: 768px;
+		border-bottom-left-radius: var(--S02);
+		border-bottom-right-radius: var(--S02);
 	}
 `;
 
@@ -35,15 +57,18 @@ class About extends React.Component {
 					<TopNav push={this.props.history.push} />
 					<AboutWrapper>
 						<AboutContent>
+							<h1>About Me</h1>
 							<img
 								src={require("../Assets/Pictures/SelfPortraits/20171001_Self.jpg")}
 								alt="Marla Foreman"
 							/>
+							<Copy>
 							<p>I am a self-taught full stack software developer living in Omaha, Nebraska.  My languages of choice are JavaScript with React and .NET, but I am friendly and open to trying just about anything.  Currently I'm learning GraphQL, advanced React concepts, and UI design.</p>
 
 							<p>When I'm not making stuff, I'm typically hanging out with my 6 year old (the coolest person I know), reading a good book, or practicing yoga and meditation.  Or, playing more Minecraft than is typically considered healthy for an adult.</p>
 
-							<p>If you'd like to reach me, you can email me at marla294@gmail.com.</p>
+							<p>If you'd like to reach me, my email is: marla294@gmail.com</p>
+							</Copy>
 						</AboutContent>
 					</AboutWrapper>
 				<GlobalStyle />

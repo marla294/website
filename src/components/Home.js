@@ -12,7 +12,7 @@ const HomeWrapper = styled.div`
 `;
 
 const HomeContent = styled.div`
-	margin: 40px 0;
+	margin-top: var(--S07);
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
 	grid-gap: 20px;
