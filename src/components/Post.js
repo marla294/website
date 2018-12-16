@@ -6,30 +6,24 @@ import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
 const PostWrapper = styled.div`
+	margin-top: var(--S07);
+	margin-bottom: var(--S07);
 	width: 100%
 	display: grid;
 	justify-items: center;
 `;
 
 const PostContent = styled.div`
-	margin: 40px 0;
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
-	grid-gap: 20px;
-`;
-
-const PostDiv = styled.div`
-	justify-self: center;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-gap: 40px;
-	justify-items: center;
+	grid-gap: var(--S05);
 `;
 
 const PostHeader = styled.div`
 	display: grid;
 	grid-template-rows: repeat(2, auto);
 	grid-gap: var(--S02);
+	justify-self: center;
 
 	img {
 		width: 100%
@@ -37,26 +31,58 @@ const PostHeader = styled.div`
 
 	@media only screen and (min-width: 768px) {
 		width: 768px;
+
+		img {
+			width: 768px;
+			border-top-left-radius: var(--S02);
+			border-top-right-radius: var(--S02);
+			border-bottom-left-radius: var(--S02);
+			border-bottom-right-radius: var(--S02);
+		}
 	}
 `;
 
 const PostCopy = styled.div`
-	margin-top: 1.25em;
 	display: grid;
-	grid-gap: var(--gridGap);
 	grid-template-columns: 1fr;
+	grid-gap: var(--S03);
+	padding: 0 var(--S06);
+	font-size: var(--F04);
+
+	p {
+		font-size: var(--F02);
+	}
 
 	figure {
 		justify-self: center;
 		img {
 			width: 100%;
+			border-top-left-radius: var(--S02);
+			border-top-right-radius: var(--S02);
+			border-bottom-left-radius: var(--S02);
+			border-bottom-right-radius: var(--S02);
+		}
+		figcaption {
+			font-size: var(--F01);
+			font-style: italic;
 		}
 	}
 
 	@media only screen and (min-width: 768px) {
+		width: 768px;
+		padding: 0;
+		font-size: var(--F05);
+
+		p {
+			font-size: var(--F03);
+		}
+
 		figure {
 			img {
 				width: 768px;
+			}
+			figcaption {
+				font-size: var(--F02);
 			}
 		}
 	}
@@ -127,10 +153,8 @@ class Post extends React.Component {
 				<TopNav push={this.props.history.push} />
 				<PostWrapper>
 					<PostContent>
-						<PostDiv>
 						{this.renderPostHeader()}
 						<PostCopy>{this.state.PostContent}</PostCopy>
-						</PostDiv>
 					</PostContent>
 				</PostWrapper>
 				<GlobalStyle />
