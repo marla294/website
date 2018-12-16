@@ -42,6 +42,7 @@ const Copy = styled.div`
 	padding: var(--S06);
 	font-size: var(--F03);
 	justify-self: center;
+	box-shadow: ${props => props.theme.bs};
 
 	@media only screen and (min-width: 768px) {
 		width: 768px;

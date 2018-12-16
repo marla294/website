@@ -50,14 +50,3 @@
 	--F10: 60px;
 	--F11: 72px;
 }
-
-/* Global Styles */
-
-
-/* Wrapper - for CSS grid on every page */
-.wrapper {
-	display: grid;
-	grid-template-rows: repeat(auto-fit, auto);
-	grid-gap: 3em;
-	padding-bottom: 200px;
-}
