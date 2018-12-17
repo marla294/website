@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
 const PostWrapper = styled.div`
-	margin-top: var(--S07);
+	margin-top: var(--S06);
 	margin-bottom: var(--S07);
 	width: 100%
 	display: grid;
@@ -22,11 +22,18 @@ const PostContent = styled.div`
 const PostHeader = styled.div`
 	display: grid;
 	grid-template-rows: repeat(2, auto);
-	grid-gap: var(--S02);
+	grid-gap: 20px;
 	justify-self: center;
 
 	img {
 		width: 100%
+	}
+
+	h1 {
+		color: var(--Gray05);
+		padding-left: var(--S03);
+		font-size: var(--F05);
+		font-weight: 700;
 	}
 
 	@media only screen and (min-width: 768px) {
@@ -38,6 +45,9 @@ const PostHeader = styled.div`
 			border-top-right-radius: var(--S02);
 			border-bottom-left-radius: var(--S02);
 			border-bottom-right-radius: var(--S02);
+		}
+		h1 {
+			font-size: var(--F06);
 		}
 	}
 `;
@@ -132,9 +142,9 @@ class Post extends React.Component {
 				postHeader = (
 					<React.Fragment>
 						<PostHeader>
-							<h2>
+							<h1>
 								{this.props.posts[key].title}
-							</h2>
+							</h1>
 							<img
 								src={`${this.props.posts[key].headerImage}`}
 								alt=""

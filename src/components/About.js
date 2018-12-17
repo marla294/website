@@ -5,7 +5,7 @@ import { GlobalStyle } from "./GlobalStyles";
 import styled from "styled-components";
 
 const AboutWrapper = styled.div`
-	margin-top: var(--S07);
+	margin-top: var(--S06);
 	width: 100%;
 	display: grid;
 	justify-items: center;
@@ -17,6 +17,9 @@ const AboutContent = styled.div`
 
 	h1 {
 		margin-bottom: 20px;
+		color: var(--Gray05);
+		padding-left: var(--S03);
+		font-size: var(--F06);
 	}
 
 	img {

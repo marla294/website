@@ -12,10 +12,16 @@ const HomeWrapper = styled.div`
 `;
 
 const HomeContent = styled.div`
-	margin-top: var(--S07);
+	margin-top: var(--S06);
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
 	grid-gap: 20px;
+
+	h1 {
+		color: var(--Gray05);
+		padding-left: var(--S03);
+		font-size: var(--F06);
+	}
 `;
 
 const BlogPosts = styled.div`
