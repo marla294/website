@@ -22,6 +22,10 @@ const BlogContent = styled.div`
 		padding-left: var(--S03);
 		font-size: var(--F06);
 	}
+
+	@media only screen and (min-width: 768px) {
+		margin-bottom: var(--S07);
+	}
 `;
 
 const BlogPosts = styled.div`
