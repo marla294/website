@@ -18,7 +18,7 @@ const PostData = props => (
 
 		<figure>
 			<img
-				src="/Images/Pictures/Posts/Post002/lin_manuel_miranda.jpg"
+				src="/Images/Posts/Post002/lin_manuel_miranda.jpg"
 				alt="Hamilton The Musical"
 			/>
 			<figcaption>
@@ -71,7 +71,7 @@ const PostData = props => (
 
 		<figure>
 			<img
-				src="/Images/Pictures/Posts/Post002/bill_gates.jpg"
+				src="/Images/Posts/Post002/bill_gates.jpg"
 				alt="Bill Gates"
 			/>
 			<figcaption>
@@ -105,7 +105,7 @@ const PostData = props => (
 
 		<figure>
 			<img
-				src="/Images/Pictures/Posts/Post002/jefferson.jpg"
+				src="/Images/Posts/Post002/jefferson.jpg"
 				alt="Thomas Jefferson"
 			/>
 			<figcaption>Thomas Jefferson</figcaption>
@@ -147,7 +147,7 @@ const PostData = props => (
 
 		<figure>
 			<img
-				src="/Images/Pictures/Posts/Post002/duel.jpg"
+				src="/Images/Posts/Post002/duel.jpg"
 				alt="Hamilton and Burr Duel"
 			/>
 			<figcaption>

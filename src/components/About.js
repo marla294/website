@@ -63,7 +63,7 @@ class About extends React.Component {
 						<AboutContent>
 							<h1>About Me</h1>
 							<img
-								src={require("../Assets/Pictures/SelfPortraits/20171001_Self.jpg")}
+								src="/Images/About.jpg"
 								alt="Marla Foreman"
 							/>
 							<Copy>
