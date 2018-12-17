@@ -8,48 +8,20 @@ const TopNavWrapper = styled.nav`
 	grid-template-rows: auto auto;
 	align-items: center;
 	justify-items: center;
-	background: var(--darkGray);
-	a {
-		color: white;
-	}
+	background: var(--Red04);
+	box-shadow: ${props => props.theme.bs};
 `;
 
 const TitleWrapper = styled.div`
 	position: relative;
 	display: inline-block;
-	background: var(--red);
-	width: 360px;
+	background: var(--Red04);
 	z-index: 100;
+	padding: var(--S05) 0 var(--S04) 0;
+	font-family: 'Josefin Sans', sans-serif;
 	a {
-		font-size: 50px;
-		font-style: italic;
+		font-size: 40px;
 		color: white;
-	}
-	:after {
-	  	content: '';
-	  	position: absolute;
-	  	top: 0;
-	  	left: 0;
-	  	width: 385px;
-	  	height: 100%;
-	  	background: #000;
-	  	background: var(--red);
-	  	-webkit-transform-origin: 100% 0;
-	  	-ms-transform-origin: 100% 0;
-	  	transform-origin: 100% 0;
-	  	-webkit-transform: skew(-15deg);
-	  	-ms-transform: skew(-15deg);
-	  	transform: skew(-15deg);
-	  	z-index: -1;
-	}
-	@media only screen and (max-width: 768px) {
-		width: 290px;
-		a {
-			font-size: 40px;
-		}
-		:after {
-			width: 305px;
-		}
 	}
 `;
 
@@ -57,14 +29,15 @@ const MenuWrapper = styled.div`
 	width: 100%
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	padding: 10px 0;
-	background: var(--red);
+	padding: var(--S04) 0 var(--S03) 0;
+	background: var(--Gray03);
+	font-family: 'Josefin Sans', sans-serif;
+	box-shadow: ${props => props.theme.bs};
 	a {
 		justify-self: center;
-		font-style: italic;
-		font-size: 20px;
+		font-size: var(--F03);
 		color: white;
-		font-weight: 700;
+		font-weight: 300;
 		text-transform: uppercase;
 	}
 `;
@@ -96,7 +69,7 @@ const TopNav = props => (
 						goToHome(props, event);
 					}}
 				>
-					Marla Foreman
+					MARLA FOREMAN
 				</a>
 			</TitleWrapper>
 		</TopNavWrapper>
