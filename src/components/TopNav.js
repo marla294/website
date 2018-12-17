@@ -20,7 +20,7 @@ const TitleWrapper = styled.div`
 	padding: var(--S05) 0 var(--S04) 0;
 	font-family: 'Josefin Sans', sans-serif;
 	a {
-		font-size: 40px;
+		font-size: 38px;
 		color: white;
 	}
 `;
