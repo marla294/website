@@ -50,7 +50,7 @@ class Home extends React.Component {
 		const displayKeys = Object.entries(this.props.posts)
 			.sort((a, b) => b[1].order - a[1].order)
 			.map(post => post[0])
-			.slice(-2);
+			.slice(0, 2);
 
 		return displayKeys.map(key => {
 			return (

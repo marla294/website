@@ -15,33 +15,33 @@ const Snippet = styled.div`
 
 	@media only screen and (min-width: 768px) {
 		width: 768px;
-		border-bottom-left-radius: var(--S02);
-		border-bottom-right-radius: var(--S02);
+		border-bottom-left-radius: ${props => props.theme.S02};
+		border-bottom-right-radius: ${props => props.theme.S02};
 		img {
 			width: 768px;
-			border-top-left-radius: var(--S02);
-			border-top-right-radius: var(--S02);
+			border-top-left-radius: ${props => props.theme.S02};
+			border-top-right-radius: ${props => props.theme.S02};
 		}
 	}
 `;
 
 const SnippetDetails = styled.div`
 	display: grid;
-	grid-gap: var(--S05);
-	background: var(--Gray03);
+	grid-gap: ${props => props.theme.S05};
+	background: ${props => props.theme.Gray03};
 	color: white;
-	padding: var(--S06);
-	font-size: var(--F04);
+	padding: ${props => props.theme.S06};
+	font-size: ${props => props.theme.F04};
 
 	p {
-		color: var(--Gray01);
-		font-size: var(--F02);
+		color: ${props => props.theme.Gray01};
+		font-size: ${props => props.theme.F02};
 		text-transform: uppercase;
 	}
 
 	@media only screen and (min-width: 768px) {
-		border-bottom-left-radius: var(--S02);
-		border-bottom-right-radius: var(--S02);
+		border-bottom-left-radius: ${props => props.theme.S02};
+		border-bottom-right-radius: ${props => props.theme.S02};
 	}
 `;
 

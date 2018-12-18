@@ -5,7 +5,7 @@ const posts = {
 		title: "About This Blog Thing...",
 		date: "July 26, 2018",
 		headerImage: "/Images/Posts/Post001/Header.jpg",
-		categories: ["Coding", "ReactJS"]
+		categories: ["Coding", "React"]
 	},
 	Post002: {
 		order: 2,
@@ -13,6 +13,13 @@ const posts = {
 		date: "August 15, 2018",
 		headerImage: "/Images/Posts/Post002/Header.jpg",
 		categories: ["Book Review"]
+	},
+	Post003: {
+		order: 3,
+		title: 'Giving Your Website A Refresh',
+		date: "December 18, 2018",
+		headerImage: "/Images/Posts/Post003/Header.jpg",
+		categories: ["Coding"]
 	}
 };
 
