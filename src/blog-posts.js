@@ -20,6 +20,13 @@ const posts = {
 		date: "December 18, 2018",
 		headerImage: "/Images/Posts/Post003/Header.jpg",
 		categories: ["Coding"]
+	},
+	Post004: {
+		order: 4,
+		title: 'Finding Santosha',
+		date: "December 19, 2018",
+		headerImage: "/Images/Posts/Post004/Header.jpg",
+		categories: ["Happiness"]
 	}
 };
 
