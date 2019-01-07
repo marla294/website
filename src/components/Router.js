@@ -7,6 +7,7 @@ import About from "./About";
 import Post from "./Post";
 import Blog from "./Blog";
 import Posts from "../blog-posts";
+import Projects from './Projects';
 
 /* Render Functions */
 
@@ -22,6 +23,10 @@ const blog = props => {
 	return <Blog posts={Posts} {...props} />;
 };
 
+const projects = props => {
+	return <Projects posts={Posts} {...props} />;
+};
+
 const Router = props => (
 	<ThemeProvider theme={theme}>
 		<BrowserRouter>
@@ -30,6 +35,7 @@ const Router = props => (
 				<Route path="/About" component={About} />
 				<Route path="/Post/:Slug" render={post} />
 				<Route path="/Blog" render={blog} />
+				<Route path="/Projects" render={projects} />
 			</Switch>
 		</BrowserRouter>
 	</ThemeProvider>
