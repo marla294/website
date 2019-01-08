@@ -46,7 +46,7 @@ const ImageContainer = styled.div`
 const Project = ({project}) => (
 <ProjectContainer>
 		<h2>{project.name}</h2>
-		<a href={project.url}>{project.url}</a>
+		<a href={project.url} target="_blank" alt={project.name}>{project.url}</a>
 		<p>{project.desc}</p>
 		<ImageContainer>
 			{project.tech.map(image => {
