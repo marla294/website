@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { GlobalStyle } from "./GlobalStyles";
 
 const ProjectContainer = styled.div`
-	width: 100%;
-	max-width: 100%;
+	width: 100vw;
 
 	display: grid;
 	grid-gap: ${props => props.theme.S01};
@@ -28,6 +27,7 @@ const ProjectContainer = styled.div`
 
 	@media only screen and (min-width: 768px) {
 		width: 768px;
+		min-width: 0;
 		border-bottom-left-radius: ${props => props.theme.S02};
 		border-bottom-right-radius: ${props => props.theme.S02};
 		border-top-left-radius: ${props => props.theme.S02};
@@ -35,11 +35,24 @@ const ProjectContainer = styled.div`
 	}
 `;
 
+const ImageContainer = styled.div`
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 62px);
+	grid-gap: ${props => props.theme.S03};
+
+	margin-top: ${props => props.theme.S04};
+`;
+
 const Project = ({project}) => (
 <ProjectContainer>
 		<h2>{project.name}</h2>
 		<a href={project.url}>{project.url}</a>
 		<p>{project.desc}</p>
+		<ImageContainer>
+			{project.tech.map(image => {
+				return <img src={`/Images/Tech/${image}.png`} alt="" />
+			})}
+		</ImageContainer>
 	<GlobalStyle />
 </ProjectContainer>
 );
