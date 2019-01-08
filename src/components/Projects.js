@@ -28,6 +28,25 @@ const ProjectsContent = styled.div`
 	}
 `;
 
+const MyProjects = [
+	{
+		name: "This website",
+		url: "www.marlaforeman.com"
+	}, 
+	{
+		name: "My BookList",
+		url: "www.mybooklist.io"
+	}, 
+	{
+		name: "Fishy Friends",
+		url: "www.fishy-friends.com"
+	},
+	{
+		name: "PostgreSQL-ORM",
+		url: "https://github.com/marla294/PostgreSQL-ORM"
+	}
+];
+
 class Projects extends React.Component {
 	render() {
 		return (
