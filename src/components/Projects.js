@@ -16,7 +16,7 @@ const ProjectsContent = styled.div`
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
 	grid-gap: 20px;
-	
+
 	h1 {
 		color: var(--Gray05);
 		padding-left: var(--S03);
@@ -30,20 +30,20 @@ const ProjectsContent = styled.div`
 
 const MyProjects = [
 	{
-		name: "marlaforeman.com",
-		url: "www.marlaforeman.com",
+		name: "Marla Foreman Home",
+		url: "https://www.marlaforeman.com",
 		desc: "This very website that you are looking at",
 		tech: ["React"]
 	}, 
 	{
 		name: "My BookList",
-		url: "www.mybooklist.io",
+		url: "https://www.mybooklist.io",
 		desc: "Allows you to save books to lists of your choosing.  Intended to eventually be a GoodReads knock-off.",
 		tech: ["React", ".NET Framework", "PostgreSQL"]
 	}, 
 	{
 		name: "Fishy Friends",
-		url: "www.fishy-friends.com",
+		url: "https://www.fishy-friends.com",
 		desc: "Check compatibility between various types of common saltwater aquarium fish.",
 		tech: ["React", ".NET Framework", "PostgreSQL"]
 	},
@@ -62,7 +62,7 @@ class Projects extends React.Component {
 				<TopNav push={this.props.history.push} />
 				<ProjectsWrapper>
 					<ProjectsContent>
-						<h1>Projects Page</h1>
+						<h1>My Projects</h1>
 						{
 							MyProjects.map((project, index) => {
 								return <Project 
