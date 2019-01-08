@@ -32,13 +32,13 @@ const MyProjects = [
 	{
 		name: "Marla Foreman Home",
 		url: "https://www.marlaforeman.com",
-		desc: "This very website that you are looking at",
+		desc: "This website!  A blog and a portfolio, all rolled into one cool-looking package.",
 		tech: ["React"]
 	}, 
 	{
 		name: "My BookList",
 		url: "https://www.mybooklist.io",
-		desc: "Allows you to save books to lists of your choosing.  Intended to eventually be a GoodReads knock-off.",
+		desc: "My version of the GoodReads website.",
 		tech: ["React", ".NET Framework", "PostgreSQL"]
 	}, 
 	{
