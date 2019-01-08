@@ -28,7 +28,7 @@ const TitleWrapper = styled.div`
 const MenuWrapper = styled.div`
 	width: 100%
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	padding: var(--S04) 0 var(--S03) 0;
 	background: var(--Gray03);
 	font-family: 'Josefin Sans', sans-serif;
@@ -52,6 +52,11 @@ const goToAbout = (props, event) => {
 const goToBlog = (props, event) => {
 	event.preventDefault();
 	props.push("/Blog");
+};
+
+const goToProjects = (props, event) => {
+	event.preventDefault();
+	props.push("/Projects");
 };
 
 const goToHome = (props, event) => {
@@ -81,6 +86,14 @@ const TopNav = props => (
 					}}
 				>
 					About
+				</a>
+				<a
+					href=""
+					onClick={event => {
+						goToProjects(props, event);
+					}}
+				>
+					Projects
 				</a>
 				<a
 					href=""
