@@ -26,7 +26,7 @@ const PostHeader = styled.div`
 	justify-self: center;
 
 	img {
-		width: 100%
+		width: 100vw;
 	}
 
 	h1 {
