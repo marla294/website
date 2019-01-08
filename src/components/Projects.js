@@ -30,20 +30,28 @@ const ProjectsContent = styled.div`
 
 const MyProjects = [
 	{
-		name: "This website",
-		url: "www.marlaforeman.com"
+		name: "marlaforeman.com",
+		url: "www.marlaforeman.com",
+		desc: "This very website that you are looking at",
+		tech: ["React"]
 	}, 
 	{
 		name: "My BookList",
-		url: "www.mybooklist.io"
+		url: "www.mybooklist.io",
+		desc: "Allows you to save books to lists of your choosing.  Intended to eventually be a GoodReads knock-off.",
+		tech: ["React", ".NET Framework", "PostgreSQL"]
 	}, 
 	{
 		name: "Fishy Friends",
-		url: "www.fishy-friends.com"
+		url: "www.fishy-friends.com",
+		desc: "Check compatibility between various types of common saltwater aquarium fish.",
+		tech: ["React", ".NET Framework", "PostgreSQL"]
 	},
 	{
 		name: "PostgreSQL-ORM",
-		url: "https://github.com/marla294/PostgreSQL-ORM"
+		url: "https://github.com/marla294/PostgreSQL-ORM",
+		desc: "An ORM useful for connecting C# applications to PostgreSQL databases.",
+		tech: [".NET Framework", "PostgreSQL"]
 	}
 ];
 
@@ -55,7 +63,14 @@ class Projects extends React.Component {
 				<ProjectsWrapper>
 					<ProjectsContent>
 						<h1>Projects Page</h1>
-						<Project />
+						{
+							MyProjects.map((project, index) => {
+								return <Project 
+									key={index} 
+									project={project} 
+								/>;
+							})
+						}
 					</ProjectsContent>
 					<GlobalStyle />
 				</ProjectsWrapper>
