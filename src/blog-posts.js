@@ -31,7 +31,7 @@ const posts = {
 	Post005: {
 		order: 5,
 		title: 'React Hooks',
-		date: "January 8, 2019",
+		date: "January 9, 2019",
 		headerImage: "/Images/Posts/Post005/Header.jpg",
 		categories: ["Coding", "React"]
 	}
