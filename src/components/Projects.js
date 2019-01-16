@@ -60,6 +60,12 @@ const MyProjects = [
 		url: "https://github.com/marla294/PostgreSQL-ORM",
 		desc: "An ORM useful for connecting C# applications to PostgreSQL databases.",
 		tech: ["net", "postgresql"]
+	},
+	{
+		name: "Axe Quest",
+		url: "https://www.axequest.com/",
+		desc: "Angular 5 front end to an API that scrapes various guitar websites for new arrivals",
+		tech: ["angular"]
 	}
 ];
 
