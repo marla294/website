@@ -16,24 +16,31 @@ const posts = {
 	},
 	Post003: {
 		order: 3,
-		title: 'Giving Your Website A Refresh',
+		title: "Giving Your Website A Refresh",
 		date: "December 18, 2018",
 		headerImage: "/Images/Posts/Post003/Header.jpg",
 		categories: ["Coding"]
 	},
 	Post004: {
 		order: 4,
-		title: 'Finding Santosha',
+		title: "Finding Santosha",
 		date: "December 19, 2018",
 		headerImage: "/Images/Posts/Post004/Header.jpg",
 		categories: ["Happiness"]
 	},
 	Post005: {
 		order: 5,
-		title: 'React Hooks',
+		title: "React Hooks",
 		date: "January 9, 2019",
 		headerImage: "/Images/Posts/Post005/Header.jpg",
 		categories: ["Coding", "React"]
+	},
+	Post006: {
+		order: 6,
+		title: "The Next Chapter",
+		date: "January 26, 2019",
+		headerImage: "/Images/Posts/Post006/Header.jpg",
+		categories: ["Coding"]
 	}
 };
 
