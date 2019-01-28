@@ -41,13 +41,6 @@ const posts = {
 		date: "January 26, 2019",
 		headerImage: "/Images/Posts/Post006/Header.jpg",
 		categories: ["Coding"]
-	},
-	Post007: {
-		order: 7,
-		title: "Custom Authentication",
-		date: "January 28, 2019",
-		headerImage: "/Images/Posts/Post007/Header.jpg",
-		categories: ["Coding"]
 	}
 };
 
