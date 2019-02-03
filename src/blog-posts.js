@@ -48,7 +48,15 @@ const posts = {
 		date: "January 28, 2019",
 		headerImage: "/Images/Posts/Post007/Header.jpg",
 		categories: ["Coding"]
+	},
+	Post008: {
+		order: 8,
+		title: "100+ Days Of Code",
+		date: "February 3, 2019",
+		headerImage: "/Images/Posts/Post008/Header.jpg",
+		categories: ["Coding"]
 	}
+
 };
 
 export default posts;
