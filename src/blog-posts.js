@@ -55,6 +55,13 @@ const posts = {
 		date: "February 3, 2019",
 		headerImage: "/Images/Posts/Post008/Header.jpg",
 		categories: ["Coding"]
+	},
+	Post009: {
+		order: 9,
+		title: "Why I Don't Drink Anymore",
+		date: "February 18, 2019",
+		headerImage: "/Images/Posts/Post009/Header.jpg",
+		categories: ["Personal"]
 	}
 
 };
