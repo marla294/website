@@ -67,7 +67,7 @@ class About extends React.Component {
 								alt="Marla Foreman"
 							/>
 							<Copy>
-							<p>I am a self-taught full stack software developer living in Omaha, Nebraska.  My languages of choice are JavaScript with React and .NET, but I am friendly and open to trying just about anything.  Currently I'm learning GraphQL, advanced React concepts, and UI design.</p>
+							<p>I am a self-taught web developer living in Omaha, Nebraska.  I recently started my first full-time development job at Volano Solutions, a software consulting company here in Omaha.  My languages of choice are JavaScript with React and .NET, but I am friendly and open to trying just about anything.  Currently I'm learning GraphQL, advanced React concepts, and ASP.NET MVC with Entity Framework.</p>
 
 							<p>When I'm not making stuff, I'm typically hanging out with my 6 year old (the coolest person I know), reading a good book, or practicing yoga and meditation.  Or, playing more Minecraft than is typically considered healthy for an adult.</p>
 
