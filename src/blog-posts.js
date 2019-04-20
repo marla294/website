@@ -61,7 +61,14 @@ const posts = {
 		title: "Testing As A Developer - Part 1",
 		date: "April 7, 2019",
 		headerImage: "/Images/Posts/Post009/Header.jpg",
-		categories: ["Life"]
+		categories: ["Testing"]
+	},
+	Post010: {
+		order: 10,
+		title: "Testing As A Developer - Part 2",
+		date: "April 20, 2019",
+		headerImage: "/Images/Posts/Post010/Header.jpg",
+		categories: ["Testing"]
 	}
 
 };
