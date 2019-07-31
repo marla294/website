@@ -69,6 +69,13 @@ const posts = {
 		date: "April 20, 2019",
 		headerImage: "/Images/Posts/Post010/Header.jpg",
 		categories: ["Testing"]
+	},
+	Post011: {
+		order: 11,
+		title: "Halfway Through My Rookie Season",
+		date: "July 30, 2019",
+		headerImage: "/Images/Posts/Post011/Header.jpg",
+		categories: ["Coding"]
 	}
 
 };
