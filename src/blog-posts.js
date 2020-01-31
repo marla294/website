@@ -76,6 +76,13 @@ const posts = {
 		date: "July 30, 2019",
 		headerImage: "/Images/Posts/Post011/Header.jpg",
 		categories: ["Coding"]
+	},
+	Post012: {
+		order: 12,
+		title: "1 Year at Volano Solutions",
+		date: "January 31, 2020",
+		headerImage: "/Images/Posts/Post012/Header.jpg",
+		categories: ["Coding"]
 	}
 
 };
