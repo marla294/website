@@ -83,6 +83,13 @@ const posts = {
 		date: "January 31, 2020",
 		headerImage: "/Images/Posts/Post012/Header.jpg",
 		categories: ["Coding"]
+	},
+	Post013: {
+		order: 13,
+		title: "Clickbait Title Goes Here",
+		date: "February 10, 2020",
+		headerImage: "/Images/Posts/Post013/Header.jpg",
+		categories: ["Life"]
 	}
 
 };
