@@ -90,8 +90,14 @@ const posts = {
 		date: "February 10, 2020",
 		headerImage: "/Images/Posts/Post013/Header.jpg",
 		categories: ["Life"]
+	},
+	Post014: {
+		order: 14,
+		title: "Site Updates",
+		date: "February 14, 2020",
+		headerImage: "/Images/Posts/Post014/Header.jpg",
+		categories: ["Coding"]
 	}
-
 };
 
 export default posts;
