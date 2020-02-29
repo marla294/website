@@ -97,6 +97,13 @@ const posts = {
 		date: "February 14, 2020",
 		headerImage: "/Images/Posts/Post014/Header.jpg",
 		categories: ["Coding"]
+	},
+	Post015: {
+		order: 15,
+		title: "Software Consulting vs Software Development",
+		date: "February 29, 2020",
+		headerImage: "/Images/Posts/Post015/Header.jpg",
+		categories: ["Software Industry"]
 	}
 };
 
