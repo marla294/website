@@ -104,6 +104,13 @@ const posts = {
 		date: "February 29, 2020",
 		headerImage: "/Images/Posts/Post015/Header.jpg",
 		categories: ["Software Industry"]
+	},
+	Post016: {
+		order: 16,
+		title: "10 Things I Like About Web Development",
+		date: "June 3, 2020",
+		headerImage: "/Images/Posts/Post016/Header.jpg",
+		categories: ["Coding"]
 	}
 };
 
