@@ -111,6 +111,13 @@ const posts = {
 		date: "June 3, 2020",
 		headerImage: "/Images/Posts/Post016/Header.jpg",
 		categories: ["Coding"]
+	},
+	Post017: {
+		order: 17,
+		title: "Grit and Hope",
+		date: "June 21, 2020",
+		headerImage: "/Images/Posts/Post017/Header.jpg",
+		categories: ["Life"]
 	}
 };
 
