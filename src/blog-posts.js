@@ -125,6 +125,13 @@ const posts = {
 		date: "January 22, 2021",
 		headerImage: "/Images/Posts/Post018/Header.jpg",
 		categories: ["Software Industry"]
+	},
+	Post019: {
+		order: 19,
+		title: "Cool Sh*t I've Coded: SQL Query Union Fix",
+		date: "January 23, 2021",
+		headerImage: "/Images/Posts/Post019/Header.jpg",
+		categories: ["Coding"]
 	}
 };
 
