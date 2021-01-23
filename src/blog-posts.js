@@ -119,7 +119,7 @@ const posts = {
 		headerImage: "/Images/Posts/Post017/Header.jpg",
 		categories: ["Life"]
 	},
-	Post017: {
+	Post018: {
 		order: 18,
 		title: "How it's Going At My Job",
 		date: "January 22, 2021",
