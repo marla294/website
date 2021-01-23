@@ -1,4 +1,5 @@
 import React from "react";
+import CodeBlock from '../components/CodeBlock';
 
 const PostData = props => (
 	<React.Fragment>
