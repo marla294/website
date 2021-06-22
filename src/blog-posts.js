@@ -132,6 +132,13 @@ const posts = {
 		date: "January 23, 2021",
 		headerImage: "/Images/Posts/Post019/Header.jpg",
 		categories: ["Coding"]
+	},
+	Post020: {
+		order: 20,
+		title: "Surprise...",
+		date: "June 21, 2021",
+		headerImage: "/Images/Posts/Post020/Header.jpg",
+		categories: ["Life"]
 	}
 };
 
