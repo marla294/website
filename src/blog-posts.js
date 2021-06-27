@@ -139,6 +139,13 @@ const posts = {
 		date: "June 21, 2021",
 		headerImage: "/Images/Posts/Post020/Header.jpg",
 		categories: ["Life"]
+	},
+	Post021: {
+		order: 21,
+		title: "Thoughts for Learning as a Professional Developer",
+		date: "June 27, 2021",
+		headerImage: "/Images/Posts/Post021/Header.jpg",
+		categories: ["Coding, Software Industry"]
 	}
 };
 
