@@ -146,6 +146,13 @@ const posts = {
 		date: "June 27, 2021",
 		headerImage: "/Images/Posts/Post021/Header.jpg",
 		categories: ["Coding, Software Industry"]
+	},
+	Post022: {
+		order: 22,
+		title: "A Personal Note",
+		date: "September 18, 2021",
+		headerImage: "/Images/Posts/Post022/Header.jpg",
+		categories: ["Life"]
 	}
 };
 
