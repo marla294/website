@@ -153,7 +153,14 @@ const posts = {
 		date: "September 18, 2021",
 		headerImage: "/Images/Posts/Post022/Header.jpg",
 		categories: ["Life"]
-	}
+	},
+	Post023: {
+		order: 23,
+		title: "Slowly Quitting Social Media",
+		date: "November 7, 2021",
+		headerImage: "/Images/Posts/Post023/Header.jpg",
+		categories: ["Life"]
+	},
 };
 
 export default posts;
