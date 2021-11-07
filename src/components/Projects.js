@@ -77,7 +77,7 @@ class Projects extends React.Component {
 				<ProjectsWrapper>
 					<ProjectsContent>
 						<h1>Projects</h1>
-						<h4>All code can be found on <a href="https://github.com/marla294" alt="Marla Foreman's Github Account" target="_blank">my Github account</a>.</h4>
+						<h4>All code can be found on <a href="https://github.com/marla294" alt="Marla Foreman's Github Account">my Github account</a>.</h4>
 						{
 							MyProjects.map((project, index) => {
 								return <Project 

@@ -11,7 +11,7 @@ const PostData = props => (
 
 		<h4>How To Use Hooks</h4>
 
-		<p>Hooks are RIDICULOUSLY easy to use.  I think it is easier to use hooks than to use state normally.  There's no setState, which I often find myself forgetting to do.  Woohoo!  Partay!  I'm not going to cover all the features of hooks, just the basics.  If you want to go more in depth, which I recommend if you seriously want to start using it, please check out the official Hooks documentation <a href="https://reactjs.org/docs/hooks-intro.html" alt="react hooks official documentation" target="_blank">here</a>.</p>
+		<p>Hooks are RIDICULOUSLY easy to use.  I think it is easier to use hooks than to use state normally.  There's no setState, which I often find myself forgetting to do.  Woohoo!  Partay!  I'm not going to cover all the features of hooks, just the basics.  If you want to go more in depth, which I recommend if you seriously want to start using it, please check out the official Hooks documentation <a href="https://reactjs.org/docs/hooks-intro.html" alt="react hooks official documentation">here</a>.</p>
 
 		<p>First thing you've got to do is, import hooks.  You'll need the "useState" package from react.</p>
 
@@ -70,7 +70,7 @@ const PostData = props => (
 
 		<p>The other couple things I ran into while using hooks may be possibly due to hooks not being out in an official release yet.  One thing is that the Chrome React dev tools, which I use heavily for debugging React, don't seem to support hooks yet.  The State dropdown is real confusing.  Maybe I'm not understanding it properly, but it's not intuitive to figure out.  So that's been a bit of a bummer.</p>
 
-                <p><strike>Also, I found that component refs don't work with functional components, which means they don't work with hooks.  My example was that I needed to blur an input component, and for that I needed a component ref.  You can't do a component reference with functional components.  No idea if they plan to support that in the future or not, or if it even can be supported.</strike>  After publishing this post, my brother (senior software engineer <a href="https://raymondjcox.com" target="_blank">RJ Cox</a> at Drift) sent me <a href="https://reactjs.org/docs/hooks-reference.html#useref" alt="React documentation for refs" target="_blank">this link</a> about creating references with hooks in the React documentation.  I haven't tried it yet, but it might be the solution to using component refs with hooks.</p>
+                <p><strike>Also, I found that component refs don't work with functional components, which means they don't work with hooks.  My example was that I needed to blur an input component, and for that I needed a component ref.  You can't do a component reference with functional components.  No idea if they plan to support that in the future or not, or if it even can be supported.</strike>  After publishing this post, my brother (senior software engineer <a href="https://raymondjcox.com">RJ Cox</a> at Drift) sent me <a href="https://reactjs.org/docs/hooks-reference.html#useref" alt="React documentation for refs" target="_blank">this link</a> about creating references with hooks in the React documentation.  I haven't tried it yet, but it might be the solution to using component refs with hooks.</p>
 
 	</React.Fragment>
 );
