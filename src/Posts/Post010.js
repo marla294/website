@@ -23,7 +23,7 @@ const PostData = props => (
 
 	<h5>Code Standards</h5>
 
-	<p>Code standards are typically a document that describes how a company likes to style its code.  I really like <a href="https://codeahoy.com/2016/05/22/effective-coding-standards/" target="_blank">this article</a> that talks more about the real purpose behind them and how to do them effectively.  Check it out if you want to go more in depth.</p>
+	<p>Code standards are typically a document that describes how a company likes to style its code.  I really like <a href="https://codeahoy.com/2016/05/22/effective-coding-standards/">this article</a> that talks more about the real purpose behind them and how to do them effectively.  Check it out if you want to go more in depth.</p>
 
 	<p>Essentially, the purpose of code standards is to catch bugs before they happen.  You want to make bad code stick out like a sore thumb.  The goal is to have the standards become second nature for the developers that work at a place so that they just automatically won't make those mistakes.</p>
 
