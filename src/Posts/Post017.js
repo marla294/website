@@ -3,7 +3,7 @@ import React from "react";
 const PostData = props => (
 	<React.Fragment>
 
-	<p><i>(Credit to <a href="https://josephmilla.com/2015/09/27/grainger-engineering-library/" target="_blank">Joseph Milla</a> for the image of a student studying at Grainger Library, at the University of Illinois Urbana Champaign)</i></p>
+	<p><i>(Credit to <a href="https://josephmilla.com/2015/09/27/grainger-engineering-library/">Joseph Milla</a> for the image of a student studying at Grainger Library, at the University of Illinois Urbana Champaign)</i></p>
 
 	<p>I am reading a book called "Grit" by Angela Duckworth.  It has really motivated me to write this post.  Hold on to your butts because it's going to be a long one.</p>
 
