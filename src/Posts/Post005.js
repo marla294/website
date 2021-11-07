@@ -7,7 +7,7 @@ const PostData = props => (
 
 		<p>What are hooks?  You may have heard the hype from the React developer conference late last year.  React hooks are a different way of using state.  You can now use State in functional components instead of having to go all-in with extending the React Component class.</p>
 
-		<p>Hooks are out now in an alpha release (16.7.0-alpha).  Since trying new things is my jam, I decided to test them out in my latest project, <a href="www.mybooklist.io" alt="my booklist link" target="_blank">mybooklist.io</a>.  I'll talk a little about how to set them up and use them, and the benefits and drawbacks that I found</p>
+		<p>Hooks are out now in an alpha release (16.7.0-alpha).  Since trying new things is my jam, I decided to test them out in my latest project, <a href="www.mybooklist.io" alt="my booklist link">mybooklist.io</a>.  I'll talk a little about how to set them up and use them, and the benefits and drawbacks that I found</p>
 
 		<h4>How To Use Hooks</h4>
 
