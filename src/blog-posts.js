@@ -161,6 +161,13 @@ const posts = {
 		headerImage: "/Images/Posts/Post023/Header.jpg",
 		categories: ["Life"]
 	},
+	Post024: {
+		order: 24,
+		title: "A New Development",
+		date: "December 18, 2021",
+		headerImage: "/Images/Posts/Post024/Header.jpg",
+		categories: ["Life"]
+	},
 };
 
 export default posts;
