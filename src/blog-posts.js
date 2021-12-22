@@ -168,6 +168,13 @@ const posts = {
 		headerImage: "/Images/Posts/Post024/Header.jpg",
 		categories: ["Life"]
 	},
+	Post025: {
+		order: 25,
+		title: "Maternity Leave Is Weird",
+		date: "December 22, 2021",
+		headerImage: "/Images/Posts/Post025/Header.jpg",
+		categories: ["Life, Coding"]
+	},
 };
 
 export default posts;
