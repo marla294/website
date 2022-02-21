@@ -50,23 +50,33 @@ const LoadMoreButton = styled.button`
 
 class Blog extends React.Component {
 	state = {
-        displayPosts: 5
+        numberPostsToDisplay: 5,
+		posts: []
     };
+
+	componentDidMount() {
+		let posts = Object.entries(this.props.posts)
+		.sort((a, b) => b[1].order - a[1].order)
+		.map(post => post[0]);
+
+		if (this.props.amountOfPostsToDisplay) {
+			posts = posts.slice(0, this.props.amountOfPostsToDisplay);
+		};
+
+		this.setState({posts});
+	};
 
 	/* Click Events */
 
-	increaseDisplayNumber = () => {
-		let displayPosts = this.state.displayPosts + 3;
-		this.setState({displayPosts});
+	loadMorePosts = () => {
+		let numberPostsToDisplay = this.state.numberPostsToDisplay + 3;
+		this.setState({numberPostsToDisplay});
 	};
 
 	/* Render Functions */
 
 	renderPostSnippets = () => {
-		const displayKeys = Object.entries(this.props.posts)
-			.sort((a, b) => b[1].order - a[1].order)
-			.map(post => post[0])
-			.slice(0, this.state.displayPosts);
+		const displayKeys = [...this.state.posts].slice(0, this.state.numberPostsToDisplay);
 
 		return displayKeys.map(key => {
 			return (
@@ -81,9 +91,10 @@ class Blog extends React.Component {
 	};
 
 	renderLoadMoreButton = () => {
-		if (this.state.displayPosts < Object.entries(this.props.posts).length) {
+
+		if (this.state.numberPostsToDisplay < this.state.posts.length) {
 			return (
-				<LoadMoreButton onClick={this.increaseDisplayNumber}>Load More</LoadMoreButton>
+				<LoadMoreButton onClick={this.loadMorePosts}>Load More</LoadMoreButton>
 			);
 		}
 	};
@@ -109,7 +120,8 @@ class Blog extends React.Component {
 
 Blog.propTypes = {
 	posts: PropTypes.object.isRequired,
-	history: PropTypes.object.isRequired
+	history: PropTypes.object.isRequired,
+	amountOfPostsToDisplay: PropTypes.number,
 };
 
 export default Blog;

@@ -37,13 +37,6 @@ const BlogPosts = styled.div`
 `;
 
 class Home extends React.Component {
-	/* Click Events */
-
-	goToAbout = event => {
-		event.preventDefault();
-		this.props.history.push("/About");
-	};
-
 	/* Render Functions */
 
 	renderPostSnippets = () => {
