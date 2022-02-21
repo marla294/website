@@ -37,16 +37,24 @@ const BlogPosts = styled.div`
 `;
 
 class Blog extends React.Component {
+	state = {
+        displayPosts: 5
+    };
+
 	/* Click Events */
 
-	
+	increaseDisplayNumber = () => {
+		let displayPosts = this.state.displayPosts + 3;
+		this.setState({displayPosts});
+	};
 
 	/* Render Functions */
 
 	renderPostSnippets = () => {
 		const displayKeys = Object.entries(this.props.posts)
 			.sort((a, b) => b[1].order - a[1].order)
-			.map(post => post[0]);
+			.map(post => post[0])
+			.slice(0, this.state.displayPosts);
 
 		return displayKeys.map(key => {
 			return (
@@ -69,6 +77,7 @@ class Blog extends React.Component {
 							<h1>Blog Posts</h1>
 							<BlogPosts>
 								{this.renderPostSnippets()}
+								<button onClick={this.increaseDisplayNumber}>Load More</button>
 							</BlogPosts>
 						</BlogContent>
 						<GlobalStyle />
