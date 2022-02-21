@@ -36,6 +36,18 @@ const BlogPosts = styled.div`
 	justify-items: center;
 `;
 
+const LoadMoreButton = styled.button`
+	background-color: ${props => props.theme.taupeGray};
+	color: white;
+	padding: 10px 20px;
+	font-size: 16px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	margin-bottom: var(--S05);
+	border-radius: ${props => props.theme.S02};
+`;
+
 class Blog extends React.Component {
 	state = {
         displayPosts: 5
@@ -77,7 +89,7 @@ class Blog extends React.Component {
 							<h1>Blog Posts</h1>
 							<BlogPosts>
 								{this.renderPostSnippets()}
-								<button onClick={this.increaseDisplayNumber}>Load More</button>
+								<LoadMoreButton onClick={this.increaseDisplayNumber}>Load More</LoadMoreButton>
 							</BlogPosts>
 						</BlogContent>
 						<GlobalStyle />
