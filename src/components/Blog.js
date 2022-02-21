@@ -36,17 +36,47 @@ const BlogPosts = styled.div`
 	justify-items: center;
 `;
 
+const LoadMoreButton = styled.button`
+	background-color: ${props => props.theme.taupeGray};
+	color: white;
+	padding: 10px 20px;
+	font-size: 16px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	margin-bottom: var(--S05);
+	border-radius: ${props => props.theme.S02};
+`;
+
 class Blog extends React.Component {
+	state = {
+        numberPostsToDisplay: 5,
+		posts: []
+    };
+
+	componentDidMount() {
+		let posts = Object.entries(this.props.posts)
+		.sort((a, b) => b[1].order - a[1].order)
+		.map(post => post[0]);
+
+		if (this.props.totalPostsToDisplay) {
+			posts = posts.slice(0, this.props.totalPostsToDisplay);
+		};
+
+		this.setState({posts});
+	};
+
 	/* Click Events */
 
-	
+	loadMorePosts = () => {
+		const numberPostsToDisplay = this.state.numberPostsToDisplay + 3;
+		this.setState({numberPostsToDisplay});
+	};
 
 	/* Render Functions */
 
 	renderPostSnippets = () => {
-		const displayKeys = Object.entries(this.props.posts)
-			.sort((a, b) => b[1].order - a[1].order)
-			.map(post => post[0]);
+		const displayKeys = [...this.state.posts].slice(0, this.state.numberPostsToDisplay);
 
 		return displayKeys.map(key => {
 			return (
@@ -60,6 +90,15 @@ class Blog extends React.Component {
 		});
 	};
 
+	renderLoadMoreButton = () => {
+
+		if (this.state.numberPostsToDisplay < this.state.posts.length) {
+			return (
+				<LoadMoreButton onClick={this.loadMorePosts}>Load More</LoadMoreButton>
+			);
+		}
+	};
+
 	render() {
 		return (
 			<React.Fragment>
@@ -69,6 +108,7 @@ class Blog extends React.Component {
 							<h1>Blog Posts</h1>
 							<BlogPosts>
 								{this.renderPostSnippets()}
+								{this.renderLoadMoreButton()}
 							</BlogPosts>
 						</BlogContent>
 						<GlobalStyle />
@@ -80,7 +120,8 @@ class Blog extends React.Component {
 
 Blog.propTypes = {
 	posts: PropTypes.object.isRequired,
-	history: PropTypes.object.isRequired
+	history: PropTypes.object.isRequired,
+	totalPostsToDisplay: PropTypes.number,
 };
 
 export default Blog;
