@@ -175,6 +175,13 @@ const posts = {
 		headerImage: "/Images/Posts/Post025/Header.jpg",
 		categories: ["Life, Coding"]
 	},
+	Post026: {
+		order: 26,
+		title: "Ch ch ch Changes",
+		date: "February 21, 2022",
+		headerImage: "/Images/Posts/Post026/Header.jpg",
+		categories: ["Life, Coding"]
+	},
 };
 
 export default posts;

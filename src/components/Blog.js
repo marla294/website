@@ -39,10 +39,7 @@ const BlogPosts = styled.div`
 class Blog extends React.Component {
 	/* Click Events */
 
-	goToAbout = event => {
-		event.preventDefault();
-		this.props.history.push("/About");
-	};
+	
 
 	/* Render Functions */
 
