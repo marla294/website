@@ -24,7 +24,7 @@ const PostData = props => (
 	</p>
 
 	<p>
-		That's all for now.  Later.  👋
+		That's all for now.  Later.  <span role="img" aria-label="wave">👋</span>
 	</p>
 	
 	</React.Fragment>
