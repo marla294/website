@@ -8,7 +8,7 @@ class Home extends React.Component {
 			<Blog 
 				posts={this.props.posts} 
 				history={this.props.history}
-				amountOfPostsToDisplay={2}
+				totalPostsToDisplay={2}
 			></Blog>
 		);
 	}

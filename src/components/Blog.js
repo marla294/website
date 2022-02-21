@@ -59,8 +59,8 @@ class Blog extends React.Component {
 		.sort((a, b) => b[1].order - a[1].order)
 		.map(post => post[0]);
 
-		if (this.props.amountOfPostsToDisplay) {
-			posts = posts.slice(0, this.props.amountOfPostsToDisplay);
+		if (this.props.totalPostsToDisplay) {
+			posts = posts.slice(0, this.props.totalPostsToDisplay);
 		};
 
 		this.setState({posts});
@@ -69,7 +69,7 @@ class Blog extends React.Component {
 	/* Click Events */
 
 	loadMorePosts = () => {
-		let numberPostsToDisplay = this.state.numberPostsToDisplay + 3;
+		const numberPostsToDisplay = this.state.numberPostsToDisplay + 3;
 		this.setState({numberPostsToDisplay});
 	};
 
@@ -121,7 +121,7 @@ class Blog extends React.Component {
 Blog.propTypes = {
 	posts: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
-	amountOfPostsToDisplay: PropTypes.number,
+	totalPostsToDisplay: PropTypes.number,
 };
 
 export default Blog;
