@@ -80,6 +80,14 @@ class Blog extends React.Component {
 		});
 	};
 
+	renderLoadMoreButton = () => {
+		if (this.state.displayPosts < Object.entries(this.props.posts).length) {
+			return (
+				<LoadMoreButton onClick={this.increaseDisplayNumber}>Load More</LoadMoreButton>
+			);
+		}
+	};
+
 	render() {
 		return (
 			<React.Fragment>
@@ -89,7 +97,7 @@ class Blog extends React.Component {
 							<h1>Blog Posts</h1>
 							<BlogPosts>
 								{this.renderPostSnippets()}
-								<LoadMoreButton onClick={this.increaseDisplayNumber}>Load More</LoadMoreButton>
+								{this.renderLoadMoreButton()}
 							</BlogPosts>
 						</BlogContent>
 						<GlobalStyle />
