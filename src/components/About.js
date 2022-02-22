@@ -82,7 +82,7 @@ class About extends React.Component {
 }
 
 About.propTypes = {
-	history: PropTypes.object.isRequired
+	history: PropTypes.object
 };
 
 export default About;

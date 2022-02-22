@@ -120,7 +120,7 @@ class Blog extends React.Component {
 
 Blog.propTypes = {
 	posts: PropTypes.object.isRequired,
-	history: PropTypes.object.isRequired,
+	history: PropTypes.object,
 	totalPostsToDisplay: PropTypes.number,
 };
 
