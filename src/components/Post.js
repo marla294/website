@@ -176,7 +176,7 @@ class Post extends React.Component {
 Post.propTypes = {
 	match: PropTypes.object.isRequired,
 	posts: PropTypes.object.isRequired,
-	history: PropTypes.object.isRequired
+	history: PropTypes.object
 };
 
 export default Post;

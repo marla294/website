@@ -16,7 +16,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
 	posts: PropTypes.object.isRequired,
-	history: PropTypes.object.isRequired
+	history: PropTypes.object
 };
 
 export default Home;
