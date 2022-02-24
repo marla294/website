@@ -8,6 +8,7 @@ import Post from "./Post";
 import Blog from "./Blog";
 import Posts from "../blog-posts";
 import Projects from './Projects';
+import ManageAbout from "./ManageAbout";
 
 /* Render Functions */
 
@@ -36,6 +37,7 @@ const Router = props => (
 				<Route path="/Post/:Slug" render={post} />
 				<Route path="/Blog" render={blog} />
 				<Route path="/Projects" render={projects} />
+				<Route path="/Manage/About" component={ManageAbout} />
 			</Switch>
 		</BrowserRouter>
 	</ThemeProvider>
