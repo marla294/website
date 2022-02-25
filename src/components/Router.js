@@ -30,17 +30,43 @@ const projects = props => {
 };
 
 class Router extends React.Component {
+	state = {
+		about: {}
+	};
+
+	componentDidMount() {
+		this.ref = base.syncState('about', {
+			context: this,
+			state: 'about'
+		});
+	}
+
+	componentWillUnmount() {
+        base.removeBinding(this.ref);
+    }
+
+	updateAbout = (about) => {
+		this.setState({about});
+	}
+
 	render() {
 		return (
 			<ThemeProvider theme={theme}>
 				<BrowserRouter>
 					<Switch>
 						<Route exact path="/" render={home} />
-						<Route path="/About" component={About} />
+						<Route path="/About" render={(props) => {
+							return <About about={this.state.about} {...props} />
+						}} />
 						<Route path="/Post/:Slug" render={post} />
 						<Route path="/Blog" render={blog} />
 						<Route path="/Projects" render={projects} />
-						<Route path="/Manage/About" component={ManageAbout} />
+						<Route path="/Manage/About" render={() => {
+							return <ManageAbout 
+										updateAbout={this.updateAbout} 
+										about={this.state.about}
+									/>
+						}} />
 					</Switch>
 				</BrowserRouter>
 			</ThemeProvider>

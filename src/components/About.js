@@ -55,6 +55,13 @@ const Copy = styled.div`
 `;
 
 class About extends React.Component {
+	static propTypes = {
+		about: PropTypes.shape({
+			blurb: PropTypes.string
+		}),
+		history: PropTypes.object
+	};
+
 	render() {
 		return (
 			<React.Fragment>
@@ -67,11 +74,12 @@ class About extends React.Component {
 								alt="Marla Foreman"
 							/>
 							<Copy>
-							<p>I am a web developer living in Omaha, Nebraska.  I love to code!  Currently working with JavaScript and C#, with Angular, React and .NET Framework, but I am open to learning anything and everything related to software development.</p>
+							<p>{this.props.about.blurb}</p>
+							{/* <p>I am a web developer living in Omaha, Nebraska.  I love to code!  Currently working with JavaScript and C#, with Angular, React and .NET Framework, but I am open to learning anything and everything related to software development.</p>
 
 							<p>When I'm not making stuff, I'm typically hanging out with my son or my baby girl, reading a good book, watching some sort of superhero movie or TV show, or practicing yoga and meditation.  Or, playing more Minecraft than is typically considered healthy for an adult.</p>
 
-							<p>If you'd like to reach me, my email is: marla294@gmail.com</p>
+							<p>If you'd like to reach me, my email is: marla294@gmail.com</p> */}
 							</Copy>
 						</AboutContent>
 					</AboutWrapper>
@@ -80,9 +88,5 @@ class About extends React.Component {
 		);
 	}
 }
-
-About.propTypes = {
-	history: PropTypes.object
-};
 
 export default About;
