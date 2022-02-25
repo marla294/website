@@ -2,14 +2,8 @@ import React from "react";
 import TopNav from "./TopNav";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
+import Wrapper from './Styles/Wrapper';
 import styled from "styled-components";
-
-const AboutWrapper = styled.div`
-	margin-top: var(--S06);
-	width: 100%;
-	display: grid;
-	justify-items: center;
-`;
 
 const AboutContent = styled.div`
 	display: grid;
@@ -66,7 +60,7 @@ class About extends React.Component {
 		return (
 			<React.Fragment>
 					<TopNav push={this.props.history.push} />
-					<AboutWrapper>
+					<Wrapper>
 						<AboutContent>
 							<h1>About Me</h1>
 							<img
@@ -82,7 +76,7 @@ class About extends React.Component {
 							<p>If you'd like to reach me, my email is: marla294@gmail.com</p> */}
 							</Copy>
 						</AboutContent>
-					</AboutWrapper>
+					</Wrapper>
 				<GlobalStyle />
 			</React.Fragment>
 		);
