@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import Submit from './Styles/Submit';
+import { Editor } from '@tinymce/tinymce-react';
 
 const ManageContent = styled.div`
     width: 100%;
@@ -19,17 +20,7 @@ const ManageContent = styled.div`
 const ManageAboutForm = styled.form`
     display: grid;
     color: var(--Gray05);
-
-    textarea {
-        width: 100%
-        height: 200px;
-        resize: none;
-        padding: 12px 20px;
-        border: 2px solid var(--Gray05);
-        border-radius: 4px;
-        margin-bottom: var(--S05);
-        color: var(--Gray05);
-    }
+    grid-gap: 10px;
 
     @media only screen and (min-width: 768px) {
 		textarea {
@@ -45,6 +36,12 @@ class ManageAbout extends React.Component {
 			blurb: PropTypes.string
 		}),
     };
+
+    constructor(props) {
+        super(props);
+
+        this.handleEditorChange = this.handleEditorChange.bind(this);
+    }
 
     state = {
 		about: {}
@@ -66,6 +63,14 @@ class ManageAbout extends React.Component {
         this.setState({about: updatedAbout});
     };
 
+    handleEditorChange(value, editor) {
+        const updatedAbout = {
+            ...this.state.about,
+            blurb: value,
+        };
+        this.setState({about: updatedAbout});
+    }
+
     updateAbout = (e) => {
         e.preventDefault();
         this.props.updateAbout(this.state.about);
@@ -79,13 +84,12 @@ class ManageAbout extends React.Component {
                     <ManageContent>
                         <h1>Update About Page</h1>
                         <ManageAboutForm onSubmit={this.updateAbout}>
-                            <label for="blurb">Blurb</label>
-                            <textarea 
-                                name="blurb" 
-                                ref={this.blurbRef} 
+                            <label>Blurb:</label>
+                            <Editor
+                                apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
                                 value={this.state.about.blurb}
-                                onChange={this.handleChange}
-                            ></textarea>
+                                onEditorChange={this.handleEditorChange}
+                            />
                             <Submit type="submit">Submit</Submit>
                         </ManageAboutForm>
                     </ManageContent>

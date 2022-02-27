@@ -40,6 +40,7 @@ const Copy = styled.div`
 	font-size: var(--F03);
 	justify-self: center;
 	box-shadow: ${props => props.theme.bs};
+	width: 100%;
 
 	@media only screen and (min-width: 768px) {
 		width: 768px;
@@ -67,13 +68,9 @@ class About extends React.Component {
 								src="/Images/About.jpg"
 								alt="Marla Foreman"
 							/>
-							<Copy>
-							<p>{this.props.about.blurb}</p>
-							{/* <p>I am a web developer living in Omaha, Nebraska.  I love to code!  Currently working with JavaScript and C#, with Angular, React and .NET Framework, but I am open to learning anything and everything related to software development.</p>
-
-							<p>When I'm not making stuff, I'm typically hanging out with my son or my baby girl, reading a good book, watching some sort of superhero movie or TV show, or practicing yoga and meditation.  Or, playing more Minecraft than is typically considered healthy for an adult.</p>
-
-							<p>If you'd like to reach me, my email is: marla294@gmail.com</p> */}
+							<Copy dangerouslySetInnerHTML={{
+								__html: this.props.about.blurb
+							}}>
 							</Copy>
 						</AboutContent>
 					</Wrapper>

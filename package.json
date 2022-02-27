@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tinymce/tinymce-react": "^3.13.0",
     "firebase": "^8.10.0",
     "merge": ">=1.2.1",
     "re-base": "^4.0.0",
