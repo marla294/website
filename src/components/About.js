@@ -65,7 +65,7 @@ class About extends React.Component {
 						<AboutContent>
 							<h1>About Me</h1>
 							<img
-								src="/Images/About.jpg"
+								src={this.props.aboutImageUrl}
 								alt="Marla Foreman"
 							/>
 							<Copy dangerouslySetInnerHTML={{

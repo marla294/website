@@ -9,7 +9,7 @@ import Blog from "./Blog";
 import Posts from "../blog-posts";
 import Projects from './Projects';
 import ManageAbout from "./ManageAbout";
-import base from '../base';
+import base, { firebaseStorage } from '../base';
 
 /* Render Functions */
 
@@ -31,7 +31,8 @@ const projects = props => {
 
 class Router extends React.Component {
 	state = {
-		about: {}
+		about: {},
+		aboutImageUrl: "",
 	};
 
 	componentDidMount() {
@@ -39,10 +40,18 @@ class Router extends React.Component {
 			context: this,
 			state: 'about'
 		});
+
+		this.storageRef = firebaseStorage.ref();
+		this.aboutImageRef = this.storageRef.child('About.jpg');
+
+		this.aboutImageRef.getDownloadURL().then(url => {
+			this.setState({aboutImageUrl: url})
+		});
 	}
 
 	componentWillUnmount() {
         base.removeBinding(this.ref);
+		base.removeBinding(this.storageRef);
     }
 
 	updateAbout = (about) => {
@@ -56,7 +65,11 @@ class Router extends React.Component {
 					<Switch>
 						<Route exact path="/" render={home} />
 						<Route path="/About" render={(props) => {
-							return <About about={this.state.about} {...props} />
+							return <About 
+								about={this.state.about} 
+								aboutImageUrl={this.state.aboutImageUrl}
+								{...props} 
+							/>
 						}} />
 						<Route path="/Post/:Slug" render={post} />
 						<Route path="/Blog" render={blog} />
