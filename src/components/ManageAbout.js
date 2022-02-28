@@ -44,7 +44,8 @@ class ManageAbout extends React.Component {
     }
 
     state = {
-		about: {}
+		about: {},
+        aboutImage: null
 	};
 
     blurbRef = React.createRef();
@@ -55,12 +56,8 @@ class ManageAbout extends React.Component {
         }
     }
 
-    handleChange = (event) => {
-        const updatedAbout = {
-            ...this.props.about,
-            [event.currentTarget.name]: event.currentTarget.value,
-        };
-        this.setState({about: updatedAbout});
+    handleFileChange = (event) => {
+        this.setState({aboutImage: event.target.files[0]});
     };
 
     handleEditorChange(value, editor) {
@@ -74,7 +71,7 @@ class ManageAbout extends React.Component {
     updateAbout = (e) => {
         e.preventDefault();
         this.props.updateAbout(this.state.about);
-        e.currentTarget.reset();
+        this.props.uploadAboutImage(this.state.aboutImage);
     };
 
     render() {
@@ -84,6 +81,12 @@ class ManageAbout extends React.Component {
                     <ManageContent>
                         <h1>Update About Page</h1>
                         <ManageAboutForm onSubmit={this.updateAbout}>
+                            <label>Image:</label>
+                            <input 
+                                name="aboutImage"
+                                type="file" 
+                                onChange={this.handleFileChange} 
+                            />
                             <label>Blurb:</label>
                             <Editor
                                 apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"

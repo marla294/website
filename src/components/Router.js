@@ -58,6 +58,14 @@ class Router extends React.Component {
 		this.setState({about});
 	}
 
+	uploadAboutImage = (image) => {
+		const metaData = {
+			contentType: 'image/jpeg'
+		};
+
+		this.aboutImageRef.put(image, metaData);
+	}
+
 	render() {
 		return (
 			<ThemeProvider theme={theme}>
@@ -78,6 +86,7 @@ class Router extends React.Component {
 							return <ManageAbout 
 										updateAbout={this.updateAbout} 
 										about={this.state.about}
+										uploadAboutImage={this.uploadAboutImage}
 									/>
 						}} />
 					</Switch>
