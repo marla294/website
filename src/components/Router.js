@@ -9,6 +9,7 @@ import Blog from "./Blog";
 import Posts from "../blog-posts";
 import Projects from './Projects';
 import ManageAbout from "./ManageAbout";
+import Manage from './Manage';
 import base, { firebaseStorage } from '../base';
 
 /* Render Functions */
@@ -82,6 +83,9 @@ class Router extends React.Component {
 						<Route path="/Post/:Slug" render={post} />
 						<Route path="/Blog" render={blog} />
 						<Route path="/Projects" render={projects} />
+						<Route path="/Manage" render={() => {
+							return <Manage />
+						}} />
 						<Route path="/Manage/About" render={() => {
 							return <ManageAbout 
 										updateAbout={this.updateAbout} 
