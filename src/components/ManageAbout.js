@@ -3,22 +3,12 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
+import ManageContent from './Styles/ManageContent';
 import Submit from './Styles/Submit';
 import { Editor } from '@tinymce/tinymce-react';
 import firebase from 'firebase';
 import Login from './Login';
 import base, { firebaseApp } from '../base';
-
-const ManageContent = styled.div`
-    width: 100%;
-    padding: 0 20px;
-
-    h1 {
-        margin-bottom: 20px;
-		color: var(--Gray05);
-		font-size: var(--F06);
-    }
-`;
 
 const ManageAboutForm = styled.form`
     display: grid;

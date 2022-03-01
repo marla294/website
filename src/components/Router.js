@@ -83,15 +83,17 @@ class Router extends React.Component {
 						<Route path="/Post/:Slug" render={post} />
 						<Route path="/Blog" render={blog} />
 						<Route path="/Projects" render={projects} />
-						<Route path="/Manage" render={() => {
-							return <Manage />
-						}} />
 						<Route path="/Manage/About" render={() => {
 							return <ManageAbout 
 										updateAbout={this.updateAbout} 
 										about={this.state.about}
 										uploadAboutImage={this.uploadAboutImage}
 									/>
+						}} />
+						<Route path="/Manage" render={(props) => {
+							return <Manage 
+								{...props}
+							/>
 						}} />
 					</Switch>
 				</BrowserRouter>
