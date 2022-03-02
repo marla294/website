@@ -10,6 +10,10 @@ const ManageFormStyles = styled.form`
         margin: 8px 0;
         box-sizing: border-box;
     }
+
+    .react-datepicker__triangle {
+        display: none !important;
+    }
 `;
 
 export default ManageFormStyles;

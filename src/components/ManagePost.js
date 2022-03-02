@@ -1,5 +1,7 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import ManageContent from './Styles/ManageContent';
@@ -11,6 +13,7 @@ class ManagePost extends React.Component {
         super(props);
 
         this.handleEditorChange = this.handleEditorChange.bind(this);
+        this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
     }
 
     state = {
@@ -21,6 +24,14 @@ class ManagePost extends React.Component {
         const updatedPost = {
             ...this.state.post,
             content: value,
+        };
+        this.setState({post: updatedPost});
+    }
+
+    handleDatePickerChange(value) {
+        const updatedPost = {
+            ...this.state.post,
+            date: new Date(value),
         };
         this.setState({post: updatedPost});
     }
@@ -40,6 +51,13 @@ class ManagePost extends React.Component {
                     <ManageContent>
                         <h1>Add New Blog Post</h1>
                         <ManageFormStyles>
+                            <label>Date:</label>
+                            <div>
+                                <DatePicker 
+                                    selected={this.state.post.date}
+                                    onChange={this.handleDatePickerChange}
+                                />
+                            </div>
                             <label>Title:</label>
                             <input 
                                 type="text"
@@ -47,13 +65,7 @@ class ManagePost extends React.Component {
                                 onChange={this.handleChange}
                                 value={this.state.post.title}
                             />
-                            <label>Date:</label>
-                            <input 
-                                type="text"
-                                name="date"
-                                onChange={this.handleChange}
-                                value={this.state.post.date}
-                            />
+                            
                             <label>Status:</label>
                             <select 
                                 type="text" 
