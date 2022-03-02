@@ -2,6 +2,7 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { WithContext as ReactTags } from 'react-tag-input';
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import ManageContent from './Styles/ManageContent';
@@ -14,10 +15,13 @@ class ManagePost extends React.Component {
 
         this.handleEditorChange = this.handleEditorChange.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
+        this.handleTagAddition = this.handleTagAddition.bind(this);
     }
 
     state = {
-		post: {},
+		post: {
+            categories: []
+        },
 	};
 
     handleEditorChange(value) {
@@ -32,6 +36,14 @@ class ManagePost extends React.Component {
         const updatedPost = {
             ...this.state.post,
             date: new Date(value),
+        };
+        this.setState({post: updatedPost});
+    }
+
+    handleTagAddition(tag) {
+        const updatedPost = {
+            ...this.state.post,
+            categories: [...this.state.post.categories, tag]
         };
         this.setState({post: updatedPost});
     }
@@ -78,12 +90,19 @@ class ManagePost extends React.Component {
                                 <option value="public">Archive</option>
                             </select>
                             <label>Categories:</label>
-                            <input 
+                            {/* <input 
                                 type="text"
                                 name="categories"
                                 onChange={this.handleChange}
                                 value={this.state.post.categories}
-                            />
+                            /> */}
+                            <div>
+                                <ReactTags 
+                                    tags={this.state.post.categories}
+                                    delimiters={[188, 13]}
+                                    handleAddition={this.handleTagAddition}
+                                />
+                            </div>
                             <label>Post Content:</label>
                             <Editor
                                 apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
