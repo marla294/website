@@ -1,26 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import styled from "styled-components";
+import { Editor } from '@tinymce/tinymce-react';
+import firebase from 'firebase';
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import ManageContent from './Styles/ManageContent';
 import Submit from './Styles/Submit';
-import { Editor } from '@tinymce/tinymce-react';
-import firebase from 'firebase';
+import ManageFormStyles from "./Styles/ManageFormStyles";
 import Login from './Login';
 import base, { firebaseApp } from '../base';
-
-const ManageAboutForm = styled.form`
-    display: grid;
-    color: var(--Gray05);
-    grid-gap: 10px;
-
-    @media only screen and (min-width: 768px) {
-		textarea {
-			width: 768px;
-		}
-	}
-`;
 
 class ManageAbout extends React.Component {
     static propTypes = {
@@ -43,8 +31,6 @@ class ManageAbout extends React.Component {
         owner: null,
 	};
 
-    blurbRef = React.createRef();
-
     componentDidMount() {
         firebase.auth().onIdTokenChanged(user => {
             if (user) {
@@ -63,7 +49,7 @@ class ManageAbout extends React.Component {
         this.setState({aboutImage: event.target.files[0]});
     };
 
-    handleEditorChange(value, editor) {
+    handleEditorChange(value) {
         const updatedAbout = {
             ...this.state.about,
             blurb: value,
@@ -118,7 +104,7 @@ class ManageAbout extends React.Component {
                 <Wrapper>
                     <ManageContent>
                         <h1>Update About Page</h1>
-                        <ManageAboutForm onSubmit={this.updateAbout}>
+                        <ManageFormStyles onSubmit={this.updateAbout}>
                             <label>Image:</label>
                             <input 
                                 name="aboutImage"
@@ -132,7 +118,7 @@ class ManageAbout extends React.Component {
                                 onEditorChange={this.handleEditorChange}
                             />
                             <Submit type="submit">Submit</Submit>
-                        </ManageAboutForm>
+                        </ManageFormStyles>
                     </ManageContent>
                 </Wrapper>
                 <GlobalStyle />
