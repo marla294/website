@@ -16,6 +16,7 @@ class ManagePost extends React.Component {
         this.handleEditorChange = this.handleEditorChange.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
         this.handleTagAddition = this.handleTagAddition.bind(this);
+        this.handleTagDeletion = this.handleTagDeletion.bind(this);
     }
 
     state = {
@@ -46,7 +47,21 @@ class ManagePost extends React.Component {
             categories: [...this.state.post.categories, tag]
         };
         this.setState({post: updatedPost});
-    }
+    };
+
+    handleTagDeletion(i) {
+        let updatedCategories = [...this.state.post.categories];
+        updatedCategories = updatedCategories.filter((cat, index) => {
+            return index !== i
+        });
+
+        const updatedPost = {
+            ...this.state.post,
+            categories: [...updatedCategories],
+        };
+
+        this.setState({post: updatedPost});
+    };
 
     handleChange(event) {
         const updatedPost = {
@@ -54,7 +69,7 @@ class ManagePost extends React.Component {
             [event.currentTarget.name]: event.currentTarget.value
         };
         this.setState({post: updatedPost});
-    }
+    };
 
     render() {
         return (
@@ -101,6 +116,7 @@ class ManagePost extends React.Component {
                                     tags={this.state.post.categories}
                                     delimiters={[188, 13]}
                                     handleAddition={this.handleTagAddition}
+                                    handleDelete={this.handleTagDeletion}
                                 />
                             </div>
                             <label>Post Content:</label>
