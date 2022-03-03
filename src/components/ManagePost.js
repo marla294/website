@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,12 +9,12 @@ import ManageContent from './Styles/ManageContent';
 import ManageFormStyles from './Styles/ManageFormStyles';
 import Submit from './Styles/Submit';
 
-const ManagePost = () => {
-    const [date, setDate] = React.useState(new Date());
-    const [title, setTitle] = React.useState("");
-    const [status, setStatus] = React.useState("draft");
-    const [categories, setCategories] = React.useState([]);
-    const [content, setContent] = React.useState("");
+const ManagePost = (props) => {
+    const [date, setDate] = useState(new Date());
+    const [title, setTitle] = useState("");
+    const [status, setStatus] = useState("draft");
+    const [categories, setCategories] = useState([]);
+    const [content, setContent] = useState("");
     
     const handleDateChange = updatedDate => {
         setDate(updatedDate);
@@ -40,12 +40,25 @@ const ManagePost = () => {
         setContent(updatedContent);
     };
 
+    const addNewPost = e => {
+        e.preventDefault();
+        const post = {
+            date,
+            title,
+            status,
+            categories,
+            content,
+        };
+
+        props.addNewPost(post);
+    };
+
     return (
         <React.Fragment>
         <Wrapper>
             <ManageContent>
                 <h1>Add New Blog Post</h1>
-                <ManageFormStyles>
+                <ManageFormStyles onSubmit={addNewPost}>
                     <label>Date:</label>
                     <div>
                         <DatePicker 
