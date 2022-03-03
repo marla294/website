@@ -51,20 +51,20 @@ const LoadMoreButton = styled.button`
 class Blog extends React.Component {
 	state = {
         numberPostsToDisplay: 5,
-		posts: []
+		posts: [],
     };
 
-	componentDidMount() {
-		let posts = Object.entries(this.props.posts)
-		.sort((a, b) => b[1].order - a[1].order)
-		.map(post => post[0]);
+	componentDidUpdate(prevProps) {
+        if (this.props.posts !== prevProps.posts) {
+            let posts = [...this.props.posts].sort((a, b) => b[1].date - a[1].date);
 
-		if (this.props.totalPostsToDisplay) {
-			posts = posts.slice(0, this.props.totalPostsToDisplay);
-		};
+			if (this.props.totalPostsToDisplay) {
+				posts = posts.slice(0, this.props.totalPostsToDisplay);
+			};
 
-		this.setState({posts});
-	};
+			this.setState({posts});
+        }
+    }
 
 	/* Click Events */
 
@@ -76,14 +76,14 @@ class Blog extends React.Component {
 	/* Render Functions */
 
 	renderPostSnippets = () => {
-		const displayKeys = [...this.state.posts].slice(0, this.state.numberPostsToDisplay);
+		const displayPosts = [...this.state.posts].slice(0, this.state.numberPostsToDisplay);
 
-		return displayKeys.map(key => {
+		return displayPosts.map((post, index) => {
 			return (
 				<Snippet
-					key={key}
-					index={key}
-					post={this.props.posts[key]}
+					key={index}
+					index={index}
+					post={post}
 					push={this.props.history.push}
 				/>
 			);
@@ -91,7 +91,6 @@ class Blog extends React.Component {
 	};
 
 	renderLoadMoreButton = () => {
-
 		if (this.state.numberPostsToDisplay < this.state.posts.length) {
 			return (
 				<LoadMoreButton onClick={this.loadMorePosts}>Load More</LoadMoreButton>
@@ -119,7 +118,6 @@ class Blog extends React.Component {
 }
 
 Blog.propTypes = {
-	posts: PropTypes.object.isRequired,
 	history: PropTypes.object,
 	totalPostsToDisplay: PropTypes.number,
 };

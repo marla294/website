@@ -95,7 +95,9 @@ class Router extends React.Component {
 							/>
 						}} />
 						<Route path="/Post/:Slug" render={post} />
-						<Route path="/Blog" render={blog} />
+						<Route path="/Blog" render={(props) => {
+							return <Blog posts={this.state.posts} {...props} />;
+						}} />
 						<Route path="/Projects" render={projects} />
 						<Route path="/Manage/About" render={() => {
 							return <ManageAbout 

@@ -58,7 +58,7 @@ const PostSnippet = ({ post, push }) => (
 			goToPost(post, push, event);
 		}}
 	>
-		<img src={`${post.headerImage}`} alt="" />
+		{/* <img src={`${post.headerImage}`} alt="" /> */}
 		<SnippetDetails>
 			<h4>{post.title}</h4>
 			<p>{post.date}</p>
