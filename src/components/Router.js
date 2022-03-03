@@ -35,12 +35,18 @@ class Router extends React.Component {
 	state = {
 		about: {},
 		aboutImageUrl: "",
+		posts: [],
 	};
 
 	componentDidMount() {
 		this.ref = base.syncState('about', {
 			context: this,
 			state: 'about'
+		});
+
+		this.postsRef = base.syncState('posts', {
+			context: this,
+			state: 'posts'
 		});
 
 		this.storageRef = firebaseStorage.ref();
@@ -53,6 +59,7 @@ class Router extends React.Component {
 
 	componentWillUnmount() {
         base.removeBinding(this.ref);
+		base.removeBinding(this.postsRef);
 		base.removeBinding(this.storageRef);
     }
 
@@ -66,6 +73,12 @@ class Router extends React.Component {
 		};
 
 		this.aboutImageRef.put(image, metaData);
+	}
+
+	addNewPost = (post) => {
+		const updatedPosts = [...this.state.posts, post];
+
+		this.setState({posts: updatedPosts});
 	}
 
 	render() {
@@ -92,7 +105,9 @@ class Router extends React.Component {
 									/>
 						}} />
 						<Route path="/Manage/Post" render={() => {
-							return <ManagePost />
+							return <ManagePost
+								addNewPost={this.addNewPost}
+							/>
 						}} />
 						<Route path="/Manage" render={(props) => {
 							return <Manage 
