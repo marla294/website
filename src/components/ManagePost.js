@@ -15,10 +15,15 @@ const ManagePost = (props) => {
     const [status, setStatus] = useState("draft");
     const [categories, setCategories] = useState([]);
     const [content, setContent] = useState("");
+    const [headerImage, setHeaderImage] = useState(null);
     
     const handleDateChange = updatedDate => {
         setDate(updatedDate);
     };
+
+    const handleHeaderImageChange = updatedHeaderImage => {
+        setHeaderImage(updatedHeaderImage);
+    }
 
     const handleTitleChange = updatedTitle => {
         setTitle(updatedTitle.currentTarget.value);
@@ -44,6 +49,7 @@ const ManagePost = (props) => {
         e.preventDefault();
         const post = {
             date,
+            headerImage,
             title,
             status,
             categories,
@@ -66,6 +72,12 @@ const ManagePost = (props) => {
                             onChange={handleDateChange}
                         />
                     </div>
+                    <label>Image:</label>
+                        <input 
+                            name="headerImage"
+                            type="file" 
+                            onChange={handleHeaderImageChange} 
+                        />
                     <label>Title:</label>
                     <input 
                         type="text"
