@@ -54,26 +54,30 @@ class Blog extends React.Component {
 		posts: [],
     };
 
+	componentDidMount() {
+		this.setPosts();
+	};
+
 	componentDidUpdate(prevProps) {
         if (this.props.posts !== prevProps.posts) {
-            let posts = [...this.props.posts].sort((a, b) => b[1].date - a[1].date);
-
-			if (this.props.totalPostsToDisplay) {
-				posts = posts.slice(0, this.props.totalPostsToDisplay);
-			};
-
-			this.setState({posts});
+            this.setPosts();
         }
-    }
+    };
 
-	/* Click Events */
+	setPosts = () => {
+		let posts = [...this.props.posts].sort((a, b) => b[1].date - a[1].date);
+
+		if (this.props.totalPostsToDisplay) {
+			posts = posts.slice(0, this.props.totalPostsToDisplay);
+		};
+
+		this.setState({...this.state, posts});
+	}
 
 	loadMorePosts = () => {
 		const numberPostsToDisplay = this.state.numberPostsToDisplay + 3;
-		this.setState({numberPostsToDisplay});
+		this.setState({...this.state, numberPostsToDisplay});
 	};
-
-	/* Render Functions */
 
 	renderPostSnippets = () => {
 		const displayPosts = [...this.state.posts].slice(0, this.state.numberPostsToDisplay);
