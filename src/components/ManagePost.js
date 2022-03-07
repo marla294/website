@@ -49,14 +49,15 @@ const ManagePost = (props) => {
         e.preventDefault();
         const post = {
             date,
-            headerImage,
             title,
             status,
             categories,
             content,
+            id: `Post_${new Date().getTime()}`
         };
 
         props.addNewPost(post);
+        props.uploadPostHeader(headerImage, post.id);
     };
 
     return (

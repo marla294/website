@@ -55,6 +55,16 @@ class Router extends React.Component {
 		this.aboutImageRef.put(image, metaData);
 	}
 
+	uploadPostHeader = (image, postId) => {
+		const metaData = {
+			contentType: 'image/jpeg'
+		};
+
+		this.postImageRef = this.storageRef.child(`/${postId}/Header.jpg`);
+
+		this.postImageRef.put(image, metaData);
+	}
+
 	addNewPost = (post) => {
 		const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
 
@@ -98,6 +108,7 @@ class Router extends React.Component {
 						<Route path="/Manage/Post" render={() => {
 							return <ManagePost
 								addNewPost={this.addNewPost}
+								uploadPostHeader={this.uploadPostHeader}
 							/>
 						}} />
 						<Route path="/Manage" render={(props) => {
