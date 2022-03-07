@@ -21,8 +21,8 @@ const ManagePost = (props) => {
         setDate(updatedDate);
     };
 
-    const handleHeaderImageChange = updatedHeaderImage => {
-        setHeaderImage(updatedHeaderImage);
+    const handleHeaderImageChange = event => {
+        setHeaderImage(event.target.files[0]);
     }
 
     const handleTitleChange = updatedTitle => {
