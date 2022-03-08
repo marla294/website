@@ -105,8 +105,6 @@ class Post extends React.Component {
 		Slug: this.props.match.params.Slug
 	};
 
-	/* Helper Methods */
-
 	getPostID = slug => {
 		let PostID = null;
 		const slugify = require("slugify");
@@ -127,13 +125,18 @@ class Post extends React.Component {
 		});
 	}
 
-	/* Lifecycle */
+	getPostHeaderUrl = (postId) => {
+		this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
+
+		this.postImageRef.getDownloadURL().then(url => {
+			this.setState({postHeaderUrl: url});
+		});
+	};
 
 	componentDidMount() {
 		this.importPostContent();
+		this.getPostHeaderUrl(this.props.post.id);
 	}
-
-	/* Render Methods */
 
 	renderPostHeader = () => {
 		let postHeader = "";

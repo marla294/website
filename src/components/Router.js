@@ -80,7 +80,11 @@ class Router extends React.Component {
 				<BrowserRouter>
 					<Switch>
 						<Route exact path="/" render={(props) => {
-							return <Home posts={this.state.data.posts} {...props} />;
+							return <Home 
+								posts={this.state.data.posts} 
+								{...props} 
+								storageRef={this.storageRef}
+							/>;
 						}} />
 						<Route path="/About" render={(props) => {
 							return <About 
@@ -90,10 +94,18 @@ class Router extends React.Component {
 							/>
 						}} />
 						<Route path="/Post/:Slug" render={(props) => {
-							return <Post posts={this.state.data.posts} {...props} />;
+							return <Post 
+								posts={this.state.data.posts} 
+								storageRef={this.storageRef}
+								{...props} 
+							/>;
 						}} />
 						<Route path="/Blog" render={(props) => {
-							return <Blog posts={this.state.data.posts} {...props} />;
+							return <Blog 
+								posts={this.state.data.posts} 
+								storageRef={this.storageRef}
+								{...props} 
+							/>;
 						}} />
 						<Route path="/Projects" render={(props) => {
 							return <Projects posts={this.state.data.posts} {...props} />;

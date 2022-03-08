@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import TopNav from "./TopNav";
-import Snippet from "./PostSnippet";
+import Snippet from "./Snippet";
 import { GlobalStyle } from "./GlobalStyles";
 
 const BlogWrapper = styled.div`
@@ -88,6 +88,7 @@ class Blog extends React.Component {
 					key={index}
 					index={index}
 					post={post}
+					storageRef={this.props.storageRef}
 					push={this.props.history.push}
 				/>
 			);
