@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import TopNav from "./TopNav";
-import Posts from "../blog-posts";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
@@ -100,63 +99,58 @@ const PostCopy = styled.div`
 
 class Post extends React.Component {
 	state = {
-		Posts,
-		PostContent: null,
-		Slug: this.props.match.params.Slug
-	};
-
-	getPostID = slug => {
-		let PostID = null;
-		const slugify = require("slugify");
-		Object.entries(this.state.Posts).forEach(entry => {
-			const slugTitle = slugify(entry[1].title, { remove: /\./ });
-			if (slugTitle === slug) {
-				PostID = entry[0];
-			}
-		});
-		return PostID;
-	};
-
-	async importPostContent() {
-		const postID = this.getPostID(this.state.Slug);
-		const { default: PostContent } = await import(`../Posts/${postID}.js`);
-		this.setState({
-			PostContent: <PostContent showFullImage={this.showFullImage} />
-		});
-	}
-
-	getPostHeaderUrl = (postId) => {
-		this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
-
-		this.postImageRef.getDownloadURL().then(url => {
-			this.setState({postHeaderUrl: url});
-		});
+		post: null
 	};
 
 	componentDidMount() {
-		this.importPostContent();
-		this.getPostHeaderUrl(this.props.post.id);
-	}
+		this.loadPost(this.props.match.params.Slug);
+	};
 
-	renderPostHeader = () => {
-		let postHeader = "";
-		Object.keys(this.props.posts).forEach(key => {
-			if (key === this.getPostID(this.state.Slug)) {
-				postHeader = (
-					<React.Fragment>
-						<PostHeader>
-							<h1>
-								{this.props.posts[key].title}
-							</h1>
-							<img
-								src={`${this.props.posts[key].headerImage}`}
-								alt=""
-							/>
-						</PostHeader>
-					</React.Fragment>
-				);
+	// componentDidUpdate(prevProps) {
+	// 	debugger;
+    //     if (this.props.posts !== prevProps.posts) {
+	// 		debugger;
+    //         this.loadPost(this.props.match.params.Slug);
+    //     }
+    // };
+
+	loadPost(slug) {
+		const slugify = require("slugify");
+
+		this.props.posts.forEach(post => {
+			const slugTitle = slugify(post.title, { remove: /\./ });
+			if (slugTitle === slug) {
+				this.setState({
+					...this.state,
+					post: post
+				});
 			}
 		});
+	};
+
+	// getPostHeaderUrl = (postId) => {
+	// 	this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
+
+	// 	this.postImageRef.getDownloadURL().then(url => {
+	// 		this.setState({postHeaderUrl: url});
+	// 	});
+	// };
+
+	renderPostHeader() {
+		let postHeader = "";
+		postHeader = (
+			<React.Fragment>
+				<PostHeader>
+					<h1>
+						{this.state.post.title}
+					</h1>
+					{/* <img
+						src={`${this.props.posts[key].headerImage}`}
+						alt=""
+					/> */}
+				</PostHeader>
+			</React.Fragment>
+		);
 		return postHeader;
 	};
 
@@ -167,7 +161,7 @@ class Post extends React.Component {
 				<PostWrapper>
 					<PostContent>
 						{this.renderPostHeader()}
-						<PostCopy>{this.state.PostContent}</PostCopy>
+						{/* <PostCopy>{this.state.PostContent}</PostCopy> */}
 					</PostContent>
 				</PostWrapper>
 				<GlobalStyle />
@@ -176,10 +170,9 @@ class Post extends React.Component {
 	}
 }
 
-Post.propTypes = {
-	match: PropTypes.object.isRequired,
-	posts: PropTypes.object.isRequired,
-	history: PropTypes.object
-};
+// Post.propTypes = {
+// 	match: PropTypes.object.isRequired,
+// 	history: PropTypes.object
+// };
 
 export default Post;
