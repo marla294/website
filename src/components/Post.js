@@ -99,7 +99,8 @@ const PostCopy = styled.div`
 
 class Post extends React.Component {
 	state = {
-		post: null
+		post: null,
+		postHeaderUrl: '',
 	};
 
 	componentDidMount() {
@@ -122,17 +123,18 @@ class Post extends React.Component {
 					...this.state,
 					post: post
 				});
+				this.getPostHeaderUrl(post.id);
 			}
 		});
 	};
 
-	// getPostHeaderUrl = (postId) => {
-	// 	this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
+	getPostHeaderUrl = (postId) => {
+		this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
 
-	// 	this.postImageRef.getDownloadURL().then(url => {
-	// 		this.setState({postHeaderUrl: url});
-	// 	});
-	// };
+		this.postImageRef.getDownloadURL().then(url => {
+			this.setState({...this.state, postHeaderUrl: url});
+		});
+	};
 
 	renderPostHeader() {
 		let postHeader = "";
