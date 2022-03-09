@@ -16,7 +16,7 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-	posts: PropTypes.object.isRequired,
+	posts: PropTypes.array,
 	history: PropTypes.object
 };
 

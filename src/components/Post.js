@@ -106,13 +106,11 @@ class Post extends React.Component {
 		this.loadPost(this.props.match.params.Slug);
 	};
 
-	// componentDidUpdate(prevProps) {
-	// 	debugger;
-    //     if (this.props.posts !== prevProps.posts) {
-	// 		debugger;
-    //         this.loadPost(this.props.match.params.Slug);
-    //     }
-    // };
+	componentDidUpdate(prevProps) {
+        if (this.props.posts !== prevProps.posts) {
+            this.loadPost(this.props.match.params.Slug);
+        }
+    };
 
 	loadPost(slug) {
 		const slugify = require("slugify");
@@ -142,7 +140,7 @@ class Post extends React.Component {
 			<React.Fragment>
 				<PostHeader>
 					<h1>
-						{this.state.post.title}
+						{this.state.post ? this.state.post.title : ''}
 					</h1>
 					{/* <img
 						src={`${this.props.posts[key].headerImage}`}
