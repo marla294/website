@@ -65,7 +65,7 @@ class Blog extends React.Component {
     };
 
 	setPosts = () => {
-		let posts = [...this.props.posts].sort((a, b) => b[1].date - a[1].date);
+		let posts = [...this.props.posts].sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
 		if (this.props.totalPostsToDisplay) {
 			posts = posts.slice(0, this.props.totalPostsToDisplay);

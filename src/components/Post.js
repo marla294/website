@@ -136,32 +136,24 @@ class Post extends React.Component {
 		});
 	};
 
-	renderPostHeader() {
-		let postHeader = "";
-		postHeader = (
-			<React.Fragment>
-				<PostHeader>
-					<h1>
-						{this.state.post ? this.state.post.title : ''}
-					</h1>
-					{/* <img
-						src={`${this.props.posts[key].headerImage}`}
-						alt=""
-					/> */}
-				</PostHeader>
-			</React.Fragment>
-		);
-		return postHeader;
-	};
-
 	render() {
 		return (
 			<React.Fragment>
 				<TopNav push={this.props.history.push} />
 				<PostWrapper>
 					<PostContent>
-						{this.renderPostHeader()}
-						{/* <PostCopy>{this.state.PostContent}</PostCopy> */}
+						<PostHeader>
+							<h1>
+								{this.state.post ? this.state.post.title : ''}
+							</h1>
+							<img
+								src={this.state.postHeaderUrl}
+								alt={this.state.post ? this.state.post.title : ''}
+							/>
+						</PostHeader>
+						<PostCopy>
+							{this.state.post ? this.state.post.PostContent : ''}
+						</PostCopy>
 					</PostContent>
 				</PostWrapper>
 				<GlobalStyle />

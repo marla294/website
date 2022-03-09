@@ -48,7 +48,7 @@ const ManagePost = (props) => {
     const addNewPost = e => {
         e.preventDefault();
         const post = {
-            date,
+            date: date.toDateString(),
             title,
             status,
             categories,
