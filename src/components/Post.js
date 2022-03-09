@@ -151,9 +151,9 @@ class Post extends React.Component {
 								alt={this.state.post ? this.state.post.title : ''}
 							/>
 						</PostHeader>
-						<PostCopy>
-							{this.state.post ? this.state.post.PostContent : ''}
-						</PostCopy>
+						<PostCopy dangerouslySetInnerHTML={{
+							__html: this.state.post ? this.state.post.content : ''
+						}}></PostCopy>
 					</PostContent>
 				</PostWrapper>
 				<GlobalStyle />
