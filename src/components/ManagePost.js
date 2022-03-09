@@ -16,6 +16,7 @@ const ManagePost = (props) => {
     const [categories, setCategories] = useState([]);
     const [content, setContent] = useState("");
     const [headerImage, setHeaderImage] = useState(null);
+    const [hasHeaderImage, setHasHeaderImage] = useState(false);
     
     const handleDateChange = updatedDate => {
         setDate(updatedDate);
@@ -60,6 +61,26 @@ const ManagePost = (props) => {
         props.uploadPostHeader(headerImage, post.id);
     };
 
+    const loadPost = (postId) => {
+        props.posts.forEach(post => {
+			if (post.id === postId) {
+				setDate(Date.parse(post.date));
+                setTitle(post.title);
+                setStatus(post.status);
+                setContent(post.content);
+                setCategories(post.categories);
+			}
+		});
+	};
+
+    const getPostHeaderUrl = (postId) => {
+		const postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
+
+		postImageRef.getDownloadURL().then(url => {
+			setHeaderImage(url);
+		});
+	};
+
     return (
         <React.Fragment>
         <Wrapper>
@@ -74,11 +95,11 @@ const ManagePost = (props) => {
                         />
                     </div>
                     <label>Image:</label>
-                        <input 
-                            name="headerImage"
-                            type="file" 
-                            onChange={handleHeaderImageChange} 
-                        />
+                    <input 
+                        name="headerImage"
+                        type="file" 
+                        onChange={handleHeaderImageChange} 
+                    />
                     <label>Title:</label>
                     <input 
                         type="text"
