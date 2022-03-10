@@ -18,32 +18,24 @@ const AddPost = (props) => {
         content: '',
         headerImage: null,
     });
+
+    const handleChange = (e) => {
+        let { value, name, type } = e.currentTarget;
+
+        if (type === 'file') {
+            [value] = e.currentTarget.files;
+        }
+
+        setInputs({
+            ...inputs,
+            [name]: value,
+        });
+    }
     
     const handleDateChange = date => {
         setInputs({
             ...inputs,
             date
-        });
-    };
-
-    const handleHeaderImageChange = event => {
-        setInputs({
-            ...inputs,
-            headerImage: event.target.files[0]
-        });
-    }
-
-    const handleTitleChange = event => {
-        setInputs({
-            ...inputs,
-            title: event.currentTarget.value,
-        });
-    };
-
-    const handleStatusChange = event => {
-        setInputs({
-            ...inputs,
-            status: event.currentTarget.value
         });
     };
 
@@ -100,25 +92,25 @@ const AddPost = (props) => {
                     <input 
                         name="headerImage"
                         type="file" 
-                        onChange={handleHeaderImageChange} 
+                        onChange={handleChange} 
                     />
                     <label>Title:</label>
                     <input 
                         type="text"
                         name="title"
-                        onChange={handleTitleChange}
+                        onChange={handleChange}
                         value={inputs.title}
                     />
                     <label>Status:</label>
                     <select 
                         type="text" 
                         name="status" 
-                        onChange={handleStatusChange} 
+                        onChange={handleChange} 
                         value={inputs.status}
                     >
                         <option value="draft">Draft</option>
                         <option value="public">Public</option>
-                        <option value="public">Archive</option>
+                        <option value="archive">Archive</option>
                     </select>
                     <label>Categories:</label>
                     <div>
