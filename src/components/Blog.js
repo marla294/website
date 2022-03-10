@@ -6,7 +6,7 @@ import Snippet from "./Snippet";
 import { GlobalStyle } from "./GlobalStyles";
 
 const BlogWrapper = styled.div`
-	width: 100%
+	width: 100%;
 	display: grid;
 	justify-items: center;
 `;
@@ -50,16 +50,16 @@ const LoadMoreButton = styled.button`
 
 class Blog extends React.Component {
 	state = {
-        numberPostsToDisplay: 5,
+		numberPostsToDisplay: 5,
 		posts: [],
-    };
+	};
 
 	componentDidMount() {
 		this.setPosts();
 	};
 
 	componentDidUpdate(prevProps) {
-        if (this.props.posts !== prevProps.posts) {
+        if (this.props.posts && this.props.posts !== prevProps.posts) {
             this.setPosts();
         }
     };
@@ -79,9 +79,7 @@ class Blog extends React.Component {
 		this.setState({...this.state, numberPostsToDisplay});
 	};
 
-	renderPostSnippets = () => {
-		const displayPosts = [...this.state.posts].slice(0, this.state.numberPostsToDisplay);
-
+	renderPostSnippets = (displayPosts) => {
 		return displayPosts.map((post, index) => {
 			return (
 				<Snippet
@@ -103,17 +101,37 @@ class Blog extends React.Component {
 		}
 	};
 
+	renderBlogContent = () => {
+		const displayPosts = [...this.state.posts].slice(0, this.state.numberPostsToDisplay);
+		
+		if (displayPosts.length > 0) {
+			return (
+				<React.Fragment>
+					<h1>Blog Posts</h1>
+					<BlogPosts>
+						{this.renderPostSnippets(displayPosts)}
+						{this.renderLoadMoreButton()}
+					</BlogPosts>
+				</React.Fragment>
+			);
+		}
+		else {
+			return (
+				<React.Fragment>
+					<h1>Blog Posts</h1>
+					<p>No posts to display</p>
+				</React.Fragment>
+			);
+		}
+	};
+
 	render() {
 		return (
 			<React.Fragment>
 				<TopNav push={this.props.history.push} />
 					<BlogWrapper>
 						<BlogContent>
-							<h1>Blog Posts</h1>
-							<BlogPosts>
-								{this.renderPostSnippets()}
-								{this.renderLoadMoreButton()}
-							</BlogPosts>
+							{this.renderBlogContent()}
 						</BlogContent>
 						<GlobalStyle />
 					</BlogWrapper>
