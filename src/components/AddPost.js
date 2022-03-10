@@ -8,9 +8,17 @@ import Wrapper from './Styles/Wrapper';
 import ManageContent from './Styles/ManageContent';
 import ManageFormStyles from './Styles/ManageFormStyles';
 import Submit from './Styles/Submit';
+import useForm from '../lib/useForm';
 
 const AddPost = (props) => {
-    const [inputs, setInputs] = useState({
+    const { 
+        inputs, 
+        handleChange,
+        handleDateChange,
+        handleCategoryAddition,
+        handleCategoryDeletion,
+        handleEditorChange,
+    } = useForm({
         date: new Date(),
         title: '',
         status: 'draft',
@@ -18,47 +26,6 @@ const AddPost = (props) => {
         content: '',
         headerImage: null,
     });
-
-    const handleChange = (e) => {
-        let { value, name, type } = e.currentTarget;
-
-        if (type === 'file') {
-            [value] = e.currentTarget.files;
-        }
-
-        setInputs({
-            ...inputs,
-            [name]: value,
-        });
-    }
-    
-    const handleDateChange = date => {
-        setInputs({
-            ...inputs,
-            date
-        });
-    };
-
-    const handleCategoryAddition = category => {
-        setInputs({
-            ...inputs,
-            categories: [...inputs.categories, category]
-        });
-    };
-
-    const handleCategoryDeletion = i => {
-        setInputs({
-            ...inputs,
-            categories: inputs.categories.filter((cat, index) => index !== i)
-        });
-    };
-
-    const handleEditorChange = content => {
-        setInputs({
-            ...inputs,
-            content 
-        });
-    };
 
     const addNewPost = e => {
         e.preventDefault();
