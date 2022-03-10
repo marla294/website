@@ -10,54 +10,77 @@ import ManageFormStyles from './Styles/ManageFormStyles';
 import Submit from './Styles/Submit';
 
 const AddPost = (props) => {
-    const [date, setDate] = useState(new Date());
-    const [title, setTitle] = useState("");
-    const [status, setStatus] = useState("draft");
-    const [categories, setCategories] = useState([]);
-    const [content, setContent] = useState("");
-    const [headerImage, setHeaderImage] = useState(null);
+    const [inputs, setInputs] = useState({
+        date: new Date(),
+        title: '',
+        status: 'draft',
+        categories: [],
+        content: '',
+        headerImage: null,
+    });
     
-    const handleDateChange = updatedDate => {
-        setDate(updatedDate);
+    const handleDateChange = date => {
+        setInputs({
+            ...inputs,
+            date
+        });
     };
 
     const handleHeaderImageChange = event => {
-        setHeaderImage(event.target.files[0]);
+        setInputs({
+            ...inputs,
+            headerImage: event.target.files[0]
+        });
     }
 
-    const handleTitleChange = updatedTitle => {
-        setTitle(updatedTitle.currentTarget.value);
+    const handleTitleChange = event => {
+        setInputs({
+            ...inputs,
+            title: event.currentTarget.value,
+        });
     };
 
-    const handleStatusChange = updatedStatus => {
-        setStatus(updatedStatus.currentTarget.value);
+    const handleStatusChange = event => {
+        setInputs({
+            ...inputs,
+            status: event.currentTarget.value
+        });
     };
 
     const handleCategoryAddition = category => {
-        setCategories([...categories, category]);
+        setInputs({
+            ...inputs,
+            categories: [...inputs.categories, category]
+        });
     };
 
     const handleCategoryDeletion = i => {
-        setCategories(categories.filter((cat, index) => index !== i));
+        setInputs({
+            ...inputs,
+            categories: inputs.categories.filter((cat, index) => index !== i)
+        });
     };
 
-    const handleEditorChange = updatedContent => {
-        setContent(updatedContent);
+    const handleEditorChange = content => {
+        setInputs({
+            ...inputs,
+            content 
+        });
     };
 
     const addNewPost = e => {
         e.preventDefault();
         const post = {
-            date: date.toDateString(),
-            title,
-            status,
-            categories,
-            content,
+            date: inputs.date.toDateString(),
+            title: inputs.title,
+            status: inputs.status,
+            categories: inputs.categories,
+            content: inputs.content,
             id: `Post_${new Date().getTime()}`
         };
 
         props.addNewPost(post);
-        props.uploadPostHeader(headerImage, post.id);
+        props.uploadPostHeader(inputs.headerImage, post.id);
     };
 
     return (
@@ -69,7 +92,7 @@ const AddPost = (props) => {
                     <label>Date:</label>
                     <div>
                         <DatePicker 
-                            selected={date}
+                            selected={inputs.date}
                             onChange={handleDateChange}
                         />
                     </div>
@@ -84,14 +107,14 @@ const AddPost = (props) => {
                         type="text"
                         name="title"
                         onChange={handleTitleChange}
-                        value={title}
+                        value={inputs.title}
                     />
                     <label>Status:</label>
                     <select 
                         type="text" 
                         name="status" 
                         onChange={handleStatusChange} 
-                        value={status}
+                        value={inputs.status}
                     >
                         <option value="draft">Draft</option>
                         <option value="public">Public</option>
@@ -100,7 +123,7 @@ const AddPost = (props) => {
                     <label>Categories:</label>
                     <div>
                         <ReactTags 
-                            tags={categories}
+                            tags={inputs.categories}
                             delimiters={[188, 13]}
                             handleAddition={handleCategoryAddition}
                             handleDelete={handleCategoryDeletion}
@@ -109,7 +132,7 @@ const AddPost = (props) => {
                     <label>Post Content:</label>
                     <Editor
                         apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
-                        value={content}
+                        value={inputs.content}
                         onEditorChange={handleEditorChange}
                     />
                     <Submit type="submit">Submit</Submit>
