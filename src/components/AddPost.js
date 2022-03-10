@@ -9,14 +9,13 @@ import ManageContent from './Styles/ManageContent';
 import ManageFormStyles from './Styles/ManageFormStyles';
 import Submit from './Styles/Submit';
 
-const ManagePost = (props) => {
+const AddPost = (props) => {
     const [date, setDate] = useState(new Date());
     const [title, setTitle] = useState("");
     const [status, setStatus] = useState("draft");
     const [categories, setCategories] = useState([]);
     const [content, setContent] = useState("");
     const [headerImage, setHeaderImage] = useState(null);
-    const [hasHeaderImage, setHasHeaderImage] = useState(false);
     
     const handleDateChange = updatedDate => {
         setDate(updatedDate);
@@ -60,26 +59,6 @@ const ManagePost = (props) => {
         props.addNewPost(post);
         props.uploadPostHeader(headerImage, post.id);
     };
-
-    const loadPost = (postId) => {
-        props.posts.forEach(post => {
-			if (post.id === postId) {
-				setDate(Date.parse(post.date));
-                setTitle(post.title);
-                setStatus(post.status);
-                setContent(post.content);
-                setCategories(post.categories);
-			}
-		});
-	};
-
-    const getPostHeaderUrl = (postId) => {
-		const postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
-
-		postImageRef.getDownloadURL().then(url => {
-			setHeaderImage(url);
-		});
-	};
 
     return (
         <React.Fragment>
@@ -143,4 +122,4 @@ const ManagePost = (props) => {
 
 }
 
-export default ManagePost;
+export default AddPost;
