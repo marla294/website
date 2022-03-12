@@ -9,6 +9,7 @@ import Blog from "./Blog";
 import Projects from './Projects';
 import ManageAbout from "./ManageAbout";
 import AddPost from "./AddPost";
+import EditPost from './EditPost';
 import Manage from './Manage';
 import base, { firebaseStorage } from '../base';
 
@@ -121,6 +122,15 @@ class Router extends React.Component {
 							return <AddPost
 								addNewPost={this.addNewPost}
 								uploadPostHeader={this.uploadPostHeader}
+								{...props}
+							/>
+						}} />
+						<Route path="/Manage/Post/Edit/:Slug" render={(props) => {
+							return <EditPost
+								addNewPost={this.addNewPost}
+								uploadPostHeader={this.uploadPostHeader}
+								posts={this.state.data.posts} 
+								storageRef={this.storageRef}
 								{...props}
 							/>
 						}} />
