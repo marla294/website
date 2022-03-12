@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -27,6 +28,8 @@ const AddPost = (props) => {
     headerImage: null,
   });
 
+  const [isUploadComplete, setIsUploadComplete] = useState(false);
+
   const addNewPost = e => {
     e.preventDefault();
     const post = {
@@ -40,6 +43,7 @@ const AddPost = (props) => {
 
     props.addNewPost(post);
     props.uploadPostHeader(inputs.headerImage, post.id);
+    setIsUploadComplete(true);
   };
 
     return (
@@ -47,7 +51,7 @@ const AddPost = (props) => {
         <Wrapper>
           <ManageContent>
             <h1>Add New Blog Post</h1>
-            <ManageFormStyles onSubmit={addNewPost}>
+            <ManageFormStyles onSubmit={addNewPost} style={{display: isUploadComplete ? "none" : "auto"}}>
               <label>Date:</label>
               <div>
                   <DatePicker 
@@ -96,6 +100,10 @@ const AddPost = (props) => {
               />
               <Submit type="submit">Submit</Submit>
             </ManageFormStyles>
+            <div style={{display: isUploadComplete ? "block" : "none"}}>
+              <p>Your post has been submitted.  Thank you.</p>
+              <Submit type="button">Back to manage content</Submit>
+            </div>
           </ManageContent>
         </Wrapper>
         <GlobalStyle />
