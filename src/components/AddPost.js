@@ -9,6 +9,7 @@ import Wrapper from './Styles/Wrapper';
 import ManageContent from './Styles/ManageContent';
 import ManageFormStyles from './Styles/ManageFormStyles';
 import Submit from './Styles/Submit';
+import ButtonStyles from './Styles/ButtonStyles';
 import useForm from '../lib/useForm';
 
 const AddPost = (props) => {
@@ -101,11 +102,11 @@ const AddPost = (props) => {
               <Submit type="submit">Submit</Submit>
             </ManageFormStyles>
             <div style={{display: isUploadComplete ? "block" : "none"}}>
-              <p>Your post has been submitted.  Thank you.</p>
-              <Submit type="button" onClick={(event) => {
+              <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
+              <ButtonStyles type="button" onClick={(event) => {
                 event.preventDefault();
                 props.history.push('/Manage');
-              }}>Back to manage content</Submit>
+              }}>⬅ Back to manage content</ButtonStyles>
             </div>
           </ManageContent>
         </Wrapper>

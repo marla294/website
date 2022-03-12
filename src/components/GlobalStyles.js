@@ -81,4 +81,8 @@ export const GlobalStyle = createGlobalStyle`
 	a:hover {
 		text-decoration: none;
 	}
+
+	button {
+		cursor: pointer;
+	}
 `;
