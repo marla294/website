@@ -102,7 +102,10 @@ const AddPost = (props) => {
             </ManageFormStyles>
             <div style={{display: isUploadComplete ? "block" : "none"}}>
               <p>Your post has been submitted.  Thank you.</p>
-              <Submit type="button">Back to manage content</Submit>
+              <Submit type="button" onClick={(event) => {
+                event.preventDefault();
+                props.history.push('/Manage');
+              }}>Back to manage content</Submit>
             </div>
           </ManageContent>
         </Wrapper>

@@ -117,10 +117,11 @@ class Router extends React.Component {
 										uploadAboutImage={this.uploadAboutImage}
 									/>
 						}} />
-						<Route path="/Manage/Post/Add" render={() => {
+						<Route path="/Manage/Post/Add" render={(props) => {
 							return <AddPost
 								addNewPost={this.addNewPost}
 								uploadPostHeader={this.uploadPostHeader}
+								{...props}
 							/>
 						}} />
 						<Route path="/Manage" render={(props) => {
