@@ -26,7 +26,7 @@ const TitleWrapper = styled.div`
 `;
 
 const MenuWrapper = styled.div`
-	width: 100%
+	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	padding: var(--S04) 0 var(--S03) 0;
