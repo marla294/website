@@ -7,7 +7,7 @@ import { GlobalStyle } from "./GlobalStyles";
 const PostWrapper = styled.div`
 	margin-top: var(--S06);
 	margin-bottom: var(--S07);
-	width: 100%
+	width: 100%;
 	display: grid;
 	justify-items: center;
 `;

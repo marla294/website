@@ -10,19 +10,19 @@ class Manage extends React.Component {
 	};
 
     render() {
-        return (
-            <React.Fragment>
-                <Wrapper>
-                    <ManageContent>
-                        <h1>Manage</h1>
-                        <a onClick={() => {
-                            this.props.history.push('/Manage/About');
-                        }}>Manage About</a>
-                    </ManageContent>
-                </Wrapper>
-                <GlobalStyle />
-            </React.Fragment>
-        );
+      return (
+        <React.Fragment>
+          <Wrapper>
+            <ManageContent>
+              <h1>Manage</h1>
+              <a onClick={() => {
+                  this.props.history.push('/Manage/About');
+              }}>Manage About</a>
+            </ManageContent>
+          </Wrapper>
+          <GlobalStyle />
+        </React.Fragment>
+      );
     }
 }
 

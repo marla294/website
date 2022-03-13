@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,6 +31,20 @@ const EditPost = (props) => {
 
   const [isUploadComplete, setIsUploadComplete] = useState(false);
 
+  const loadPost = (slug) => {
+		const slugify = require("slugify");
+
+		this.props.posts.forEach(post => {
+			const slugTitle = slugify(post.title, { remove: /\./ });
+			if (slugTitle === slug) {
+				// TODO: update useForm hook to allow updating the inputs from here
+        // TODO: show original post header photo and allow updating to new photo
+				// this.getPostHeaderUrl(post.id);
+			}
+		});
+	};
+
+  // TODO: Make this into "Edit post"
   const addNewPost = e => {
     e.preventDefault();
     const post = {
@@ -51,7 +65,7 @@ const EditPost = (props) => {
       <React.Fragment>
         <Wrapper>
           <ManageContent>
-            <h1>Add New Blog Post</h1>
+            <h1>Edit Blog Post</h1>
             <ManageFormStyles onSubmit={addNewPost} style={{display: isUploadComplete ? "none" : "auto"}}>
               <label>Date:</label>
               <div>
