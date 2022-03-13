@@ -15,6 +15,7 @@ import useForm from '../lib/useForm';
 const EditPost = (props) => {
   const { 
     inputs, 
+    setInputs,
     handleChange,
     handleDateChange,
     handleCategoryAddition,

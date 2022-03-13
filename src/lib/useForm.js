@@ -46,6 +46,7 @@ export default function useForm(initial = {}) {
 
   return {
     inputs,
+    setInputs,
     handleChange,
     handleDateChange,
     handleCategoryAddition,
