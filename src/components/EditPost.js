@@ -43,12 +43,12 @@ const EditPost = (props) => {
 		props.posts.forEach(post => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
-        debugger;
         setInputs({
           ...post,
           date: new Date(Date.parse(post.date)),
         });
         setPostId(post.id);
+        debugger;
         // TODO: show original post header photo and allow updating to new photo
 				// this.getPostHeaderUrl(post.id);
 			}
@@ -78,7 +78,7 @@ const EditPost = (props) => {
         <Wrapper>
           <ManageContent>
             <h1>Edit Blog Post</h1>
-            <ManageFormStyles onSubmit={editPost} style={{display: isSubmitComplete ? "none" : "auto"}}>
+            <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "auto"}}>
               <label>Date:</label>
               <div>
                   <DatePicker 
@@ -128,12 +128,19 @@ const EditPost = (props) => {
               <Submit type="submit">Submit</Submit>
             </ManageFormStyles>
               <div style={{display: isSubmitComplete ? "block" : "none"}}>
-              <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
-              <ButtonStyles type="button" onClick={(event) => {
-                event.preventDefault();
-                props.history.push('/Manage');
-              }}>⬅ Back to manage content</ButtonStyles>
-            </div>
+                <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
+                <ButtonStyles type="button" onClick={(event) => {
+                  event.preventDefault();
+                  props.history.push('/Manage');
+                }}>⬅ Back to manage content</ButtonStyles>
+              </div>
+              <div style={{display: postId === null ? "block" : "none"}}>
+                <p style={{marginBottom: "10px"}}>We can't find this post.  Want to add a new post?  Go back to the Manage page and click "Add Post" button.</p>
+                <ButtonStyles type="button" onClick={(event) => {
+                  event.preventDefault();
+                  props.history.push('/Manage');
+                }}>⬅ Back to manage content</ButtonStyles>
+              </div>
           </ManageContent>
         </Wrapper>
         <GlobalStyle />
