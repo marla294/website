@@ -34,7 +34,7 @@ const EditPost = (props) => {
 
   useEffect(() => {
     loadPost(props.match.params.Slug);
-  });
+  }, [props.posts]);
 
   const loadPost = (slug) => {
 		const slugify = require("slugify");
@@ -42,9 +42,10 @@ const EditPost = (props) => {
 		props.posts.forEach(post => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
-        debugger;
-				// TODO: update useForm hook to allow updating the inputs from here
-        setInputs(post);
+        setInputs({
+          ...post,
+          date: Date.parse(post.date),
+        });
         // TODO: show original post header photo and allow updating to new photo
 				// this.getPostHeaderUrl(post.id);
 			}
