@@ -31,6 +31,7 @@ const EditPost = (props) => {
   });
 
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
+  const [postId, setPostId] = useState(null);
 
   useEffect(() => {
     loadPost(props.match.params.Slug);
@@ -42,17 +43,19 @@ const EditPost = (props) => {
 		props.posts.forEach(post => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
+        debugger;
         setInputs({
           ...post,
-          date: Date.parse(post.date),
+          date: new Date(Date.parse(post.date)),
         });
+        setPostId(post.id);
         // TODO: show original post header photo and allow updating to new photo
 				// this.getPostHeaderUrl(post.id);
 			}
+      // TODO: didn't find the post?  Show a message
 		});
 	};
 
-  // TODO: Make this into "Edit post"
   const editPost = e => {
     e.preventDefault();
     const post = {
@@ -61,10 +64,11 @@ const EditPost = (props) => {
       status: inputs.status,
       categories: inputs.categories,
       content: inputs.content,
-      id: `Post_${new Date().getTime()}`
+      id: postId,
     };
 
     props.editPost(post);
+    // TODO: change this to update the post header image
     // props.uploadPostHeader(inputs.headerImage, post.id);
     setIsSubmitComplete(true);
   };
