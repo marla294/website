@@ -123,7 +123,7 @@ const EditPost = (props) => {
               />
               <Submit type="submit">Submit</Submit>
             </ManageFormStyles>
-            <div style={{display: isSubmitComplete ? "block" : "none"}}>
+              <div style={{display: isSubmitComplete ? "block" : "none"}}>
               <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
               <ButtonStyles type="button" onClick={(event) => {
                 event.preventDefault();

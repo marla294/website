@@ -37,7 +37,7 @@ class Router extends React.Component {
 	}
 
 	componentWillUnmount() {
-        base.removeBinding(this.ref);
+    base.removeBinding(this.ref);
 		base.removeBinding(this.storageRef);
     }
 
@@ -73,7 +73,18 @@ class Router extends React.Component {
 			about: {...this.state.data.about},
 			posts: updatedPosts
 		}});
-	}
+	};
+
+	editPost = (post) => {
+		debugger;
+		const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
+		const updatedPosts = [...filteredPosts, post];
+
+		this.setState({ data: {
+			about: {...this.state.data.about},
+			posts: updatedPosts
+		}});
+	};
 
 	render() {
 		return (
@@ -127,7 +138,7 @@ class Router extends React.Component {
 						}} />
 						<Route path="/Manage/Post/Edit/:Slug" render={(props) => {
 							return <EditPost
-								addNewPost={this.addNewPost}
+								editPost={this.editPost}
 								uploadPostHeader={this.uploadPostHeader}
 								posts={this.state.data.posts} 
 								storageRef={this.storageRef}
