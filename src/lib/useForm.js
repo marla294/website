@@ -26,7 +26,7 @@ export default function useForm(initial = {}) {
   function handleCategoryAddition(category) {
     setInputs({
       ...inputs,
-      categories: [...inputs.categories, category]
+      categories: inputs.categories ? [...inputs.categories, category] : [category],
     });
   };
 
