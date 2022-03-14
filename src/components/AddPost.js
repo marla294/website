@@ -29,7 +29,7 @@ const AddPost = (props) => {
     headerImage: null,
   });
 
-  const [isUploadComplete, setIsUploadComplete] = useState(false);
+  const [isSubmitComplete, setIsSubmitComplete] = useState(false);
 
   const addNewPost = e => {
     e.preventDefault();
@@ -44,7 +44,7 @@ const AddPost = (props) => {
 
     props.addNewPost(post);
     props.uploadPostHeader(inputs.headerImage, post.id);
-    setIsUploadComplete(true);
+    setIsSubmitComplete(true);
   };
 
     return (
@@ -52,7 +52,7 @@ const AddPost = (props) => {
         <Wrapper>
           <ManageContent>
             <h1>Add New Blog Post</h1>
-            <ManageFormStyles onSubmit={addNewPost} style={{display: isUploadComplete ? "none" : "auto"}}>
+            <ManageFormStyles onSubmit={addNewPost} style={{display: isSubmitComplete ? "none" : "auto"}}>
               <label>Date:</label>
               <div>
                   <DatePicker 
@@ -101,7 +101,7 @@ const AddPost = (props) => {
               />
               <Submit type="submit">Submit</Submit>
             </ManageFormStyles>
-            <div style={{display: isUploadComplete ? "block" : "none"}}>
+            <div style={{display: isSubmitComplete ? "block" : "none"}}>
               <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
               <ButtonStyles type="button" onClick={(event) => {
                 event.preventDefault();
