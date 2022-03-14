@@ -53,7 +53,7 @@ const EditPost = (props) => {
 	};
 
   // TODO: Make this into "Edit post"
-  const addNewPost = e => {
+  const editPost = e => {
     e.preventDefault();
     const post = {
       date: inputs.date.toDateString(),
@@ -64,8 +64,8 @@ const EditPost = (props) => {
       id: `Post_${new Date().getTime()}`
     };
 
-    props.addNewPost(post);
-    props.uploadPostHeader(inputs.headerImage, post.id);
+    props.editPost(post);
+    // props.uploadPostHeader(inputs.headerImage, post.id);
     setIsSubmitComplete(true);
   };
 
@@ -74,7 +74,7 @@ const EditPost = (props) => {
         <Wrapper>
           <ManageContent>
             <h1>Edit Blog Post</h1>
-            <ManageFormStyles onSubmit={addNewPost} style={{display: isSubmitComplete ? "none" : "auto"}}>
+            <ManageFormStyles onSubmit={editPost} style={{display: isSubmitComplete ? "none" : "auto"}}>
               <label>Date:</label>
               <div>
                   <DatePicker 
