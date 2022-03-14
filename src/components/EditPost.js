@@ -32,13 +32,19 @@ const EditPost = (props) => {
 
   const [isUploadComplete, setIsUploadComplete] = useState(false);
 
+  useEffect(() => {
+    loadPost(props.match.params.Slug);
+  });
+
   const loadPost = (slug) => {
 		const slugify = require("slugify");
 
-		this.props.posts.forEach(post => {
+		props.posts.forEach(post => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
+        debugger;
 				// TODO: update useForm hook to allow updating the inputs from here
+        setInputs(post);
         // TODO: show original post header photo and allow updating to new photo
 				// this.getPostHeaderUrl(post.id);
 			}
