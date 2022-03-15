@@ -14,6 +14,7 @@ const Manage = ({ posts, history }) => {
           <a onClick={() => {
             history.push('/Manage/About');
           }}>Manage About</a>
+          <h3>Manage Posts</h3>
           {posts.map(post => {
             return <p>{post.title}</p>;
           })}
