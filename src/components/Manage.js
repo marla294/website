@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Wrapper from './Styles/Wrapper';
-import ManageContentStyles from './Styles/ManageContent';
+import ManageContentStyles from './Styles/ManageContentStyles';
 import { GlobalStyle } from "./GlobalStyles";
 
 const Manage = ({ posts, history }) => {

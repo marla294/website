@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { WithContext as ReactTags } from 'react-tag-input';
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
-import ManageContentStyles from './Styles/ManageContent';
+import ManageContentStyles from './Styles/ManageContentStyles';
 import ManageFormStyles from './Styles/ManageFormStyles';
 import Submit from './Styles/Submit';
 import ButtonStyles from './Styles/ButtonStyles';

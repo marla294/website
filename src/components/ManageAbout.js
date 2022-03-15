@@ -4,7 +4,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import firebase from 'firebase';
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
-import ManageContentStyles from './Styles/ManageContent';
+import ManageContentStyles from './Styles/ManageContentStyles';
 import Submit from './Styles/Submit';
 import ManageFormStyles from "./Styles/ManageFormStyles";
 import Login from './Login';

@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { WithContext as ReactTags } from 'react-tag-input';
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
-import ManageContent from './Styles/ManageContent';
+import ManageContentStyles from './Styles/ManageContentStyles';
 import ManageFormStyles from './Styles/ManageFormStyles';
 import Submit from './Styles/Submit';
 import ButtonStyles from './Styles/ButtonStyles';
@@ -71,7 +71,7 @@ const EditPost = (props) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <ManageContent>
+        <ManageContentStyles>
           <h1>Edit Blog Post</h1>
           <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
             <label>Date:</label>
@@ -136,7 +136,7 @@ const EditPost = (props) => {
               props.history.push('/Manage');
             }}>⬅ Back to manage content</ButtonStyles>
           </div>
-        </ManageContent>
+        </ManageContentStyles>
       </Wrapper>
       <GlobalStyle />
     </React.Fragment>
