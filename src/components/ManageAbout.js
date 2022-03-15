@@ -4,7 +4,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import firebase from 'firebase';
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
-import ManageContent from './Styles/ManageContent';
+import ManageContentStyles from './Styles/ManageContent';
 import Submit from './Styles/Submit';
 import ManageFormStyles from "./Styles/ManageFormStyles";
 import Login from './Login';
@@ -102,7 +102,7 @@ class ManageAbout extends React.Component {
         return (
             <React.Fragment>
                 <Wrapper>
-                    <ManageContent>
+                    <ManageContentStyles>
                         <h1>Update About Page</h1>
                         <ManageFormStyles onSubmit={this.updateAbout}>
                             <label>Image:</label>
@@ -119,7 +119,7 @@ class ManageAbout extends React.Component {
                             />
                             <Submit type="submit">Submit</Submit>
                         </ManageFormStyles>
-                    </ManageContent>
+                    </ManageContentStyles>
                 </Wrapper>
                 <GlobalStyle />
             </React.Fragment>

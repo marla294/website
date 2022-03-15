@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Wrapper from './Styles/Wrapper';
-import ManageContent from './Styles/ManageContent';
+import ManageContentStyles from './Styles/ManageContent';
 import { GlobalStyle } from "./GlobalStyles";
 
 const Manage = ({ posts, history }) => {
@@ -9,7 +9,7 @@ const Manage = ({ posts, history }) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <ManageContent>
+        <ManageContentStyles>
           <h1>Manage</h1>
           <a onClick={() => {
             history.push('/Manage/About');
@@ -18,7 +18,7 @@ const Manage = ({ posts, history }) => {
           {posts.map(post => {
             return <p>{post.title}</p>;
           })}
-        </ManageContent>
+        </ManageContentStyles>
       </Wrapper>
       <GlobalStyle />
     </React.Fragment>

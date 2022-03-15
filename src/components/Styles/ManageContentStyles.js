@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ManageContent = styled.div`
+const ManageContentStyles = styled.div`
 	width: 100%;
   padding: 0 20px;
 
@@ -19,4 +19,4 @@ const ManageContent = styled.div`
   }
 `;
 
-export default ManageContent;
+export default ManageContentStyles;
