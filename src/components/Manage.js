@@ -6,6 +6,15 @@ import { GlobalStyle } from "./GlobalStyles";
 
 const Manage = ({ posts, history }) => {
 
+  const renderPostLinks = ({id, title}) => {
+    const slugify = require("slugify");
+    const slugTitle = slugify(title, { remove: /\./ });
+    
+    return <a key={id} onClick={() => {
+      history.push(`/Manage/Post/Edit/${slugTitle}`);
+    }}>{title}</a>
+  };
+
   return (
     <React.Fragment>
       <Wrapper>
@@ -16,7 +25,7 @@ const Manage = ({ posts, history }) => {
           }}>Manage About</a>
           <h3>Manage Posts</h3>
           {posts.map(post => {
-            return <p>{post.title}</p>;
+            return renderPostLinks(post);
           })}
         </ManageContentStyles>
       </Wrapper>
