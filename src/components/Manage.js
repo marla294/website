@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import Wrapper from './Styles/Wrapper';
 import ManageContentStyles from './Styles/ManageContentStyles';
 import { GlobalStyle } from "./GlobalStyles";
+import ButtonStyles from './Styles/ButtonStyles';
 
 const Manage = ({ posts, history }) => {
 
   const renderPostLinks = ({id, title}) => {
     const slugify = require("slugify");
     const slugTitle = slugify(title, { remove: /\./ });
-    
+
     return <a key={id} onClick={() => {
       history.push(`/Manage/Post/Edit/${slugTitle}`);
     }}>{title}</a>
@@ -24,9 +25,15 @@ const Manage = ({ posts, history }) => {
             history.push('/Manage/About');
           }}>Manage About</a>
           <h3>Manage Posts</h3>
-          {posts.map(post => {
-            return renderPostLinks(post);
-          })}
+          <div>
+            {posts.map(post => {
+              return renderPostLinks(post);
+            })}
+          </div>
+          <ButtonStyles type="button" onClick={(event) => {
+            event.preventDefault();
+            history.push('/Manage/Post/Add');
+          }}>Add Blog Post</ButtonStyles>
         </ManageContentStyles>
       </Wrapper>
       <GlobalStyle />
