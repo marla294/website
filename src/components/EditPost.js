@@ -48,8 +48,6 @@ const EditPost = (props) => {
           date: new Date(Date.parse(post.date)),
         });
         setPostId(post.id);
-        // TODO: show original post header photo and allow updating to new photo
-				// this.getPostHeaderUrl(post.id);
 			}
 		});
 	};
@@ -66,8 +64,7 @@ const EditPost = (props) => {
     };
 
     props.editPost(post);
-    // TODO: change this to update the post header image
-    // props.uploadPostHeader(inputs.headerImage, post.id);
+    props.uploadPostHeader(inputs.headerImage, post.id);
     setIsSubmitComplete(true);
   };
 
