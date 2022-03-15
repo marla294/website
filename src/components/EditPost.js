@@ -68,79 +68,79 @@ const EditPost = (props) => {
     setIsSubmitComplete(true);
   };
 
-    return (
-      <React.Fragment>
-        <Wrapper>
-          <ManageContent>
-            <h1>Edit Blog Post</h1>
-            <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
-              <label>Date:</label>
-              <div>
-                  <DatePicker 
-                      selected={inputs.date}
-                      onChange={handleDateChange}
-                  />
-              </div>
-              <label>Image:</label>
-              <input 
-                  name="headerImage"
-                  type="file" 
-                  onChange={handleChange} 
-              />
-              <label>Title:</label>
-              <input 
-                  type="text"
-                  name="title"
-                  onChange={handleChange}
-                  value={inputs.title}
-              />
-              <label>Status:</label>
-              <select 
-                  type="text" 
-                  name="status" 
-                  onChange={handleChange} 
-                  value={inputs.status}
-              >
-                  <option value="draft">Draft</option>
-                  <option value="public">Public</option>
-                  <option value="archive">Archive</option>
-              </select>
-              <label>Categories:</label>
-              <div>
-                  <ReactTags 
-                      tags={inputs.categories}
-                      delimiters={[188, 13]}
-                      handleAddition={handleCategoryAddition}
-                      handleDelete={handleCategoryDeletion}
-                  />
-              </div>
-              <label>Post Content:</label>
-              <Editor
-                  apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
-                  value={inputs.content}
-                  onEditorChange={handleEditorChange}
-              />
-              <Submit type="submit">Submit</Submit>
-            </ManageFormStyles>
-            <div style={{display: isSubmitComplete ? "block" : "none"}}>
-              <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
-              <ButtonStyles type="button" onClick={(event) => {
-                event.preventDefault();
-                props.history.push('/Manage');
-              }}>⬅ Back to manage content</ButtonStyles>
+  return (
+    <React.Fragment>
+      <Wrapper>
+        <ManageContent>
+          <h1>Edit Blog Post</h1>
+          <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
+            <label>Date:</label>
+            <div>
+                <DatePicker 
+                    selected={inputs.date}
+                    onChange={handleDateChange}
+                />
             </div>
-            <div style={{display: postId === null ? "block" : "none"}}>
-              <p style={{marginBottom: "10px"}}>We can't find this post.  Want to add a new post?  Go back to the Manage page and click "Add Post" button.</p>
-              <ButtonStyles type="button" onClick={(event) => {
-                event.preventDefault();
-                props.history.push('/Manage');
-              }}>⬅ Back to manage content</ButtonStyles>
+            <label>Image:</label>
+            <input 
+                name="headerImage"
+                type="file" 
+                onChange={handleChange} 
+            />
+            <label>Title:</label>
+            <input 
+                type="text"
+                name="title"
+                onChange={handleChange}
+                value={inputs.title}
+            />
+            <label>Status:</label>
+            <select 
+                type="text" 
+                name="status" 
+                onChange={handleChange} 
+                value={inputs.status}
+            >
+                <option value="draft">Draft</option>
+                <option value="public">Public</option>
+                <option value="archive">Archive</option>
+            </select>
+            <label>Categories:</label>
+            <div>
+                <ReactTags 
+                    tags={inputs.categories}
+                    delimiters={[188, 13]}
+                    handleAddition={handleCategoryAddition}
+                    handleDelete={handleCategoryDeletion}
+                />
             </div>
-          </ManageContent>
-        </Wrapper>
-        <GlobalStyle />
-      </React.Fragment>
-    );
+            <label>Post Content:</label>
+            <Editor
+                apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
+                value={inputs.content}
+                onEditorChange={handleEditorChange}
+            />
+            <Submit type="submit">Submit</Submit>
+          </ManageFormStyles>
+          <div style={{display: isSubmitComplete ? "block" : "none"}}>
+            <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
+            <ButtonStyles type="button" onClick={(event) => {
+              event.preventDefault();
+              props.history.push('/Manage');
+            }}>⬅ Back to manage content</ButtonStyles>
+          </div>
+          <div style={{display: postId === null ? "block" : "none"}}>
+            <p style={{marginBottom: "10px"}}>We can't find this post.  Want to add a new post?  Go back to the Manage page and click "Add Post" button.</p>
+            <ButtonStyles type="button" onClick={(event) => {
+              event.preventDefault();
+              props.history.push('/Manage');
+            }}>⬅ Back to manage content</ButtonStyles>
+          </div>
+        </ManageContent>
+      </Wrapper>
+      <GlobalStyle />
+    </React.Fragment>
+  );
 }
 
 export default EditPost;

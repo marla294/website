@@ -4,26 +4,24 @@ import Wrapper from './Styles/Wrapper';
 import ManageContent from './Styles/ManageContent';
 import { GlobalStyle } from "./GlobalStyles";
 
-class Manage extends React.Component {
-	static propTypes = {
-		history: PropTypes.object
-	};
+const Manage = (props) => {
+  return (
+    <React.Fragment>
+      <Wrapper>
+        <ManageContent>
+          <h1>Manage</h1>
+          <a onClick={() => {
+              props.history.push('/Manage/About');
+          }}>Manage About</a>
+        </ManageContent>
+      </Wrapper>
+      <GlobalStyle />
+    </React.Fragment>
+  );
+}
 
-    render() {
-      return (
-        <React.Fragment>
-          <Wrapper>
-            <ManageContent>
-              <h1>Manage</h1>
-              <a onClick={() => {
-                  this.props.history.push('/Manage/About');
-              }}>Manage About</a>
-            </ManageContent>
-          </Wrapper>
-          <GlobalStyle />
-        </React.Fragment>
-      );
-    }
+Manage.propTypes = {
+  history: PropTypes.object
 }
 
 export default Manage;
