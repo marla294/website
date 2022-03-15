@@ -17,6 +17,10 @@ const ManageContentStyles = styled.div`
     font-size: var(--F04);
     margin-top: var(--S05);
   }
+
+  a:hover {
+    text-decoration: underline;
+  }
 `;
 
 export default ManageContentStyles;

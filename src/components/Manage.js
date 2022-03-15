@@ -1,9 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from 'styled-components';
 import Wrapper from './Styles/Wrapper';
 import ManageContentStyles from './Styles/ManageContentStyles';
 import { GlobalStyle } from "./GlobalStyles";
 import ButtonStyles from './Styles/ButtonStyles';
+
+const PostListStyles = styled.ul`
+  margin-bottom: var(--S05);
+  list-style-type: none;
+
+  li {
+    cursor: pointer;
+  }
+
+  li:hover {
+    text-decoration: underline;
+  }
+`;
 
 const Manage = ({ posts, history }) => {
 
@@ -11,25 +25,25 @@ const Manage = ({ posts, history }) => {
     const slugify = require("slugify");
     const slugTitle = slugify(title, { remove: /\./ });
 
-    return <a key={id} onClick={() => {
+    return <li key={id} onClick={() => {
       history.push(`/Manage/Post/Edit/${slugTitle}`);
-    }}>{title}</a>
+    }}>{title}</li>
   };
 
   return (
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>
-          <h1>Manage</h1>
+          <h1>Manage Ur Website</h1>
           <a onClick={() => {
             history.push('/Manage/About');
-          }}>Manage About</a>
+          }}>Edit About Page</a>
           <h3>Manage Posts</h3>
-          <div>
+          <PostListStyles>
             {posts.map(post => {
               return renderPostLinks(post);
             })}
-          </div>
+          </PostListStyles>
           <ButtonStyles type="button" onClick={(event) => {
             event.preventDefault();
             history.push('/Manage/Post/Add');
