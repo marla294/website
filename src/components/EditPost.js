@@ -122,20 +122,20 @@ const EditPost = (props) => {
               />
               <Submit type="submit">Submit</Submit>
             </ManageFormStyles>
-              <div style={{display: isSubmitComplete ? "block" : "none"}}>
-                <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
-                <ButtonStyles type="button" onClick={(event) => {
-                  event.preventDefault();
-                  props.history.push('/Manage');
-                }}>⬅ Back to manage content</ButtonStyles>
-              </div>
-              <div style={{display: postId === null ? "block" : "none"}}>
-                <p style={{marginBottom: "10px"}}>We can't find this post.  Want to add a new post?  Go back to the Manage page and click "Add Post" button.</p>
-                <ButtonStyles type="button" onClick={(event) => {
-                  event.preventDefault();
-                  props.history.push('/Manage');
-                }}>⬅ Back to manage content</ButtonStyles>
-              </div>
+            <div style={{display: isSubmitComplete ? "block" : "none"}}>
+              <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
+              <ButtonStyles type="button" onClick={(event) => {
+                event.preventDefault();
+                props.history.push('/Manage');
+              }}>⬅ Back to manage content</ButtonStyles>
+            </div>
+            <div style={{display: postId === null ? "block" : "none"}}>
+              <p style={{marginBottom: "10px"}}>We can't find this post.  Want to add a new post?  Go back to the Manage page and click "Add Post" button.</p>
+              <ButtonStyles type="button" onClick={(event) => {
+                event.preventDefault();
+                props.history.push('/Manage');
+              }}>⬅ Back to manage content</ButtonStyles>
+            </div>
           </ManageContent>
         </Wrapper>
         <GlobalStyle />

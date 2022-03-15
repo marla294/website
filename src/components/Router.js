@@ -76,7 +76,6 @@ class Router extends React.Component {
 	};
 
 	editPost = (post) => {
-		debugger;
 		const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
 		const updatedPosts = [...filteredPosts, post];
 
