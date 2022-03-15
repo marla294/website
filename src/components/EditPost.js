@@ -48,11 +48,9 @@ const EditPost = (props) => {
           date: new Date(Date.parse(post.date)),
         });
         setPostId(post.id);
-        debugger;
         // TODO: show original post header photo and allow updating to new photo
 				// this.getPostHeaderUrl(post.id);
 			}
-      // TODO: didn't find the post?  Show a message
 		});
 	};
 
@@ -78,7 +76,7 @@ const EditPost = (props) => {
         <Wrapper>
           <ManageContent>
             <h1>Edit Blog Post</h1>
-            <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "auto"}}>
+            <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
               <label>Date:</label>
               <div>
                   <DatePicker 
