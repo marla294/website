@@ -4,15 +4,19 @@ import Wrapper from './Styles/Wrapper';
 import ManageContent from './Styles/ManageContent';
 import { GlobalStyle } from "./GlobalStyles";
 
-const Manage = (props) => {
+const Manage = ({ posts, history }) => {
+
   return (
     <React.Fragment>
       <Wrapper>
         <ManageContent>
           <h1>Manage</h1>
           <a onClick={() => {
-              props.history.push('/Manage/About');
+            history.push('/Manage/About');
           }}>Manage About</a>
+          {posts.map(post => {
+            return <p>{post.title}</p>;
+          })}
         </ManageContent>
       </Wrapper>
       <GlobalStyle />
@@ -21,7 +25,8 @@ const Manage = (props) => {
 }
 
 Manage.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  posts: PropTypes.array
 }
 
 export default Manage;

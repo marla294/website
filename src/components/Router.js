@@ -146,6 +146,7 @@ class Router extends React.Component {
 						}} />
 						<Route path="/Manage" render={(props) => {
 							return <Manage 
+								posts={this.state.data.posts}
 								{...props}
 							/>
 						}} />
