@@ -19,12 +19,11 @@ const ManageAbout = (props) => {
     handleChange,
     handleEditorChange,
   } = useForm({
-    blurb: '',
+    content: '',
     aboutImage: null,
   });
 
-  const [uid, setUid] = useState(null);
-  const [owner, setOwner] = useState(null);
+  const [auth, setAuth] = useState({});
 
   useEffect(() => {
     firebase.auth().onIdTokenChanged(user => {
@@ -37,15 +36,79 @@ const ManageAbout = (props) => {
   useEffect(() => {
     setInputs({
       ...inputs,
-      blurb: props.about.blurb
+      content: props.about.blurb
     });
   }, [props.about]);
 
   const updateAbout = (e) => {
     e.preventDefault();
-    props.updateAbout({ blurb: inputs.blurb });
+    props.updateAbout({ blurb: inputs.content });
     props.uploadAboutImage(inputs.aboutImage);
   };
+
+  const authHandler = async (authData) => {
+    const owner = await base.fetch('owner', {context: this});
+
+    setAuth({
+      ...auth,
+      uid: authData.user.uid,
+      owner: owner || authData.user.uid,
+    });
+  };
+
+  const authenticate = () => {
+    const authProvider = new firebase.auth['GithubAuthProvider']();
+
+    firebaseApp
+      .auth()
+      .signInWithPopup(authProvider)
+      .then(authHandler);
+  };
+
+  const logout = async () => {
+    await firebase.auth().signOut();
+    setAuth({
+      ...auth,
+      uid: null,
+    });
+  };
+
+  if (!auth.uid) {
+    return <Login authenticate={authenticate} />
+  }
+
+  if (auth.uid !== auth.owner) {
+    return <div>
+      <p>Hey, you're not Marla Foreman!  Stop trying to break into my site!</p>
+      <button onClick={logout}>Log Out!</button>
+    </div>
+  }
+
+  return (
+    <React.Fragment>
+      <Wrapper>
+        <ManageContentStyles>
+          <h1>Update About Page</h1>
+          <ManageFormStyles onSubmit={updateAbout}>
+            <label>Image:</label>
+            <input 
+              name="aboutImage"
+              type="file" 
+              onChange={handleChange} 
+            />
+            <label>Blurb:</label>
+            <Editor
+              apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
+              value={inputs.content}
+              onEditorChange={handleEditorChange}
+            />
+            <Submit type="submit">Submit</Submit>
+          </ManageFormStyles>
+        </ManageContentStyles>
+      </Wrapper>
+      <GlobalStyle />
+    </React.Fragment>
+  );
 };
 
 ManageAbout.propTypes = {
@@ -53,116 +116,6 @@ ManageAbout.propTypes = {
   about: PropTypes.shape({
     blurb: PropTypes.string
   }),
-};
-
-class ManageAbout extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.handleEditorChange = this.handleEditorChange.bind(this);
-  // }
-
-  // state = {
-  //   about: {},
-  //   aboutImage: null,
-  //   uid: null,
-  //   owner: null,
-  // };
-
-  // componentDidMount() {
-  //   firebase.auth().onIdTokenChanged(user => {
-  //     if (user) {
-  //       this.authHandler({user});
-  //     }
-  //   });
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.about !== prevProps.about) {
-  //     this.setState({about: {...this.props.about}});
-  //   }
-  // }
-
-  // handleFileChange = (event) => {
-  //   this.setState({aboutImage: event.target.files[0]});
-  // };
-
-  // handleEditorChange(value) {
-  //   const updatedAbout = {
-  //     ...this.state.about,
-  //     blurb: value,
-  //   };
-  //   this.setState({about: updatedAbout});
-  // }
-
-  // updateAbout = (e) => {
-  //   e.preventDefault();
-  //   this.props.updateAbout(this.state.about);
-  //   this.props.uploadAboutImage(this.state.aboutImage);
-  // };
-
-  authHandler = async (authData) => {
-    const owner = await base.fetch('owner', {context: this});
-    
-    this.setState({
-      uid: authData.user.uid,
-      owner: owner || authData.user.uid
-    });
-  };
-
-  authenticate = () => {
-    const authProvider = new firebase.auth['GithubAuthProvider']();
-    firebaseApp
-      .auth()
-      .signInWithPopup(authProvider)
-      .then(this.authHandler);
-  };
-
-  logout = async () => {
-    await firebase.auth().signOut();
-    this.setState({ uid: null });
-  };
-
-  render() {
-    const logout = <button onClick={this.logout}>Log Out!</button>
-
-    if (!this.state.uid) {
-      return <Login authenticate={this.authenticate} />
-    }
-
-    if (this.state.uid !== this.state.owner) {
-      return <div>
-        <p>Hey, you're not Marla Foreman!  Stop trying to break into my site!</p>
-        {logout}
-      </div>
-    }
-
-    return (
-      <React.Fragment>
-        <Wrapper>
-          <ManageContentStyles>
-            <h1>Update About Page</h1>
-            <ManageFormStyles onSubmit={this.updateAbout}>
-              <label>Image:</label>
-              <input 
-                name="aboutImage"
-                type="file" 
-                onChange={this.handleFileChange} 
-              />
-              <label>Blurb:</label>
-              <Editor
-                apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
-                value={this.state.about.blurb}
-                onEditorChange={this.handleEditorChange}
-              />
-              <Submit type="submit">Submit</Submit>
-            </ManageFormStyles>
-          </ManageContentStyles>
-        </Wrapper>
-        <GlobalStyle />
-      </React.Fragment>
-    );
-  }
 };
 
 export default ManageAbout;
