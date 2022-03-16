@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
 import firebase from 'firebase';
@@ -9,27 +10,43 @@ import Submit from './Styles/Submit';
 import ManageFormStyles from "./Styles/ManageFormStyles";
 import Login from './Login';
 import base, { firebaseApp } from '../base';
+import useForm from '../lib/useForm';
+
+const ManageAbout = (props) => {
+  const { 
+    inputs, 
+    setInputs,
+    handleChange,
+    handleEditorChange,
+  } = useForm({
+    blurb: '',
+    aboutImage: null,
+  });
+
+  const [uid, setUid] = useState(null);
+  const [owner, setOwner] = useState(null);
+};
+
+ManageAbout.propTypes = {
+  updateAbout: PropTypes.func,
+  about: PropTypes.shape({
+    blurb: PropTypes.string
+  }),
+};
 
 class ManageAbout extends React.Component {
-  static propTypes = {
-    updateAbout: PropTypes.func,
-    about: PropTypes.shape({
-      blurb: PropTypes.string
-    }),
-  };
+  // constructor(props) {
+  //   super(props);
 
-  constructor(props) {
-    super(props);
+  //   this.handleEditorChange = this.handleEditorChange.bind(this);
+  // }
 
-    this.handleEditorChange = this.handleEditorChange.bind(this);
-  }
-
-  state = {
-    about: {},
-    aboutImage: null,
-    uid: null,
-    owner: null,
-  };
+  // state = {
+  //   about: {},
+  //   aboutImage: null,
+  //   uid: null,
+  //   owner: null,
+  // };
 
   componentDidMount() {
     firebase.auth().onIdTokenChanged(user => {
