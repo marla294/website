@@ -25,6 +25,27 @@ const ManageAbout = (props) => {
 
   const [uid, setUid] = useState(null);
   const [owner, setOwner] = useState(null);
+
+  useEffect(() => {
+    firebase.auth().onIdTokenChanged(user => {
+      if (user) {
+        authHandler({user});
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    setInputs({
+      ...inputs,
+      blurb: props.about.blurb
+    });
+  }, [props.about]);
+
+  const updateAbout = (e) => {
+    e.preventDefault();
+    props.updateAbout({ blurb: inputs.blurb });
+    props.uploadAboutImage(inputs.aboutImage);
+  };
 };
 
 ManageAbout.propTypes = {
@@ -48,37 +69,37 @@ class ManageAbout extends React.Component {
   //   owner: null,
   // };
 
-  componentDidMount() {
-    firebase.auth().onIdTokenChanged(user => {
-      if (user) {
-        this.authHandler({user});
-      }
-    });
-  }
+  // componentDidMount() {
+  //   firebase.auth().onIdTokenChanged(user => {
+  //     if (user) {
+  //       this.authHandler({user});
+  //     }
+  //   });
+  // }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.about !== prevProps.about) {
-      this.setState({about: {...this.props.about}});
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.about !== prevProps.about) {
+  //     this.setState({about: {...this.props.about}});
+  //   }
+  // }
 
-  handleFileChange = (event) => {
-    this.setState({aboutImage: event.target.files[0]});
-  };
+  // handleFileChange = (event) => {
+  //   this.setState({aboutImage: event.target.files[0]});
+  // };
 
-  handleEditorChange(value) {
-    const updatedAbout = {
-      ...this.state.about,
-      blurb: value,
-    };
-    this.setState({about: updatedAbout});
-  }
+  // handleEditorChange(value) {
+  //   const updatedAbout = {
+  //     ...this.state.about,
+  //     blurb: value,
+  //   };
+  //   this.setState({about: updatedAbout});
+  // }
 
-  updateAbout = (e) => {
-    e.preventDefault();
-    this.props.updateAbout(this.state.about);
-    this.props.uploadAboutImage(this.state.aboutImage);
-  };
+  // updateAbout = (e) => {
+  //   e.preventDefault();
+  //   this.props.updateAbout(this.state.about);
+  //   this.props.uploadAboutImage(this.state.aboutImage);
+  // };
 
   authHandler = async (authData) => {
     const owner = await base.fetch('owner', {context: this});
