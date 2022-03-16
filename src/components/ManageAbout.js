@@ -7,7 +7,6 @@ import Wrapper from './Styles/Wrapper';
 import ManageContentStyles from './Styles/ManageContentStyles';
 import Submit from './Styles/Submit';
 import ManageFormStyles from "./Styles/ManageFormStyles";
-import Login from './Login';
 import useForm from '../lib/useForm';
 import useAuth from '../lib/useAuth';
 
@@ -23,9 +22,8 @@ const ManageAbout = (props) => {
   });
 
   const {
-    auth,
-    authenticate,
     logout,
+    authWrapper,
   } = useAuth({});
 
   useEffect(() => {
@@ -40,19 +38,8 @@ const ManageAbout = (props) => {
     props.updateAbout({ blurb: inputs.content });
     props.uploadAboutImage(inputs.aboutImage);
   };
-
-  if (!auth.uid) {
-    return <Login authenticate={authenticate} />
-  }
-
-  if (auth.uid !== auth.owner) {
-    return <div>
-      <p>Hey, you're not Marla Foreman!  Stop trying to break into my site!</p>
-      <button onClick={logout}>Log Out!</button>
-    </div>
-  }
-
-  return (
+  
+  return authWrapper(
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>
@@ -72,11 +59,13 @@ const ManageAbout = (props) => {
             />
             <Submit type="submit">Submit</Submit>
           </ManageFormStyles>
+          <button onClick={logout}>Log Out!</button>
         </ManageContentStyles>
       </Wrapper>
       <GlobalStyle />
     </React.Fragment>
   );
+
 };
 
 ManageAbout.propTypes = {

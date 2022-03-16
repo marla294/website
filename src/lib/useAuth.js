@@ -1,6 +1,8 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import base, { firebaseApp } from '../base';
+import Login from '../components/Login';
 
 export default function useAuth(initial = {}) {
   const [auth, setAuth] = useState(initial);
@@ -40,9 +42,25 @@ export default function useAuth(initial = {}) {
     });
   };
 
+  const authWrapper = (html) => {
+    if (!auth.uid) {
+      return <Login authenticate={authenticate} />
+    }
+  
+    if (auth.uid !== auth.owner) {
+      return <div>
+        <p>Hey, you're not Marla Foreman!  Stop trying to break into my site!</p>
+        <button onClick={logout}>Log Out!</button>
+      </div>
+    }
+
+    return html;
+  };
+
   return {
     auth,
     authenticate,
     logout,
+    authWrapper,
   }
 }
