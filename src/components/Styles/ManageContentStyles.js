@@ -4,7 +4,7 @@ const ManageContentStyles = styled.div`
 	width: 100%;
   padding: 0 20px;
 
-  h1, h2, h3, h4, h5 {
+  h1, h2, h3, h4, h5, p {
     margin-bottom: var(--S05);
     color: var(--Gray05);
   }
