@@ -51,6 +51,7 @@ const EditPost = (props) => {
         setInputs({
           ...post,
           date: new Date(Date.parse(post.date)),
+          categories: post.categories ? [...post.categories] : [],
         });
         setPostId(post.id);
 			}
@@ -69,7 +70,9 @@ const EditPost = (props) => {
     };
 
     props.editPost(post);
-    props.uploadPostHeader(inputs.headerImage, post.id);
+    if (inputs.headerImage) {
+      props.uploadPostHeader(inputs.headerImage, post.id);
+    }
     setIsSubmitComplete(true);
   };
 
