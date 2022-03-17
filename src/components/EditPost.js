@@ -12,6 +12,7 @@ import Submit from './Styles/Submit';
 import ButtonStyles from './Styles/ButtonStyles';
 import useForm from '../lib/useForm';
 import useAuth from '../lib/useAuth';
+import DisplayError from './DisplayError';
 
 const EditPost = (props) => {
   const { 
@@ -63,7 +64,7 @@ const EditPost = (props) => {
     e.preventDefault();
     setError(null);
     if (!inputs.title || inputs.title.length === 0) {
-      setError('Title is required MARLA!!!!  Jesus get it together grrrl.')
+      setError('Title is required!!!1!')
       return;
     }
 
@@ -87,9 +88,9 @@ const EditPost = (props) => {
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>
-          <div style={{display: error ? "block" : "none"}}>
+          <DisplayError isError={!!error}>
             {error}
-          </div>
+          </DisplayError>
           <h1>Edit Blog Post</h1>
           <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
             <label>Date:</label>
