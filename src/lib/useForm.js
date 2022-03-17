@@ -10,6 +10,10 @@ export default function useForm(initial = {}) {
       [value] = e.currentTarget.files;
     }
 
+    if (type === 'text') {
+      value = value.trim();
+    }
+
     setInputs({
       ...inputs,
       [name]: value,

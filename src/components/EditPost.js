@@ -37,6 +37,7 @@ const EditPost = (props) => {
 
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
   const [postId, setPostId] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadPost(props.match.params.Slug);
@@ -60,6 +61,12 @@ const EditPost = (props) => {
 
   const editPost = e => {
     e.preventDefault();
+    setError(null);
+    if (!inputs.title || inputs.title.length === 0) {
+      setError('Title is required MARLA!!!!  Jesus get it together grrrl.')
+      return;
+    }
+
     const post = {
       date: inputs.date.toDateString(),
       title: inputs.title,
@@ -80,6 +87,9 @@ const EditPost = (props) => {
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>
+          <div style={{display: error ? "block" : "none"}}>
+            {error}
+          </div>
           <h1>Edit Blog Post</h1>
           <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
             <label>Date:</label>
