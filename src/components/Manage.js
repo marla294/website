@@ -5,6 +5,7 @@ import Wrapper from './Styles/Wrapper';
 import ManageContentStyles from './Styles/ManageContentStyles';
 import { GlobalStyle } from "./GlobalStyles";
 import ButtonStyles from './Styles/ButtonStyles';
+import useAuth from '../lib/useAuth';
 
 const PostListStyles = styled.ul`
   margin-bottom: var(--S05);
@@ -20,6 +21,9 @@ const PostListStyles = styled.ul`
 `;
 
 const Manage = ({ posts, history }) => {
+  const {
+    authWrapper,
+  } = useAuth({});
 
   const renderPostLinks = ({id, title}) => {
     const slugify = require("slugify");
@@ -30,7 +34,7 @@ const Manage = ({ posts, history }) => {
     }}>{title}</li>
   };
 
-  return (
+  return authWrapper(
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>

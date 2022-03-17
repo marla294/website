@@ -11,6 +11,7 @@ import ManageFormStyles from './Styles/ManageFormStyles';
 import Submit from './Styles/Submit';
 import ButtonStyles from './Styles/ButtonStyles';
 import useForm from '../lib/useForm';
+import useAuth from '../lib/useAuth';
 
 const EditPost = (props) => {
   const { 
@@ -29,6 +30,10 @@ const EditPost = (props) => {
     content: '',
     headerImage: null,
   });
+
+  const {
+    authWrapper,
+  } = useAuth({});
 
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
   const [postId, setPostId] = useState(null);
@@ -68,7 +73,7 @@ const EditPost = (props) => {
     setIsSubmitComplete(true);
   };
 
-  return (
+  return authWrapper(
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>
