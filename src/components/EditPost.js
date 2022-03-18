@@ -13,6 +13,7 @@ import ButtonStyles from './Styles/ButtonStyles';
 import useForm from '../lib/useForm';
 import useAuth from '../lib/useAuth';
 import DisplayErrors from './DisplayErrors';
+import PropTypes from 'prop-types';
 
 const EditPost = (props) => {
   const { 
@@ -94,8 +95,8 @@ const EditPost = (props) => {
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>
-          <DisplayErrors isError={errors.length > 0} errors={errors} />
           <h1>Edit Blog Post</h1>
+          <DisplayErrors isError={errors.length > 0} errors={errors} />
           <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
             <label>Date:</label>
             <div>
@@ -165,5 +166,18 @@ const EditPost = (props) => {
     </React.Fragment>
   );
 }
+
+EditPost.propTypes = {
+  editPost: PropTypes.func.isRequired,
+  uploadPostHeader: PropTypes.func.isRequired,
+  posts: PropTypes.arrayOf(PropTypes.shape({
+    date: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    status: PropTypes.string,
+    categories: PropTypes.array,
+    content: PropTypes.string,
+    headerImage: PropTypes.string,
+  })),
+};
 
 export default EditPost;

@@ -53,9 +53,14 @@ const DisplayErrors = ({isError, errors}) => {
   <React.Fragment>
     <ErrorStyles style={{display: showError ? "grid" : "none"}}>
       <div>
-        <h3>👎👎ERRORS👎👎</h3>
+        <h3>
+          <span role="img" aria-label="thumbs down">👎</span>
+          <span role="img" aria-label="thumbs down">👎</span>ERRORS
+          <span role="img" aria-label="thumbs down">👎</span>
+          <span role="img" aria-label="thumbs down">👎</span>
+        </h3>
         <ul>
-          {errorsToDisplay.map(error => <li>{error}</li>)}
+          {errorsToDisplay.map(error => <li key={error}>{error}</li>)}
         </ul>
       </div>
       <button onClick={(e) => {
