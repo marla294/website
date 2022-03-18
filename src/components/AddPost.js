@@ -12,6 +12,7 @@ import Submit from './Styles/Submit';
 import ButtonStyles from './Styles/ButtonStyles';
 import useForm from '../lib/useForm';
 import useAuth from '../lib/useAuth';
+import DisplayErrors from './DisplayErrors';
 import PropTypes from 'prop-types';
 
 const AddPost = (props) => {
@@ -36,9 +37,30 @@ const AddPost = (props) => {
   } = useAuth({});
 
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const addNewPost = e => {
     e.preventDefault();
+    setErrors([]);
+    let addPostErrors = [];
+
+    if (!inputs.date) {
+      addPostErrors.push('Date is required!!!1!');
+    }
+
+    if (!inputs.title || inputs.title.length === 0) {
+      addPostErrors.push('Title is required!!!1!');
+    }
+
+    if (!inputs.content || inputs.content.length === 0) {
+      addPostErrors.push('Post Content is required!!!1!');
+    }
+
+    if (addPostErrors.length) {
+      setErrors(addPostErrors);
+      return;
+    }
+
     const post = {
       date: inputs.date.toDateString(),
       title: inputs.title,
@@ -58,8 +80,9 @@ const AddPost = (props) => {
       <Wrapper>
         <ManageContentStyles>
           <h1>Add New Blog Post</h1>
+          <DisplayErrors isError={errors.length > 0} errors={errors} />
           <ManageFormStyles onSubmit={addNewPost} style={{display: isSubmitComplete ? "none" : "auto"}}>
-            <label>Date:</label>
+            <label>Date:<span className="required">&nbsp;*</span></label>
             <div>
                 <DatePicker 
                     selected={inputs.date}
@@ -72,7 +95,7 @@ const AddPost = (props) => {
                 type="file" 
                 onChange={handleChange} 
             />
-            <label>Title:</label>
+            <label>Title:<span className="required">&nbsp;*</span></label>
             <input 
                 type="text"
                 name="title"
@@ -99,7 +122,7 @@ const AddPost = (props) => {
                     handleDelete={handleCategoryDeletion}
                 />
             </div>
-            <label>Post Content:</label>
+            <label>Post Content:<span className="required">&nbsp;*</span></label>
             <Editor
                 apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
                 value={inputs.content}
