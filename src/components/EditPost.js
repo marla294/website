@@ -66,8 +66,16 @@ const EditPost = (props) => {
     setErrors([]);
     let editErrors = [];
 
+    if (!inputs.date) {
+      editErrors.push('Date is required!!!1!');
+    }
+
     if (!inputs.title || inputs.title.length === 0) {
       editErrors.push('Title is required!!!1!');
+    }
+
+    if (!inputs.content || inputs.content.length === 0) {
+      editErrors.push('Post Content is required!!!1!');
     }
 
     if (editErrors.length) {
@@ -98,7 +106,7 @@ const EditPost = (props) => {
           <h1>Edit Blog Post</h1>
           <DisplayErrors isError={errors.length > 0} errors={errors} />
           <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
-            <label>Date:</label>
+            <label>Date:<span className="required">&nbsp;*</span></label>
             <div>
                 <DatePicker 
                     selected={inputs.date}
@@ -111,7 +119,7 @@ const EditPost = (props) => {
                 type="file" 
                 onChange={handleChange} 
             />
-            <label>Title:</label>
+            <label>Title:<span className="required">&nbsp;*</span></label>
             <input 
                 type="text"
                 name="title"
@@ -138,7 +146,7 @@ const EditPost = (props) => {
                     handleDelete={handleCategoryDeletion}
                 />
             </div>
-            <label>Post Content:</label>
+            <label>Post Content:<span className="required">&nbsp;*</span></label>
             <Editor
                 apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
                 value={inputs.content}
@@ -171,6 +179,7 @@ EditPost.propTypes = {
   editPost: PropTypes.func.isRequired,
   uploadPostHeader: PropTypes.func.isRequired,
   posts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
     date: PropTypes.string,
     title: PropTypes.string.isRequired,
     status: PropTypes.string,

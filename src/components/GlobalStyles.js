@@ -85,4 +85,8 @@ export const GlobalStyle = createGlobalStyle`
 	button {
 		cursor: pointer;
 	}
+
+	.required {
+		color: red;
+	}
 `;
