@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const ErrorStyles = styled.div`
@@ -26,9 +27,18 @@ const ErrorStyles = styled.div`
 `;
 
 const DisplayError = ({isError, children}) => {
-  return <ErrorStyles style={{display: isError ? "grid" : "none"}}>
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    setShowError(isError);
+  }, [isError]);
+
+  return <ErrorStyles style={{display: showError ? "grid" : "none"}}>
     <p>{children}</p>
-    <button>&times;</button>
+    <button onClick={(e) => {
+      e.preventDefault();
+      setShowError(false);
+    }}>&times;</button>
   </ErrorStyles>
 }
 
