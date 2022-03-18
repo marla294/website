@@ -12,6 +12,7 @@ import Submit from './Styles/Submit';
 import ButtonStyles from './Styles/ButtonStyles';
 import useForm from '../lib/useForm';
 import useAuth from '../lib/useAuth';
+import PropTypes from 'prop-types';
 
 const AddPost = (props) => {
   const { 
@@ -119,5 +120,10 @@ const AddPost = (props) => {
     </React.Fragment>
   );
 }
+
+AddPost.propTypes = {
+  addNewPost: PropTypes.func.isRequired,
+  uploadPostHeader: PropTypes.func.isRequired,
+};
 
 export default AddPost;
