@@ -9,8 +9,8 @@ const ErrorStyles = styled.div`
   margin: 8px 0;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-radius: 4px;
+  grid-template-columns: 10fr 1fr;
+  border-radius: 8px;
 
   h3 {
     color: white;
@@ -40,7 +40,7 @@ const ErrorStyles = styled.div`
   }
 `;
 
-const DisplayError = ({isError, errors}) => {
+const DisplayErrors = ({isError, errors}) => {
   const [showError, setShowError] = useState(false);
   const [errorsToDisplay, setErrorsToDisplay] = useState([]);
 
@@ -53,7 +53,7 @@ const DisplayError = ({isError, errors}) => {
   <React.Fragment>
     <ErrorStyles style={{display: showError ? "grid" : "none"}}>
       <div>
-        <h3>👎👎ERRORS👎👎ERRORS👎👎ERRORS👎👎</h3>
+        <h3>👎👎ERRORS👎👎</h3>
         <ul>
           {errorsToDisplay.map(error => <li>{error}</li>)}
         </ul>
@@ -68,9 +68,9 @@ const DisplayError = ({isError, errors}) => {
   );
 };
 
-DisplayError.propTypes = {
+DisplayErrors.propTypes = {
   isError: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default DisplayError;
+export default DisplayErrors;

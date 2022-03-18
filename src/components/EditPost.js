@@ -12,7 +12,7 @@ import Submit from './Styles/Submit';
 import ButtonStyles from './Styles/ButtonStyles';
 import useForm from '../lib/useForm';
 import useAuth from '../lib/useAuth';
-import DisplayError from './DisplayError';
+import DisplayErrors from './DisplayErrors';
 
 const EditPost = (props) => {
   const { 
@@ -94,7 +94,7 @@ const EditPost = (props) => {
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>
-          <DisplayError isError={errors.length > 0} errors={errors} />
+          <DisplayErrors isError={errors.length > 0} errors={errors} />
           <h1>Edit Blog Post</h1>
           <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
             <label>Date:</label>
