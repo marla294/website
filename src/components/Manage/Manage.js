@@ -7,15 +7,19 @@ import { GlobalStyle } from "../GlobalStyles";
 import ButtonStyles from '../Styles/ButtonStyles';
 import useAuth from '../../lib/useAuth';
 
-const PostListStyles = styled.ul`
+const PostListStyles = styled.div`
   margin-bottom: var(--S05);
-  list-style-type: none;
+  
+  div {
+    display: grid;
+    grid-template-columns: repeat()(1fr, 4);
+  }
 
-  li {
+  a {
     cursor: pointer;
   }
 
-  li:hover {
+  a:hover {
     text-decoration: underline;
   }
 `;
@@ -29,9 +33,14 @@ const Manage = ({ posts, history }) => {
     const slugify = require("slugify");
     const slugTitle = slugify(title, { remove: /\./ });
 
-    return <li key={id} onClick={() => {
-      history.push(`/Manage/Post/Edit/${slugTitle}`);
-    }}>{date} - {title} - {status}</li>
+    return <div key={id} >
+      <a onClick={() => {
+        history.push(`/Manage/Post/Edit/${slugTitle}`);
+      }}>Edit</a>
+      <div>{date}</div>
+      <div>{title}</div>
+      <div>{status}</div>
+    </div>
   };
 
   return authWrapper(
