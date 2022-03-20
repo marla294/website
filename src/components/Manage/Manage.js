@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
-import Wrapper from './Styles/Wrapper';
-import ManageContentStyles from './Styles/ManageContentStyles';
-import { GlobalStyle } from "./GlobalStyles";
-import ButtonStyles from './Styles/ButtonStyles';
-import useAuth from '../lib/useAuth';
+import Wrapper from '../Styles/Wrapper';
+import ManageContentStyles from '../Styles/ManageContentStyles';
+import { GlobalStyle } from "../GlobalStyles";
+import ButtonStyles from '../Styles/ButtonStyles';
+import useAuth from '../../lib/useAuth';
 
 const PostListStyles = styled.ul`
   margin-bottom: var(--S05);

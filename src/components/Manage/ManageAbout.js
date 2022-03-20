@@ -2,13 +2,13 @@ import React from "react";
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
-import { GlobalStyle } from "./GlobalStyles";
-import Wrapper from './Styles/Wrapper';
-import ManageContentStyles from './Styles/ManageContentStyles';
-import Submit from './Styles/Submit';
-import ManageFormStyles from "./Styles/ManageFormStyles";
-import useForm from '../lib/useForm';
-import useAuth from '../lib/useAuth';
+import { GlobalStyle } from "../GlobalStyles";
+import Wrapper from '../Styles/Wrapper';
+import ManageContentStyles from '../Styles/ManageContentStyles';
+import Submit from '../Styles/Submit';
+import ManageFormStyles from "../Styles/ManageFormStyles";
+import useForm from '../../lib/useForm';
+import useAuth from '../../lib/useAuth';
 
 const ManageAbout = (props) => {
   const { 

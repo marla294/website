@@ -4,15 +4,15 @@ import { Editor } from '@tinymce/tinymce-react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { WithContext as ReactTags } from 'react-tag-input';
-import { GlobalStyle } from "./GlobalStyles";
-import Wrapper from './Styles/Wrapper';
-import ManageContentStyles from './Styles/ManageContentStyles';
-import ManageFormStyles from './Styles/ManageFormStyles';
-import Submit from './Styles/Submit';
-import ButtonStyles from './Styles/ButtonStyles';
-import useForm from '../lib/useForm';
-import useAuth from '../lib/useAuth';
-import DisplayErrors from './DisplayErrors';
+import { GlobalStyle } from "../GlobalStyles";
+import Wrapper from '../Styles/Wrapper';
+import ManageContentStyles from '../Styles/ManageContentStyles';
+import ManageFormStyles from '../Styles/ManageFormStyles';
+import Submit from '../Styles/Submit';
+import ButtonStyles from '../Styles/ButtonStyles';
+import useForm from '../../lib/useForm';
+import useAuth from '../../lib/useAuth';
+import DisplayErrors from '../DisplayErrors';
 import PropTypes from 'prop-types';
 
 const EditPost = (props) => {

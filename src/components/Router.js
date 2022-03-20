@@ -7,10 +7,10 @@ import About from "./About";
 import Post from "./Post";
 import Blog from "./Blog";
 import Projects from './Projects';
-import ManageAbout from "./ManageAbout";
-import AddPost from "./AddPost";
-import EditPost from './EditPost';
-import Manage from './Manage';
+import ManageAbout from "./Manage/ManageAbout";
+import AddPost from "./Manage/AddPost";
+import EditPost from './Manage/EditPost';
+import Manage from './Manage/Manage';
 import base, { firebaseStorage } from '../base';
 
 class Router extends React.Component {
