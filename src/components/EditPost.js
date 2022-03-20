@@ -66,6 +66,9 @@ const EditPost = (props) => {
     setErrors([]);
     let editErrors = [];
 
+    inputs.title = inputs.title.trim();
+    inputs.content = inputs.content.trim();
+
     if (!inputs.date) {
       editErrors.push('Date is required!!!1!');
     }
