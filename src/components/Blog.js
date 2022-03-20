@@ -52,13 +52,16 @@ const LoadMoreButton = styled.button`
 const Blog = (props) => {
 	const [numberPostsToDisplay, setNumberPostsToDisplay] = useState(5);
 	const [posts, setPosts] = useState([]);
-	
+
 	useEffect(() => {
 		loadPosts();
 	}, [props.posts]);
 
 	const loadPosts = () => {
-		const filteredPosts = [...props.posts].filter(post => post.status === "public");
+		const filteredPosts = [...props.posts].filter(post => 
+			post.status === "public" &&
+			Date.parse(new Date()) > Date.parse(post.date)
+		);
 		let postsToDisplay = filteredPosts.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
 		if (props.totalPostsToDisplay) {
