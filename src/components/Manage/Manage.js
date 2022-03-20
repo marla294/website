@@ -25,13 +25,13 @@ const Manage = ({ posts, history }) => {
     authWrapper,
   } = useAuth({});
 
-  const renderPostLinks = ({id, title}) => {
+  const renderPostLinks = ({id, title, date, status}) => {
     const slugify = require("slugify");
     const slugTitle = slugify(title, { remove: /\./ });
 
     return <li key={id} onClick={() => {
       history.push(`/Manage/Post/Edit/${slugTitle}`);
-    }}>{title}</li>
+    }}>{date} - {title} - {status}</li>
   };
 
   return authWrapper(
@@ -44,7 +44,9 @@ const Manage = ({ posts, history }) => {
           }}>Edit About Page</a>
           <h3>Manage Posts</h3>
           <PostListStyles>
-            {posts.map(post => {
+            {posts
+            .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+            .map(post => {
               return renderPostLinks(post);
             })}
           </PostListStyles>
