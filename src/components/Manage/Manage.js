@@ -10,9 +10,9 @@ import useAuth from '../../lib/useAuth';
 const PostListStyles = styled.div`
   margin-bottom: var(--S05);
   
-  div {
+  .row {
     display: grid;
-    grid-template-columns: repeat()(1fr, 4);
+    grid-template-columns: 1fr repeat(3, 3fr);
   }
 
   a {
@@ -33,10 +33,10 @@ const Manage = ({ posts, history }) => {
     const slugify = require("slugify");
     const slugTitle = slugify(title, { remove: /\./ });
 
-    return <div key={id} >
+    return <div className="row" key={id} >
       <a onClick={() => {
         history.push(`/Manage/Post/Edit/${slugTitle}`);
-      }}>Edit</a>
+      }}><span role="img" aria-label="Edit">📝</span></a>
       <div>{date}</div>
       <div>{title}</div>
       <div>{status}</div>
