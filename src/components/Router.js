@@ -64,7 +64,19 @@ class Router extends React.Component {
 		this.postImageRef = this.storageRef.child(`/${postId}/Header.jpg`);
 
 		this.postImageRef.put(image, metaData);
-	}
+	};
+
+	uploadPostImages = (images, postId) => {
+		const metaData = {
+			contentType: 'image/jpeg'
+		};
+
+		images.forEach((image, i) => {
+			this.postImageRef = this.storageRef.child(`/${postId}/image_${i}.jpg`);
+
+			this.postImageRef.put(image, metaData);
+		});
+	};
 
 	addNewPost = (post) => {
 		const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
@@ -139,6 +151,7 @@ class Router extends React.Component {
 							return <EditPost
 								editPost={this.editPost}
 								uploadPostHeader={this.uploadPostHeader}
+								uploadPostImages={this.uploadPostImages}
 								posts={this.state.data.posts} 
 								{...props}
 							/>
