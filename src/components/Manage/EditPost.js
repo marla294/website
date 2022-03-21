@@ -63,7 +63,7 @@ const EditPost = (props) => {
 	};
 
   const handlePostImageAddition = (e) => {
-    const image = e.currentTarget.files;
+    const image = e.currentTarget.files[0];
     const postImages = images.length > 0 ? [...images, image] : [image];
 
     setImages(postImages);
@@ -108,7 +108,7 @@ const EditPost = (props) => {
       props.uploadPostHeader(inputs.headerImage, post.id);
     }
     if (images.length > 0) {
-      props.uploadPostImages(images);
+      props.uploadPostImages(images, post.id);
     }
 
     setIsSubmitComplete(true);
