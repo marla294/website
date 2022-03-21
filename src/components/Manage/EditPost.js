@@ -37,6 +37,7 @@ const EditPost = (props) => {
     authWrapper,
   } = useAuth({});
 
+  const [images, setImages] = useState([]);
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState([]);
@@ -99,6 +100,10 @@ const EditPost = (props) => {
     if (inputs.headerImage) {
       props.uploadPostHeader(inputs.headerImage, post.id);
     }
+    if (images.length > 0) {
+      props.uploadPostImages(images);
+    }
+
     setIsSubmitComplete(true);
   };
 
@@ -116,7 +121,7 @@ const EditPost = (props) => {
                     onChange={handleDateChange}
                 />
             </div>
-            <label>Image:</label>
+            <label>Header Image:</label>
             <input 
                 name="headerImage"
                 type="file" 
@@ -155,6 +160,12 @@ const EditPost = (props) => {
                 value={inputs.content}
                 onEditorChange={handleEditorChange}
             />
+            <label>Add Post Image:</label>
+            <input 
+                name="postImage"
+                type="file" 
+                onChange={handleChange} 
+            />
             <Submit type="submit">Submit</Submit>
           </ManageFormStyles>
           <div style={{display: isSubmitComplete ? "block" : "none"}}>
@@ -181,6 +192,7 @@ const EditPost = (props) => {
 EditPost.propTypes = {
   editPost: PropTypes.func.isRequired,
   uploadPostHeader: PropTypes.func.isRequired,
+  uploadPostImages: PropTypes.func.isRequired,
   posts: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     date: PropTypes.string,
