@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import styled from "styled-components";
 import TopNav from "./TopNav";
 import PropTypes from "prop-types";
@@ -97,11 +98,16 @@ const PostCopy = styled.div`
 	}
 `;
 
+const Post = (props) => {
+	const [post, setPost] = useState(null);
+	const [postHeaderUrl, setPostHeaderUrl] = useState(''); 
+}
+
 class Post extends React.Component {
-	state = {
-		post: null,
-		postHeaderUrl: '',
-	};
+	// state = {
+	// 	post: null,
+	// 	postHeaderUrl: '',
+	// };
 
 	componentDidMount() {
 		this.loadPost(this.props.match.params.Slug);
