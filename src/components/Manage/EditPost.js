@@ -62,6 +62,13 @@ const EditPost = (props) => {
 		});
 	};
 
+  const handlePostImageAddition = (e) => {
+    const image = e.currentTarget.files;
+    const postImages = images.length > 0 ? [...images, image] : [image];
+
+    setImages(postImages);
+  };
+
   const editPost = e => {
     e.preventDefault();
     setErrors([]);
@@ -162,9 +169,9 @@ const EditPost = (props) => {
             />
             <label>Add Post Image:</label>
             <input 
-                name="postImage"
-                type="file" 
-                onChange={handleChange} 
+              name="postImage"
+              type="file" 
+              onChange={handlePostImageAddition} 
             />
             <Submit type="submit">Submit</Submit>
           </ManageFormStyles>
