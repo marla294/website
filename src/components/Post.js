@@ -101,71 +101,53 @@ const PostCopy = styled.div`
 const Post = (props) => {
 	const [post, setPost] = useState(null);
 	const [postHeaderUrl, setPostHeaderUrl] = useState(''); 
-}
 
-class Post extends React.Component {
-	// state = {
-	// 	post: null,
-	// 	postHeaderUrl: '',
-	// };
+	useEffect(() => {
+		loadPost(props.match.params.Slug)
+	}, [props.posts]);
 
-	componentDidMount() {
-		this.loadPost(this.props.match.params.Slug);
-	};
-
-	componentDidUpdate(prevProps) {
-        if (this.props.posts !== prevProps.posts) {
-            this.loadPost(this.props.match.params.Slug);
-        }
-    };
-
-	loadPost(slug) {
+	const loadPost = (slug) => {
 		const slugify = require("slugify");
 
-		this.props.posts.forEach(post => {
+		props.posts.forEach(post => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
-				this.setState({
-					...this.state,
-					post: post
-				});
-				this.getPostHeaderUrl(post.id);
+				setPost(post);
+				getPostHeaderUrl(post.id);
 			}
 		});
 	};
 
-	getPostHeaderUrl = (postId) => {
-		this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
+	const getPostHeaderUrl = (postId) => {
+		const postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
 
-		this.postImageRef.getDownloadURL().then(url => {
-			this.setState({...this.state, postHeaderUrl: url});
+		postImageRef.getDownloadURL().then(url => {
+			setPostHeaderUrl(url);
 		});
 	};
 
-	render() {
-		return (
-			<React.Fragment>
-				<TopNav push={this.props.history.push} />
-				<PostWrapper>
-					<PostContent>
-						<PostHeader>
-							<h1>
-								{this.state.post ? this.state.post.title : ''}
-							</h1>
-							<img
-								src={this.state.postHeaderUrl}
-								alt={this.state.post ? this.state.post.title : ''}
-							/>
-						</PostHeader>
-						<PostCopy dangerouslySetInnerHTML={{
-							__html: this.state.post ? this.state.post.content : ''
-						}}></PostCopy>
-					</PostContent>
-				</PostWrapper>
-				<GlobalStyle />
-			</React.Fragment>
-		);
-	}
+	return (
+		<React.Fragment>
+			<TopNav push={props.history.push} />
+			<PostWrapper>
+				<PostContent>
+					<PostHeader>
+						<h1>
+							{post ? post.title : ''}
+						</h1>
+						<img
+							src={postHeaderUrl}
+							alt={post ? post.title : ''}
+						/>
+					</PostHeader>
+					<PostCopy dangerouslySetInnerHTML={{
+						__html: post ? post.content : ''
+					}}></PostCopy>
+				</PostContent>
+			</PostWrapper>
+			<GlobalStyle />
+		</React.Fragment>
+	);
 }
 
 // Post.propTypes = {
