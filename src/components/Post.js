@@ -150,9 +150,25 @@ const Post = (props) => {
 	);
 }
 
-// Post.propTypes = {
-// 	match: PropTypes.object.isRequired,
-// 	history: PropTypes.object
-// };
+Post.propTypes = {
+  storageRef: PropTypes.object,
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired,
+	}),
+	match: PropTypes.shape({
+		params: PropTypes.shape({
+			Slug: PropTypes.string.isRequired,
+		}),
+	}),
+  posts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    status: PropTypes.string,
+    categories: PropTypes.array,
+    content: PropTypes.string,
+    headerImage: PropTypes.string,
+  })),
+};
 
 export default Post;
