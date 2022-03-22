@@ -14,6 +14,12 @@ import useForm from '../../lib/useForm';
 import useAuth from '../../lib/useAuth';
 import DisplayErrors from '../DisplayErrors';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const ImageListStyles = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+`;
 
 const EditPost = (props) => {
   const { 
@@ -38,6 +44,7 @@ const EditPost = (props) => {
   } = useAuth({});
 
   const [images, setImages] = useState([]);
+  const [existingImages, setExistingImages] = useState([]);
   const [numberOfImages, setNumberOfImages] = useState(0);
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
   const [postId, setPostId] = useState(null);
@@ -60,8 +67,21 @@ const EditPost = (props) => {
         });
         setPostId(post.id);
         setNumberOfImages(post.numberOfImages || 0);
+        loadPostImages(post);
 			}
 		});
+	};
+
+  const loadPostImages = (post) => {
+		if (post.numberOfImages && post.numberOfImages > 0) {
+			for (let i = 0; i < post.numberOfImages; i++) {
+				const imageRef = props.storageRef.child(`/${post.id}/image_${i}.jpg`);
+
+				imageRef.getDownloadURL().then(url => {
+          setExistingImages([...existingImages, url]);
+				});
+			}
+		}
 	};
 
   const handlePostImageAddition = (e) => {
@@ -177,6 +197,11 @@ const EditPost = (props) => {
               type="file" 
               onChange={handlePostImageAddition} 
             />
+            <ImageListStyles>
+              {existingImages.map((url, i) => {
+                return <img src={url} alt="test" key={i} />
+              })}
+            </ImageListStyles>
             <Submit type="submit">Submit</Submit>
           </ManageFormStyles>
           <div style={{display: isSubmitComplete ? "block" : "none"}}>
@@ -214,6 +239,7 @@ EditPost.propTypes = {
     headerImage: PropTypes.string,
     numberOfImages: PropTypes.number,
   })),
+  storageRef: PropTypes.object,
 };
 
 export default EditPost;

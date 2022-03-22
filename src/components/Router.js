@@ -153,6 +153,7 @@ class Router extends React.Component {
 								uploadPostHeader={this.uploadPostHeader}
 								uploadPostImages={this.uploadPostImages}
 								posts={this.state.data.posts} 
+								storageRef={this.storageRef}
 								{...props}
 							/>
 						}} />

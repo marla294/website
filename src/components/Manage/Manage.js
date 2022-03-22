@@ -22,10 +22,6 @@ const PostListStyles = styled.div`
   a {
     cursor: pointer;
   }
-
-  a:hover {
-    text-decoration: underline;
-  }
 `;
 
 const Manage = ({ posts, history }) => {
