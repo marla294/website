@@ -212,6 +212,7 @@ EditPost.propTypes = {
     categories: PropTypes.array,
     content: PropTypes.string,
     headerImage: PropTypes.string,
+    numberOfImages: PropTypes.number,
   })),
 };
 

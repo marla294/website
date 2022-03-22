@@ -85,6 +85,14 @@ const Blog = (props) => {
 		});
 	};
 
+	const renderLoadMoreButton = () => {
+		if (numberPostsToDisplay < posts.length) {
+			return (
+				<LoadMoreButton onClick={() => setNumberPostsToDisplay(numberPostsToDisplay + 3)}>Load More</LoadMoreButton>
+			);
+		}
+	}
+
 	const renderBlogContent = () => {
 		const displayPosts = posts.slice(0, numberPostsToDisplay);
 		
@@ -94,13 +102,7 @@ const Blog = (props) => {
 					<h1>Blog Posts</h1>
 					<BlogPosts>
 						{renderPostSnippets(displayPosts)}
-						{() => {
-							if (numberPostsToDisplay < posts.length) {
-								return (
-									<LoadMoreButton onClick={() => setNumberPostsToDisplay(numberPostsToDisplay + 3)}>Load More</LoadMoreButton>
-								);
-							}
-						}}
+						{renderLoadMoreButton()}
 					</BlogPosts>
 				</React.Fragment>
 			);
