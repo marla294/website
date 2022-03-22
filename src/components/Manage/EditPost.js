@@ -38,6 +38,7 @@ const EditPost = (props) => {
   } = useAuth({});
 
   const [images, setImages] = useState([]);
+  const [numberOfImages, setNumberOfImages] = useState(0);
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState([]);
@@ -58,6 +59,7 @@ const EditPost = (props) => {
           categories: post.categories ? [...post.categories] : [],
         });
         setPostId(post.id);
+        setNumberOfImages(post.numberOfImages || 0);
 			}
 		});
 	};
@@ -71,7 +73,7 @@ const EditPost = (props) => {
 
   const editPost = e => {
     e.preventDefault();
-    setErrors([]);
+    setErrors([]); // reset errors in case they had errors on last submit
     let editErrors = [];
 
     inputs.title = inputs.title.trim();
@@ -101,9 +103,11 @@ const EditPost = (props) => {
       categories: inputs.categories,
       content: inputs.content,
       id: postId,
+      numberOfImages: numberOfImages + images.length,
     };
 
     props.editPost(post);
+
     if (inputs.headerImage) {
       props.uploadPostHeader(inputs.headerImage, post.id);
     }
@@ -123,49 +127,49 @@ const EditPost = (props) => {
           <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
             <label>Date:<span className="required">&nbsp;*</span></label>
             <div>
-                <DatePicker 
-                    selected={inputs.date}
-                    onChange={handleDateChange}
-                />
+              <DatePicker 
+                selected={inputs.date}
+                onChange={handleDateChange}
+              />
             </div>
             <label>Header Image:</label>
             <input 
-                name="headerImage"
-                type="file" 
-                onChange={handleChange} 
+              name="headerImage"
+              type="file" 
+              onChange={handleChange} 
             />
             <label>Title:<span className="required">&nbsp;*</span></label>
             <input 
-                type="text"
-                name="title"
-                onChange={handleChange}
-                value={inputs.title}
+              type="text"
+              name="title"
+              onChange={handleChange}
+              value={inputs.title}
             />
             <label>Status:</label>
             <select 
-                type="text" 
-                name="status" 
-                onChange={handleChange} 
-                value={inputs.status}
+              type="text" 
+              name="status" 
+              onChange={handleChange} 
+              value={inputs.status}
             >
-                <option value="draft">Draft</option>
-                <option value="public">Public</option>
-                <option value="archive">Archive</option>
+              <option value="draft">Draft</option>
+              <option value="public">Public</option>
+              <option value="archive">Archive</option>
             </select>
             <label>Categories:</label>
             <div>
-                <ReactTags 
-                    tags={inputs.categories}
-                    delimiters={[188, 13]}
-                    handleAddition={handleCategoryAddition}
-                    handleDelete={handleCategoryDeletion}
-                />
+              <ReactTags 
+                tags={inputs.categories}
+                delimiters={[188, 13]}
+                handleAddition={handleCategoryAddition}
+                handleDelete={handleCategoryDeletion}
+              />
             </div>
             <label>Post Content:<span className="required">&nbsp;*</span></label>
             <Editor
-                apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
-                value={inputs.content}
-                onEditorChange={handleEditorChange}
+              apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
+              value={inputs.content}
+              onEditorChange={handleEditorChange}
             />
             <label>Add Post Image:</label>
             <input 
