@@ -133,7 +133,13 @@ const Post = (props) => {
 				const imageRef = props.storageRef.child(`/${post.id}/image_${i}.jpg`);
 
 				imageRef.getDownloadURL().then(url => {
-					debugger;
+					const imageTag = `<img src=${url} alt="image_${i}" />`;
+					const content = post.content.replace(`image_${i}`, imageTag);
+					const updatedPost = {
+						...post,
+						content,
+					};
+					setPost(updatedPost);
 				});
 			}
 		}
