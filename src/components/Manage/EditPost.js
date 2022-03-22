@@ -21,6 +21,10 @@ const ImageListStyles = styled.div`
   grid-template-columns: repeat(4, 1fr);
 `;
 
+const ImageThumbStyles = styled.img`
+  width: 150px;
+`;
+
 const EditPost = (props) => {
   const { 
     inputs, 
@@ -78,6 +82,7 @@ const EditPost = (props) => {
 				const imageRef = props.storageRef.child(`/${post.id}/image_${i}.jpg`);
 
 				imageRef.getDownloadURL().then(url => {
+          debugger;
           setExistingImages([...existingImages, url]);
 				});
 			}
@@ -116,6 +121,13 @@ const EditPost = (props) => {
       return;
     }
 
+    if (inputs.headerImage) {
+      props.uploadPostHeader(inputs.headerImage, postId);
+    }
+    if (images.length > 0) {
+      props.uploadPostImages(images, postId, numberOfImages);
+    }
+
     const post = {
       date: inputs.date.toDateString(),
       title: inputs.title,
@@ -127,13 +139,6 @@ const EditPost = (props) => {
     };
 
     props.editPost(post);
-
-    if (inputs.headerImage) {
-      props.uploadPostHeader(inputs.headerImage, post.id);
-    }
-    if (images.length > 0) {
-      props.uploadPostImages(images, post.id);
-    }
 
     setIsSubmitComplete(true);
   };
@@ -199,7 +204,7 @@ const EditPost = (props) => {
             />
             <ImageListStyles>
               {existingImages.map((url, i) => {
-                return <img src={url} alt="test" key={i} />
+                return <ImageThumbStyles src={url} alt={`image_${i}`} key={i} />
               })}
             </ImageListStyles>
             <Submit type="submit">Submit</Submit>

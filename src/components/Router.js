@@ -66,13 +66,13 @@ class Router extends React.Component {
 		this.postImageRef.put(image, metaData);
 	};
 
-	uploadPostImages = (images, postId) => {
+	uploadPostImages = (images, postId, startIndex) => {
 		const metaData = {
 			contentType: 'image/jpeg'
 		};
 
 		images.forEach((image, i) => {
-			this.postImageRef = this.storageRef.child(`/${postId}/image_${i}.jpg`);
+			this.postImageRef = this.storageRef.child(`/${postId}/image_${i + startIndex}.jpg`);
 
 			this.postImageRef.put(image, metaData);
 		});
