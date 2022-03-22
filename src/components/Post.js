@@ -114,6 +114,7 @@ const Post = (props) => {
 			if (slugTitle === slug) {
 				setPost(post);
 				getPostHeaderUrl(post.id);
+				loadPostImages(post);
 			}
 		});
 	};
@@ -124,6 +125,18 @@ const Post = (props) => {
 		postImageRef.getDownloadURL().then(url => {
 			setPostHeaderUrl(url);
 		});
+	};
+
+	const loadPostImages = (post) => {
+		if (post.numberOfImages && post.numberOfImages > 0) {
+			for (let i = 0; i < post.numberOfImages; i++) {
+				const imageRef = props.storageRef.child(`/${post.id}/image_${i}.jpg`);
+
+				imageRef.getDownloadURL().then(url => {
+					debugger;
+				});
+			}
+		}
 	};
 
 	return (
