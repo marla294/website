@@ -100,9 +100,11 @@ const EditPost = (props) => {
     for (let i = 0; i < imageRefArray.length; i++) {
       let ref = imageRefArray[i];
       if (ref.name !== 'Header.jpg') {
-        debugger;
         const url = await ref.getDownloadURL();
-        postImages.push(url);
+        postImages.push({
+          url,
+          name: ref.name,
+        });
       }
     }
 
@@ -116,13 +118,9 @@ const EditPost = (props) => {
     setImages(postImages);
   };
 
-  const handlePostImageDeletion = async (e, i) => {
+  const handlePostImageDeletion = async (e, name) => {
     e.preventDefault();
-    // 1. Delete the image from the server.  Make a function on the router to do this
-    await props.deletePostImages(postId, [i]);
-    debugger;
-    // 2. Update loadImages function so that it loads all the images from a post folder
-    // 3. Reload images (so that the one that was deleted is not displayed)
+    await props.deletePostImages(postId, [name]);
     await loadPostImages(postId);
   };
 
@@ -233,13 +231,13 @@ const EditPost = (props) => {
               onChange={handlePostImageAddition} 
             />
             <ImageListStyles>
-              {existingImages.map((url, i) => {
+              {existingImages.map((img, i) => {
                 return (
                 <ImageThumbWrapperStyles key={i}>
-                  <ImageThumbStyles src={url} alt={`image_${i}`} />
+                  <ImageThumbStyles src={img.url} alt={img.name} />
                   <DeleteImageButtonStyles
                     onClick={(e) => {
-                      handlePostImageDeletion(e, i);
+                      handlePostImageDeletion(e, img.name);
                     }}
                   >
                     &times;
