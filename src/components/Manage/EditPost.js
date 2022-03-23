@@ -15,7 +15,6 @@ import useAuth from '../../lib/useAuth';
 import DisplayErrors from '../DisplayErrors';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS } from 'styled-components';
 
 const ImageListStyles = styled.div`
   display: grid;
@@ -87,21 +86,27 @@ const EditPost = (props) => {
         });
         setPostId(post.id);
         setNumberOfImages(post.numberOfImages || 0);
-        await loadPostImages(post);
+        await loadPostImages(post.id);
 			}
 		});
 	};
 
-  const loadPostImages = async (post) => {
-		if (post.numberOfImages && post.numberOfImages > 0) {
-      let images = [];
-			for (let i = 0; i < post.numberOfImages; i++) {
-				const imageRef = props.storageRef.child(`/${post.id}/image_${i}.jpg`);
-        const url = await imageRef.getDownloadURL();
-        images.push(url);
-			}
-      setExistingImages(images);
-		}
+  const loadPostImages = async (postId) => {
+    let postImages = [];
+    const postImagesRef = await props.storageRef.child(`/${postId}`).listAll();
+
+    let imageRefArray = Array.from(postImagesRef.items);
+
+    for (let i = 0; i < imageRefArray.length; i++) {
+      let ref = imageRefArray[i];
+      if (ref.name !== 'Header.jpg') {
+        debugger;
+        const url = await ref.getDownloadURL();
+        postImages.push(url);
+      }
+    }
+
+    setExistingImages(postImages);
 	};
 
   const handlePostImageAddition = (e) => {
@@ -114,11 +119,11 @@ const EditPost = (props) => {
   const handlePostImageDeletion = async (e, i) => {
     e.preventDefault();
     // 1. Delete the image from the server.  Make a function on the router to do this
-    // await props.deletePostImages(postId, [i]);
-    // 2. If the image was not the last one, rename all images that came after it
-    await props.renamePostImage(postId, 0, 0);
-    // 3. Decrease numberOfImages by 1
-    // 4. Reload images (so that the one that was deleted was not displayed)
+    await props.deletePostImages(postId, [i]);
+    debugger;
+    // 2. Update loadImages function so that it loads all the images from a post folder
+    // 3. Reload images (so that the one that was deleted is not displayed)
+    await loadPostImages(postId);
   };
 
   const editPost = e => {
