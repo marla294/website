@@ -78,6 +78,13 @@ class Router extends React.Component {
 		});
 	};
 
+	deletePostImages = async (postId, imageIndexes) => {
+		await imageIndexes.forEach(async imageIndex => {
+			const postImageRef = this.storageRef.child(`/${postId}/image_${imageIndex}.jpg`);
+			await postImageRef.delete();
+		});
+	};
+
 	addNewPost = (post) => {
 		const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
 
@@ -152,6 +159,7 @@ class Router extends React.Component {
 								editPost={this.editPost}
 								uploadPostHeader={this.uploadPostHeader}
 								uploadPostImages={this.uploadPostImages}
+								deletePostImages={this.deletePostImages}
 								posts={this.state.data.posts} 
 								storageRef={this.storageRef}
 								{...props}

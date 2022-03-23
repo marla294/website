@@ -15,6 +15,7 @@ import useAuth from '../../lib/useAuth';
 import DisplayErrors from '../DisplayErrors';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS } from 'styled-components';
 
 const ImageListStyles = styled.div`
   display: grid;
@@ -108,6 +109,15 @@ const EditPost = (props) => {
     const postImages = images.length > 0 ? [...images, image] : [image];
 
     setImages(postImages);
+  };
+
+  const handlePostImageDeletion = async (e, i) => {
+    e.preventDefault();
+    // 1. Delete the image from the server.  Make a function on the router to do this
+    await props.deletePostImages(postId, [i]);
+    // 2. If the image was not the last one, rename all images that came after it
+    // 3. Decrease numberOfImages by 1
+    // 4. Reload images (so that the one that was deleted was not displayed)
   };
 
   const editPost = e => {
@@ -221,7 +231,13 @@ const EditPost = (props) => {
                 return (
                 <ImageThumbWrapperStyles key={i}>
                   <ImageThumbStyles src={url} alt={`image_${i}`} />
-                  <DeleteImageButtonStyles>&times;</DeleteImageButtonStyles>
+                  <DeleteImageButtonStyles
+                    onClick={(e) => {
+                      handlePostImageDeletion(e, i);
+                    }}
+                  >
+                    &times;
+                  </DeleteImageButtonStyles>
                 </ImageThumbWrapperStyles>
                 );
               })}
