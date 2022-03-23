@@ -85,6 +85,16 @@ class Router extends React.Component {
 		});
 	};
 
+	renamePostImage = async (postId, initialIndex, newIndex) => {
+		// 1. Download image from firebase + hold onto in a variable
+		const postImageRef = this.storageRef.child(`/${postId}/image_${initialIndex}.jpg`);
+		const imageUrl = await postImageRef.getDownloadURL();
+		const image = await (await fetch(imageUrl)).blob().data;
+		debugger;
+		// 2. Delete image on firebase
+		// 3. Upload image with new name to firebase
+	}
+
 	addNewPost = (post) => {
 		const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
 
@@ -160,6 +170,7 @@ class Router extends React.Component {
 								uploadPostHeader={this.uploadPostHeader}
 								uploadPostImages={this.uploadPostImages}
 								deletePostImages={this.deletePostImages}
+								renamePostImage={this.renamePostImage}
 								posts={this.state.data.posts} 
 								storageRef={this.storageRef}
 								{...props}

@@ -114,8 +114,9 @@ const EditPost = (props) => {
   const handlePostImageDeletion = async (e, i) => {
     e.preventDefault();
     // 1. Delete the image from the server.  Make a function on the router to do this
-    await props.deletePostImages(postId, [i]);
+    // await props.deletePostImages(postId, [i]);
     // 2. If the image was not the last one, rename all images that came after it
+    await props.renamePostImage(postId, 0, 0);
     // 3. Decrease numberOfImages by 1
     // 4. Reload images (so that the one that was deleted was not displayed)
   };
