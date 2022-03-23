@@ -21,8 +21,23 @@ const ImageListStyles = styled.div`
   grid-template-columns: repeat(4, 1fr);
 `;
 
-const ImageThumbStyles = styled.img`
+const ImageThumbWrapperStyles = styled.div`
   width: 150px;
+  position: relative;
+`;
+
+const ImageThumbStyles = styled.img`
+  width: 100%;
+`;
+
+const DeleteImageButtonStyles = styled.button`
+  position: absolute;
+  top: -5%;
+  left: 80%;
+  background-color: transparent;
+  font-size: 34px;
+  border: none;
+  color: red;
 `;
 
 const EditPost = (props) => {
@@ -203,7 +218,12 @@ const EditPost = (props) => {
             />
             <ImageListStyles>
               {existingImages.map((url, i) => {
-                return <ImageThumbStyles src={url} alt={`image_${i}`} key={i} />
+                return (
+                <ImageThumbWrapperStyles key={i}>
+                  <ImageThumbStyles src={url} alt={`image_${i}`} />
+                  <DeleteImageButtonStyles>&times;</DeleteImageButtonStyles>
+                </ImageThumbWrapperStyles>
+                );
               })}
             </ImageListStyles>
             <Submit type="submit">Submit</Submit>
