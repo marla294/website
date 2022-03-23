@@ -54,14 +54,14 @@ const EditPost = (props) => {
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     loadPost(props.match.params.Slug);
   }, [props.posts]);
 
-  const loadPost = (slug) => {
+  const loadPost = async (slug) => {
 		const slugify = require("slugify");
 
-		props.posts.forEach(post => {
+		await props.posts.forEach(async post => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
         setInputs({
@@ -71,21 +71,20 @@ const EditPost = (props) => {
         });
         setPostId(post.id);
         setNumberOfImages(post.numberOfImages || 0);
-        loadPostImages(post);
+        await loadPostImages(post);
 			}
 		});
 	};
 
-  const loadPostImages = (post) => {
+  const loadPostImages = async (post) => {
 		if (post.numberOfImages && post.numberOfImages > 0) {
+      let images = [];
 			for (let i = 0; i < post.numberOfImages; i++) {
 				const imageRef = props.storageRef.child(`/${post.id}/image_${i}.jpg`);
-
-				imageRef.getDownloadURL().then(url => {
-          debugger;
-          setExistingImages([...existingImages, url]);
-				});
+        const url = await imageRef.getDownloadURL();
+        images.push(url);
 			}
+      setExistingImages(images);
 		}
 	};
 
