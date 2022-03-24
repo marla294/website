@@ -114,27 +114,21 @@ const Post = (props) => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
 				setPost(post);
-				getPostHeaderUrl(post.id);
-				await loadInnerImages(post);
+				await loadPostImages(post);
 			}
 		}
 	};
 
-	const getPostHeaderUrl = (postId) => {
-		const postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
-
-		postImageRef.getDownloadURL().then(url => {
-			setPostHeaderUrl(url);
-		});
-	};
-
-	const loadInnerImages = async (post) => {
+	const loadPostImages = async (post) => {
 		const options = { postId: post.id };
-    const innerImages = (await props.loadImages(options)).filter(image => image.name !== 'Header.jpg');
+    const postImages = (await props.loadImages(options));
+		const [ headerImage ] = postImages.filter(image => image.name === 'Header.jpg');
 
-		if (innerImages.length > 0) {
+		setPostHeaderUrl(headerImage.url);
+
+		if (postImages.length > 1) {
 			let { content } = { ...post };
-			innerImages.forEach(image => {
+			postImages.forEach(image => {
 				const imageTag = `<img src=${image.url} alt="${image.name}" />`;
 				content = content.replace(image.name, imageTag);
 			});
