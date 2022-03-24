@@ -135,7 +135,7 @@ const EditPost = (props) => {
     }
 
     if (inputs.headerImage) {
-      props.uploadImages([inputs.headerImage], { postId, isHeader: true })
+      props.uploadImages([inputs.headerImage], { postId, isHeader: true });
     }
     if (images.length > 0) {
       props.uploadImages(images, { postId });

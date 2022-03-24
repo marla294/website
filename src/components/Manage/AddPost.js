@@ -71,7 +71,7 @@ const AddPost = (props) => {
     };
 
     props.addNewPost(post);
-    props.uploadPostHeader(inputs.headerImage, post.id);
+    props.uploadImages([inputs.headerImage], { postId: post.id, isHeader: true });
     setIsSubmitComplete(true);
   };
 
@@ -146,7 +146,7 @@ const AddPost = (props) => {
 
 AddPost.propTypes = {
   addNewPost: PropTypes.func.isRequired,
-  uploadPostHeader: PropTypes.func.isRequired,
+  uploadImages: PropTypes.func.isRequired,
 };
 
 export default AddPost;

@@ -39,14 +39,14 @@ class Router extends React.Component {
 	componentWillUnmount() {
     base.removeBinding(this.ref);
 		base.removeBinding(this.storageRef);
-    }
+  };
 
 	updateAbout = (about) => {
 		this.setState({ data: {
 			about: {...about},
 			posts: [...this.state.data.posts]
 		}});
-	}
+	};
 
 	uploadAboutImage = (image) => {
 		const metaData = {
@@ -54,26 +54,6 @@ class Router extends React.Component {
 		};
 
 		this.aboutImageRef.put(image, metaData);
-	}
-
-	uploadPostHeader = (image, postId) => {
-		const metaData = {
-			contentType: 'image/jpeg'
-		};
-
-		this.postImageRef = this.storageRef.child(`/${postId}/Header.jpg`);
-
-		this.postImageRef.put(image, metaData);
-	};
-
-	uploadPostImages = (images, postId) => {
-		images.forEach((image) => {
-			this.postImageRef = this.storageRef.child(`/${postId}/${image.name}`);
-			const metaData = {
-				contentType: image.type
-			};
-			this.postImageRef.put(image, metaData);
-		});
 	};
 
 	// options object:
@@ -89,7 +69,7 @@ class Router extends React.Component {
 			this.aboutImageRef.put(aboutImage, metaData);
 			return;
 		}
-		if (options.isHeader) {
+		if (options.isHeader && options.postId) {
 			const [ headerImage ] = images;
 			const metaData = {
 				contentType: headerImage.type
@@ -204,7 +184,7 @@ class Router extends React.Component {
 						<Route path="/Manage/Post/Add" render={(props) => {
 							return <AddPost
 								addNewPost={this.addNewPost}
-								uploadPostHeader={this.uploadPostHeader}
+								uploadImages={this.uploadImages}
 								{...props}
 							/>
 						}} />
