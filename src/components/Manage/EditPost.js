@@ -64,7 +64,6 @@ const EditPost = (props) => {
 
   const [images, setImages] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
-  const [numberOfImages, setNumberOfImages] = useState(0);
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState([]);
@@ -85,7 +84,6 @@ const EditPost = (props) => {
           categories: post.categories ? [...post.categories] : [],
         });
         setPostId(post.id);
-        setNumberOfImages(post.numberOfImages || 0);
         await loadInnerImages(post.id);
 			}
 		});
@@ -140,7 +138,7 @@ const EditPost = (props) => {
       props.uploadPostHeader(inputs.headerImage, postId);
     }
     if (images.length > 0) {
-      props.uploadPostImages(images, postId, numberOfImages);
+      props.uploadPostImages(images, postId);
     }
 
     const post = {
@@ -150,7 +148,6 @@ const EditPost = (props) => {
       categories: inputs.categories,
       content: inputs.content,
       id: postId,
-      numberOfImages: numberOfImages + images.length,
     };
 
     props.editPost(post);
@@ -229,6 +226,7 @@ const EditPost = (props) => {
                   >
                     &times;
                   </DeleteImageButtonStyles>
+                  <p>{img.name}</p>
                 </ImageThumbWrapperStyles>
                 );
               })}
@@ -269,7 +267,6 @@ EditPost.propTypes = {
     categories: PropTypes.array,
     content: PropTypes.string,
     headerImage: PropTypes.string,
-    numberOfImages: PropTypes.number,
   })),
   storageRef: PropTypes.object,
 };
