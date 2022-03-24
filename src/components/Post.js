@@ -102,21 +102,22 @@ const Post = (props) => {
 	const [post, setPost] = useState(null);
 	const [postHeaderUrl, setPostHeaderUrl] = useState(''); 
 
-	useEffect(() => {
-		loadPost(props.match.params.Slug)
+	useEffect(async () => {
+		await loadPost(props.match.params.Slug)
 	}, [props.posts]);
 
-	const loadPost = (slug) => {
+	const loadPost =  async (slug) => {
 		const slugify = require("slugify");
 
-		props.posts.forEach(post => {
+		for (let i = 0; i < props.posts.length; i++) {
+			const post = props.posts[i];
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
 				setPost(post);
 				getPostHeaderUrl(post.id);
-				loadPostImages(post);
+				await loadInnerImages(post);
 			}
-		});
+		}
 	};
 
 	const getPostHeaderUrl = (postId) => {
@@ -127,21 +128,22 @@ const Post = (props) => {
 		});
 	};
 
-	const loadPostImages = (post) => {
-		if (post.numberOfImages && post.numberOfImages > 0) {
-			for (let i = 0; i < post.numberOfImages; i++) {
-				const imageRef = props.storageRef.child(`/${post.id}/image_${i}.jpg`);
+	const loadInnerImages = async (post) => {
+		const options = { postId: post.id };
+    const innerImages = (await props.loadImages(options)).filter(image => image.name !== 'Header.jpg');
 
-				imageRef.getDownloadURL().then(url => {
-					const imageTag = `<img src=${url} alt="image_${i}" />`;
-					const content = post.content.replace(`image_${i}`, imageTag);
-					const updatedPost = {
-						...post,
-						content,
-					};
-					setPost(updatedPost);
-				});
-			}
+		if (innerImages.length > 0) {
+			let { content } = { ...post };
+			innerImages.forEach(image => {
+				const imageTag = `<img src=${image.url} alt="${image.name}" />`;
+				content = content.replace(image.name, imageTag);
+			});
+
+			const updatedPost = {
+				...post,
+				content,
+			};
+			setPost(updatedPost);
 		}
 	};
 
@@ -188,6 +190,7 @@ Post.propTypes = {
     content: PropTypes.string,
     headerImage: PropTypes.string,
   })),
+	loadImages: PropTypes.func.isRequired,
 };
 
 export default Post;

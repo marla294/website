@@ -149,6 +149,7 @@ class Router extends React.Component {
 							return <Post 
 								posts={this.state.data.posts} 
 								storageRef={this.storageRef}
+								loadImages={this.loadImages}
 								{...props} 
 							/>;
 						}} />
