@@ -182,7 +182,6 @@ Post.propTypes = {
     status: PropTypes.string,
     categories: PropTypes.array,
     content: PropTypes.string,
-    headerImage: PropTypes.string,
   })),
 	loadImages: PropTypes.func.isRequired,
 };
