@@ -86,29 +86,16 @@ const EditPost = (props) => {
         });
         setPostId(post.id);
         setNumberOfImages(post.numberOfImages || 0);
-        await loadPostImages(post.id);
+        await loadInnerImages(post.id);
 			}
 		});
 	};
 
-  const loadPostImages = async (postId) => {
-    let postImages = [];
-    const postImagesRef = await props.storageRef.child(`/${postId}`).listAll();
+  const loadInnerImages = async (postId) => {
+    const options = { postId };
+    const innerImages = (await props.loadImages(options)).filter(image => image.name !== 'Header.jpg');
 
-    let imageRefArray = Array.from(postImagesRef.items);
-
-    for (let i = 0; i < imageRefArray.length; i++) {
-      let ref = imageRefArray[i];
-      if (ref.name !== 'Header.jpg') {
-        const url = await ref.getDownloadURL();
-        postImages.push({
-          url,
-          name: ref.name,
-        });
-      }
-    }
-
-    setExistingImages(postImages);
+    setExistingImages(innerImages);
 	};
 
   const handlePostImageAddition = (e) => {
@@ -121,7 +108,7 @@ const EditPost = (props) => {
   const handlePostImageDeletion = async (e, name) => {
     e.preventDefault();
     await props.deletePostImages(postId, [name]);
-    await loadPostImages(postId);
+    await loadInnerImages(postId);
   };
 
   const editPost = e => {
@@ -273,6 +260,7 @@ EditPost.propTypes = {
   editPost: PropTypes.func.isRequired,
   uploadPostHeader: PropTypes.func.isRequired,
   uploadPostImages: PropTypes.func.isRequired,
+  loadImages: PropTypes.func.isRequired,
   posts: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     date: PropTypes.string,

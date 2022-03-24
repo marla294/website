@@ -78,6 +78,27 @@ class Router extends React.Component {
 		});
 	};
 
+	// options object:
+	// postId - return all images associated with a post
+	loadImages = async (options) => {
+    let images = [];
+
+		if (options.postId) {
+			const imageRefArray = Array.from((await this.storageRef.child(`/${options.postId}`).listAll()).items);
+
+			for (let i = 0; i < imageRefArray.length; i++) {
+				let ref = imageRefArray[i];
+				const url = await ref.getDownloadURL();
+				images.push({
+					url,
+					name: ref.name,
+				});
+			}
+		}
+    
+		return images;
+	};
+
 	deletePostImages = async (postId, imageNames) => {
 		for (let i = 0; i < imageNames.length; i++) {
 			const imageName = imageNames[i];
@@ -161,7 +182,7 @@ class Router extends React.Component {
 								uploadPostHeader={this.uploadPostHeader}
 								uploadPostImages={this.uploadPostImages}
 								deletePostImages={this.deletePostImages}
-								renamePostImage={this.renamePostImage}
+								loadImages={this.loadImages}
 								posts={this.state.data.posts} 
 								storageRef={this.storageRef}
 								{...props}
