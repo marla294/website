@@ -67,13 +67,46 @@ class Router extends React.Component {
 	};
 
 	uploadPostImages = (images, postId) => {
-		images.forEach((image, i) => {
+		images.forEach((image) => {
 			this.postImageRef = this.storageRef.child(`/${postId}/${image.name}`);
 			const metaData = {
 				contentType: image.type
 			};
 			this.postImageRef.put(image, metaData);
 		});
+	};
+
+	// options object:
+	// postId - associate all images with post
+	// isAbout - if true then it is the About page image
+	// isHeader - if true then rename the image to Header (postId should also be filled)
+	uploadImages = (images, options) => {
+		if (options.isAbout) {
+			const [ aboutImage ] = images;
+			const metaData = {
+				contentType: aboutImage.type
+			};
+			this.aboutImageRef.put(aboutImage, metaData);
+			return;
+		}
+		if (options.isHeader) {
+			const [ headerImage ] = images;
+			const metaData = {
+				contentType: headerImage.type
+			};
+			const headerImageRef = this.storageRef.child(`/${options.postId}/Header.jpg`);
+			headerImageRef.put(headerImage, metaData);
+			return;
+		}
+		if (options.postId) {
+			images.forEach((image) => {
+				const metaData = {
+					contentType: image.type
+				};
+				const postImageRef = this.storageRef.child(`/${options.postId}/${image.name}`);
+				postImageRef.put(image, metaData);
+			});
+		}
 	};
 
 	// options object:
@@ -178,8 +211,7 @@ class Router extends React.Component {
 						<Route path="/Manage/Post/Edit/:Slug" render={(props) => {
 							return <EditPost
 								editPost={this.editPost}
-								uploadPostHeader={this.uploadPostHeader}
-								uploadPostImages={this.uploadPostImages}
+								uploadImages={this.uploadImages}
 								deletePostImages={this.deletePostImages}
 								loadImages={this.loadImages}
 								posts={this.state.data.posts} 

@@ -135,10 +135,10 @@ const EditPost = (props) => {
     }
 
     if (inputs.headerImage) {
-      props.uploadPostHeader(inputs.headerImage, postId);
+      props.uploadImages([inputs.headerImage], { postId, isHeader: true })
     }
     if (images.length > 0) {
-      props.uploadPostImages(images, postId);
+      props.uploadImages(images, { postId });
     }
 
     const post = {
@@ -256,8 +256,7 @@ const EditPost = (props) => {
 
 EditPost.propTypes = {
   editPost: PropTypes.func.isRequired,
-  uploadPostHeader: PropTypes.func.isRequired,
-  uploadPostImages: PropTypes.func.isRequired,
+  uploadImages: PropTypes.func.isRequired,
   loadImages: PropTypes.func.isRequired,
   posts: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
