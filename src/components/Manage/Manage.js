@@ -60,11 +60,11 @@ const Manage = ({ posts, history }) => {
               <h3>Title</h3>
               <h3>Status</h3>
             </div>
-            {posts
+            {posts ? posts
             .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
             .map(post => {
               return renderPostLinks(post);
-            })}
+            }) : 'No posts to display'}
           </PostListStyles>
           <ButtonStyles type="button" onClick={(event) => {
             event.preventDefault();
