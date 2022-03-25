@@ -36,7 +36,7 @@ const ManageAbout = (props) => {
   const updateAbout = (e) => {
     e.preventDefault();
     props.updateAbout({ blurb: inputs.content });
-    props.uploadAboutImage(inputs.aboutImage);
+    props.uploadImages([inputs.aboutImage], { isAbout: true })
   };
   
   return authWrapper(
@@ -70,6 +70,7 @@ const ManageAbout = (props) => {
 
 ManageAbout.propTypes = {
   updateAbout: PropTypes.func,
+  uploadImages: PropTypes.func.isRequired,
   about: PropTypes.shape({
     blurb: PropTypes.string
   }),

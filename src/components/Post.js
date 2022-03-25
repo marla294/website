@@ -129,7 +129,14 @@ const Post = (props) => {
 		if (postImages.length > 1) {
 			let { content } = { ...post };
 			postImages.forEach(image => {
-				const imageTag = `<img src=${image.url} alt="${image.name}" />`;
+				const imageTag = `
+				<figure>
+					<img
+						src=${image.url}
+						alt="${image.name}"
+					/>
+				</figure>
+				`;
 				content = content.replace(image.name, imageTag);
 			});
 

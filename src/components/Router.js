@@ -48,14 +48,6 @@ class Router extends React.Component {
 		}});
 	};
 
-	uploadAboutImage = (image) => {
-		const metaData = {
-			contentType: 'image/jpeg'
-		};
-
-		this.aboutImageRef.put(image, metaData);
-	};
-
 	// options object:
 	// postId - associate all images with post
 	// isAbout - if true then it is the About page image
@@ -178,7 +170,7 @@ class Router extends React.Component {
 							return <ManageAbout 
 										updateAbout={this.updateAbout} 
 										about={this.state.data.about}
-										uploadAboutImage={this.uploadAboutImage}
+										uploadImages={this.uploadImages}
 									/>
 						}} />
 						<Route path="/Manage/Post/Add" render={(props) => {
