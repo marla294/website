@@ -58,7 +58,8 @@ const Blog = (props) => {
 	}, [props.posts]);
 
 	const loadPosts = () => {
-		const filteredPosts = [...props.posts].filter(post => 
+		const posts = props.posts ? [...props.posts] : [];
+		const filteredPosts = posts.filter(post => 
 			post.status === "public" &&
 			Date.parse(new Date()) > Date.parse(post.date)
 		);
