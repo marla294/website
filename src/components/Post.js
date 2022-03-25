@@ -109,7 +109,11 @@ const Post = (props) => {
 	const loadPost =  async (slug) => {
 		const slugify = require("slugify");
 
-		for (let i = 0; i < props.posts.length; i++) {
+		const filteredPosts = props.posts.filter(post => 
+			post.status !== "archive"
+		);
+
+		for (let i = 0; i < filteredPosts.length; i++) {
 			const post = props.posts[i];
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
