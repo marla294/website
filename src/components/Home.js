@@ -8,6 +8,7 @@ class Home extends React.Component {
 			<Blog 
 				posts={this.props.posts} 
 				history={this.props.history}
+				storageRef={this.props.storageRef}
 				totalPostsToDisplay={2}
 			></Blog>
 		);
@@ -15,7 +16,7 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-	posts: PropTypes.object.isRequired,
+	posts: PropTypes.array,
 	history: PropTypes.object
 };
 

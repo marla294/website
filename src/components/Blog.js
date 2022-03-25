@@ -1,12 +1,13 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import TopNav from "./TopNav";
-import Snippet from "./PostSnippet";
+import Snippet from "./Snippet";
 import { GlobalStyle } from "./GlobalStyles";
 
 const BlogWrapper = styled.div`
-	width: 100%
+	width: 100%;
 	display: grid;
 	justify-items: center;
 `;
@@ -48,78 +49,89 @@ const LoadMoreButton = styled.button`
 	border-radius: ${props => props.theme.S02};
 `;
 
-class Blog extends React.Component {
-	state = {
-        numberPostsToDisplay: 5,
-		posts: []
-    };
+const Blog = (props) => {
+	const [numberPostsToDisplay, setNumberPostsToDisplay] = useState(5);
+	const [posts, setPosts] = useState([]);
 
-	componentDidMount() {
-		let posts = Object.entries(this.props.posts)
-		.sort((a, b) => b[1].order - a[1].order)
-		.map(post => post[0]);
+	useEffect(() => {
+		loadPosts();
+	}, [props.posts]);
 
-		if (this.props.totalPostsToDisplay) {
-			posts = posts.slice(0, this.props.totalPostsToDisplay);
+	const loadPosts = () => {
+		const posts = props.posts ? [...props.posts] : [];
+		const filteredPosts = posts.filter(post => 
+			post.status === "public" &&
+			Date.parse(new Date()) > Date.parse(post.date)
+		);
+		let postsToDisplay = filteredPosts.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+
+		if (props.totalPostsToDisplay) {
+			postsToDisplay = postsToDisplay.slice(0, props.totalPostsToDisplay);
 		};
 
-		this.setState({posts});
+		setPosts(postsToDisplay);
 	};
 
-	/* Click Events */
-
-	loadMorePosts = () => {
-		const numberPostsToDisplay = this.state.numberPostsToDisplay + 3;
-		this.setState({numberPostsToDisplay});
-	};
-
-	/* Render Functions */
-
-	renderPostSnippets = () => {
-		const displayKeys = [...this.state.posts].slice(0, this.state.numberPostsToDisplay);
-
-		return displayKeys.map(key => {
+	const renderPostSnippets = (displayPosts) => {
+		return displayPosts.map((post, index) => {
 			return (
 				<Snippet
-					key={key}
-					index={key}
-					post={this.props.posts[key]}
-					push={this.props.history.push}
+					key={index}
+					index={index}
+					post={post}
+					storageRef={props.storageRef}
+					push={props.history.push}
 				/>
 			);
 		});
 	};
 
-	renderLoadMoreButton = () => {
-
-		if (this.state.numberPostsToDisplay < this.state.posts.length) {
+	const renderLoadMoreButton = () => {
+		if (numberPostsToDisplay < posts.length) {
 			return (
-				<LoadMoreButton onClick={this.loadMorePosts}>Load More</LoadMoreButton>
+				<LoadMoreButton onClick={() => setNumberPostsToDisplay(numberPostsToDisplay + 3)}>Load More</LoadMoreButton>
+			);
+		}
+	}
+
+	const renderBlogContent = () => {
+		const displayPosts = posts.slice(0, numberPostsToDisplay);
+		
+		if (displayPosts.length > 0) {
+			return (
+				<React.Fragment>
+					<h1>Blog Posts</h1>
+					<BlogPosts>
+						{renderPostSnippets(displayPosts)}
+						{renderLoadMoreButton()}
+					</BlogPosts>
+				</React.Fragment>
+			);
+		}
+		else {
+			return (
+				<React.Fragment>
+					<h1>Blog Posts</h1>
+					<p>No posts to display</p>
+				</React.Fragment>
 			);
 		}
 	};
 
-	render() {
-		return (
-			<React.Fragment>
-				<TopNav push={this.props.history.push} />
-					<BlogWrapper>
-						<BlogContent>
-							<h1>Blog Posts</h1>
-							<BlogPosts>
-								{this.renderPostSnippets()}
-								{this.renderLoadMoreButton()}
-							</BlogPosts>
-						</BlogContent>
-						<GlobalStyle />
-					</BlogWrapper>
-			</React.Fragment>
-		);
-	}
-}
+	return (
+		<React.Fragment>
+			<TopNav push={props.history.push} />
+				<BlogWrapper>
+					<BlogContent>
+						{renderBlogContent()}
+					</BlogContent>
+					<GlobalStyle />
+				</BlogWrapper>
+		</React.Fragment>
+	);
+};
 
 Blog.propTypes = {
-	posts: PropTypes.object.isRequired,
 	history: PropTypes.object,
 	totalPostsToDisplay: PropTypes.number,
 };
