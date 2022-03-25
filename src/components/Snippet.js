@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
-const Snippet = styled.div`
+const SnippetStyles = styled.div`
 	display: grid;
 	grid-template-rows: repeat(2, auto);
 	box-shadow: ${props => props.theme.bs};
@@ -45,27 +45,50 @@ const SnippetDetails = styled.div`
 	}
 `;
 
-const goToPost = (post, push, event) => {
-	event.preventDefault();
-	const slugify = require("slugify");
-	const slug = slugify(post.title, { remove: /\./ });
-	push(`/Post/${slug}`);
+class PostSnippet extends React.Component {
+	state = {
+		postHeaderUrl: ''
+	};
+
+	componentDidMount() {
+		this.getPostHeaderUrl(this.props.post.id);
+	}
+
+	componentDidUpdate(prevProps) {
+        if (this.props.post !== prevProps.post) {
+            this.getPostHeaderUrl(this.props.post.id);
+        }
+    };
+
+	getPostHeaderUrl = (postId) => {
+		this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
+
+		this.postImageRef.getDownloadURL().then(url => {
+			this.setState({postHeaderUrl: url});
+		});
+	};
+
+	goToPost = (event) => {
+		event.preventDefault();
+		const slugify = require("slugify");
+		const slug = slugify(this.props.post.title, { remove: /\./ });
+		this.props.push(`/Post/${slug}`);
+	}
+
+	render() {
+		return (
+			<SnippetStyles onClick={this.goToPost}>
+				<img src={`${this.state.postHeaderUrl}`} alt="" />
+				<SnippetDetails>
+					<h4>{this.props.post.title}</h4>
+					<p>{this.props.post.date}</p>
+				</SnippetDetails>
+				<GlobalStyle />
+			</SnippetStyles>
+		);
+	}
 };
 
-const PostSnippet = ({ post, push }) => (
-	<Snippet
-		onClick={event => {
-			goToPost(post, push, event);
-		}}
-	>
-		<img src={`${post.headerImage}`} alt="" />
-		<SnippetDetails>
-			<h4>{post.title}</h4>
-			<p>{post.date}</p>
-		</SnippetDetails>
-		<GlobalStyle />
-	</Snippet>
-);
 
 PostSnippet.propTypes = {
 	post: PropTypes.object.isRequired

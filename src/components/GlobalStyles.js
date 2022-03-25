@@ -75,9 +75,18 @@ export const GlobalStyle = createGlobalStyle`
 
 	a {
 		text-decoration: none;
+		cursor: pointer;
 	}
 
 	a:hover {
 		text-decoration: none;
+	}
+
+	button {
+		cursor: pointer;
+	}
+
+	.required {
+		color: red;
 	}
 `;

@@ -1,14 +1,14 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import styled from "styled-components";
 import TopNav from "./TopNav";
-import Posts from "../blog-posts";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
 const PostWrapper = styled.div`
 	margin-top: var(--S06);
 	margin-bottom: var(--S07);
-	width: 100%
+	width: 100%;
 	display: grid;
 	justify-items: center;
 `;
@@ -98,85 +98,103 @@ const PostCopy = styled.div`
 	}
 `;
 
-class Post extends React.Component {
-	state = {
-		Posts,
-		PostContent: null,
-		Slug: this.props.match.params.Slug
-	};
+const Post = (props) => {
+	const [post, setPost] = useState(null);
+	const [postHeaderUrl, setPostHeaderUrl] = useState(''); 
 
-	/* Helper Methods */
+	useEffect(async () => {
+		await loadPost(props.match.params.Slug)
+	}, [props.posts]);
 
-	getPostID = slug => {
-		let PostID = null;
+	const loadPost =  async (slug) => {
 		const slugify = require("slugify");
-		Object.entries(this.state.Posts).forEach(entry => {
-			const slugTitle = slugify(entry[1].title, { remove: /\./ });
-			if (slugTitle === slug) {
-				PostID = entry[0];
-			}
-		});
-		return PostID;
-	};
 
-	async importPostContent() {
-		const postID = this.getPostID(this.state.Slug);
-		const { default: PostContent } = await import(`../Posts/${postID}.js`);
-		this.setState({
-			PostContent: <PostContent showFullImage={this.showFullImage} />
-		});
-	}
-
-	/* Lifecycle */
-
-	componentDidMount() {
-		this.importPostContent();
-	}
-
-	/* Render Methods */
-
-	renderPostHeader = () => {
-		let postHeader = "";
-		Object.keys(this.props.posts).forEach(key => {
-			if (key === this.getPostID(this.state.Slug)) {
-				postHeader = (
-					<React.Fragment>
-						<PostHeader>
-							<h1>
-								{this.props.posts[key].title}
-							</h1>
-							<img
-								src={`${this.props.posts[key].headerImage}`}
-								alt=""
-							/>
-						</PostHeader>
-					</React.Fragment>
-				);
-			}
-		});
-		return postHeader;
-	};
-
-	render() {
-		return (
-			<React.Fragment>
-				<TopNav push={this.props.history.push} />
-				<PostWrapper>
-					<PostContent>
-						{this.renderPostHeader()}
-						<PostCopy>{this.state.PostContent}</PostCopy>
-					</PostContent>
-				</PostWrapper>
-				<GlobalStyle />
-			</React.Fragment>
+		const filteredPosts = props.posts.filter(post => 
+			post.status !== "archive"
 		);
-	}
+
+		for (let i = 0; i < filteredPosts.length; i++) {
+			const post = props.posts[i];
+			const slugTitle = slugify(post.title, { remove: /\./ });
+			if (slugTitle === slug) {
+				setPost(post);
+				await loadPostImages(post);
+			}
+		}
+	};
+
+	const loadPostImages = async (post) => {
+		const options = { postId: post.id };
+    const postImages = (await props.loadImages(options));
+		const [ headerImage ] = postImages.filter(image => image.name === 'Header.jpg');
+
+		setPostHeaderUrl(headerImage.url);
+
+		if (postImages.length > 1) {
+			let { content } = { ...post };
+			postImages.forEach(image => {
+				const imageTag = `
+				<figure>
+					<img
+						src=${image.url}
+						alt="${image.name}"
+					/>
+				</figure>
+				`;
+				content = content.replace(image.name, imageTag);
+			});
+
+			const updatedPost = {
+				...post,
+				content,
+			};
+			setPost(updatedPost);
+		}
+	};
+
+	return (
+		<React.Fragment>
+			<TopNav push={props.history.push} />
+			<PostWrapper>
+				<PostContent>
+					<PostHeader>
+						<h1>
+							{post ? post.title : ''}
+						</h1>
+						<img
+							src={postHeaderUrl}
+							alt={post ? post.title : ''}
+						/>
+					</PostHeader>
+					<PostCopy dangerouslySetInnerHTML={{
+						__html: post ? post.content : ''
+					}}></PostCopy>
+				</PostContent>
+			</PostWrapper>
+			<GlobalStyle />
+		</React.Fragment>
+	);
 }
 
 Post.propTypes = {
-	match: PropTypes.object.isRequired,
-	posts: PropTypes.object.isRequired,
-	history: PropTypes.object
+  storageRef: PropTypes.object,
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired,
+	}),
+	match: PropTypes.shape({
+		params: PropTypes.shape({
+			Slug: PropTypes.string.isRequired,
+		}),
+	}),
+  posts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    status: PropTypes.string,
+    categories: PropTypes.array,
+    content: PropTypes.string,
+  })),
+	loadImages: PropTypes.func.isRequired,
 };
 
 export default Post;

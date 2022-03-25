@@ -8,7 +8,7 @@ const Block = styled.code`
 	margin: ${props => props.theme.S03} 0;
 	white-space: pre-wrap;
 
-	font-size: ${props => props.theme.F01}
+	font-size: ${props => props.theme.F01};
 
 	@media only screen and (min-width: 768px) {
 		width: 768px;
