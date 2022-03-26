@@ -193,7 +193,6 @@ Post.propTypes = {
     date: PropTypes.string,
     title: PropTypes.string.isRequired,
     status: PropTypes.string,
-    categories: PropTypes.array,
     content: PropTypes.string,
   })),
 	loadImages: PropTypes.func.isRequired,

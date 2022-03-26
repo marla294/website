@@ -77,7 +77,6 @@ const EditPost = (props) => {
         setInputs({
           ...post,
           date: new Date(Date.parse(post.date)),
-          categories: post.categories ? [...post.categories] : [],
         });
         setPostId(post.id);
         await loadInnerImages(post.id);
@@ -141,7 +140,6 @@ const EditPost = (props) => {
       date: inputs.date.toDateString(),
       title: inputs.title,
       status: inputs.status,
-      categories: inputs.categories,
       content: inputs.content,
       id: postId,
     };
@@ -250,7 +248,6 @@ EditPost.propTypes = {
     date: PropTypes.string,
     title: PropTypes.string.isRequired,
     status: PropTypes.string,
-    categories: PropTypes.array,
     content: PropTypes.string,
     headerImage: PropTypes.string,
   })),
