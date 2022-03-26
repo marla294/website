@@ -107,6 +107,8 @@ const Post = (props) => {
 	}, [props.posts]);
 
 	const loadPost =  async (slug) => {
+		if (!props.posts || props.posts.length === 0) return;
+
 		const slugify = require("slugify");
 
 		const filteredPosts = props.posts.filter(post => 
@@ -114,7 +116,7 @@ const Post = (props) => {
 		);
 
 		for (let i = 0; i < filteredPosts.length; i++) {
-			const post = props.posts[i];
+			const post = filteredPosts[i];
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
 				setPost(post);
