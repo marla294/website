@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { WithContext as ReactTags } from 'react-tag-input';
 import { GlobalStyle } from "../GlobalStyles";
 import Wrapper from '../Styles/Wrapper';
 import ManageContentStyles from '../Styles/ManageContentStyles';
@@ -20,14 +19,11 @@ const AddPost = (props) => {
     inputs, 
     handleChange,
     handleDateChange,
-    handleCategoryAddition,
-    handleCategoryDeletion,
     handleEditorChange,
   } = useForm({
     date: new Date(),
     title: '',
     status: 'draft',
-    categories: [],
     content: '',
     headerImage: null,
   });
@@ -113,15 +109,6 @@ const AddPost = (props) => {
                 <option value="public">Public</option>
                 <option value="archive">Archive</option>
             </select>
-            <label>Categories:</label>
-            <div>
-                <ReactTags 
-                    tags={inputs.categories}
-                    delimiters={[188, 13]}
-                    handleAddition={handleCategoryAddition}
-                    handleDelete={handleCategoryDeletion}
-                />
-            </div>
             <label>Post Content:<span className="required">&nbsp;*</span></label>
             <Editor
                 apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
