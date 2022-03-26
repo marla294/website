@@ -61,7 +61,6 @@ const AddPost = (props) => {
       date: inputs.date.toDateString(),
       title: inputs.title,
       status: inputs.status,
-      categories: inputs.categories,
       content: inputs.content,
       id: `Post_${new Date().getTime()}`
     };
