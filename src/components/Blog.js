@@ -41,16 +41,17 @@ const LoadMoreButton = styled.button`
 	padding: 1px 0;
 	background-color: transparent;
 	border: none;
-	color: ${props => props.theme.darkGray};
-	border-bottom: 1px solid ${props => props.theme.darkGray};
+	color: ${props => props.theme.Gray05};
+	border-bottom: 2px solid ${props => props.theme.Gray05};
 	transition: color 0.25s ease, border-bottom 0.25s ease;
-	font-size: var(--F03);
+	font-size: var(--F04);
+	font-weight: bold;
 	outline: none;
 	cursor: pointer;
 	margin-bottom: var(--S05);
 	&:hover {
 		color: ${props => props.theme.red};
-		border-bottom: 1px solid ${props => props.theme.red};
+		border-bottom: 2px solid ${props => props.theme.red};
 		transition: color 0.25s ease, border-bottom 0.25s ease;
 	}
 `;
