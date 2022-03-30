@@ -31,12 +31,10 @@ const AboutContent = styled.div`
 	}
 `;
 
-const Copy = styled.div`
-	display: grid;
-	grid-gap: var(--S03);
+const Blurb = styled.div`
 	background: var(--Gray03);
 	color: white;
-	padding: var(--S06);
+	padding:  var(--S05) var(--S06) var(--S06) var(--S06);
 	font-size: var(--F03);
 	justify-self: center;
 	box-shadow: ${props => props.theme.bs};
@@ -47,6 +45,12 @@ const Copy = styled.div`
 		border-bottom-left-radius: var(--S02);
 		border-bottom-right-radius: var(--S02);
 	}
+`;
+
+const Copy = styled.div`
+	display: grid;
+	grid-gap: var(--S02);
+	padding-top: var(--S02);
 `;
 
 class About extends React.Component {
@@ -60,20 +64,24 @@ class About extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-					<TopNav push={this.props.history.push} />
-					<Wrapper>
-						<AboutContent>
-							<h1>About Me</h1>
-							<img
-								src={this.props.aboutImageUrl}
-								alt="Marla Foreman"
-							/>
+				<TopNav push={this.props.history.push} />
+				<Wrapper>
+					<AboutContent>
+						<h1>About Me</h1>
+						<img
+							src={this.props.aboutImageUrl}
+							alt="Marla Foreman"
+						/>
+						<Blurb>
 							<Copy dangerouslySetInnerHTML={{
 								__html: this.props.about.blurb
-							}}>
+							}}></Copy>
+							<Copy>
+								<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
 							</Copy>
-						</AboutContent>
-					</Wrapper>
+						</Blurb>
+					</AboutContent>
+				</Wrapper>
 				<GlobalStyle />
 			</React.Fragment>
 		);
