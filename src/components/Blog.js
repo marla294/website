@@ -38,15 +38,20 @@ const BlogPosts = styled.div`
 `;
 
 const LoadMoreButton = styled.button`
-	background-color: ${props => props.theme.taupeGray};
-	color: white;
-	padding: 10px 20px;
-	font-size: 16px;
+	background-color: transparent;
 	border: none;
+	color: ${props => props.theme.darkGray};
+	border-bottom: 1px solid ${props => props.theme.darkGray};
+	transition: color 0.25s ease, border-bottom 0.25s ease;
+	font-size: var(--F03);
 	outline: none;
 	cursor: pointer;
 	margin-bottom: var(--S05);
-	border-radius: ${props => props.theme.S02};
+	&:hover {
+		color: ${props => props.theme.red};
+		border-bottom: 1px solid ${props => props.theme.red};
+		transition: color 0.25s ease, border-bottom 0.25s ease;
+	}
 `;
 
 const Blog = (props) => {
