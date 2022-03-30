@@ -20,30 +20,27 @@ const AboutContent = styled.div`
 		width: 100%;
 	}
 
-	@media only screen and (min-width: 768px) {
+	@media only screen and (min-width: 512px) {
 		margin-bottom: var(--S07);
 		img {
 			justify-self: center;
-			width: 768px;
-			border-top-left-radius: var(--S02);
+			width: var(--S13);
+			/* border-top-left-radius: var(--S02);
 			border-top-right-radius: var(--S02);
+			border-bottom-left-radius: var(--S02);
+			border-bottom-right-radius: var(--S02); */
 		}
 	}
 `;
 
 const Blurb = styled.div`
-	background: var(--Gray03);
-	color: white;
 	padding:  var(--S05) var(--S06) var(--S06) var(--S06);
-	font-size: var(--F03);
+	font-size: var(--F01);
 	justify-self: center;
-	box-shadow: ${props => props.theme.bs};
 	width: 100%;
 
-	@media only screen and (min-width: 768px) {
-		width: 768px;
-		border-bottom-left-radius: var(--S02);
-		border-bottom-right-radius: var(--S02);
+	@media only screen and (min-width: 512px) {
+		width: var(--S15);
 	}
 `;
 
@@ -67,12 +64,14 @@ class About extends React.Component {
 				<TopNav push={this.props.history.push} />
 				<Wrapper>
 					<AboutContent>
-						<h1>About Me</h1>
 						<img
 							src={this.props.aboutImageUrl}
 							alt="Marla Foreman"
 						/>
 						<Blurb>
+							<Copy>
+								<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
+							</Copy>
 							<Copy dangerouslySetInnerHTML={{
 								__html: this.props.about.blurb
 							}}></Copy>
