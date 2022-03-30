@@ -107,7 +107,6 @@ const Blog = (props) => {
 		if (displayPosts.length > 0) {
 			return (
 				<React.Fragment>
-					<h1>Blog Posts</h1>
 					<BlogPosts>
 						{renderPostSnippets(displayPosts)}
 						{renderLoadMoreButton()}
@@ -118,7 +117,6 @@ const Blog = (props) => {
 		else {
 			return (
 				<React.Fragment>
-					<h1>Blog Posts</h1>
 					<p>No posts to display</p>
 				</React.Fragment>
 			);

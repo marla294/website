@@ -6,42 +6,33 @@ import { GlobalStyle } from "./GlobalStyles";
 const SnippetStyles = styled.div`
 	display: grid;
 	grid-template-rows: repeat(2, auto);
-	box-shadow: ${props => props.theme.bs};
+	box-shadow: var(--bs);
 	width: 100%;
 
 	img {
 		width: 100%;
 	}
 
-	@media only screen and (min-width: 768px) {
-		width: 768px;
-		border-bottom-left-radius: ${props => props.theme.S02};
-		border-bottom-right-radius: ${props => props.theme.S02};
+	@media only screen and (min-width: 512px) {
+		width: var(--S14);
 		img {
-			width: 768px;
-			border-top-left-radius: ${props => props.theme.S02};
-			border-top-right-radius: ${props => props.theme.S02};
+			width: var(--S14);
 		}
 	}
 `;
 
 const SnippetDetails = styled.div`
 	display: grid;
-	grid-gap: ${props => props.theme.S05};
+	grid-gap: var(--S02);
 	background: ${props => props.theme.Gray03};
 	color: white;
-	padding: ${props => props.theme.S06};
-	font-size: ${props => props.theme.F04};
+	padding: var(--S04);
+	font-size: var(--F03);
 
 	p {
 		color: ${props => props.theme.Gray01};
-		font-size: ${props => props.theme.F02};
+		font-size: var(--F01);
 		text-transform: uppercase;
-	}
-
-	@media only screen and (min-width: 768px) {
-		border-bottom-left-radius: ${props => props.theme.S02};
-		border-bottom-right-radius: ${props => props.theme.S02};
 	}
 `;
 
@@ -81,8 +72,8 @@ class PostSnippet extends React.Component {
 			<SnippetStyles onClick={this.goToPost}>
 				<img src={`${this.state.postHeaderUrl}`} alt="" />
 				<SnippetDetails>
-					<h4>{this.props.post.title}</h4>
 					<p>{new Date(Date.parse(this.props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
+					<h4>{this.props.post.title}</h4>
 				</SnippetDetails>
 				<GlobalStyle />
 			</SnippetStyles>
