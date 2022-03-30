@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
 const SnippetStyles = styled.div`
-	display: grid;
-	grid-template-rows: repeat(2, auto);
+	/* display: grid;
+	grid-template-rows: repeat(2, auto); */
+	position: relative;
 	box-shadow: var(--bs);
 	width: 100%;
 
@@ -22,15 +23,19 @@ const SnippetStyles = styled.div`
 `;
 
 const SnippetDetails = styled.div`
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	display: grid;
 	grid-gap: var(--S02);
-	background: ${props => props.theme.Gray03};
+	/* background: var(--Gray07); */
+	background: linear-gradient(rgb(24, 24, 29, 0.2), rgb(24, 24, 29, 1));
 	color: white;
 	padding: var(--S04);
 	font-size: var(--F03);
 
 	p {
-		color: ${props => props.theme.Gray01};
+		color: white;
 		font-size: var(--F01);
 		text-transform: uppercase;
 	}
