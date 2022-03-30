@@ -55,10 +55,10 @@ class PostSnippet extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
-        if (this.props.post !== prevProps.post) {
-            this.getPostHeaderUrl(this.props.post.id);
-        }
-    };
+		if (this.props.post !== prevProps.post) {
+			this.getPostHeaderUrl(this.props.post.id);
+		}
+	};
 
 	getPostHeaderUrl = (postId) => {
 		this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
@@ -76,12 +76,13 @@ class PostSnippet extends React.Component {
 	}
 
 	render() {
+		const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 		return (
 			<SnippetStyles onClick={this.goToPost}>
 				<img src={`${this.state.postHeaderUrl}`} alt="" />
 				<SnippetDetails>
 					<h4>{this.props.post.title}</h4>
-					<p>{this.props.post.date}</p>
+					<p>{new Date(Date.parse(this.props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
 				</SnippetDetails>
 				<GlobalStyle />
 			</SnippetStyles>
