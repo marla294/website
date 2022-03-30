@@ -38,6 +38,7 @@ const BlogPosts = styled.div`
 `;
 
 const LoadMoreButton = styled.button`
+	padding: 1px 0;
 	background-color: transparent;
 	border: none;
 	color: ${props => props.theme.darkGray};
