@@ -4,11 +4,10 @@ import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
 const SnippetStyles = styled.div`
-	/* display: grid;
-	grid-template-rows: repeat(2, auto); */
 	position: relative;
 	box-shadow: var(--bs);
 	width: 100%;
+	background-color: rgb(24, 24, 29, 1);
 
 	img {
 		width: 100%;
@@ -27,14 +26,13 @@ const SnippetDetails = styled.div`
 	bottom: 0;
 	width: 100%;
 	display: grid;
-	grid-gap: var(--S02);
-	/* background: var(--Gray07); */
-	background: linear-gradient(rgb(24, 24, 29, 0.2), rgb(24, 24, 29, 1));
+	grid-gap: var(--S01);
+	background: linear-gradient(rgb(24, 24, 29, 0), rgb(24, 24, 29, 1));
 	color: white;
 	padding: var(--S04);
 	font-size: var(--F03);
 
-	p {
+	.date {
 		color: white;
 		font-size: var(--F01);
 		text-transform: uppercase;
@@ -77,8 +75,8 @@ class PostSnippet extends React.Component {
 			<SnippetStyles onClick={this.goToPost}>
 				<img src={`${this.state.postHeaderUrl}`} alt="" />
 				<SnippetDetails>
-					<p>{new Date(Date.parse(this.props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
-					<h4>{this.props.post.title}</h4>
+					<p className="date">{new Date(Date.parse(this.props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
+					<p>{this.props.post.title}</p>
 				</SnippetDetails>
 				<GlobalStyle />
 			</SnippetStyles>
