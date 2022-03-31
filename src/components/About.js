@@ -25,10 +25,6 @@ const AboutContent = styled.div`
 		img {
 			justify-self: center;
 			width: var(--S13);
-			/* border-top-left-radius: var(--S02);
-			border-top-right-radius: var(--S02);
-			border-bottom-left-radius: var(--S02);
-			border-bottom-right-radius: var(--S02); */
 		}
 	}
 `;

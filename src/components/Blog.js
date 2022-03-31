@@ -38,19 +38,26 @@ const BlogPosts = styled.div`
 `;
 
 const LoadMoreButton = styled.button`
-	background-color: ${props => props.theme.taupeGray};
-	color: white;
-	padding: 10px 20px;
-	font-size: 16px;
+	padding: 1px 0;
+	background-color: transparent;
 	border: none;
+	color: ${props => props.theme.Gray05};
+	border-bottom: 2px solid ${props => props.theme.Gray05};
+	transition: color 0.25s ease, border-bottom 0.25s ease;
+	font-size: var(--F04);
+	font-weight: bold;
 	outline: none;
 	cursor: pointer;
 	margin-bottom: var(--S05);
-	border-radius: ${props => props.theme.S02};
+	&:hover {
+		color: ${props => props.theme.red};
+		border-bottom: 2px solid ${props => props.theme.red};
+		transition: color 0.25s ease, border-bottom 0.25s ease;
+	}
 `;
 
 const Blog = (props) => {
-	const [numberPostsToDisplay, setNumberPostsToDisplay] = useState(5);
+	const [numberPostsToDisplay, setNumberPostsToDisplay] = useState(3);
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
@@ -100,7 +107,6 @@ const Blog = (props) => {
 		if (displayPosts.length > 0) {
 			return (
 				<React.Fragment>
-					<h1>Blog Posts</h1>
 					<BlogPosts>
 						{renderPostSnippets(displayPosts)}
 						{renderLoadMoreButton()}
@@ -111,7 +117,6 @@ const Blog = (props) => {
 		else {
 			return (
 				<React.Fragment>
-					<h1>Blog Posts</h1>
 					<p>No posts to display</p>
 				</React.Fragment>
 			);
