@@ -1,95 +1,89 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
 const SnippetStyles = styled.div`
-	display: grid;
-	grid-template-rows: repeat(2, auto);
-	box-shadow: ${props => props.theme.bs};
+	position: relative;
+	box-shadow: var(--bs);
 	width: 100%;
+	background-color: rgb(24, 24, 29, 1);
 
 	img {
 		width: 100%;
 	}
 
-	@media only screen and (min-width: 768px) {
-		width: 768px;
-		border-bottom-left-radius: ${props => props.theme.S02};
-		border-bottom-right-radius: ${props => props.theme.S02};
+	@media only screen and (min-width: 512px) {
+		width: var(--S14);
 		img {
-			width: 768px;
-			border-top-left-radius: ${props => props.theme.S02};
-			border-top-right-radius: ${props => props.theme.S02};
+			width: var(--S14);
 		}
 	}
 `;
 
 const SnippetDetails = styled.div`
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	display: grid;
-	grid-gap: ${props => props.theme.S05};
-	background: ${props => props.theme.Gray03};
+	grid-gap: var(--S01);
+	background: linear-gradient(rgb(24, 24, 29, 0), rgb(24, 24, 29, 1));
 	color: white;
-	padding: ${props => props.theme.S06};
-	font-size: ${props => props.theme.F04};
+	padding: var(--S04);
+	font-size: var(--F03);
 
-	p {
-		color: ${props => props.theme.Gray01};
-		font-size: ${props => props.theme.F02};
+	.date {
+		color: white;
+		font-size: var(--F01);
 		text-transform: uppercase;
-	}
-
-	@media only screen and (min-width: 768px) {
-		border-bottom-left-radius: ${props => props.theme.S02};
-		border-bottom-right-radius: ${props => props.theme.S02};
 	}
 `;
 
-class PostSnippet extends React.Component {
-	state = {
-		postHeaderUrl: ''
+const PostSnippet = (props) => {
+	const [postHeaderUrl, setPostHeaderUrl] = useState('');
+	const [postHeaderImageLoaded, setPostHeaderImageLoaded] = useState(false);
+
+	useEffect(async () => {
+		await getPostHeaderUrl(props.post.id);
+	}, [props.post]);
+
+	const getPostHeaderUrl = async (postId) => {
+		const postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
+		const url = await postImageRef.getDownloadURL();
+		setPostHeaderUrl(url);
+		await getPostHeaderImage(url);
 	};
 
-	componentDidMount() {
-		this.getPostHeaderUrl(this.props.post.id);
-	}
-
-	componentDidUpdate(prevProps) {
-		if (this.props.post !== prevProps.post) {
-			this.getPostHeaderUrl(this.props.post.id);
+	const getPostHeaderImage = async (url) => {
+		if (url && url !== '') {
+			const img = new Image();
+			img.src = url;
+			await img.decode();
+			setPostHeaderImageLoaded(true);
 		}
 	};
 
-	getPostHeaderUrl = (postId) => {
-		this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
-
-		this.postImageRef.getDownloadURL().then(url => {
-			this.setState({postHeaderUrl: url});
-		});
-	};
-
-	goToPost = (event) => {
+	const goToPost = (event) => {
 		event.preventDefault();
 		const slugify = require("slugify");
-		const slug = slugify(this.props.post.title, { remove: /\./ });
-		this.props.push(`/Post/${slug}`);
+		const slug = slugify(props.post.title, { remove: /\./ });
+		props.push(`/Post/${slug}`);
 	}
 
-	render() {
-		const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-		return (
-			<SnippetStyles onClick={this.goToPost}>
-				<img src={`${this.state.postHeaderUrl}`} alt="" />
+	const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+	return postHeaderImageLoaded ? (
+			<SnippetStyles onClick={goToPost}>
+				<img src={`${postHeaderUrl}`} alt="" />
 				<SnippetDetails>
-					<h4>{this.props.post.title}</h4>
-					<p>{new Date(Date.parse(this.props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
+					<p className="date">{new Date(Date.parse(props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
+					<p>{props.post.title}</p>
 				</SnippetDetails>
 				<GlobalStyle />
 			</SnippetStyles>
-		);
-	}
+	) : null;
 };
-
 
 PostSnippet.propTypes = {
 	post: PropTypes.object.isRequired
