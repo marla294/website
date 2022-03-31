@@ -42,7 +42,7 @@ const SnippetDetails = styled.div`
 
 const PostSnippet = (props) => {
 	const [postHeaderUrl, setPostHeaderUrl] = useState('');
-	const [postHeaderImage, setPostHeaderImage] = useState(null);
+	const [postHeaderImageLoaded, setPostHeaderImageLoaded] = useState(false);
 
 	useEffect(async () => {
 		await getPostHeaderUrl(props.post.id);
@@ -52,6 +52,16 @@ const PostSnippet = (props) => {
 		const postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
 		const url = await postImageRef.getDownloadURL();
 		setPostHeaderUrl(url);
+		await getPostHeaderImage(url);
+	};
+
+	const getPostHeaderImage = async (url) => {
+		if (url && url !== '') {
+			const img = new Image();
+			img.src = url;
+			await img.decode();
+			setPostHeaderImageLoaded(true);
+		}
 	};
 
 	const goToPost = (event) => {
@@ -63,16 +73,16 @@ const PostSnippet = (props) => {
 
 	const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
-	return (
-		<SnippetStyles onClick={goToPost}>
-			<img src={`${postHeaderUrl}`} alt="" />
-			<SnippetDetails>
-				<p className="date">{new Date(Date.parse(props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
-				<p>{props.post.title}</p>
-			</SnippetDetails>
-			<GlobalStyle />
-		</SnippetStyles>
-	);
+	return postHeaderImageLoaded ? (
+			<SnippetStyles onClick={goToPost}>
+				<img src={`${postHeaderUrl}`} alt="" />
+				<SnippetDetails>
+					<p className="date">{new Date(Date.parse(props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
+					<p>{props.post.title}</p>
+				</SnippetDetails>
+				<GlobalStyle />
+			</SnippetStyles>
+	) : null;
 };
 
 PostSnippet.propTypes = {

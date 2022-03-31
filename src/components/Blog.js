@@ -57,7 +57,7 @@ const LoadMoreButton = styled.button`
 `;
 
 const Blog = (props) => {
-	const [numberPostsToDisplay, setNumberPostsToDisplay] = useState(5);
+	const [numberPostsToDisplay, setNumberPostsToDisplay] = useState(3);
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
