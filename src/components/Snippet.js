@@ -42,17 +42,16 @@ const SnippetDetails = styled.div`
 
 const PostSnippet = (props) => {
 	const [postHeaderUrl, setPostHeaderUrl] = useState('');
+	const [postHeaderImage, setPostHeaderImage] = useState(null);
 
-	useEffect(() => {
-		getPostHeaderUrl(props.post.id);
+	useEffect(async () => {
+		await getPostHeaderUrl(props.post.id);
 	}, [props.post]);
 
-	const getPostHeaderUrl = (postId) => {
-		let postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
-
-		postImageRef.getDownloadURL().then(url => {
-			setPostHeaderUrl(url);
-		});
+	const getPostHeaderUrl = async (postId) => {
+		const postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
+		const url = await postImageRef.getDownloadURL();
+		setPostHeaderUrl(url);
 	};
 
 	const goToPost = (event) => {
