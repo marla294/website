@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
@@ -39,51 +40,41 @@ const SnippetDetails = styled.div`
 	}
 `;
 
-class PostSnippet extends React.Component {
-	state = {
-		postHeaderUrl: ''
-	};
+const PostSnippet = (props) => {
+	const [postHeaderUrl, setPostHeaderUrl] = useState('');
 
-	componentDidMount() {
-		this.getPostHeaderUrl(this.props.post.id);
-	}
+	useEffect(() => {
+		getPostHeaderUrl(props.post.id);
+	}, [props.post]);
 
-	componentDidUpdate(prevProps) {
-		if (this.props.post !== prevProps.post) {
-			this.getPostHeaderUrl(this.props.post.id);
-		}
-	};
+	const getPostHeaderUrl = (postId) => {
+		let postImageRef = props.storageRef.child(`/${postId}/Header.jpg`);
 
-	getPostHeaderUrl = (postId) => {
-		this.postImageRef = this.props.storageRef.child(`/${postId}/Header.jpg`);
-
-		this.postImageRef.getDownloadURL().then(url => {
-			this.setState({postHeaderUrl: url});
+		postImageRef.getDownloadURL().then(url => {
+			setPostHeaderUrl(url);
 		});
 	};
 
-	goToPost = (event) => {
+	const goToPost = (event) => {
 		event.preventDefault();
 		const slugify = require("slugify");
-		const slug = slugify(this.props.post.title, { remove: /\./ });
-		this.props.push(`/Post/${slug}`);
+		const slug = slugify(props.post.title, { remove: /\./ });
+		props.push(`/Post/${slug}`);
 	}
 
-	render() {
-		const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-		return (
-			<SnippetStyles onClick={this.goToPost}>
-				<img src={`${this.state.postHeaderUrl}`} alt="" />
-				<SnippetDetails>
-					<p className="date">{new Date(Date.parse(this.props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
-					<p>{this.props.post.title}</p>
-				</SnippetDetails>
-				<GlobalStyle />
-			</SnippetStyles>
-		);
-	}
+	const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+	return (
+		<SnippetStyles onClick={goToPost}>
+			<img src={`${postHeaderUrl}`} alt="" />
+			<SnippetDetails>
+				<p className="date">{new Date(Date.parse(props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
+				<p>{props.post.title}</p>
+			</SnippetDetails>
+			<GlobalStyle />
+		</SnippetStyles>
+	);
 };
-
 
 PostSnippet.propTypes = {
 	post: PropTypes.object.isRequired
