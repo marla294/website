@@ -64,14 +64,16 @@ const EditPost = (props) => {
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState([]);
 
+  const posts = [...props.posts, ...props.archivedPosts];
+
   useEffect(async () => {
     loadPost(props.match.params.Slug);
-  }, [props.posts]);
+  }, [props.posts, props.archivedPosts]);
 
   const loadPost = async (slug) => {
 		const slugify = require("slugify");
 
-		await props.posts.forEach(async post => {
+		await posts.forEach(async post => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
         setInputs({
