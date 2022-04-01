@@ -134,9 +134,9 @@ class Router extends React.Component {
 	};
 
 	editPost = (post) => {
+		const filteredArchivedPosts = this.state.data.archivedPosts ? this.state.data.archivedPosts.filter(p => p.id !== post.id) : [];
+		const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
 		if (post.status === 'archive') {
-			const filteredArchivedPosts = this.state.data.archivedPosts ? this.state.data.archivedPosts.filter(p => p.id !== post.id) : [];
-			const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
 			const updatedArchivedPosts = [...filteredArchivedPosts, post];
 			
 			this.setState({ data: {
@@ -146,8 +146,6 @@ class Router extends React.Component {
 			}});
 		}
 		else {
-			const filteredArchivedPosts = this.state.data.archivedPosts ? this.state.data.archivedPosts.filter(p => p.id !== post.id) : [];
-			const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
 			const updatedPosts = [...filteredPosts, post];
 	
 			this.setState({ data: {
