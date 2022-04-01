@@ -18,6 +18,7 @@ class Router extends React.Component {
 		data: {
 			about: {},
 			posts: [],
+			archivedPosts: [],
 		},
 		aboutImageUrl: "",
 	};
@@ -44,7 +45,8 @@ class Router extends React.Component {
 	updateAbout = (about) => {
 		this.setState({ data: {
 			about: {...about},
-			posts: [...this.state.data.posts]
+			posts: [...this.state.data.posts],
+			archivedPosts: [...this.state.data.archivedPosts]
 		}});
 	};
 
@@ -111,22 +113,49 @@ class Router extends React.Component {
 	};
 
 	addNewPost = (post) => {
-		const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
+		if (post.status === 'archive') {
+			const updatedPosts = this.state.data.archivedPosts ? [...this.state.data.archivedPosts, post] : [post];
 
-		this.setState({ data: {
-			about: {...this.state.data.about},
-			posts: updatedPosts
-		}});
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: [...this.state.data.posts],
+				archivedPosts: updatedPosts,
+			}});
+		}
+		else {
+			const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
+
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: updatedPosts,
+				archivedPosts: [...this.state.data.archivedPosts],
+			}});
+		}
 	};
 
 	editPost = (post) => {
-		const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
-		const updatedPosts = [...filteredPosts, post];
-
-		this.setState({ data: {
-			about: {...this.state.data.about},
-			posts: updatedPosts
-		}});
+		if (post.status === 'archive') {
+			const filteredArchivedPosts = this.state.data.archivedPosts ? this.state.data.archivedPosts.filter(p => p.id !== post.id) : [];
+			const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
+			const updatedArchivedPosts = [...filteredArchivedPosts, post];
+			
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: filteredPosts,
+				archivedPosts: updatedArchivedPosts,
+			}});
+		}
+		else {
+			const filteredArchivedPosts = this.state.data.archivedPosts ? this.state.data.archivedPosts.filter(p => p.id !== post.id) : [];
+			const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
+			const updatedPosts = [...filteredPosts, post];
+	
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: updatedPosts,
+				archivedPosts: filteredArchivedPosts,
+			}});
+		}
 	};
 
 	render() {
@@ -186,7 +215,8 @@ class Router extends React.Component {
 								uploadImages={this.uploadImages}
 								deletePostImages={this.deletePostImages}
 								loadImages={this.loadImages}
-								posts={this.state.data.posts} 
+								posts={this.state.data.posts}
+								archivedPosts={this.state.data.archivedPosts}
 								storageRef={this.storageRef}
 								{...props}
 							/>
@@ -194,6 +224,7 @@ class Router extends React.Component {
 						<Route path="/Manage" render={(props) => {
 							return <Manage 
 								posts={this.state.data.posts}
+								archivedPosts={this.state.data.archivedPosts}
 								{...props}
 							/>
 						}} />
