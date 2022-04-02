@@ -17,7 +17,6 @@ export default function useAuth(initial = {}) {
 
   const authHandler = async (authData) => {
     const owner = await base.fetch('owner', {context: this});
-
     setAuth({
       ...auth,
       uid: authData.user.uid,

@@ -106,7 +106,7 @@ const EditPost = (props) => {
     await loadInnerImages(postId);
   };
 
-  const editPost = e => {
+  const editPost = async e => {
     e.preventDefault();
     setErrors([]); // reset errors in case they had errors on last submit
     let editErrors = [];
@@ -146,7 +146,7 @@ const EditPost = (props) => {
       id: postId,
     };
 
-    props.editPost(post);
+    await props.editPost(post);
 
     setIsSubmitComplete(true);
   };
