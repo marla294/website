@@ -64,14 +64,16 @@ const EditPost = (props) => {
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState([]);
 
+  const posts = [...props.posts, ...props.archivedPosts];
+
   useEffect(async () => {
     loadPost(props.match.params.Slug);
-  }, [props.posts]);
+  }, [props.posts, props.archivedPosts]);
 
   const loadPost = async (slug) => {
 		const slugify = require("slugify");
 
-		await props.posts.forEach(async post => {
+		await posts.forEach(async post => {
 			const slugTitle = slugify(post.title, { remove: /\./ });
 			if (slugTitle === slug) {
         setInputs({
@@ -104,7 +106,7 @@ const EditPost = (props) => {
     await loadInnerImages(postId);
   };
 
-  const editPost = e => {
+  const editPost = async e => {
     e.preventDefault();
     setErrors([]); // reset errors in case they had errors on last submit
     let editErrors = [];
@@ -144,7 +146,7 @@ const EditPost = (props) => {
       id: postId,
     };
 
-    props.editPost(post);
+    await props.editPost(post);
 
     setIsSubmitComplete(true);
   };

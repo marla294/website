@@ -35,7 +35,7 @@ const AddPost = (props) => {
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const addNewPost = e => {
+  const addNewPost = async e => {
     e.preventDefault();
     setErrors([]);
     let addPostErrors = [];
@@ -65,7 +65,7 @@ const AddPost = (props) => {
       id: `Post_${new Date().getTime()}`
     };
 
-    props.addNewPost(post);
+    await props.addNewPost(post);
     props.uploadImages([inputs.headerImage], { postId: post.id, isHeader: true });
     setIsSubmitComplete(true);
   };

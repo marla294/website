@@ -19,21 +19,30 @@ class Router extends React.Component {
 			about: {},
 			posts: [],
 		},
+		archivedPosts: [],
 		aboutImageUrl: "",
 	};
 
-	componentDidMount() {
+	async componentDidMount() {
 		this.ref = base.syncState('data', {
 			context: this,
 			state: 'data'
 		});
-
 		this.storageRef = firebaseStorage.ref();
 		this.aboutImageRef = this.storageRef.child('About.jpg');
 
 		this.aboutImageRef.getDownloadURL().then(url => {
 			this.setState({aboutImageUrl: url})
 		});
+
+		const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
+		debugger;
+
+		this.setState({ data: {
+			about: {...this.state.data.about},
+			posts: [...this.state.data.posts],
+		},
+		archivedPosts: [...archivedPosts]});
 	}
 
 	componentWillUnmount() {
@@ -44,8 +53,9 @@ class Router extends React.Component {
 	updateAbout = (about) => {
 		this.setState({ data: {
 			about: {...about},
-			posts: [...this.state.data.posts]
-		}});
+			posts: [...this.state.data.posts],
+		},
+		archivedPosts: [...this.state.data.archivedPosts]});
 	};
 
 	// options object:
@@ -110,23 +120,58 @@ class Router extends React.Component {
 		}
 	};
 
-	addNewPost = (post) => {
-		const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
+	addNewPost = async (post) => {
+		if (post.status === 'archive') {
+			const updatedPosts = this.state.archivedPosts ? [...this.state.archivedPosts, post] : [post];
 
-		this.setState({ data: {
-			about: {...this.state.data.about},
-			posts: updatedPosts
-		}});
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: [...this.state.data.posts],
+				},
+				archivedPosts: updatedPosts,
+			});
+
+			await base.post('private/archivedPosts', {data: updatedPosts});
+		}
+		else {
+			const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
+
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: updatedPosts,
+				},
+				archivedPosts: [...this.state.data.archivedPosts],
+			});
+		}
 	};
 
-	editPost = (post) => {
+	editPost = async (post) => {
+		const filteredArchivedPosts = this.state.archivedPosts ? this.state.archivedPosts.filter(p => p.id !== post.id) : [];
 		const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
-		const updatedPosts = [...filteredPosts, post];
+		if (post.status === 'archive') {
+			const updatedArchivedPosts = [...filteredArchivedPosts, post];
+			
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: filteredPosts,
+				},
+				archivedPosts: updatedArchivedPosts,
+			});
 
-		this.setState({ data: {
-			about: {...this.state.data.about},
-			posts: updatedPosts
-		}});
+			await base.post('private/archivedPosts', {data: updatedArchivedPosts});
+		}
+		else {
+			const updatedPosts = [...filteredPosts, post];
+	
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: updatedPosts,
+				},
+				archivedPosts: filteredArchivedPosts,
+			});
+
+			await base.post('private/archivedPosts', {data: filteredArchivedPosts});
+		}
 	};
 
 	render() {
@@ -186,7 +231,8 @@ class Router extends React.Component {
 								uploadImages={this.uploadImages}
 								deletePostImages={this.deletePostImages}
 								loadImages={this.loadImages}
-								posts={this.state.data.posts} 
+								posts={this.state.data.posts}
+								archivedPosts={this.state.archivedPosts}
 								storageRef={this.storageRef}
 								{...props}
 							/>
@@ -194,6 +240,7 @@ class Router extends React.Component {
 						<Route path="/Manage" render={(props) => {
 							return <Manage 
 								posts={this.state.data.posts}
+								archivedPosts={this.state.archivedPosts}
 								{...props}
 							/>
 						}} />

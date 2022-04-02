@@ -24,10 +24,12 @@ const PostListStyles = styled.div`
   }
 `;
 
-const Manage = ({ posts, history }) => {
+const Manage = ({ posts, archivedPosts, history }) => {
   const {
     authWrapper,
   } = useAuth({});
+
+  const allPosts = [...posts, ...archivedPosts];
 
   const renderPostLinks = ({id, title, date, status}) => {
     const slugify = require("slugify");
@@ -60,7 +62,7 @@ const Manage = ({ posts, history }) => {
               <h3>Title</h3>
               <h3>Status</h3>
             </div>
-            {posts ? posts
+            {allPosts ? allPosts
             .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
             .map(post => {
               return renderPostLinks(post);
