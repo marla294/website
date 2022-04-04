@@ -46,41 +46,41 @@ const Copy = styled.div`
 	padding-top: var(--S02);
 `;
 
-class About extends React.Component {
-	static propTypes = {
-		about: PropTypes.shape({
-			blurb: PropTypes.string
-		}),
-		history: PropTypes.object
-	};
+const About = (props) => {
 
-	render() {
-		return (
-			<React.Fragment>
-				<TopNav push={this.props.history.push} />
-				<Wrapper>
-					<AboutContent>
-						<img
-							src={this.props.aboutImageUrl}
-							alt="Marla Foreman"
-						/>
-						<Blurb>
-							<Copy>
-								<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
-							</Copy>
-							<Copy dangerouslySetInnerHTML={{
-								__html: this.props.about.blurb
-							}}></Copy>
-							<Copy>
-								<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
-							</Copy>
-						</Blurb>
-					</AboutContent>
-				</Wrapper>
-				<GlobalStyle />
-			</React.Fragment>
-		);
-	}
-}
+
+	return (
+		<React.Fragment>
+			<TopNav push={props.history.push} />
+			<Wrapper>
+				<AboutContent>
+					<img
+						src={props.aboutImageUrl}
+						alt="Marla Foreman"
+					/>
+					<Blurb>
+						<Copy>
+							<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
+						</Copy>
+						<Copy dangerouslySetInnerHTML={{
+							__html: props.about.blurb
+						}}></Copy>
+						<Copy>
+							<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
+						</Copy>
+					</Blurb>
+				</AboutContent>
+			</Wrapper>
+			<GlobalStyle />
+		</React.Fragment>
+	);
+};
+
+About.propTypes = {
+	about: PropTypes.shape({
+		blurb: PropTypes.string
+	}),
+	history: PropTypes.object
+};
 
 export default About;
