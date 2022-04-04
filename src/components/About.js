@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import styled from "styled-components";
-import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
+// import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
 
 const AboutContent = styled.div`
 	display: grid;
@@ -18,13 +18,22 @@ const AboutContent = styled.div`
 		font-size: var(--F06);
 	}
 
-	img {
+	img, .loading-div {
 		width: 100%;
+		height: 400px;
+	}
+
+	img {
+		object-fit: cover;
+	}
+	.loading-div {
+		height: 400px;
+		background-color: var(--Gray03);
 	}
 
 	@media only screen and (min-width: 512px) {
 		margin-bottom: var(--S07);
-		img {
+		img, .loading-div {
 			justify-self: center;
 			width: var(--S13);
 		}
@@ -68,7 +77,7 @@ const About = (props) => {
 					{isImageLoaded ? <img
 						src={props.aboutImageUrl}
 						alt="Marla Foreman"
-					/> : 'loading'}
+					/> : <div className="loading-div"></div>}
 					<Blurb>
 						<Copy>
 							<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
