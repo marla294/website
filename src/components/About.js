@@ -12,13 +12,6 @@ const AboutContent = styled.div`
 	grid-template-rows: repeat(auto-fit, auto);
 	width: 100%;
 
-	h1 {
-		margin-bottom: 20px;
-		color: var(--Gray05);
-		padding-left: var(--S03);
-		font-size: var(--F06);
-	}
-
 	img, .loading-div {
 		width: 100%;
 		height: 400px;
