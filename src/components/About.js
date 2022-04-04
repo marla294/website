@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import styled from "styled-components";
-// import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
 import { TextBlock } from 'react-placeholder/lib/placeholders';
 
 const AboutContent = styled.div`
@@ -95,7 +94,7 @@ const About = (props) => {
 							<Copy>
 								<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
 							</Copy>
-						</React.Fragment> : <TextBlock rows={7} ready={props.about.blurb}></TextBlock>}
+						</React.Fragment> : <Copy><TextBlock rows={7} ready={props.about.blurb}></TextBlock></Copy>}
 					</Blurb>
 				</AboutContent>
 			</Wrapper>
