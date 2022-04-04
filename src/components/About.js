@@ -6,10 +6,12 @@ import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import styled from "styled-components";
 // import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
+import { TextBlock } from 'react-placeholder/lib/placeholders';
 
 const AboutContent = styled.div`
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
+	width: 100%;
 
 	h1 {
 		margin-bottom: 20px;
@@ -46,6 +48,10 @@ const Blurb = styled.div`
 	justify-self: center;
 	width: 100%;
 
+	.text-row {
+		background-color: var(--Gray03);
+	}
+
 	@media only screen and (min-width: 512px) {
 		width: var(--S15);
 	}
@@ -74,20 +80,22 @@ const About = (props) => {
 			<TopNav push={props.history.push} />
 			<Wrapper>
 				<AboutContent>
-					{isImageLoaded ? <img
+					{isImageLoaded && props.about.blurb ? <img
 						src={props.aboutImageUrl}
 						alt="Marla Foreman"
 					/> : <div className="loading-div"></div>}
 					<Blurb>
-						<Copy>
-							<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
-						</Copy>
-						<Copy dangerouslySetInnerHTML={{
-							__html: props.about.blurb
-						}}></Copy>
-						<Copy>
-							<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
-						</Copy>
+						{isImageLoaded && props.about.blurb ? <React.Fragment>
+							<Copy>
+								<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
+							</Copy>
+							<Copy dangerouslySetInnerHTML={{
+								__html: props.about.blurb
+							}}></Copy>
+							<Copy>
+								<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
+							</Copy>
+						</React.Fragment> : <TextBlock rows={7} ready={props.about.blurb}></TextBlock>}
 					</Blurb>
 				</AboutContent>
 			</Wrapper>
