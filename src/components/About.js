@@ -1,9 +1,11 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import TopNav from "./TopNav";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import styled from "styled-components";
+import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
 
 const AboutContent = styled.div`
 	display: grid;
@@ -47,17 +49,26 @@ const Copy = styled.div`
 `;
 
 const About = (props) => {
+	const [isImageLoaded, setIsImageLoaded] = useState(false);
 
+	useEffect(async () => {
+		if (props.aboutImageUrl && props.aboutImageUrl !== '') {
+			const img = new Image();
+			img.src = props.aboutImageUrl;
+			await img.decode();
+			setIsImageLoaded(true);
+		}
+	}, [props.aboutImageUrl]);
 
 	return (
 		<React.Fragment>
 			<TopNav push={props.history.push} />
 			<Wrapper>
 				<AboutContent>
-					<img
+					{isImageLoaded ? <img
 						src={props.aboutImageUrl}
 						alt="Marla Foreman"
-					/>
+					/> : 'loading'}
 					<Blurb>
 						<Copy>
 							<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
