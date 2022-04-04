@@ -77,7 +77,7 @@ const Blog = (props) => {
 		if (props.totalPostsToDisplay) {
 			postsToDisplay = postsToDisplay.slice(0, props.totalPostsToDisplay);
 		};
-
+		
 		setPosts(postsToDisplay);
 	};
 
@@ -113,13 +113,6 @@ const Blog = (props) => {
 						{renderPostSnippets(displayPosts)}
 						{renderLoadMoreButton()}
 					</BlogPosts>
-				</React.Fragment>
-			);
-		}
-		else {
-			return (
-				<React.Fragment>
-					<p>No posts to display</p>
 				</React.Fragment>
 			);
 		}
