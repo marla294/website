@@ -6,18 +6,11 @@ import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 
 const PostWrapper = styled.div`
-	margin-top: var(--S06);
-	margin-bottom: var(--S07);
+	margin: var(--S06) 0;
 	width: 100%;
 	display: grid;
 	justify-items: center;
-`;
-
-const PostContent = styled.div`
-	display: grid;
-	grid-template-rows: repeat(auto-fit, auto);
 	grid-gap: var(--S05);
-	width: 100%;
 
 	@media only screen and (min-width: 512px) {
 		width: auto;
@@ -26,9 +19,7 @@ const PostContent = styled.div`
 
 const PostHeader = styled.div`
 	display: grid;
-	grid-template-rows: repeat(2, auto);
-	grid-gap: 20px;
-	justify-self: center;
+	grid-gap: var(--S04);
 	width: 100%;
 
 	img, .loading-div {
@@ -45,10 +36,8 @@ const PostHeader = styled.div`
 	}
 
 	h1 {
-		color: var(--Gray05);
 		padding-left: var(--S03);
 		font-size: var(--F05);
-		font-weight: 700;
 	}
 
 	@media only screen and (min-width: 512px) {
@@ -59,7 +48,7 @@ const PostHeader = styled.div`
 			height: 600px;
 		}
 		h1 {
-			font-size: var(--F06);
+			padding-left: 0;
 		}
 	}
 `;
@@ -77,26 +66,13 @@ const PostCopy = styled.div`
 	figure {
 		justify-self: center;
 		img {
-			width: 100%;
+			max-width: 100%;
 		}
 	}
 
 	@media only screen and (min-width: 768px) {
 		width: 768px;
 		padding: 0;
-
-		p {
-			font-size: var(--F01);
-		}
-
-		figure {
-			img {
-				width: 768px;
-			}
-			figcaption {
-				font-size: var(--F02);
-			}
-		}
 	}
 `;
 
@@ -171,7 +147,6 @@ const Post = (props) => {
 		<React.Fragment>
 			<TopNav push={props.history.push} />
 			<PostWrapper>
-				<PostContent>
 					<PostHeader>
 						<h1>
 							{post ? post.title : ''}
@@ -187,7 +162,6 @@ const Post = (props) => {
 					<PostCopy dangerouslySetInnerHTML={{
 						__html: post ? post.content : ''
 					}}></PostCopy>
-				</PostContent>
 			</PostWrapper>
 			<GlobalStyle />
 		</React.Fragment>
