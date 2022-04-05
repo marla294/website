@@ -17,6 +17,11 @@ const PostContent = styled.div`
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
 	grid-gap: var(--S05);
+	width: 100%;
+
+	@media only screen and (min-width: 512px) {
+		width: auto;
+	}
 `;
 
 const PostHeader = styled.div`
@@ -24,9 +29,19 @@ const PostHeader = styled.div`
 	grid-template-rows: repeat(2, auto);
 	grid-gap: 20px;
 	justify-self: center;
+	width: 100%;
+
+	img, .loading-div {
+		width: 100%;
+		height: 400px;
+	}
 
 	img {
-		width: 100vw;
+		object-fit: cover;
+	}
+
+	.loading-div {
+		background-color: var(--Gray03);
 	}
 
 	h1 {
@@ -36,11 +51,12 @@ const PostHeader = styled.div`
 		font-weight: 700;
 	}
 
-	@media only screen and (min-width: 768px) {
-		width: 768px;
+	@media only screen and (min-width: 512px) {
+		width: var(--S16);
 
-		img {
-			width: 768px;
+		img, .loading-div {
+			width: var(--S16);
+			height: 600px;
 		}
 		h1 {
 			font-size: var(--F06);
@@ -86,7 +102,8 @@ const PostCopy = styled.div`
 
 const Post = (props) => {
 	const [post, setPost] = useState(null);
-	const [postHeaderUrl, setPostHeaderUrl] = useState(''); 
+	const [postHeaderUrl, setPostHeaderUrl] = useState('');
+	const [isHeaderImageLoaded, setIsHeaderImageLoaded] = useState(false);
 
 	useEffect(async () => {
 		await loadPost(props.match.params.Slug)
@@ -111,12 +128,22 @@ const Post = (props) => {
 		}
 	};
 
+	const loadPostHeaderImage = async (url) => {
+		if (url && url !== '') {
+			const img = new Image();
+			img.src = url;
+			await img.decode();
+			setIsHeaderImageLoaded(true);
+		}
+	};
+
 	const loadPostImages = async (post) => {
 		const options = { postId: post.id };
     const postImages = (await props.loadImages(options));
 		const [ headerImage ] = postImages.filter(image => image.name === 'Header.jpg');
 
 		setPostHeaderUrl(headerImage.url);
+		await loadPostHeaderImage(headerImage.url);
 
 		if (postImages.length > 1) {
 			let { content } = { ...post };
@@ -149,10 +176,13 @@ const Post = (props) => {
 						<h1>
 							{post ? post.title : ''}
 						</h1>
+						{isHeaderImageLoaded ? 
 						<img
 							src={postHeaderUrl}
 							alt={post ? post.title : ''}
 						/>
+						: <div className="loading-div"></div>}
+						
 					</PostHeader>
 					<PostCopy dangerouslySetInnerHTML={{
 						__html: post ? post.content : ''
