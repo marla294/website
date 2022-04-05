@@ -36,7 +36,6 @@ class Router extends React.Component {
 		});
 
 		const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
-		debugger;
 
 		this.setState({ data: {
 			about: {...this.state.data.about},

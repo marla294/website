@@ -17,6 +17,7 @@ const BlogContent = styled.div`
 	display: grid;
 	grid-template-rows: repeat(auto-fit, auto);
 	grid-gap: 20px;
+	width: 100%;
 	
 	h1 {
 		color: var(--Gray05);
@@ -35,6 +36,7 @@ const BlogPosts = styled.div`
 	grid-template-columns: 1fr;
 	grid-gap: 40px;
 	justify-items: center;
+	width: 100%;
 `;
 
 const LoadMoreButton = styled.button`
@@ -75,7 +77,7 @@ const Blog = (props) => {
 		if (props.totalPostsToDisplay) {
 			postsToDisplay = postsToDisplay.slice(0, props.totalPostsToDisplay);
 		};
-
+		
 		setPosts(postsToDisplay);
 	};
 
@@ -111,13 +113,6 @@ const Blog = (props) => {
 						{renderPostSnippets(displayPosts)}
 						{renderLoadMoreButton()}
 					</BlogPosts>
-				</React.Fragment>
-			);
-		}
-		else {
-			return (
-				<React.Fragment>
-					<p>No posts to display</p>
 				</React.Fragment>
 			);
 		}

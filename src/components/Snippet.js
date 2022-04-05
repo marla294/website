@@ -10,8 +10,18 @@ const SnippetStyles = styled.div`
 	width: 100%;
 	background-color: rgb(24, 24, 29, 1);
 
-	img {
+	img, .loading-div {
 		width: 100%;
+		height: 400px;
+	}
+
+	img {
+		object-fit: cover;
+	}
+
+	.loading-div {
+		height: 400px;
+		background-color: var(--Gray03);
 	}
 
 	@media only screen and (min-width: 512px) {
@@ -73,16 +83,18 @@ const PostSnippet = (props) => {
 
 	const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
-	return postHeaderImageLoaded ? (
-			<SnippetStyles onClick={goToPost}>
+	return (
+		<SnippetStyles onClick={goToPost}>
+			{ postHeaderImageLoaded ? <React.Fragment>
 				<img src={`${postHeaderUrl}`} alt="" />
 				<SnippetDetails>
 					<p className="date">{new Date(Date.parse(props.post.date)).toLocaleDateString("en-US", dateOptions)}</p>
 					<p>{props.post.title}</p>
 				</SnippetDetails>
-				<GlobalStyle />
-			</SnippetStyles>
-	) : null;
+			</React.Fragment> : <div className="loading-div"></div>}
+			<GlobalStyle />
+		</SnippetStyles>
+	);
 };
 
 PostSnippet.propTypes = {

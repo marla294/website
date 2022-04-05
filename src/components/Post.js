@@ -41,10 +41,6 @@ const PostHeader = styled.div`
 
 		img {
 			width: 768px;
-			border-top-left-radius: var(--S02);
-			border-top-right-radius: var(--S02);
-			border-bottom-left-radius: var(--S02);
-			border-bottom-right-radius: var(--S02);
 		}
 		h1 {
 			font-size: var(--F06);
@@ -57,34 +53,24 @@ const PostCopy = styled.div`
 	grid-template-columns: 1fr;
 	grid-gap: var(--S03);
 	padding: 0 var(--S06);
-	font-size: var(--F04);
 
 	p {
-		font-size: var(--F02);
+		font-size: var(--F01);
 	}
 
 	figure {
 		justify-self: center;
 		img {
 			width: 100%;
-			border-top-left-radius: var(--S02);
-			border-top-right-radius: var(--S02);
-			border-bottom-left-radius: var(--S02);
-			border-bottom-right-radius: var(--S02);
-		}
-		figcaption {
-			font-size: var(--F01);
-			font-style: italic;
 		}
 	}
 
 	@media only screen and (min-width: 768px) {
 		width: 768px;
 		padding: 0;
-		font-size: var(--F05);
 
 		p {
-			font-size: var(--F03);
+			font-size: var(--F01);
 		}
 
 		figure {
