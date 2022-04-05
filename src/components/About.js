@@ -9,7 +9,6 @@ import { TextBlock } from 'react-placeholder/lib/placeholders';
 
 const AboutContent = styled.div`
 	display: grid;
-	grid-template-rows: repeat(auto-fit, auto);
 	width: 100%;
 
 	img, .loading-div {
@@ -36,7 +35,6 @@ const AboutContent = styled.div`
 
 const Blurb = styled.div`
 	padding:  var(--S05) var(--S06) var(--S06) var(--S06);
-	font-size: var(--F01);
 	justify-self: center;
 	width: 100%;
 
@@ -45,7 +43,7 @@ const Blurb = styled.div`
 	}
 
 	@media only screen and (min-width: 512px) {
-		width: var(--S15);
+		width: var(--S16);
 	}
 `;
 
