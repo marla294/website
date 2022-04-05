@@ -4,100 +4,87 @@ import styled from "styled-components";
 import TopNav from "./TopNav";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
+import { TextBlock } from 'react-placeholder/lib/placeholders';
 
 const PostWrapper = styled.div`
-	margin-top: var(--S06);
-	margin-bottom: var(--S07);
+	margin: var(--S06) 0;
 	width: 100%;
 	display: grid;
 	justify-items: center;
-`;
-
-const PostContent = styled.div`
-	display: grid;
-	grid-template-rows: repeat(auto-fit, auto);
 	grid-gap: var(--S05);
+
+	@media only screen and (min-width: 768px) {
+		width: auto;
+	}
 `;
 
 const PostHeader = styled.div`
 	display: grid;
-	grid-template-rows: repeat(2, auto);
-	grid-gap: 20px;
-	justify-self: center;
+	grid-gap: var(--S04);
+	width: 100%;
+
+	img, .loading-div {
+		width: 100%;
+		height: 400px;
+	}
 
 	img {
-		width: 100vw;
+		object-fit: cover;
+	}
+
+	.loading-div {
+		background-color: var(--Gray03);
 	}
 
 	h1 {
-		color: var(--Gray05);
 		padding-left: var(--S03);
-		font-size: var(--F05);
-		font-weight: 700;
 	}
 
 	@media only screen and (min-width: 768px) {
-		width: 768px;
+		width: var(--S16);
 
-		img {
-			width: 768px;
+		img, .loading-div {
+			height: 600px;
 		}
 		h1 {
-			font-size: var(--F06);
+			padding-left: 0;
 		}
 	}
 `;
 
 const PostCopy = styled.div`
 	display: grid;
-	grid-template-columns: 1fr;
 	grid-gap: var(--S03);
-	padding: 0 var(--S06);
-
-	p {
-		font-size: var(--F01);
-	}
+	padding: 0 var(--S03);
 
 	figure {
 		justify-self: center;
 		img {
-			width: 100%;
+			max-width: 100%;
 		}
 	}
 
 	@media only screen and (min-width: 768px) {
-		width: 768px;
+		width: var(--S16);
 		padding: 0;
-
-		p {
-			font-size: var(--F01);
-		}
-
-		figure {
-			img {
-				width: 768px;
-			}
-			figcaption {
-				font-size: var(--F02);
-			}
-		}
 	}
 `;
 
 const Post = (props) => {
 	const [post, setPost] = useState(null);
-	const [postHeaderUrl, setPostHeaderUrl] = useState(''); 
+	const [postHeaderUrl, setPostHeaderUrl] = useState('');
+	const [isHeaderImageLoaded, setIsHeaderImageLoaded] = useState(false);
 
 	useEffect(async () => {
 		await loadPost(props.match.params.Slug)
 	}, [props.posts]);
 
-	const loadPost =  async (slug) => {
+	const loadPost = async (slug) => {
 		if (!props.posts || props.posts.length === 0) return;
 
 		const slugify = require("slugify");
 
-		const filteredPosts = props.posts.filter(post => 
+		const filteredPosts = props.posts.filter(post =>
 			post.status !== "archive"
 		);
 
@@ -111,12 +98,22 @@ const Post = (props) => {
 		}
 	};
 
+	const loadPostHeaderImage = async (url) => {
+		if (url && url !== '') {
+			const img = new Image();
+			img.src = url;
+			await img.decode();
+			setIsHeaderImageLoaded(true);
+		}
+	};
+
 	const loadPostImages = async (post) => {
 		const options = { postId: post.id };
-    const postImages = (await props.loadImages(options));
-		const [ headerImage ] = postImages.filter(image => image.name === 'Header.jpg');
+		const postImages = (await props.loadImages(options));
+		const [headerImage] = postImages.filter(image => image.name === 'Header.jpg');
 
 		setPostHeaderUrl(headerImage.url);
+		await loadPostHeaderImage(headerImage.url);
 
 		if (postImages.length > 1) {
 			let { content } = { ...post };
@@ -144,20 +141,21 @@ const Post = (props) => {
 		<React.Fragment>
 			<TopNav push={props.history.push} />
 			<PostWrapper>
-				<PostContent>
-					<PostHeader>
-						<h1>
-							{post ? post.title : ''}
-						</h1>
+				<PostHeader>
+					<h1>
+						{post !== null && post.title ? post.title : <TextBlock rows={1}></TextBlock>}
+					</h1>
+					{isHeaderImageLoaded ?
 						<img
 							src={postHeaderUrl}
 							alt={post ? post.title : ''}
 						/>
-					</PostHeader>
-					<PostCopy dangerouslySetInnerHTML={{
-						__html: post ? post.content : ''
-					}}></PostCopy>
-				</PostContent>
+						: <div className="loading-div"></div>}
+				</PostHeader>
+				{isHeaderImageLoaded ? <PostCopy dangerouslySetInnerHTML={{
+					__html: post ? post.content : ''
+				}}></PostCopy> : <PostCopy><TextBlock rows={7}></TextBlock></PostCopy>}
+				
 			</PostWrapper>
 			<GlobalStyle />
 		</React.Fragment>
@@ -165,7 +163,7 @@ const Post = (props) => {
 }
 
 Post.propTypes = {
-  storageRef: PropTypes.object,
+	storageRef: PropTypes.object,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired,
 	}),
@@ -174,13 +172,13 @@ Post.propTypes = {
 			Slug: PropTypes.string.isRequired,
 		}),
 	}),
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    status: PropTypes.string,
-    content: PropTypes.string,
-  })),
+	posts: PropTypes.arrayOf(PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		date: PropTypes.string,
+		title: PropTypes.string.isRequired,
+		status: PropTypes.string,
+		content: PropTypes.string,
+	})),
 	loadImages: PropTypes.func.isRequired,
 };
 

@@ -51,7 +51,7 @@ export const theme = {
 export const GlobalStyle = createGlobalStyle`
 	html {
 		font-family: 'Open Sans', sans-serif;
-		color: ${props => props.theme.darkGray};
+		color: black;
 		box-sizing: border-box;
 		padding: 0;
 		margin: 0;
@@ -73,6 +73,26 @@ export const GlobalStyle = createGlobalStyle`
 		padding: 0;
 	}
 
+	h1 {
+		font-size: var(--F05);
+	}
+
+	h2 {
+		font-size: var(--F04);
+	}
+
+	h3 {
+		font-size: var(--F03);
+	}
+
+	h4 {
+		font-size: var(--F02);
+	}
+
+	h5, h6, p {
+		font-size: var(--F01);
+	}
+
 	a {
 		text-decoration: none;
 		cursor: pointer;
@@ -88,5 +108,9 @@ export const GlobalStyle = createGlobalStyle`
 
 	.required {
 		color: red;
+	}
+
+	.text-row {
+		background-color: var(--Gray03);
 	}
 `;
