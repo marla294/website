@@ -37,14 +37,12 @@ const PostHeader = styled.div`
 
 	h1 {
 		padding-left: var(--S03);
-		font-size: var(--F05);
 	}
 
 	@media only screen and (min-width: 512px) {
 		width: var(--S16);
 
 		img, .loading-div {
-			width: var(--S16);
 			height: 600px;
 		}
 		h1 {

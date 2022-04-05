@@ -72,8 +72,24 @@ export const GlobalStyle = createGlobalStyle`
 		margin: 0;
 		padding: 0;
 	}
-	
-	p {
+
+	h1 {
+		font-size: var(--F05);
+	}
+
+	h2 {
+		font-size: var(--F04);
+	}
+
+	h3 {
+		font-size: var(--F03);
+	}
+
+	h4 {
+		font-size: var(--F02);
+	}
+
+	h5, h6, p {
 		font-size: var(--F01);
 	}
 
