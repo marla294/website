@@ -12,7 +12,7 @@ const PostWrapper = styled.div`
 	justify-items: center;
 	grid-gap: var(--S05);
 
-	@media only screen and (min-width: 512px) {
+	@media only screen and (min-width: 768px) {
 		width: auto;
 	}
 `;
@@ -39,7 +39,7 @@ const PostHeader = styled.div`
 		padding-left: var(--S03);
 	}
 
-	@media only screen and (min-width: 512px) {
+	@media only screen and (min-width: 768px) {
 		width: var(--S16);
 
 		img, .loading-div {
@@ -63,7 +63,7 @@ const PostCopy = styled.div`
 		}
 	}
 
-	@media only screen and (min-width: 512px) {
+	@media only screen and (min-width: 768px) {
 		width: var(--S16);
 		padding: 0;
 	}

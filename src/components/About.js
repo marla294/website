@@ -42,7 +42,7 @@ const Blurb = styled.div`
 		background-color: var(--Gray03);
 	}
 
-	@media only screen and (min-width: 512px) {
+	@media only screen and (min-width: 768px) {
 		width: var(--S16);
 	}
 `;
