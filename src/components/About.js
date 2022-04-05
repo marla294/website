@@ -38,10 +38,6 @@ const Blurb = styled.div`
 	justify-self: center;
 	width: 100%;
 
-	.text-row {
-		background-color: var(--Gray03);
-	}
-
 	@media only screen and (min-width: 768px) {
 		width: var(--S16);
 	}

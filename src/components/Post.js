@@ -4,6 +4,7 @@ import styled from "styled-components";
 import TopNav from "./TopNav";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
+import { TextBlock } from 'react-placeholder/lib/placeholders';
 
 const PostWrapper = styled.div`
 	margin: var(--S06) 0;
@@ -142,7 +143,7 @@ const Post = (props) => {
 			<PostWrapper>
 				<PostHeader>
 					<h1>
-						{post ? post.title : ''}
+						{post !== null && post.title ? post.title : <TextBlock rows={1}></TextBlock>}
 					</h1>
 					{isHeaderImageLoaded ?
 						<img
@@ -150,11 +151,11 @@ const Post = (props) => {
 							alt={post ? post.title : ''}
 						/>
 						: <div className="loading-div"></div>}
-
 				</PostHeader>
-				<PostCopy dangerouslySetInnerHTML={{
+				{isHeaderImageLoaded ? <PostCopy dangerouslySetInnerHTML={{
 					__html: post ? post.content : ''
-				}}></PostCopy>
+				}}></PostCopy> : <PostCopy><TextBlock rows={7}></TextBlock></PostCopy>}
+				
 			</PostWrapper>
 			<GlobalStyle />
 		</React.Fragment>

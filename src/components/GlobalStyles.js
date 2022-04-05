@@ -109,4 +109,8 @@ export const GlobalStyle = createGlobalStyle`
 	.required {
 		color: red;
 	}
+
+	.text-row {
+		background-color: var(--Gray03);
+	}
 `;
