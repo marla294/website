@@ -55,13 +55,8 @@ const PostHeader = styled.div`
 
 const PostCopy = styled.div`
 	display: grid;
-	grid-template-columns: 1fr;
 	grid-gap: var(--S03);
-	padding: 0 var(--S06);
-
-	p {
-		font-size: var(--F01);
-	}
+	padding: 0 var(--S03);
 
 	figure {
 		justify-self: center;
@@ -70,8 +65,8 @@ const PostCopy = styled.div`
 		}
 	}
 
-	@media only screen and (min-width: 768px) {
-		width: 768px;
+	@media only screen and (min-width: 512px) {
+		width: var(--S16);
 		padding: 0;
 	}
 `;
@@ -85,12 +80,12 @@ const Post = (props) => {
 		await loadPost(props.match.params.Slug)
 	}, [props.posts]);
 
-	const loadPost =  async (slug) => {
+	const loadPost = async (slug) => {
 		if (!props.posts || props.posts.length === 0) return;
 
 		const slugify = require("slugify");
 
-		const filteredPosts = props.posts.filter(post => 
+		const filteredPosts = props.posts.filter(post =>
 			post.status !== "archive"
 		);
 
@@ -115,8 +110,8 @@ const Post = (props) => {
 
 	const loadPostImages = async (post) => {
 		const options = { postId: post.id };
-    const postImages = (await props.loadImages(options));
-		const [ headerImage ] = postImages.filter(image => image.name === 'Header.jpg');
+		const postImages = (await props.loadImages(options));
+		const [headerImage] = postImages.filter(image => image.name === 'Header.jpg');
 
 		setPostHeaderUrl(headerImage.url);
 		await loadPostHeaderImage(headerImage.url);
@@ -147,21 +142,21 @@ const Post = (props) => {
 		<React.Fragment>
 			<TopNav push={props.history.push} />
 			<PostWrapper>
-					<PostHeader>
-						<h1>
-							{post ? post.title : ''}
-						</h1>
-						{isHeaderImageLoaded ? 
+				<PostHeader>
+					<h1>
+						{post ? post.title : ''}
+					</h1>
+					{isHeaderImageLoaded ?
 						<img
 							src={postHeaderUrl}
 							alt={post ? post.title : ''}
 						/>
 						: <div className="loading-div"></div>}
-						
-					</PostHeader>
-					<PostCopy dangerouslySetInnerHTML={{
-						__html: post ? post.content : ''
-					}}></PostCopy>
+
+				</PostHeader>
+				<PostCopy dangerouslySetInnerHTML={{
+					__html: post ? post.content : ''
+				}}></PostCopy>
 			</PostWrapper>
 			<GlobalStyle />
 		</React.Fragment>
@@ -169,7 +164,7 @@ const Post = (props) => {
 }
 
 Post.propTypes = {
-  storageRef: PropTypes.object,
+	storageRef: PropTypes.object,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired,
 	}),
@@ -178,13 +173,13 @@ Post.propTypes = {
 			Slug: PropTypes.string.isRequired,
 		}),
 	}),
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    status: PropTypes.string,
-    content: PropTypes.string,
-  })),
+	posts: PropTypes.arrayOf(PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		date: PropTypes.string,
+		title: PropTypes.string.isRequired,
+		status: PropTypes.string,
+		content: PropTypes.string,
+	})),
 	loadImages: PropTypes.func.isRequired,
 };
 

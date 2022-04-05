@@ -51,7 +51,7 @@ export const theme = {
 export const GlobalStyle = createGlobalStyle`
 	html {
 		font-family: 'Open Sans', sans-serif;
-		color: ${props => props.theme.darkGray};
+		color: black;
 		box-sizing: border-box;
 		padding: 0;
 		margin: 0;
@@ -71,6 +71,10 @@ export const GlobalStyle = createGlobalStyle`
 	h1, h2, h3, h4, h5, h6, p, ul, li, figure {
 		margin: 0;
 		padding: 0;
+	}
+	
+	p {
+		font-size: var(--F01);
 	}
 
 	a {
