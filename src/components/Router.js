@@ -24,7 +24,6 @@ class Router extends React.Component {
 	};
 
 	async componentDidMount() {
-		debugger;
 		this.ref = base.syncState('data', {
 			context: this,
 			state: 'data'
@@ -50,13 +49,14 @@ class Router extends React.Component {
 		base.removeBinding(this.storageRef);
   };
 
-	updateAbout = (about) => {
-		debugger;
+	updateAbout = async (about) => {
 		this.setState({ data: {
 			about: {...about},
 			posts: [...this.state.data.posts],
 		},
-		archivedPosts: [...this.state.data.archivedPosts]});
+		archivedPosts: [...this.state.archivedPosts]});
+
+		await base.post('data/about', {data: about});
 	};
 
 	// options object:
@@ -64,7 +64,6 @@ class Router extends React.Component {
 	// isAbout - if true then it is the About page image
 	// isHeader - if true then rename the image to Header (postId should also be filled)
 	uploadImages = (images, options) => {
-		debugger;
 		if (options.isAbout) {
 			const [ aboutImage ] = images;
 			if (aboutImage) {
@@ -150,7 +149,6 @@ class Router extends React.Component {
 	};
 
 	editPost = async (post) => {
-		debugger;
 		const filteredArchivedPosts = this.state.archivedPosts ? this.state.archivedPosts.filter(p => p.id !== post.id) : [];
 		const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
 		if (post.status === 'archive') {
@@ -175,7 +173,7 @@ class Router extends React.Component {
 				archivedPosts: filteredArchivedPosts,
 			});
 
-			await base.post('private/archivedPosts', {data: filteredArchivedPosts});
+			await base.post('data/posts', {data: updatedPosts});
 		}
 	};
 
