@@ -33,10 +33,10 @@ const ManageAbout = (props) => {
     });
   }, [props.about]);
 
-  function UpdateAbout(e) {
+  async function UpdateAbout(e) {
     e.preventDefault();
     props.uploadImages([inputs.aboutImage], { isAbout: true });
-    props.updateAbout({ blurb: inputs.content });
+    await props.updateAbout({ blurb: inputs.content });
   };
   
   return authWrapper(
