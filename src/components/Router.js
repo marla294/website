@@ -24,6 +24,7 @@ class Router extends React.Component {
 	};
 
 	async componentDidMount() {
+		debugger;
 		this.ref = base.syncState('data', {
 			context: this,
 			state: 'data'
@@ -50,6 +51,7 @@ class Router extends React.Component {
   };
 
 	updateAbout = (about) => {
+		debugger;
 		this.setState({ data: {
 			about: {...about},
 			posts: [...this.state.data.posts],
@@ -62,12 +64,15 @@ class Router extends React.Component {
 	// isAbout - if true then it is the About page image
 	// isHeader - if true then rename the image to Header (postId should also be filled)
 	uploadImages = (images, options) => {
+		debugger;
 		if (options.isAbout) {
 			const [ aboutImage ] = images;
-			const metaData = {
-				contentType: aboutImage.type
-			};
-			this.aboutImageRef.put(aboutImage, metaData);
+			if (aboutImage) {
+				const metaData = {
+					contentType: aboutImage.type
+				};
+				this.aboutImageRef.put(aboutImage, metaData);
+			}
 			return;
 		}
 		if (options.isHeader && options.postId) {
@@ -145,6 +150,7 @@ class Router extends React.Component {
 	};
 
 	editPost = async (post) => {
+		debugger;
 		const filteredArchivedPosts = this.state.archivedPosts ? this.state.archivedPosts.filter(p => p.id !== post.id) : [];
 		const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
 		if (post.status === 'archive') {
@@ -210,11 +216,12 @@ class Router extends React.Component {
 						<Route path="/Projects" render={(props) => {
 							return <Projects posts={this.state.data.posts} {...props} />;
 						}} />
-						<Route path="/Manage/About" render={() => {
+						<Route path="/Manage/About" render={(props) => {
 							return <ManageAbout 
 										updateAbout={this.updateAbout} 
 										about={this.state.data.about}
 										uploadImages={this.uploadImages}
+										{...props}
 									/>
 						}} />
 						<Route path="/Manage/Post/Add" render={(props) => {
