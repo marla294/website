@@ -145,6 +145,8 @@ const Post = (props) => {
 			<Helmet>
 				<meta property="og:title" content={post ? post.title : ''} />
 				<meta property="og:url" content={postSlug ? `https://www.marlaforeman.com/Post/${postSlug}` : ''} />
+				<meta property="og:type" content="article" />
+				<meta property="og:description" content="" />
 				<meta property="og:image" content={postHeaderUrl ? postHeaderUrl : ''} />
 			</Helmet>
 			<TopNav push={props.history.push} />
