@@ -146,7 +146,7 @@ const Post = (props) => {
 				<meta name="title" property="og:title" content={post ? post.title : ''} />
 				<meta property="og:url" content={postSlug ? `https://www.marlaforeman.com/Post/${postSlug}` : ''} />
 				<meta property="og:type" content="article" />
-				<meta name="description" property="og:description" content={post ? post.title : ''} />
+				<meta name="description" property="og:description" content="" />
 				<meta name="image" property="og:image" content={postHeaderUrl ? postHeaderUrl : ''} />
 				<meta name="author" content="Marla Foreman" />
 			</Helmet>
