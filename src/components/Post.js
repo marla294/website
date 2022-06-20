@@ -143,11 +143,12 @@ const Post = (props) => {
 	return (
 		<React.Fragment>
 			<Helmet>
-				<meta property="og:title" content={post ? post.title : ''} />
+				<meta name="title" property="og:title" content={post ? post.title : ''} />
 				<meta property="og:url" content={postSlug ? `https://www.marlaforeman.com/Post/${postSlug}` : ''} />
 				<meta property="og:type" content="article" />
-				<meta property="og:description" content="" />
-				<meta property="og:image" content={postHeaderUrl ? postHeaderUrl : ''} />
+				<meta name="description" property="og:description" content={post ? post.title : ''} />
+				<meta name="image" property="og:image" content={postHeaderUrl ? postHeaderUrl : ''} />
+				<meta name="author" content="Marla Foreman" />
 			</Helmet>
 			<TopNav push={props.history.push} />
 			<PostWrapper>
