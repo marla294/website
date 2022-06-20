@@ -5,6 +5,7 @@ import TopNav from "./TopNav";
 import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 import { TextBlock } from 'react-placeholder/lib/placeholders';
+import { Helmet } from "react-helmet";
 
 const PostWrapper = styled.div`
 	margin: var(--S06) 0;
@@ -73,6 +74,7 @@ const PostCopy = styled.div`
 const Post = (props) => {
 	const [post, setPost] = useState(null);
 	const [postHeaderUrl, setPostHeaderUrl] = useState('');
+	const [postSlug, setPostSlug] = useState('');
 	const [isHeaderImageLoaded, setIsHeaderImageLoaded] = useState(false);
 
 	useEffect(async () => {
@@ -91,6 +93,7 @@ const Post = (props) => {
 		for (let i = 0; i < filteredPosts.length; i++) {
 			const post = filteredPosts[i];
 			const slugTitle = slugify(post.title, { remove: /\./ });
+			setPostSlug(slugTitle);
 			if (slugTitle === slug) {
 				setPost(post);
 				await loadPostImages(post);
@@ -139,6 +142,11 @@ const Post = (props) => {
 
 	return (
 		<React.Fragment>
+			<Helmet>
+				<meta property="og:title" content={post ? post.title : ''} />
+				<meta property="og:url" content={postSlug ? `https://www.marlaforeman.com/Post/${postSlug}` : ''} />
+				<meta property="og:image" content={postHeaderUrl ? postHeaderUrl : ''} />
+			</Helmet>
 			<TopNav push={props.history.push} />
 			<PostWrapper>
 				<PostHeader>

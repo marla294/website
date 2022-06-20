@@ -49,12 +49,14 @@ class Router extends React.Component {
 		base.removeBinding(this.storageRef);
   };
 
-	updateAbout = (about) => {
+	updateAbout = async (about) => {
 		this.setState({ data: {
 			about: {...about},
 			posts: [...this.state.data.posts],
 		},
-		archivedPosts: [...this.state.data.archivedPosts]});
+		archivedPosts: [...this.state.archivedPosts]});
+
+		await base.post('data/about', {data: about});
 	};
 
 	// options object:
@@ -64,10 +66,12 @@ class Router extends React.Component {
 	uploadImages = (images, options) => {
 		if (options.isAbout) {
 			const [ aboutImage ] = images;
-			const metaData = {
-				contentType: aboutImage.type
-			};
-			this.aboutImageRef.put(aboutImage, metaData);
+			if (aboutImage) {
+				const metaData = {
+					contentType: aboutImage.type
+				};
+				this.aboutImageRef.put(aboutImage, metaData);
+			}
 			return;
 		}
 		if (options.isHeader && options.postId) {
@@ -169,7 +173,7 @@ class Router extends React.Component {
 				archivedPosts: filteredArchivedPosts,
 			});
 
-			await base.post('private/archivedPosts', {data: filteredArchivedPosts});
+			await base.post('data/posts', {data: updatedPosts});
 		}
 	};
 
@@ -210,11 +214,12 @@ class Router extends React.Component {
 						<Route path="/Projects" render={(props) => {
 							return <Projects posts={this.state.data.posts} {...props} />;
 						}} />
-						<Route path="/Manage/About" render={() => {
+						<Route path="/Manage/About" render={(props) => {
 							return <ManageAbout 
 										updateAbout={this.updateAbout} 
 										about={this.state.data.about}
 										uploadImages={this.uploadImages}
+										{...props}
 									/>
 						}} />
 						<Route path="/Manage/Post/Add" render={(props) => {

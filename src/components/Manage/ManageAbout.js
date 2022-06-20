@@ -33,10 +33,10 @@ const ManageAbout = (props) => {
     });
   }, [props.about]);
 
-  const updateAbout = (e) => {
+  async function UpdateAbout(e) {
     e.preventDefault();
-    props.updateAbout({ blurb: inputs.content });
-    props.uploadImages([inputs.aboutImage], { isAbout: true })
+    props.uploadImages([inputs.aboutImage], { isAbout: true });
+    await props.updateAbout({ blurb: inputs.content });
   };
   
   return authWrapper(
@@ -44,7 +44,7 @@ const ManageAbout = (props) => {
       <Wrapper>
         <ManageContentStyles>
           <h1>Update About Page</h1>
-          <ManageFormStyles onSubmit={updateAbout}>
+          <ManageFormStyles onSubmit={UpdateAbout}>
             <label>Image:</label>
             <input 
               name="aboutImage"
