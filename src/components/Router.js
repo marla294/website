@@ -77,7 +77,8 @@ class Router extends React.Component {
 		if (options.isHeader && options.postId) {
 			const [ headerImage ] = images;
 			const metaData = {
-				contentType: headerImage.type
+				contentType: headerImage.type,
+				public: true
 			};
 			const headerImageRef = this.storageRef.child(`/${options.postId}/Header.jpg`);
 			headerImageRef.put(headerImage, metaData);
@@ -143,7 +144,7 @@ class Router extends React.Component {
 				about: {...this.state.data.about},
 				posts: updatedPosts,
 				},
-				archivedPosts: [...this.state.data.archivedPosts],
+				archivedPosts: [...this.state.archivedPosts],
 			});
 		}
 	};

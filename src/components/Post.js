@@ -147,8 +147,7 @@ const Post = (props) => {
 				<meta property="og:url" content={postSlug ? `https://www.marlaforeman.com/Post/${postSlug}` : ''} />
 				<meta property="og:type" content="article" />
 				<meta name="description" property="og:description" content="" />
-				{/* <meta name="image" property="og:image" content={postHeaderUrl ? postHeaderUrl : ''} /> */}
-				<meta name="image" property="og:image" content="https://images.unsplash.com/photo-1652389474094-a4881756102f" />
+				<meta name="image" property="og:image" content={postHeaderUrl ? postHeaderUrl : ''} />
 				<meta property="og:image:width" content="400" />
 				<meta property="og:image:height" content="300" />
 				<meta name="author" content="Marla Foreman" />
