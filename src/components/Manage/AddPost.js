@@ -37,6 +37,7 @@ const AddPost = (props) => {
 
   const addNewPost = async e => {
     e.preventDefault();
+    debugger;
     setErrors([]);
     let addPostErrors = [];
 
