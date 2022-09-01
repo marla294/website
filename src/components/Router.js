@@ -11,7 +11,7 @@ import ManageAbout from "./Manage/ManageAbout";
 import AddPost from "./Manage/AddPost";
 import EditPost from './Manage/EditPost';
 import Manage from './Manage/Manage';
-import base, { firebaseStorage } from '../base';
+import base, { firebaseApp, firebaseStorage } from '../base';
 
 class Router extends React.Component {
 	state = {
@@ -30,16 +30,22 @@ class Router extends React.Component {
 		});
 		this.storageRef = firebaseStorage.ref();
 		this.aboutImageRef = this.storageRef.child('About.jpg');
+		this.dbRef = firebaseApp.database().ref();
+		this.postDataRef = this.dbRef.child('data');
 
 		this.aboutImageRef.getDownloadURL().then(url => {
 			this.setState({aboutImageUrl: url})
 		});
 
 		const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
+		let postData = null;
+		this.postDataRef.on('value', (snapshot) => {
+			postData = snapshot.val();
+		});
 
 		this.setState({ data: {
-			about: {...this.state.data.about},
-			posts: [...this.state.data.posts],
+			about: {...postData.about},
+			posts: [...postData.posts],
 		},
 		archivedPosts: [...archivedPosts]});
 	}
