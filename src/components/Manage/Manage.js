@@ -29,6 +29,8 @@ const Manage = ({ posts, archivedPosts, history }) => {
     authWrapper,
   } = useAuth({});
 
+  debugger;
+
   const allPosts = [...posts, ...archivedPosts];
 
   const renderPostLinks = ({id, title, date, status}) => {

@@ -32,28 +32,35 @@ class Router extends React.Component {
 		this.aboutImageRef = this.storageRef.child('About.jpg');
 		this.dbRef = firebaseApp.database().ref();
 		this.postDataRef = this.dbRef.child('data');
+		this.archiveDataRef = this.dbRef.child('private/archivedPosts');
 
 		this.aboutImageRef.getDownloadURL().then(url => {
 			this.setState({aboutImageUrl: url})
 		});
 
 		const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
-		let postData = null;
-		this.postDataRef.on('value', (snapshot) => {
-			postData = snapshot.val();
-		});
+
+		const postData = await (await this.postDataRef.once('value')).val();
+		const postIds = Object.keys(postData.posts);
+
+		let posts = [];
+
+		for (let i = 0; i < postIds.length; i++) {
+			posts.push(postData.posts[postIds[i]]);
+		}
+
+		// let archivedPosts = null;
+		// this.archiveDataRef.on('value', (snapshot) => {
+		// 	archivedPosts = snapshot.val();
+		// });
+
 
 		this.setState({ data: {
 			about: {...postData.about},
-			posts: [...postData.posts],
+			posts: [...posts],
 		},
-		archivedPosts: [...archivedPosts]});
+		archivedPosts: archivedPosts ? [...archivedPosts] : null});
 	}
-
-	componentWillUnmount() {
-    base.removeBinding(this.ref);
-		base.removeBinding(this.storageRef);
-  };
 
 	updateAbout = async (about) => {
 		this.setState({ data: {
@@ -185,6 +192,8 @@ class Router extends React.Component {
 	};
 
 	render() {
+		debugger;
+
 		return (
 			<ThemeProvider theme={theme}>
 				<BrowserRouter>
