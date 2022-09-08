@@ -139,7 +139,7 @@ const EditPost = (props) => {
     }
 
     const post = {
-      date: inputs.date.toDateString(),
+      date: inputs.date ? inputs.date.toDateString() : null,
       title: inputs.title,
       status: inputs.status,
       content: inputs.content,

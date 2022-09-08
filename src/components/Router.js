@@ -11,7 +11,7 @@ import ManageAbout from "./Manage/ManageAbout";
 import AddPost from "./Manage/AddPost";
 import EditPost from './Manage/EditPost';
 import Manage from './Manage/Manage';
-import base, { firebaseStorage } from '../base';
+import base, { firebaseApp, firebaseStorage } from '../base';
 
 class Router extends React.Component {
 	state = {
@@ -30,6 +30,9 @@ class Router extends React.Component {
 		});
 		this.storageRef = firebaseStorage.ref();
 		this.aboutImageRef = this.storageRef.child('About.jpg');
+		this.dbRef = firebaseApp.database().ref();
+		this.postDataRef = this.dbRef.child('data');
+		this.archiveDataRef = this.dbRef.child('private/archivedPosts');
 
 		this.aboutImageRef.getDownloadURL().then(url => {
 			this.setState({aboutImageUrl: url})
@@ -37,17 +40,27 @@ class Router extends React.Component {
 
 		const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
 
-		this.setState({ data: {
-			about: {...this.state.data.about},
-			posts: [...this.state.data.posts],
-		},
-		archivedPosts: [...archivedPosts]});
-	}
+		const postData = await (await this.postDataRef.once('value')).val();
+		const postIds = Object.keys(postData.posts);
 
-	componentWillUnmount() {
-    base.removeBinding(this.ref);
-		base.removeBinding(this.storageRef);
-  };
+		let posts = [];
+
+		for (let i = 0; i < postIds.length; i++) {
+			posts.push(postData.posts[postIds[i]]);
+		}
+
+		// let archivedPosts = null;
+		// this.archiveDataRef.on('value', (snapshot) => {
+		// 	archivedPosts = snapshot.val();
+		// });
+
+
+		this.setState({ data: {
+			about: {...postData.about},
+			posts: [...posts],
+		},
+		archivedPosts: archivedPosts ? [...archivedPosts] : null});
+	}
 
 	updateAbout = async (about) => {
 		this.setState({ data: {
@@ -179,6 +192,8 @@ class Router extends React.Component {
 	};
 
 	render() {
+		debugger;
+
 		return (
 			<ThemeProvider theme={theme}>
 				<BrowserRouter>
