@@ -38,15 +38,15 @@ class Router extends React.Component {
 			this.setState({aboutImageUrl: url})
 		});
 
-		// const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
-
 		const postData = await (await this.postDataRef.once('value')).val();
-		const postIds = Object.keys(postData.posts);
-
 		const posts = [];
 
-		for (let i = 0; i < postIds.length; i++) {
-			posts.push(postData.posts[postIds[i]]);
+		if (postData) {
+			const postIds = Object.keys(postData.posts);
+
+			for (let i = 0; i < postIds.length; i++) {
+				posts.push(postData.posts[postIds[i]]);
+			}
 		}
 
 		const archivedPostData = await (await this.archiveDataRef.once('value')).val();
@@ -54,7 +54,6 @@ class Router extends React.Component {
 
 		if (archivedPostData) {
 			const archivedPostIds = Object.keys(archivedPostData);
-			debugger;
 			for (let i = 0; i < archivedPostIds.length; i++) {
 				archivedPosts.push(archivedPostData[archivedPostIds[i]]);
 			}
@@ -74,7 +73,10 @@ class Router extends React.Component {
 		},
 		archivedPosts: [...this.state.archivedPosts]});
 
-		await base.post('data/about', {data: about});
+		const aboutDataRef = this.dbRef.child('data/about');
+
+		await aboutDataRef.set({blurb: about.blurb});
+
 	};
 
 	// options object:
