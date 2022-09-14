@@ -82,7 +82,6 @@ const Post = (props) => {
 	}, [props.posts]);
 
 	const loadPost = async (slug) => {
-		debugger;
 		if (!props.posts || props.posts.length === 0) return;
 
 		const slugify = require("slugify");

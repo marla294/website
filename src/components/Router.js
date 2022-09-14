@@ -38,28 +38,33 @@ class Router extends React.Component {
 			this.setState({aboutImageUrl: url})
 		});
 
-		const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
+		// const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
 
 		const postData = await (await this.postDataRef.once('value')).val();
 		const postIds = Object.keys(postData.posts);
 
-		let posts = [];
+		const posts = [];
 
 		for (let i = 0; i < postIds.length; i++) {
 			posts.push(postData.posts[postIds[i]]);
 		}
 
-		// let archivedPosts = null;
-		// this.archiveDataRef.on('value', (snapshot) => {
-		// 	archivedPosts = snapshot.val();
-		// });
+		const archivedPostData = await (await this.archiveDataRef.once('value')).val();
+		const archivedPosts = [];
 
-
+		if (archivedPostData) {
+			const archivedPostIds = Object.keys(archivedPostData);
+			debugger;
+			for (let i = 0; i < archivedPostIds.length; i++) {
+				archivedPosts.push(archivedPostData[archivedPostIds[i]]);
+			}
+		}
+		
 		this.setState({ data: {
 			about: {...postData.about},
 			posts: [...posts],
 		},
-		archivedPosts: archivedPosts ? [...archivedPosts] : null});
+		archivedPosts: [...archivedPosts]});
 	}
 
 	updateAbout = async (about) => {
@@ -192,8 +197,6 @@ class Router extends React.Component {
 	};
 
 	render() {
-		debugger;
-
 		return (
 			<ThemeProvider theme={theme}>
 				<BrowserRouter>
