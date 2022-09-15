@@ -186,7 +186,11 @@ class Router extends React.Component {
 				archivedPosts: updatedArchivedPosts,
 			});
 
-			await base.post('private/archivedPosts', {data: updatedArchivedPosts});
+			const postsRef = this.dbRef.child('data/posts');
+			await postsRef.set(filteredPosts);
+			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
+			await archivedPostsRef.set(updatedArchivedPosts);
+
 		}
 		else {
 			const updatedPosts = [...filteredPosts, post];
@@ -198,7 +202,11 @@ class Router extends React.Component {
 				archivedPosts: filteredArchivedPosts,
 			});
 
-			await base.post('data/posts', {data: updatedPosts});
+			const postsRef = this.dbRef.child('data/posts');
+			await postsRef.set(updatedPosts);
+			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
+			await archivedPostsRef.set(filteredArchivedPosts);
+
 		}
 	};
 
