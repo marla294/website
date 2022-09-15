@@ -24,10 +24,10 @@ class Router extends React.Component {
 	};
 
 	async componentDidMount() {
-		this.ref = base.syncState('data', {
-			context: this,
-			state: 'data'
-		});
+		// this.ref = base.syncState('data', {
+		// 	context: this,
+		// 	state: 'data'
+		// });
 		this.storageRef = firebaseStorage.ref();
 		this.aboutImageRef = this.storageRef.child('About.jpg');
 		this.dbRef = firebaseApp.database().ref();
@@ -38,28 +38,34 @@ class Router extends React.Component {
 			this.setState({aboutImageUrl: url})
 		});
 
-		const archivedPosts = await base.fetch('private/archivedPosts', {context: this});
-
 		const postData = await (await this.postDataRef.once('value')).val();
-		const postIds = Object.keys(postData.posts);
+		const posts = [];
 
-		let posts = [];
+		if (postData) {
+			const postIds = Object.keys(postData.posts);
 
-		for (let i = 0; i < postIds.length; i++) {
-			posts.push(postData.posts[postIds[i]]);
+			for (let i = 0; i < postIds.length; i++) {
+				posts.push(postData.posts[postIds[i]]);
+			}
 		}
 
-		// let archivedPosts = null;
-		// this.archiveDataRef.on('value', (snapshot) => {
-		// 	archivedPosts = snapshot.val();
-		// });
 
 
+		const archivedPostData = await (await this.archiveDataRef.once('value')).val();
+		const archivedPosts = [];
+
+		if (archivedPostData) {
+			const archivedPostIds = Object.keys(archivedPostData);
+			for (let i = 0; i < archivedPostIds.length; i++) {
+				archivedPosts.push(archivedPostData[archivedPostIds[i]]);
+			}
+		}
+		
 		this.setState({ data: {
 			about: {...postData.about},
 			posts: [...posts],
 		},
-		archivedPosts: archivedPosts ? [...archivedPosts] : null});
+		archivedPosts: [...archivedPosts]});
 	}
 
 	updateAbout = async (about) => {
@@ -69,7 +75,8 @@ class Router extends React.Component {
 		},
 		archivedPosts: [...this.state.archivedPosts]});
 
-		await base.post('data/about', {data: about});
+		const aboutDataRef = this.dbRef.child('data/about');
+		await aboutDataRef.set({blurb: about.blurb});
 	};
 
 	// options object:
@@ -148,7 +155,8 @@ class Router extends React.Component {
 				archivedPosts: updatedPosts,
 			});
 
-			await base.post('private/archivedPosts', {data: updatedPosts});
+			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
+			await archivedPostsRef.set(updatedPosts);
 		}
 		else {
 			const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
@@ -159,6 +167,9 @@ class Router extends React.Component {
 				},
 				archivedPosts: [...this.state.archivedPosts],
 			});
+
+			const postsRef = this.dbRef.child('data/posts');
+			await postsRef.set(updatedPosts);
 		}
 	};
 
@@ -175,7 +186,11 @@ class Router extends React.Component {
 				archivedPosts: updatedArchivedPosts,
 			});
 
-			await base.post('private/archivedPosts', {data: updatedArchivedPosts});
+			const postsRef = this.dbRef.child('data/posts');
+			await postsRef.set(filteredPosts);
+			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
+			await archivedPostsRef.set(updatedArchivedPosts);
+
 		}
 		else {
 			const updatedPosts = [...filteredPosts, post];
@@ -187,13 +202,15 @@ class Router extends React.Component {
 				archivedPosts: filteredArchivedPosts,
 			});
 
-			await base.post('data/posts', {data: updatedPosts});
+			const postsRef = this.dbRef.child('data/posts');
+			await postsRef.set(updatedPosts);
+			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
+			await archivedPostsRef.set(filteredArchivedPosts);
+
 		}
 	};
 
 	render() {
-		debugger;
-
 		return (
 			<ThemeProvider theme={theme}>
 				<BrowserRouter>
