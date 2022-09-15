@@ -24,10 +24,10 @@ class Router extends React.Component {
 	};
 
 	async componentDidMount() {
-		this.ref = base.syncState('data', {
-			context: this,
-			state: 'data'
-		});
+		// this.ref = base.syncState('data', {
+		// 	context: this,
+		// 	state: 'data'
+		// });
 		this.storageRef = firebaseStorage.ref();
 		this.aboutImageRef = this.storageRef.child('About.jpg');
 		this.dbRef = firebaseApp.database().ref();
@@ -48,6 +48,8 @@ class Router extends React.Component {
 				posts.push(postData.posts[postIds[i]]);
 			}
 		}
+
+
 
 		const archivedPostData = await (await this.archiveDataRef.once('value')).val();
 		const archivedPosts = [];
@@ -74,9 +76,7 @@ class Router extends React.Component {
 		archivedPosts: [...this.state.archivedPosts]});
 
 		const aboutDataRef = this.dbRef.child('data/about');
-
 		await aboutDataRef.set({blurb: about.blurb});
-
 	};
 
 	// options object:
@@ -155,7 +155,8 @@ class Router extends React.Component {
 				archivedPosts: updatedPosts,
 			});
 
-			await base.post('private/archivedPosts', {data: updatedPosts});
+			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
+			await archivedPostsRef.set(updatedPosts);
 		}
 		else {
 			const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
@@ -166,6 +167,9 @@ class Router extends React.Component {
 				},
 				archivedPosts: [...this.state.archivedPosts],
 			});
+
+			const postsRef = this.dbRef.child('data/posts');
+			await postsRef.set(updatedPosts);
 		}
 	};
 
