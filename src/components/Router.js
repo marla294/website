@@ -11,7 +11,7 @@ import ManageAbout from "./Manage/ManageAbout";
 import AddPost from "./Manage/AddPost";
 import EditPost from './Manage/EditPost';
 import Manage from './Manage/Manage';
-import base, { firebaseApp, firebaseStorage } from '../base';
+import { firebaseApp, firebaseStorage } from '../base';
 
 class Router extends React.Component {
 	state = {
@@ -24,10 +24,6 @@ class Router extends React.Component {
 	};
 
 	async componentDidMount() {
-		// this.ref = base.syncState('data', {
-		// 	context: this,
-		// 	state: 'data'
-		// });
 		this.storageRef = firebaseStorage.ref();
 		this.aboutImageRef = this.storageRef.child('About.jpg');
 		this.dbRef = firebaseApp.database().ref();
@@ -48,9 +44,7 @@ class Router extends React.Component {
 				posts.push(postData.posts[postIds[i]]);
 			}
 		}
-
-
-
+		
 		const archivedPostData = await (await this.archiveDataRef.once('value')).val();
 		const archivedPosts = [];
 
