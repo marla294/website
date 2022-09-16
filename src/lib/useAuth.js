@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import firebase from 'firebase';
-import base, { firebaseApp } from '../base';
+import { firebaseApp } from '../base';
 import Login from '../components/Login';
 
 export default function useAuth(initial = {}) {
@@ -16,7 +16,10 @@ export default function useAuth(initial = {}) {
   }, []);
 
   const authHandler = async (authData) => {
-    const owner = await base.fetch('owner', {context: this});
+    const dbRef = firebaseApp.database().ref();
+    const ownerRef = dbRef.child('owner');
+    const owner = await (await ownerRef.once('value')).val();
+
     setAuth({
       ...auth,
       uid: authData.user.uid,
