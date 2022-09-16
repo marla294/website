@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./GlobalStyles";
@@ -13,20 +13,110 @@ import EditPost from './Manage/EditPost';
 import Manage from './Manage/Manage';
 import { firebaseApp, firebaseStorage } from '../base';
 
-class Router extends React.Component {
-	state = {
-		data: {
-			about: {},
-			posts: [],
-		},
-		archivedPosts: [],
-		aboutImageUrl: "",
-	};
+export default function Router() {
+	const [about, setAbout] = useState({});
+	const [posts, setPosts] = useState([]);
+	const [archivedPosts, setArchivedPosts] = useState([]);
+	const [aboutImageUrl, setAboutImageUrl] = useState('');
+	const [storageRef, setStorageRef] = useState(null);
+	const [dbRef, setDbRef] = useState(null);
+
+
+	useEffect(() => {
+		setStorageRef(firebaseStorage.ref());
+		setDbRef(firebaseApp.database().ref());
+	}, []);
+
+	return (
+		<ThemeProvider theme={theme}>
+			<BrowserRouter>
+				<Switch>
+					<Route exact path="/" render={(props) => {
+						return <Home 
+							posts={posts} 
+							{...props} 
+							storageRef={this.storageRef}
+						/>;
+					}} />
+					<Route path="/About" render={(props) => {
+						return <About 
+							about={about} 
+							aboutImageUrl={aboutImageUrl}
+							{...props} 
+						/>
+					}} />
+					<Route path="/Post/:Slug" render={(props) => {
+						return <Post 
+							posts={posts} 
+							storageRef={this.storageRef}
+							loadImages={this.loadImages}
+							{...props} 
+						/>;
+					}} />
+					<Route path="/Blog" render={(props) => {
+						return <Blog 
+							posts={posts} 
+							storageRef={this.storageRef}
+							{...props} 
+						/>;
+					}} />
+					<Route path="/Projects" render={(props) => {
+						return <Projects posts={posts} {...props} />;
+					}} />
+					<Route path="/Manage/About" render={(props) => {
+						return <ManageAbout 
+									updateAbout={this.updateAbout} 
+									about={about}
+									uploadImages={this.uploadImages}
+									{...props}
+								/>
+					}} />
+					<Route path="/Manage/Post/Add" render={(props) => {
+						return <AddPost
+							addNewPost={this.addNewPost}
+							uploadImages={this.uploadImages}
+							{...props}
+						/>
+					}} />
+					<Route path="/Manage/Post/Edit/:Slug" render={(props) => {
+						return <EditPost
+							editPost={this.editPost}
+							uploadImages={this.uploadImages}
+							deletePostImages={this.deletePostImages}
+							loadImages={this.loadImages}
+							posts={posts}
+							archivedPosts={archivedPosts}
+							storageRef={this.storageRef}
+							{...props}
+						/>
+					}} />
+					<Route path="/Manage" render={(props) => {
+						return <Manage 
+							posts={posts}
+							archivedPosts={archivedPosts}
+							{...props}
+						/>
+					}} />
+				</Switch>
+			</BrowserRouter>
+		</ThemeProvider>
+	);
+}
+
+class R extends React.Component {
+	// state = {
+	// 	data: {
+	// 		about: {},
+	// 		posts: [],
+	// 	},
+	// 	archivedPosts: [],
+	// 	aboutImageUrl: "",
+	// };
 
 	async componentDidMount() {
-		this.storageRef = firebaseStorage.ref();
-		this.dbRef = firebaseApp.database().ref();
-		
+		// this.storageRef = firebaseStorage.ref();
+		// this.dbRef = firebaseApp.database().ref();
+
 		const aboutImageRef = this.storageRef.child('About.jpg');
 		const postDataRef = this.dbRef.child('data');
 		const archiveDataRef = this.dbRef.child('private/archivedPosts');
@@ -283,5 +373,3 @@ class Router extends React.Component {
 		);
 	}
 }
-
-export default Router;
