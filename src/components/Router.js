@@ -25,16 +25,17 @@ class Router extends React.Component {
 
 	async componentDidMount() {
 		this.storageRef = firebaseStorage.ref();
-		this.aboutImageRef = this.storageRef.child('About.jpg');
 		this.dbRef = firebaseApp.database().ref();
-		this.postDataRef = this.dbRef.child('data');
-		this.archiveDataRef = this.dbRef.child('private/archivedPosts');
+		
+		const aboutImageRef = this.storageRef.child('About.jpg');
+		const postDataRef = this.dbRef.child('data');
+		const archiveDataRef = this.dbRef.child('private/archivedPosts');
 
-		this.aboutImageRef.getDownloadURL().then(url => {
+		aboutImageRef.getDownloadURL().then(url => {
 			this.setState({aboutImageUrl: url})
 		});
 
-		const postData = await (await this.postDataRef.once('value')).val();
+		const postData = await (await postDataRef.once('value')).val();
 		const posts = [];
 
 		if (postData) {
@@ -44,8 +45,8 @@ class Router extends React.Component {
 				posts.push(postData.posts[postIds[i]]);
 			}
 		}
-		
-		const archivedPostData = await (await this.archiveDataRef.once('value')).val();
+
+		const archivedPostData = await (await archiveDataRef.once('value')).val();
 		const archivedPosts = [];
 
 		if (archivedPostData) {
@@ -84,7 +85,8 @@ class Router extends React.Component {
 				const metaData = {
 					contentType: aboutImage.type
 				};
-				this.aboutImageRef.put(aboutImage, metaData);
+				const aboutImageRef = this.storageRef.child('About.jpg');
+				aboutImageRef.put(aboutImage, metaData);
 			}
 			return;
 		}
