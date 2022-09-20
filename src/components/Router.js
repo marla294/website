@@ -25,6 +25,12 @@ export default function Router() {
 	useEffect(() => {
 		setStorageRef(firebaseStorage.ref());
 		setDbRef(firebaseApp.database().ref());
+
+		const aboutImageRef = firebaseStorage.ref().child('About.jpg');
+		aboutImageRef.getDownloadURL().then(url => {
+			setAboutImageUrl(url);
+		});
+		
 	}, []);
 
 	return (
@@ -35,12 +41,13 @@ export default function Router() {
 						return <Home 
 							posts={posts} 
 							{...props} 
-							storageRef={this.storageRef}
+							storageRef={storageRef}
 						/>;
 					}} />
 					<Route path="/About" render={(props) => {
 						return <About 
-							about={about} 
+							about={about}
+							storageRef={storageRef}
 							aboutImageUrl={aboutImageUrl}
 							{...props} 
 						/>
@@ -48,7 +55,7 @@ export default function Router() {
 					<Route path="/Post/:Slug" render={(props) => {
 						return <Post 
 							posts={posts} 
-							storageRef={this.storageRef}
+							storageRef={storageRef}
 							loadImages={this.loadImages}
 							{...props} 
 						/>;
@@ -56,7 +63,7 @@ export default function Router() {
 					<Route path="/Blog" render={(props) => {
 						return <Blog 
 							posts={posts} 
-							storageRef={this.storageRef}
+							storageRef={storageRef}
 							{...props} 
 						/>;
 					}} />
@@ -86,7 +93,7 @@ export default function Router() {
 							loadImages={this.loadImages}
 							posts={posts}
 							archivedPosts={archivedPosts}
-							storageRef={this.storageRef}
+							storageRef={storageRef}
 							{...props}
 						/>
 					}} />

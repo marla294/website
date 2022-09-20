@@ -49,39 +49,38 @@ const Copy = styled.div`
 	padding-top: var(--S02);
 `;
 
-const About = (props) => {
-	const [isImageLoaded, setIsImageLoaded] = useState(false);
+const About = ({storageRef, about, history }) => {
+	const [aboutImageUrl, setAboutImageUrl] = useState(null);
 
 	useEffect(async () => {
-		if (props.aboutImageUrl && props.aboutImageUrl !== '') {
-			const img = new Image();
-			img.src = props.aboutImageUrl;
-			await img.decode();
-			setIsImageLoaded(true);
+		if (storageRef) {
+			const aboutImageRef = storageRef.child('About.jpg');
+			const url = await aboutImageRef.getDownloadURL();
+			setAboutImageUrl(url);
 		}
-	}, [props.aboutImageUrl]);
+	}, [storageRef]);
 
 	return (
 		<React.Fragment>
-			<TopNav push={props.history.push} />
+			<TopNav push={history.push} />
 			<Wrapper>
 				<AboutContent>
-					{isImageLoaded && props.about.blurb ? <img
-						src={props.aboutImageUrl}
+					{aboutImageUrl ? <img
+						src={aboutImageUrl}
 						alt="Marla Foreman"
 					/> : <div className="loading-div"></div>}
 					<Blurb>
-						{isImageLoaded && props.about.blurb ? <React.Fragment>
+						{aboutImageUrl && about.blurb ? <React.Fragment>
 							<Copy>
 								<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
 							</Copy>
 							<Copy dangerouslySetInnerHTML={{
-								__html: props.about.blurb
+								__html: about.blurb
 							}}></Copy>
 							<Copy>
 								<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
 							</Copy>
-						</React.Fragment> : <Copy><TextBlock rows={7} ready={props.about.blurb}></TextBlock></Copy>}
+						</React.Fragment> : <Copy><TextBlock rows={7} ready={about.blurb}></TextBlock></Copy>}
 					</Blurb>
 				</AboutContent>
 			</Wrapper>
