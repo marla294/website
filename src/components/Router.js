@@ -17,7 +17,6 @@ export default function Router() {
 	const [about, setAbout] = useState({});
 	const [posts, setPosts] = useState([]);
 	const [archivedPosts, setArchivedPosts] = useState([]);
-	const [aboutImageUrl, setAboutImageUrl] = useState('');
 	const [storageRef, setStorageRef] = useState(null);
 	const [dbRef, setDbRef] = useState(null);
 
@@ -25,12 +24,6 @@ export default function Router() {
 	useEffect(() => {
 		setStorageRef(firebaseStorage.ref());
 		setDbRef(firebaseApp.database().ref());
-
-		const aboutImageRef = firebaseStorage.ref().child('About.jpg');
-		aboutImageRef.getDownloadURL().then(url => {
-			setAboutImageUrl(url);
-		});
-		
 	}, []);
 
 	return (
@@ -40,15 +33,15 @@ export default function Router() {
 					<Route exact path="/" render={(props) => {
 						return <Home 
 							posts={posts} 
-							{...props} 
 							storageRef={storageRef}
+							{...props}
 						/>;
 					}} />
 					<Route path="/About" render={(props) => {
 						return <About 
 							about={about}
 							storageRef={storageRef}
-							aboutImageUrl={aboutImageUrl}
+							dbRef={dbRef}
 							{...props} 
 						/>
 					}} />

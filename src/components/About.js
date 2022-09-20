@@ -49,8 +49,9 @@ const Copy = styled.div`
 	padding-top: var(--S02);
 `;
 
-const About = ({storageRef, about, history }) => {
+const About = ({storageRef, dbRef, about, history }) => {
 	const [aboutImageUrl, setAboutImageUrl] = useState(null);
+	const [blurb, setBlurb] = useState(null);
 
 	useEffect(async () => {
 		if (storageRef) {
@@ -59,6 +60,17 @@ const About = ({storageRef, about, history }) => {
 			setAboutImageUrl(url);
 		}
 	}, [storageRef]);
+
+	useEffect(async () => {
+		if (dbRef) {
+			const aboutDataRef = dbRef.child('data/about');
+			const aboutData = await (await aboutDataRef.once('value')).val();
+			setBlurb(about.blurb);
+			// const aboutImageRef = storageRef.child('About.jpg');
+			// const url = await aboutImageRef.getDownloadURL();
+			// setAboutImageUrl(url);
+		}
+	}, [dbRef]);
 
 	return (
 		<React.Fragment>
