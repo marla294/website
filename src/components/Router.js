@@ -19,12 +19,29 @@ export default function Router() {
 	const [archivedPosts, setArchivedPosts] = useState([]);
 	const [storageRef, setStorageRef] = useState(null);
 	const [dbRef, setDbRef] = useState(null);
-
+	const [aboutImageUrl, setAboutImageUrl] = useState(null);
+	const [aboutBlurb, setAboutBlurb] = useState(null);
 
 	useEffect(() => {
 		setStorageRef(firebaseStorage.ref());
 		setDbRef(firebaseApp.database().ref());
 	}, []);
+
+	useEffect(async () => {
+		if (storageRef) {
+			const aboutImageRef = storageRef.child('About.jpg');
+			const url = await aboutImageRef.getDownloadURL();
+			setAboutImageUrl(url);
+		}
+	}, [storageRef]);
+
+	useEffect(async () => {
+		if (dbRef) {
+			const aboutDataRef = dbRef.child('data/about');
+			const aboutData = await (await aboutDataRef.once('value')).val();
+			setAboutBlurb(aboutData.blurb);
+		}
+	}, [dbRef]);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -39,9 +56,10 @@ export default function Router() {
 					}} />
 					<Route path="/About" render={(props) => {
 						return <About 
-							about={about}
 							storageRef={storageRef}
 							dbRef={dbRef}
+							aboutImageUrl={aboutImageUrl}
+							aboutBlurb={aboutBlurb}
 							{...props} 
 						/>
 					}} />
@@ -68,6 +86,8 @@ export default function Router() {
 									updateAbout={this.updateAbout} 
 									about={about}
 									uploadImages={this.uploadImages}
+									storageRef={storageRef}
+									dbRef={dbRef}
 									{...props}
 								/>
 					}} />

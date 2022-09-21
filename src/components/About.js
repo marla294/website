@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from 'react';
 import TopNav from "./TopNav";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
@@ -18,7 +17,7 @@ const AboutContent = styled.div`
 	img {
 		object-fit: cover;
 	}
-	
+
 	.loading-div {
 		height: 400px;
 		background-color: var(--Gray03);
@@ -49,47 +48,28 @@ const Copy = styled.div`
 	padding-top: var(--S02);
 `;
 
-const About = ({storageRef, dbRef, history }) => {
-	const [aboutImageUrl, setAboutImageUrl] = useState(null);
-	const [blurb, setBlurb] = useState(null);
-
-	useEffect(async () => {
-		if (storageRef) {
-			const aboutImageRef = storageRef.child('About.jpg');
-			const url = await aboutImageRef.getDownloadURL();
-			setAboutImageUrl(url);
-		}
-	}, [storageRef]);
-
-	useEffect(async () => {
-		if (dbRef) {
-			const aboutDataRef = dbRef.child('data/about');
-			const aboutData = await (await aboutDataRef.once('value')).val();
-			setBlurb(aboutData.blurb);
-		}
-	}, [dbRef]);
-
+const About = ({aboutImageUrl, aboutBlurb, history}) => {
 	return (
 		<React.Fragment>
 			<TopNav push={history.push} />
 			<Wrapper>
 				<AboutContent>
-					{aboutImageUrl && blurb ? <img
+					{aboutImageUrl && aboutBlurb ? <img
 						src={aboutImageUrl}
 						alt="Marla Foreman"
 					/> : <div className="loading-div"></div>}
 					<Blurb>
-						{aboutImageUrl && blurb ? <React.Fragment>
+						{aboutImageUrl && aboutBlurb ? <React.Fragment>
 							<Copy>
 								<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
 							</Copy>
 							<Copy dangerouslySetInnerHTML={{
-								__html: blurb
+								__html: aboutBlurb
 							}}></Copy>
 							<Copy>
 								<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
 							</Copy>
-						</React.Fragment> : <Copy><TextBlock rows={7} ready={blurb}></TextBlock></Copy>}
+						</React.Fragment> : <Copy><TextBlock rows={7} ready={aboutBlurb}></TextBlock></Copy>}
 					</Blurb>
 				</AboutContent>
 			</Wrapper>
