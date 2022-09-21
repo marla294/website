@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
 import { GlobalStyle } from "../GlobalStyles";
 import Wrapper from '../Styles/Wrapper';
@@ -10,7 +9,7 @@ import ManageFormStyles from "../Styles/ManageFormStyles";
 import useForm from '../../lib/useForm';
 import useAuth from '../../lib/useAuth';
 
-const ManageAbout = (props) => {
+const ManageAbout = ({updateAbout, uploadImages, aboutBlurb}) => {
   const { 
     inputs, 
     setInputs,
@@ -29,14 +28,14 @@ const ManageAbout = (props) => {
   useEffect(() => {
     setInputs({
       ...inputs,
-      content: props.about.blurb
+      content: aboutBlurb
     });
-  }, [props.about]);
+  }, [aboutBlurb]);
 
   async function UpdateAbout(e) {
     e.preventDefault();
-    props.uploadImages([inputs.aboutImage], { isAbout: true });
-    await props.updateAbout({ blurb: inputs.content });
+    uploadImages([inputs.aboutImage], { isAbout: true });
+    await updateAbout({ blurb: inputs.content });
   };
   
   return authWrapper(
@@ -66,14 +65,6 @@ const ManageAbout = (props) => {
     </React.Fragment>
   );
 
-};
-
-ManageAbout.propTypes = {
-  updateAbout: PropTypes.func,
-  uploadImages: PropTypes.func.isRequired,
-  about: PropTypes.shape({
-    blurb: PropTypes.string
-  }),
 };
 
 export default ManageAbout;

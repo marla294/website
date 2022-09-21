@@ -43,6 +43,51 @@ export default function Router() {
 		}
 	}, [dbRef]);
 
+	const updateAbout = async (about) => {
+		if (dbRef) {
+			const aboutDataRef = dbRef.child('data/about');
+			await aboutDataRef.set({blurb: about.blurb});
+			setAboutBlurb(about.blurb);
+		}
+	};
+
+	// options object:
+	// postId - associate all images with post
+	// isAbout - if true then it is the About page image
+	// isHeader - if true then rename the image to Header (postId should also be filled)
+	const uploadImages = (images, options) => {
+		if (options.isAbout) {
+			const [ aboutImage ] = images;
+			if (aboutImage) {
+				const metaData = {
+					contentType: aboutImage.type
+				};
+				const aboutImageRef = storageRef.child('About.jpg');
+				aboutImageRef.put(aboutImage, metaData);
+			}
+			return;
+		}
+		if (options.isHeader && options.postId) {
+			const [ headerImage ] = images;
+			const metaData = {
+				contentType: headerImage.type,
+				public: true
+			};
+			const headerImageRef = storageRef.child(`/${options.postId}/Header.jpg`);
+			headerImageRef.put(headerImage, metaData);
+			return;
+		}
+		if (options.postId) {
+			images.forEach((image) => {
+				const metaData = {
+					contentType: image.type
+				};
+				const postImageRef = storageRef.child(`/${options.postId}/${image.name}`);
+				postImageRef.put(image, metaData);
+			});
+		}
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
@@ -56,8 +101,6 @@ export default function Router() {
 					}} />
 					<Route path="/About" render={(props) => {
 						return <About 
-							storageRef={storageRef}
-							dbRef={dbRef}
 							aboutImageUrl={aboutImageUrl}
 							aboutBlurb={aboutBlurb}
 							{...props} 
@@ -83,12 +126,9 @@ export default function Router() {
 					}} />
 					<Route path="/Manage/About" render={(props) => {
 						return <ManageAbout 
-									updateAbout={this.updateAbout} 
-									about={about}
-									uploadImages={this.uploadImages}
-									storageRef={storageRef}
-									dbRef={dbRef}
-									{...props}
+									updateAbout={updateAbout} 
+									uploadImages={uploadImages}
+									aboutBlurb={aboutBlurb}
 								/>
 					}} />
 					<Route path="/Manage/Post/Add" render={(props) => {
