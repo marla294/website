@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import TopNav from "./TopNav";
-import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import styled from "styled-components";
@@ -19,6 +18,7 @@ const AboutContent = styled.div`
 	img {
 		object-fit: cover;
 	}
+	
 	.loading-div {
 		height: 400px;
 		background-color: var(--Gray03);
@@ -49,7 +49,7 @@ const Copy = styled.div`
 	padding-top: var(--S02);
 `;
 
-const About = ({storageRef, dbRef, about, history }) => {
+const About = ({storageRef, dbRef, history }) => {
 	const [aboutImageUrl, setAboutImageUrl] = useState(null);
 	const [blurb, setBlurb] = useState(null);
 
@@ -65,10 +65,7 @@ const About = ({storageRef, dbRef, about, history }) => {
 		if (dbRef) {
 			const aboutDataRef = dbRef.child('data/about');
 			const aboutData = await (await aboutDataRef.once('value')).val();
-			setBlurb(about.blurb);
-			// const aboutImageRef = storageRef.child('About.jpg');
-			// const url = await aboutImageRef.getDownloadURL();
-			// setAboutImageUrl(url);
+			setBlurb(aboutData.blurb);
 		}
 	}, [dbRef]);
 
@@ -77,35 +74,28 @@ const About = ({storageRef, dbRef, about, history }) => {
 			<TopNav push={history.push} />
 			<Wrapper>
 				<AboutContent>
-					{aboutImageUrl ? <img
+					{aboutImageUrl && blurb ? <img
 						src={aboutImageUrl}
 						alt="Marla Foreman"
 					/> : <div className="loading-div"></div>}
 					<Blurb>
-						{aboutImageUrl && about.blurb ? <React.Fragment>
+						{aboutImageUrl && blurb ? <React.Fragment>
 							<Copy>
 								<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
 							</Copy>
 							<Copy dangerouslySetInnerHTML={{
-								__html: about.blurb
+								__html: blurb
 							}}></Copy>
 							<Copy>
 								<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
 							</Copy>
-						</React.Fragment> : <Copy><TextBlock rows={7} ready={about.blurb}></TextBlock></Copy>}
+						</React.Fragment> : <Copy><TextBlock rows={7} ready={blurb}></TextBlock></Copy>}
 					</Blurb>
 				</AboutContent>
 			</Wrapper>
 			<GlobalStyle />
 		</React.Fragment>
 	);
-};
-
-About.propTypes = {
-	about: PropTypes.shape({
-		blurb: PropTypes.string
-	}),
-	history: PropTypes.object
 };
 
 export default About;
