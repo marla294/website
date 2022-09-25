@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { GlobalStyle } from "../GlobalStyles";
@@ -8,8 +8,9 @@ import Submit from '../Styles/Submit';
 import ManageFormStyles from "../Styles/ManageFormStyles";
 import useForm from '../../lib/useForm';
 import useAuth from '../../lib/useAuth';
+import ButtonStyles from "../Styles/ButtonStyles";
 
-const ManageAbout = ({updateAbout, uploadImages, aboutBlurb}) => {
+const ManageAbout = ({updateAbout, uploadImages, aboutBlurb, history}) => {
   const { 
     inputs, 
     setInputs,
@@ -21,9 +22,10 @@ const ManageAbout = ({updateAbout, uploadImages, aboutBlurb}) => {
   });
 
   const {
-    logout,
     authWrapper,
   } = useAuth({});
+
+  const [isSubmitComplete, setIsSubmitComplete] = useState(false);
 
   useEffect(() => {
     setInputs({
@@ -36,6 +38,8 @@ const ManageAbout = ({updateAbout, uploadImages, aboutBlurb}) => {
     e.preventDefault();
     uploadImages([inputs.aboutImage], { isAbout: true });
     await updateAbout({ blurb: inputs.content });
+
+    setIsSubmitComplete(true);
   };
   
   return authWrapper(
@@ -43,7 +47,7 @@ const ManageAbout = ({updateAbout, uploadImages, aboutBlurb}) => {
       <Wrapper>
         <ManageContentStyles>
           <h1>Update About Page</h1>
-          <ManageFormStyles onSubmit={UpdateAbout}>
+          <ManageFormStyles onSubmit={UpdateAbout}  style={{display: isSubmitComplete ? "none" : "grid"}}>
             <label>Image:</label>
             <input 
               name="aboutImage"
@@ -58,7 +62,13 @@ const ManageAbout = ({updateAbout, uploadImages, aboutBlurb}) => {
             />
             <Submit type="submit">Submit</Submit>
           </ManageFormStyles>
-          <button onClick={logout}>Log Out!</button>
+          <div style={{display: isSubmitComplete ? "block" : "none"}}>
+            <p style={{marginBottom: "10px"}}>Your change has been submitted.  Thank you.</p>
+            <ButtonStyles type="button" onClick={(event) => {
+              event.preventDefault();
+              history.push('/Manage');
+            }}>⬅ Back to manage content</ButtonStyles>
+          </div>
         </ManageContentStyles>
       </Wrapper>
       <GlobalStyle />

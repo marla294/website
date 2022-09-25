@@ -129,6 +129,7 @@ export default function Router() {
 									updateAbout={updateAbout} 
 									uploadImages={uploadImages}
 									aboutBlurb={aboutBlurb}
+									{...props}
 								/>
 					}} />
 					<Route path="/Manage/Post/Add" render={(props) => {
