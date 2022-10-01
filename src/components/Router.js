@@ -40,6 +40,20 @@ export default function Router() {
 			const aboutDataRef = dbRef.child('data/about');
 			const aboutData = await (await aboutDataRef.once('value')).val();
 			setAboutBlurb(aboutData.blurb);
+
+			const postDataRef = dbRef.child('data');
+			const postData = await (await postDataRef.once('value')).val();
+
+			if (postData) {
+				const postsTemp = [];
+				const postIds = Object.keys(postData.posts);
+	
+				for (let i = 0; i < postIds.length; i++) {
+					postsTemp.push(postData.posts[postIds[i]]);
+				}
+
+				setPosts(postsTemp);
+			}
 		}
 	}, [dbRef]);
 
