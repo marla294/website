@@ -101,6 +101,27 @@ export default function Router() {
 		}
 	};
 
+	// options object:
+	// postId - return all images associated with a post
+	const loadImages = async (options) => {
+    const images = [];
+
+		if (options.postId) {
+			const imageRefArray = Array.from((await storageRef.child(`/${options.postId}`).listAll()).items);
+
+			for (let i = 0; i < imageRefArray.length; i++) {
+				const ref = imageRefArray[i];
+				const url = await ref.getDownloadURL();
+				images.push({
+					url,
+					name: ref.name,
+				});
+			}
+		}
+    
+		return images;
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
@@ -123,7 +144,7 @@ export default function Router() {
 						return <Post 
 							posts={posts} 
 							storageRef={storageRef}
-							loadImages={this.loadImages}
+							loadImages={loadImages}
 							{...props} 
 						/>;
 					}} />
@@ -226,75 +247,6 @@ class R extends React.Component {
 		},
 		archivedPosts: [...archivedPosts]});
 	}
-
-	updateAbout = async (about) => {
-		this.setState({ data: {
-			about: {...about},
-			posts: [...this.state.data.posts],
-		},
-		archivedPosts: [...this.state.archivedPosts]});
-
-		const aboutDataRef = this.dbRef.child('data/about');
-		await aboutDataRef.set({blurb: about.blurb});
-	};
-
-	// options object:
-	// postId - associate all images with post
-	// isAbout - if true then it is the About page image
-	// isHeader - if true then rename the image to Header (postId should also be filled)
-	uploadImages = (images, options) => {
-		if (options.isAbout) {
-			const [ aboutImage ] = images;
-			if (aboutImage) {
-				const metaData = {
-					contentType: aboutImage.type
-				};
-				const aboutImageRef = this.storageRef.child('About.jpg');
-				aboutImageRef.put(aboutImage, metaData);
-			}
-			return;
-		}
-		if (options.isHeader && options.postId) {
-			const [ headerImage ] = images;
-			const metaData = {
-				contentType: headerImage.type,
-				public: true
-			};
-			const headerImageRef = this.storageRef.child(`/${options.postId}/Header.jpg`);
-			headerImageRef.put(headerImage, metaData);
-			return;
-		}
-		if (options.postId) {
-			images.forEach((image) => {
-				const metaData = {
-					contentType: image.type
-				};
-				const postImageRef = this.storageRef.child(`/${options.postId}/${image.name}`);
-				postImageRef.put(image, metaData);
-			});
-		}
-	};
-
-	// options object:
-	// postId - return all images associated with a post
-	loadImages = async (options) => {
-    let images = [];
-
-		if (options.postId) {
-			const imageRefArray = Array.from((await this.storageRef.child(`/${options.postId}`).listAll()).items);
-
-			for (let i = 0; i < imageRefArray.length; i++) {
-				let ref = imageRefArray[i];
-				const url = await ref.getDownloadURL();
-				images.push({
-					url,
-					name: ref.name,
-				});
-			}
-		}
-    
-		return images;
-	};
 
 	deletePostImages = async (postId, imageNames) => {
 		for (let i = 0; i < imageNames.length; i++) {
