@@ -14,9 +14,8 @@ import Manage from './Manage/Manage';
 import { firebaseApp, firebaseStorage } from '../base';
 
 export default function Router() {
-	const [about, setAbout] = useState({});
 	const [posts, setPosts] = useState([]);
-	const [archivedPosts, setArchivedPosts] = useState([]);
+	const [archivedPosts] = useState([]);
 	const [storageRef, setStorageRef] = useState(null);
 	const [dbRef, setDbRef] = useState(null);
 	const [aboutImageUrl, setAboutImageUrl] = useState(null);
