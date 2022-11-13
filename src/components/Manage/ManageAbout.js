@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
 import { GlobalStyle } from "../GlobalStyles";
 import Wrapper from '../Styles/Wrapper';
@@ -9,8 +8,9 @@ import Submit from '../Styles/Submit';
 import ManageFormStyles from "../Styles/ManageFormStyles";
 import useForm from '../../lib/useForm';
 import useAuth from '../../lib/useAuth';
+import ButtonStyles from "../Styles/ButtonStyles";
 
-const ManageAbout = (props) => {
+const ManageAbout = ({updateAbout, uploadImages, aboutBlurb, history}) => {
   const { 
     inputs, 
     setInputs,
@@ -22,21 +22,24 @@ const ManageAbout = (props) => {
   });
 
   const {
-    logout,
     authWrapper,
   } = useAuth({});
+
+  const [isSubmitComplete, setIsSubmitComplete] = useState(false);
 
   useEffect(() => {
     setInputs({
       ...inputs,
-      content: props.about.blurb
+      content: aboutBlurb
     });
-  }, [props.about]);
+  }, [aboutBlurb]);
 
   async function UpdateAbout(e) {
     e.preventDefault();
-    props.uploadImages([inputs.aboutImage], { isAbout: true });
-    await props.updateAbout({ blurb: inputs.content });
+    uploadImages([inputs.aboutImage], { isAbout: true });
+    await updateAbout({ blurb: inputs.content });
+
+    setIsSubmitComplete(true);
   };
   
   return authWrapper(
@@ -44,7 +47,7 @@ const ManageAbout = (props) => {
       <Wrapper>
         <ManageContentStyles>
           <h1>Update About Page</h1>
-          <ManageFormStyles onSubmit={UpdateAbout}>
+          <ManageFormStyles onSubmit={UpdateAbout}  style={{display: isSubmitComplete ? "none" : "grid"}}>
             <label>Image:</label>
             <input 
               name="aboutImage"
@@ -59,21 +62,19 @@ const ManageAbout = (props) => {
             />
             <Submit type="submit">Submit</Submit>
           </ManageFormStyles>
-          <button onClick={logout}>Log Out!</button>
+          <div style={{display: isSubmitComplete ? "block" : "none"}}>
+            <p style={{marginBottom: "10px"}}>Your change has been submitted.  Thank you.</p>
+            <ButtonStyles type="button" onClick={(event) => {
+              event.preventDefault();
+              history.push('/Manage');
+            }}>⬅ Back to manage content</ButtonStyles>
+          </div>
         </ManageContentStyles>
       </Wrapper>
       <GlobalStyle />
     </React.Fragment>
   );
 
-};
-
-ManageAbout.propTypes = {
-  updateAbout: PropTypes.func,
-  uploadImages: PropTypes.func.isRequired,
-  about: PropTypes.shape({
-    blurb: PropTypes.string
-  }),
 };
 
 export default ManageAbout;
