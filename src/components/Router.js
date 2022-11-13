@@ -15,7 +15,7 @@ import { firebaseApp, firebaseStorage } from '../base';
 
 export default function Router() {
 	const [posts, setPosts] = useState([]);
-	const [archivedPosts] = useState([]);
+	const [archivedPosts, setArchivedPosts] = useState([]);
 	const [storageRef, setStorageRef] = useState(null);
 	const [dbRef, setDbRef] = useState(null);
 	const [aboutImageUrl, setAboutImageUrl] = useState(null);
@@ -52,6 +52,20 @@ export default function Router() {
 				}
 
 				setPosts(postsTemp);
+			}
+
+			const archivedPostsDataRef = dbRef.child('private/archivedPosts');
+			const archivedPostData = await (await archivedPostsDataRef.once('value')).val();
+
+			if (archivedPostData) {
+				const archivedPostsTemp = [];
+				const archivedPostIds = Object.keys(archivedPostData);
+	
+				for (let i = 0; i < archivedPostIds.length; i++) {
+					archivedPostsTemp.push(archivedPostData[archivedPostIds[i]]);
+				}
+
+				setArchivedPosts(archivedPostsTemp);
 			}
 		}
 	}, [dbRef]);
@@ -120,6 +134,28 @@ export default function Router() {
 		}
     
 		return images;
+	};
+
+	const addNewPost = async (post) => {
+		if (post.status === 'archive' && dbRef) {
+			const updatedArchivedPosts = archivedPosts && archivedPosts.length > 0 ? [...archivedPosts, post] : [post];
+			const archivedPostsRef = dbRef.child('private/archivedPosts');
+			await archivedPostsRef.set(updatedArchivedPosts);
+			setArchivedPosts(updatedArchivedPosts);
+		}
+		else {
+			const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
+
+			this.setState({ data: {
+				about: {...this.state.data.about},
+				posts: updatedPosts,
+				},
+				archivedPosts: [...this.state.archivedPosts],
+			});
+
+			const postsRef = this.dbRef.child('data/posts');
+			await postsRef.set(updatedPosts);
+		}
 	};
 
 	return (
