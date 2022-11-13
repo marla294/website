@@ -137,24 +137,19 @@ export default function Router() {
 	};
 
 	const addNewPost = async (post) => {
-		if (post.status === 'archive' && dbRef) {
-			const updatedArchivedPosts = archivedPosts && archivedPosts.length > 0 ? [...archivedPosts, post] : [post];
-			const archivedPostsRef = dbRef.child('private/archivedPosts');
-			await archivedPostsRef.set(updatedArchivedPosts);
-			setArchivedPosts(updatedArchivedPosts);
-		}
-		else {
-			const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
-
-			this.setState({ data: {
-				about: {...this.state.data.about},
-				posts: updatedPosts,
-				},
-				archivedPosts: [...this.state.archivedPosts],
-			});
-
-			const postsRef = this.dbRef.child('data/posts');
-			await postsRef.set(updatedPosts);
+		if (dbRef) {
+			if (post.status === 'archive') {
+				const updatedArchivedPosts = archivedPosts && archivedPosts.length > 0 ? [...archivedPosts, post] : [post];
+				const archivedPostsRef = dbRef.child('private/archivedPosts');
+				await archivedPostsRef.set(updatedArchivedPosts);
+				setArchivedPosts(updatedArchivedPosts);
+			}
+			else {
+				const updatedPosts = posts && posts.length > 0 ? [...posts, post] : [post];
+				const postsRef = dbRef.child('data/posts');
+				await postsRef.set(updatedPosts);
+				setPosts(updatedPosts);
+			}
 		}
 	};
 
@@ -204,8 +199,8 @@ export default function Router() {
 					}} />
 					<Route path="/Manage/Post/Add" render={(props) => {
 						return <AddPost
-							addNewPost={this.addNewPost}
-							uploadImages={this.uploadImages}
+							addNewPost={addNewPost}
+							uploadImages={uploadImages}
 							{...props}
 						/>
 					}} />
