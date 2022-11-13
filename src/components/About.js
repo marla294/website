@@ -1,7 +1,5 @@
 import React from "react";
-import { useState, useEffect } from 'react';
 import TopNav from "./TopNav";
-import PropTypes from "prop-types";
 import { GlobalStyle } from "./GlobalStyles";
 import Wrapper from './Styles/Wrapper';
 import styled from "styled-components";
@@ -19,6 +17,7 @@ const AboutContent = styled.div`
 	img {
 		object-fit: cover;
 	}
+
 	.loading-div {
 		height: 400px;
 		background-color: var(--Gray03);
@@ -49,52 +48,34 @@ const Copy = styled.div`
 	padding-top: var(--S02);
 `;
 
-const About = (props) => {
-	const [isImageLoaded, setIsImageLoaded] = useState(false);
-
-	useEffect(async () => {
-		if (props.aboutImageUrl && props.aboutImageUrl !== '') {
-			const img = new Image();
-			img.src = props.aboutImageUrl;
-			await img.decode();
-			setIsImageLoaded(true);
-		}
-	}, [props.aboutImageUrl]);
-
+const About = ({aboutImageUrl, aboutBlurb, history}) => {
 	return (
 		<React.Fragment>
-			<TopNav push={props.history.push} />
+			<TopNav push={history.push} />
 			<Wrapper>
 				<AboutContent>
-					{isImageLoaded && props.about.blurb ? <img
-						src={props.aboutImageUrl}
+					{aboutImageUrl && aboutBlurb ? <img
+						src={aboutImageUrl}
 						alt="Marla Foreman"
 					/> : <div className="loading-div"></div>}
 					<Blurb>
-						{isImageLoaded && props.about.blurb ? <React.Fragment>
+						{aboutImageUrl && aboutBlurb ? <React.Fragment>
 							<Copy>
 								<h2>Hello! <span role="img" aria-label="wave">👋</span></h2>
 							</Copy>
 							<Copy dangerouslySetInnerHTML={{
-								__html: props.about.blurb
+								__html: aboutBlurb
 							}}></Copy>
 							<Copy>
 								<p>If you would like to reach me, my email address is: <a href="mailto:marla294@gmail.com">marla294@gmail.com</a></p>
 							</Copy>
-						</React.Fragment> : <Copy><TextBlock rows={7} ready={props.about.blurb}></TextBlock></Copy>}
+						</React.Fragment> : <Copy><TextBlock rows={7} ready={aboutBlurb}></TextBlock></Copy>}
 					</Blurb>
 				</AboutContent>
 			</Wrapper>
 			<GlobalStyle />
 		</React.Fragment>
 	);
-};
-
-About.propTypes = {
-	about: PropTypes.shape({
-		blurb: PropTypes.string
-	}),
-	history: PropTypes.object
 };
 
 export default About;
