@@ -115,6 +115,14 @@ export default function Router() {
 		}
 	};
 
+	const deletePostImages = async (postId, imageNames) => {
+		for (let i = 0; i < imageNames.length; i++) {
+			const imageName = imageNames[i];
+			const postImageRef = storageRef.child(`/${postId}/${imageName}`);
+			await postImageRef.delete();
+		}
+	};
+
 	// options object:
 	// postId - return all images associated with a post
 	const loadImages = async (options) => {
@@ -136,20 +144,43 @@ export default function Router() {
 		return images;
 	};
 
-	const addNewPost = async (post) => {
+	const updateArchivedPosts = async (posts) => {
 		if (dbRef) {
-			if (post.status === 'archive') {
-				const updatedArchivedPosts = archivedPosts && archivedPosts.length > 0 ? [...archivedPosts, post] : [post];
-				const archivedPostsRef = dbRef.child('private/archivedPosts');
-				await archivedPostsRef.set(updatedArchivedPosts);
-				setArchivedPosts(updatedArchivedPosts);
-			}
-			else {
-				const updatedPosts = posts && posts.length > 0 ? [...posts, post] : [post];
-				const postsRef = dbRef.child('data/posts');
-				await postsRef.set(updatedPosts);
-				setPosts(updatedPosts);
-			}
+			const archivedPostsRef = dbRef.child('private/archivedPosts');
+			await archivedPostsRef.set(posts);
+			setArchivedPosts(posts);
+		}
+	}
+
+	const updatePosts = async (posts) => {
+		if (dbRef) {
+			const postsRef = dbRef.child('data/posts');
+			await postsRef.set(posts);
+			setPosts(posts);
+		}
+	}
+
+	const addNewPost = async (post) => {
+		if (post.status === 'archive') {
+			const updatedArchivedPosts = archivedPosts && archivedPosts.length > 0 ? [...archivedPosts, post] : [post];
+			await updateArchivedPosts(updatedArchivedPosts);
+		}
+		else {
+			const updatedPosts = posts && posts.length > 0 ? [...posts, post] : [post];
+			await updatePosts(updatedPosts);
+		}
+	};
+
+	const editPost = async (post) => {
+		const filteredArchivedPosts = archivedPosts && archivedPosts.length > 0 ? archivedPosts.filter(p => p.id !== post.id) : [];
+		const filteredPosts = posts && posts.length > 0 ? posts.filter(p => p.id !== post.id) : [];
+		if (post.status === 'archive') {
+			await updateArchivedPosts([...filteredArchivedPosts, post]);
+			await updatePosts(filteredPosts);
+		}
+		else {
+			await updateArchivedPosts(filteredArchivedPosts);
+			await updatePosts([...filteredPosts, post]);
 		}
 	};
 
@@ -206,10 +237,10 @@ export default function Router() {
 					}} />
 					<Route path="/Manage/Post/Edit/:Slug" render={(props) => {
 						return <EditPost
-							editPost={this.editPost}
-							uploadImages={this.uploadImages}
-							deletePostImages={this.deletePostImages}
-							loadImages={this.loadImages}
+							editPost={editPost}
+							uploadImages={uploadImages}
+							deletePostImages={deletePostImages}
+							loadImages={loadImages}
 							posts={posts}
 							archivedPosts={archivedPosts}
 							storageRef={storageRef}
@@ -227,206 +258,4 @@ export default function Router() {
 			</BrowserRouter>
 		</ThemeProvider>
 	);
-}
-
-class R extends React.Component {
-	// state = {
-	// 	data: {
-	// 		about: {},
-	// 		posts: [],
-	// 	},
-	// 	archivedPosts: [],
-	// 	aboutImageUrl: "",
-	// };
-
-	async componentDidMount() {
-		// this.storageRef = firebaseStorage.ref();
-		// this.dbRef = firebaseApp.database().ref();
-
-		const aboutImageRef = this.storageRef.child('About.jpg');
-		const postDataRef = this.dbRef.child('data');
-		const archiveDataRef = this.dbRef.child('private/archivedPosts');
-
-		aboutImageRef.getDownloadURL().then(url => {
-			this.setState({aboutImageUrl: url})
-		});
-
-		const postData = await (await postDataRef.once('value')).val();
-		const posts = [];
-
-		if (postData) {
-			const postIds = Object.keys(postData.posts);
-
-			for (let i = 0; i < postIds.length; i++) {
-				posts.push(postData.posts[postIds[i]]);
-			}
-		}
-
-		const archivedPostData = await (await archiveDataRef.once('value')).val();
-		const archivedPosts = [];
-
-		if (archivedPostData) {
-			const archivedPostIds = Object.keys(archivedPostData);
-			for (let i = 0; i < archivedPostIds.length; i++) {
-				archivedPosts.push(archivedPostData[archivedPostIds[i]]);
-			}
-		}
-		
-		this.setState({ data: {
-			about: {...postData.about},
-			posts: [...posts],
-		},
-		archivedPosts: [...archivedPosts]});
-	}
-
-	deletePostImages = async (postId, imageNames) => {
-		for (let i = 0; i < imageNames.length; i++) {
-			const imageName = imageNames[i];
-			const postImageRef = this.storageRef.child(`/${postId}/${imageName}`);
-			await postImageRef.delete();
-		}
-	};
-
-	addNewPost = async (post) => {
-		if (post.status === 'archive') {
-			const updatedPosts = this.state.archivedPosts ? [...this.state.archivedPosts, post] : [post];
-
-			this.setState({ data: {
-				about: {...this.state.data.about},
-				posts: [...this.state.data.posts],
-				},
-				archivedPosts: updatedPosts,
-			});
-
-			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
-			await archivedPostsRef.set(updatedPosts);
-		}
-		else {
-			const updatedPosts = this.state.data.posts ? [...this.state.data.posts, post] : [post];
-
-			this.setState({ data: {
-				about: {...this.state.data.about},
-				posts: updatedPosts,
-				},
-				archivedPosts: [...this.state.archivedPosts],
-			});
-
-			const postsRef = this.dbRef.child('data/posts');
-			await postsRef.set(updatedPosts);
-		}
-	};
-
-	editPost = async (post) => {
-		const filteredArchivedPosts = this.state.archivedPosts ? this.state.archivedPosts.filter(p => p.id !== post.id) : [];
-		const filteredPosts = this.state.data.posts ? this.state.data.posts.filter(p => p.id !== post.id) : [];
-		if (post.status === 'archive') {
-			const updatedArchivedPosts = [...filteredArchivedPosts, post];
-			
-			this.setState({ data: {
-				about: {...this.state.data.about},
-				posts: filteredPosts,
-				},
-				archivedPosts: updatedArchivedPosts,
-			});
-
-			const postsRef = this.dbRef.child('data/posts');
-			await postsRef.set(filteredPosts);
-			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
-			await archivedPostsRef.set(updatedArchivedPosts);
-
-		}
-		else {
-			const updatedPosts = [...filteredPosts, post];
-	
-			this.setState({ data: {
-				about: {...this.state.data.about},
-				posts: updatedPosts,
-				},
-				archivedPosts: filteredArchivedPosts,
-			});
-
-			const postsRef = this.dbRef.child('data/posts');
-			await postsRef.set(updatedPosts);
-			const archivedPostsRef = this.dbRef.child('private/archivedPosts');
-			await archivedPostsRef.set(filteredArchivedPosts);
-
-		}
-	};
-
-	render() {
-		return (
-			<ThemeProvider theme={theme}>
-				<BrowserRouter>
-					<Switch>
-						<Route exact path="/" render={(props) => {
-							return <Home 
-								posts={this.state.data.posts} 
-								{...props} 
-								storageRef={this.storageRef}
-							/>;
-						}} />
-						<Route path="/About" render={(props) => {
-							return <About 
-								about={this.state.data.about} 
-								aboutImageUrl={this.state.aboutImageUrl}
-								{...props} 
-							/>
-						}} />
-						<Route path="/Post/:Slug" render={(props) => {
-							return <Post 
-								posts={this.state.data.posts} 
-								storageRef={this.storageRef}
-								loadImages={this.loadImages}
-								{...props} 
-							/>;
-						}} />
-						<Route path="/Blog" render={(props) => {
-							return <Blog 
-								posts={this.state.data.posts} 
-								storageRef={this.storageRef}
-								{...props} 
-							/>;
-						}} />
-						<Route path="/Projects" render={(props) => {
-							return <Projects posts={this.state.data.posts} {...props} />;
-						}} />
-						<Route path="/Manage/About" render={(props) => {
-							return <ManageAbout 
-										updateAbout={this.updateAbout} 
-										about={this.state.data.about}
-										uploadImages={this.uploadImages}
-										{...props}
-									/>
-						}} />
-						<Route path="/Manage/Post/Add" render={(props) => {
-							return <AddPost
-								addNewPost={this.addNewPost}
-								uploadImages={this.uploadImages}
-								{...props}
-							/>
-						}} />
-						<Route path="/Manage/Post/Edit/:Slug" render={(props) => {
-							return <EditPost
-								editPost={this.editPost}
-								uploadImages={this.uploadImages}
-								deletePostImages={this.deletePostImages}
-								loadImages={this.loadImages}
-								posts={this.state.data.posts}
-								archivedPosts={this.state.archivedPosts}
-								storageRef={this.storageRef}
-								{...props}
-							/>
-						}} />
-						<Route path="/Manage" render={(props) => {
-							return <Manage 
-								posts={this.state.data.posts}
-								archivedPosts={this.state.archivedPosts}
-								{...props}
-							/>
-						}} />
-					</Switch>
-				</BrowserRouter>
-			</ThemeProvider>
-		);
-	}
 }
