@@ -21,6 +21,7 @@ const PostListStyles = styled.div`
 
   a {
     cursor: pointer;
+    color: blue;
   }
 `;
 
@@ -39,7 +40,7 @@ const Manage = ({ posts, archivedPosts, history }) => {
     return <div className="row" key={id} >
       <a onClick={() => {
         history.push(`/Manage/Post/Edit/${slugTitle}`);
-      }}><span role="img" aria-label="Edit">📝</span></a>
+      }}>Edit</a>
       <div>{new Date(Date.parse(date)).toLocaleDateString("en-US", dateOptions)}</div>
       <div>{title}</div>
       <div>{status}</div>
@@ -50,11 +51,11 @@ const Manage = ({ posts, archivedPosts, history }) => {
     <React.Fragment>
       <Wrapper>
         <ManageContentStyles>
-          <h1>Manage Ur Website</h1>
+          <h1>Manage</h1>
           <a onClick={() => {
             history.push('/Manage/About');
-          }}>Edit About Page</a>
-          <h3>Manage Posts</h3>
+          }} style={{color: 'blue'}}>Edit About Page</a>
+          <h3 style={{marginBottom: '0'}}>Manage Posts</h3>
           <PostListStyles>
             <div className="row">
               <div></div>
@@ -62,6 +63,7 @@ const Manage = ({ posts, archivedPosts, history }) => {
               <h3>Title</h3>
               <h3>Status</h3>
             </div>
+            <hr />
             {allPosts ? allPosts
             .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
             .map(post => {
