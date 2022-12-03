@@ -4,6 +4,7 @@ const ManageFormStyles = styled.form`
     display: grid;
     color: var(--Gray05);
     grid-gap: 10px;
+    margin-bottom: 10px;
 
     input, select {
         padding: 12px 20px;

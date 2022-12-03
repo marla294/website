@@ -194,6 +194,13 @@ const EditPost = (props) => {
               apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
               value={inputs.content}
               onEditorChange={handleEditorChange}
+              init={{
+                height: 500,
+                resize: false,
+                statusbar: false,
+                plugins: 'code',
+                toolbar: 'code'
+              }}
             />
             <label>Add Post Image:</label>
             <input 
