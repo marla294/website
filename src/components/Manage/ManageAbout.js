@@ -59,6 +59,13 @@ const ManageAbout = ({updateAbout, uploadImages, aboutBlurb, history}) => {
               apiKey="6iwtqmlk62i53rbkbzwap5z37phnitxrj9fsdyy9ri2k2ykj"
               value={inputs.content}
               onEditorChange={handleEditorChange}
+              init={{
+                height: 500,
+                resize: false,
+                statusbar: false,
+                plugins: 'code',
+                toolbar: 'code'
+              }}
             />
             <Submit type="submit">Submit</Submit>
           </ManageFormStyles>

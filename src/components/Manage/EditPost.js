@@ -195,7 +195,11 @@ const EditPost = (props) => {
               value={inputs.content}
               onEditorChange={handleEditorChange}
               init={{
-                height: 500
+                height: 500,
+                resize: false,
+                statusbar: false,
+                plugins: 'code',
+                toolbar: 'code'
               }}
             />
             <label>Add Post Image:</label>
