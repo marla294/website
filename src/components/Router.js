@@ -184,9 +184,9 @@ export default function Router() {
 		}
 	};
 
-	const deletePost = async (post) => {
-		const filteredArchivedPosts = archivedPosts && archivedPosts.length > 0 ? archivedPosts.filter(p => p.id !== post.id) : [];
-		const filteredPosts = posts && posts.length > 0 ? posts.filter(p => p.id !== post.id) : [];
+	const deletePost = async (postId) => {
+		const filteredArchivedPosts = archivedPosts && archivedPosts.length > 0 ? archivedPosts.filter(p => p.id !== postId) : [];
+		const filteredPosts = posts && posts.length > 0 ? posts.filter(p => p.id !== postId) : [];
 		await updateArchivedPosts(filteredArchivedPosts);
 		await updatePosts(filteredPosts);
 	};

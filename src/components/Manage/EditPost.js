@@ -151,6 +151,12 @@ const EditPost = (props) => {
     setIsSubmitComplete(true);
   };
 
+  const deletePost = async e => {
+    e.preventDefault();
+
+    await props.deletePost(postId);
+  }
+
   return authWrapper(
     <React.Fragment>
       <Wrapper>
@@ -226,6 +232,7 @@ const EditPost = (props) => {
               })}
             </ImageListStyles>
             <Submit type="submit">Submit</Submit>
+            <ButtonStyles type="button" onClick={(e) => { deletePost(e) }}>Delete Post</ButtonStyles>
           </ManageFormStyles>
           <div style={{display: isSubmitComplete ? "block" : "none"}}>
             <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
