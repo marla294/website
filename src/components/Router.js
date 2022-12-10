@@ -184,6 +184,13 @@ export default function Router() {
 		}
 	};
 
+	const deletePost = async (post) => {
+		const filteredArchivedPosts = archivedPosts && archivedPosts.length > 0 ? archivedPosts.filter(p => p.id !== post.id) : [];
+		const filteredPosts = posts && posts.length > 0 ? posts.filter(p => p.id !== post.id) : [];
+		await updateArchivedPosts(filteredArchivedPosts);
+		await updatePosts(filteredPosts);
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
