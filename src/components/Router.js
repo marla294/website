@@ -245,6 +245,7 @@ export default function Router() {
 					<Route path="/Manage/Post/Edit/:Slug" render={(props) => {
 						return <EditPost
 							editPost={editPost}
+							deletePost={deletePost}
 							uploadImages={uploadImages}
 							deletePostImages={deletePostImages}
 							loadImages={loadImages}

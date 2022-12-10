@@ -250,6 +250,7 @@ const EditPost = (props) => {
 
 EditPost.propTypes = {
   editPost: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
   uploadImages: PropTypes.func.isRequired,
   loadImages: PropTypes.func.isRequired,
   posts: PropTypes.arrayOf(PropTypes.shape({
