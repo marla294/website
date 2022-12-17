@@ -73,6 +73,7 @@ const EditPost = (props) => {
   const [images, setImages] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
   const [isSubmitComplete, setIsSubmitComplete] = useState(false);
+  const [isDeleteComplete, setIsDeleteComplete] = useState(false);
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState([]);
 
@@ -169,9 +170,8 @@ const EditPost = (props) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm('Are you sure you want to delete this post?  Click OK to continue.')) {
       await props.deletePost(postId);
-      props.history.push('/Manage');
+      setIsDeleteComplete(true);
     }
-
   }
 
   return authWrapper(
@@ -180,7 +180,7 @@ const EditPost = (props) => {
         <ManageContentStyles>
           <h1>Edit Blog Post</h1>
           <DisplayErrors isError={errors.length > 0} errors={errors} />
-          <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || postId === null) ? "none" : "grid"}}>
+          <ManageFormStyles onSubmit={editPost} style={{display: (isSubmitComplete || isDeleteComplete || postId === null) ? "none" : "grid"}}>
             <label>Date:<span className="required">&nbsp;*</span></label>
             <div>
               <DatePicker 
@@ -255,6 +255,13 @@ const EditPost = (props) => {
           </ManageFormStyles>
           <div style={{display: isSubmitComplete ? "block" : "none"}}>
             <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
+            <ButtonStyles type="button" onClick={(event) => {
+              event.preventDefault();
+              props.history.push('/Manage');
+            }}>⬅ Back to manage content</ButtonStyles>
+          </div>
+          <div style={{display: isDeleteComplete ? "block" : "none"}}>
+            <p style={{marginBottom: "10px"}}>Your post has been deleted.  Thank you.</p>
             <ButtonStyles type="button" onClick={(event) => {
               event.preventDefault();
               props.history.push('/Manage');
