@@ -184,6 +184,13 @@ export default function Router() {
 		}
 	};
 
+	const deletePost = async (postId) => {
+		const filteredArchivedPosts = archivedPosts && archivedPosts.length > 0 ? archivedPosts.filter(p => p.id !== postId) : [];
+		const filteredPosts = posts && posts.length > 0 ? posts.filter(p => p.id !== postId) : [];
+		await updateArchivedPosts(filteredArchivedPosts);
+		await updatePosts(filteredPosts);
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
@@ -238,6 +245,7 @@ export default function Router() {
 					<Route path="/Manage/Post/Edit/:Slug" render={(props) => {
 						return <EditPost
 							editPost={editPost}
+							deletePost={deletePost}
 							uploadImages={uploadImages}
 							deletePostImages={deletePostImages}
 							loadImages={loadImages}

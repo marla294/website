@@ -39,6 +39,18 @@ const DeleteImageButtonStyles = styled.button`
   color: red;
 `;
 
+const ButtonWrapperStyles = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  justify-items: start;
+`;
+
+const DeleteButtonStyles = styled(ButtonStyles)`
+  width: 150px;
+  background-color: red;
+`;
+
 const EditPost = (props) => {
   const { 
     inputs, 
@@ -151,6 +163,12 @@ const EditPost = (props) => {
     setIsSubmitComplete(true);
   };
 
+  const deletePost = async e => {
+    e.preventDefault();
+
+    await props.deletePost(postId);
+  }
+
   return authWrapper(
     <React.Fragment>
       <Wrapper>
@@ -225,7 +243,10 @@ const EditPost = (props) => {
                 );
               })}
             </ImageListStyles>
-            <Submit type="submit">Submit</Submit>
+            <ButtonWrapperStyles>
+              <Submit type="submit">Submit</Submit>
+              <DeleteButtonStyles type="button" onClick={(e) => { deletePost(e) }}>Delete</DeleteButtonStyles>
+            </ButtonWrapperStyles>
           </ManageFormStyles>
           <div style={{display: isSubmitComplete ? "block" : "none"}}>
             <p style={{marginBottom: "10px"}}>Your post has been submitted.  Thank you.</p>
@@ -250,6 +271,7 @@ const EditPost = (props) => {
 
 EditPost.propTypes = {
   editPost: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
   uploadImages: PropTypes.func.isRequired,
   loadImages: PropTypes.func.isRequired,
   posts: PropTypes.arrayOf(PropTypes.shape({
