@@ -166,7 +166,12 @@ const EditPost = (props) => {
   const deletePost = async e => {
     e.preventDefault();
 
-    await props.deletePost(postId);
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm('Are you sure you want to delete this post?  Click OK to continue.')) {
+      await props.deletePost(postId);
+      props.history.push('/Manage');
+    }
+
   }
 
   return authWrapper(
